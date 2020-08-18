@@ -8,12 +8,17 @@ public class TestController {
 	
 	@GetMapping("/test")
 	public String test() {
-		return "caa/test";
+		return "caa/mainPage/test";
 	}
 	
 	@GetMapping("/test2")
 	public String test2() {
-		return "caa/test2";
+		return "caa/mainPage/test2";
+	}
+	
+	@GetMapping("/JoinMember")
+	public String JoinMember() {
+		return "caa/JoinMember";
 	}
 	
 	@GetMapping("/iRecommendation")
@@ -37,4 +42,5 @@ public class TestController {
 	public String test4() {
 		return "caa/member/SearchPWMember";
 	}
+
 }
