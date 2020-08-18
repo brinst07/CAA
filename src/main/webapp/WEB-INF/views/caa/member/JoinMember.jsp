@@ -35,6 +35,7 @@
 <link rel="stylesheet" href="/resources/assets/css/demo.css">
 
 </head>
+
 <body>
    <div class="wrapper fullheight-side sidebar_minimize">
       
@@ -57,21 +58,56 @@
             <div class="page-inner">
                <!-- 이름 /이메일 /아이디 입력란 -->
                <div class="form-group" align="center">
-                  <label for="password">이름&nbsp&nbsp&nbsp</label><input
-                     style="display: inline; width: 500px" type="password"
-                     class="form-control" id="password" placeholder="Enter Name">
+                  <label for="name">이름&nbsp&nbsp&nbsp</label><input
+                     style="display: inline; width: 500px" type="name"
+                     class="form-control" id="name" placeholder="Enter Name">
                </div>
+               
                <div class="form-group" align="center">
-                  <label for="email2">아이디&nbsp </label><input
-                     style="display: inline; width: 500px" type="email"
-                     class="form-control" id="email2" placeholder="Enter Email">
-                  <small id="emailHelp2" class="form-text text-muted">
+                  <label for="id">아이디&nbsp&nbsp&nbsp</label><input
+                     style="display: inline; width: 400px;" type="id"
+                     class="form-control" id="id" placeholder="Enter ID">&nbsp;&nbsp;&nbsp;&nbsp;
+                    <button class="btn btn-info">중복확인</button>
+               </div>
+               
+               <div class="form-group" align="center">
+                  <label for="password">비밀번호&nbsp&nbsp&nbsp</label><input
+                     style="display: inline; width: 500px" type="password"
+                     class="form-control" id="password" placeholder="Enter Password">
+               </div>
+               
+               <div class="form-group" align="center">
+                  <label for="password2">비밀번호 확인&nbsp&nbsp&nbsp</label><input
+                     style="display: inline; width: 480px" type="password"
+                     class="form-control" id="password2" placeholder="Enter Password">
+               </div>
+               
+               <div class="form-group" align="center">
+                  <label for="email">이메일&nbsp&nbsp&nbsp</label><input
+                     style="display: inline; width: 400px" type="email"
+                     class="form-control" id="email" placeholder="Enter Email">&nbsp;&nbsp;&nbsp;&nbsp;
+                  <button class="btn btn-info">이메일 인증</button>
+               </div>
+               
+               <div class="form-group" align="center">
+                  <label for="Certification Number">인증번호&nbsp&nbsp&nbsp</label><input
+                     style="display: inline; width: 400px" type="Certification Number"
+                     class="form-control" id="Certification Number" placeholder="Enter Certification Number">&nbsp;&nbsp;&nbsp;&nbsp;
+                    <button class="btn btn-info">확인</button>
+               </div>
+               
+               <div class="form-group" align="center">
+                  <label for="Captcha">캡챠&nbsp;&nbsp;&nbsp; </label><input
+                     style="display: inline; width: 400px" type="Captcha"
+                     class="form-control" id="id" placeholder="Enter Captcha">&nbsp;&nbsp;&nbsp;&nbsp;
+                      <button class="btn btn-info">확인</button>
+                  <small id="Captcha" class="form-text text-muted"><br>
                      ThinkPeople은 회원님의 개인정보를 보호합니다.</small>
                </div>
                <div></div>
                <!-- 버튼 -->
-               <div class="card-action" align="center">
-                  <button class="btn btn-primary">확인</button>
+               <div class="card-action" align="right"><br>
+                  <button class="btn btn-primary">확인</button>&nbsp;&nbsp;&nbsp;&nbsp;
                   <button class="btn btn-black">취소</button>
                </div>
             </div>

@@ -18,7 +18,13 @@ public class TestController {
 	
 	@GetMapping("/JoinMember")
 	public String JoinMember() {
-		return "caa/JoinMember";
+		return "caa/member/JoinMember";
+	}
+	
+
+	@GetMapping("/noticeList")
+	public String noticeList() {
+		return "caa/notice/noticeList";
 	}
 	
 	@GetMapping("/iRecommendation")
@@ -45,6 +51,16 @@ public class TestController {
 	@GetMapping("/test4")
 	public String test4() {
 		return "caa/member/SearchPWMember";
+	}
+	
+	@GetMapping("/testtest")
+	public String testtest() {
+		return "caa/member/testtest";
+	}
+	
+	@GetMapping("/qnaList")
+	public String qnaList() {
+		return "caa/member/qnaList";
 	}
 
 }
