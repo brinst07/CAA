@@ -8,22 +8,30 @@ public class TestController {
 	
 	@GetMapping("/test")
 	public String test() {
-		return "caa/test";
+		return "caa/mainPage/test";
 	}
 	
 	@GetMapping("/test2")
 	public String test2() {
-		return "caa/test2";
+		return "caa/mainPage/test2";
 	}
-
+	
+	@GetMapping("/JoinMember")
+	public String JoinMember() {
+		return "caa/JoinMember";
+	}
 	
 	@GetMapping("/iRecommendation")
 	public String IRtest() {
-		return "caa/iRecommendation";
+		return "caa/ir/iRecommendation";
 	}
 	@GetMapping("/iRecommendation2")
 	public String IRtest2() {
-		return "caa/iRecommendation2";
+		return "caa/ir/iRecommendation2";
+	}
+	@GetMapping("/iRecommendation3")
+	public String IRtest3() {
+		return "caa/ir/iRecommendation3";
 	}
 	@GetMapping("/test3")
 	public String test3() {

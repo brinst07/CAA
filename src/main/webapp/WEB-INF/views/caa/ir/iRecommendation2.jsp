@@ -7,7 +7,12 @@
 <title>Insert title here</title>
 </head>
 <body>
-
+<!-- 충돌 -->
+<!-- 충돌 -->
+<!-- 충돌 -->
+<!-- 충돌 -->
+<!-- 충돌 -->
+<!-- 충돌 -->
 
 	<div class="main-panel full-height">
 		<div class="container">
@@ -38,9 +43,10 @@
 									<div
 										class="nav nav-line nav-color-info d-flex align-items-center justify-contents-center">
 										<a class="nav-link" href="iRecommendation">업종별 등급<span
-											class="badge badge-info ml-2">8</span></a> <a class="nav-link active"
-											href="iRecommendation2">상권 유형 판별</a> <a class="nav-link" href="#">안정성 우수
-											업종<span class="badge badge-danger ml-2">2</span>
+											class="badge badge-info ml-2">8</span></a> <a
+											class="nav-link active" href="iRecommendation2">상권 유형 판별</a>
+										<a class="nav-link" href="iRecommendation3">안정성 우수 업종<span
+											class="badge badge-danger ml-2">2</span>
 										</a>
 									</div>
 								</div>
@@ -52,73 +58,76 @@
 						<div class="page-category">
 
 							<!-- ----------------------------------- -->
-							
-							<table class="table">
-								<thead>
-								</thead>
-								<tbody>
-									<tr>
-										<td colspan="1">음식형</td>
-										<td>65%</td>
-										<td>음식업</td>
-										<td>소매점</td>
-										<td>20%</td>
-										<td>서비스형</td>
-										<td>9%</td>
-									</tr>
-									<tr>
-										<td>2</td>
-										<td>Jacob</td>
-									</tr>
-								</tbody>
-							</table>
-							
-							
-							<table class="table">
-								<thead>
-									<tr>
-										<th scope="col">화면 구분</th>
-										<th scope="col">설명</th>
-									</tr>
-								</thead>
-								<tbody>
-									<tr>
-										<td>일반형</td>
-										<td>전체 업종구성시 기존 </td>
-									</tr>
-									<tr>
-										<td>2</td>
-										<td>Jacob</td>
-									</tr>
-									<tr>
-										<td>3</td>
-										<td>@twitter</td>
-									</tr>
-								</tbody>
-							</table>
-							
-							<table class="table">
-								<thead>
-									<tr>
-										<th scope="col">화면 구분</th>
-										<th scope="col">설명</th>
-									</tr>
-								</thead>
-								<tbody>
-									<tr>
-										<td>일반형</td>
-										<td>전체 업종구성시 기존 </td>
-									</tr>
-									<tr>
-										<td>2</td>
-										<td>Jacob</td>
-									</tr>
-									<tr>
-										<td>3</td>
-										<td>@twitter</td>
-									</tr>
-								</tbody>
-							</table>
+
+							<div class="col-md-6">
+
+								<table class="table">
+									<thead>
+									</thead>
+									<tbody>
+										<tr>
+											<td colspan="1">음식형</td>
+											<td>65%</td>
+											<td>음식업</td>
+											<td>소매점</td>
+											<td>20%</td>
+											<td>서비스형</td>
+											<td>9%</td>
+										</tr>
+										<tr>
+											<td>2</td>
+											<td>Jacob</td>
+										</tr>
+									</tbody>
+								</table>
+
+
+								<table class="table">
+									<thead>
+										<tr>
+											<th scope="col">화면 구분</th>
+											<th scope="col">설명</th>
+										</tr>
+									</thead>
+									<tbody>
+										<tr>
+											<td>일반형</td>
+											<td>전체 업종구성시 기존</td>
+										</tr>
+										<tr>
+											<td>2</td>
+											<td>Jacob</td>
+										</tr>
+										<tr>
+											<td>3</td>
+											<td>@twitter</td>
+										</tr>
+									</tbody>
+								</table>
+
+								<table class="table">
+									<thead>
+										<tr>
+											<th scope="col">화면 구분</th>
+											<th scope="col">설명</th>
+										</tr>
+									</thead>
+									<tbody>
+										<tr>
+											<td>일반형</td>
+											<td>전체 업종구성시 기존</td>
+										</tr>
+										<tr>
+											<td>2</td>
+											<td>Jacob</td>
+										</tr>
+										<tr>
+											<td>3</td>
+											<td>@twitter</td>
+										</tr>
+									</tbody>
+								</table>
+							</div>
 							<!-- ------------------- -->
 						</div>
 
