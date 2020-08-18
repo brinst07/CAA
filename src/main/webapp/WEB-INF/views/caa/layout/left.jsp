@@ -55,6 +55,9 @@
 					<li class="nav-item"><a href="starter-template.html"> <i class="fas fa-cloud"></i>
 							<p>상권현황</p>
 					</a></li>
+					<li class="nav-item"><a href="iRecommendation"> <i class="fas fa-chart-bar"></i>
+							<p>업종 추천</p>
+					</a></li>
 					<li class="nav-section"><span class="sidebar-mini-icon"> <i class="fa fa-ellipsis-h"></i>
 					</span>
 						<h4 class="text-section">게시판 메뉴</h4></li>
