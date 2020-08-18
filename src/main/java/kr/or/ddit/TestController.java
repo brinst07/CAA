@@ -18,16 +18,30 @@ public class TestController {
 	
 	@GetMapping("/JoinMember")
 	public String JoinMember() {
-		return "caa/JoinMember";
+		return "caa/member/JoinMember";
+	}
+	
+
+	@GetMapping("/noticeList")
+	public String noticeList() {
+		return "caa/notice/noticeList";
 	}
 	
 	@GetMapping("/iRecommendation")
 	public String IRtest() {
-		return "caa/iRecommendation";
+		return "caa/ir/iRecommendation";
 	}
 	@GetMapping("/iRecommendation2")
 	public String IRtest2() {
-		return "caa/iRecommendation2";
+		return "caa/ir/iRecommendation2";
+	}
+	@GetMapping("/iRecommendation3")
+	public String IRtest3() {
+		return "caa/ir/iRecommendation3";
+	}
+	@GetMapping("/ss")
+	public String sS() {
+		return "caa/ss/sS";
 	}
 	@GetMapping("/test3")
 	public String test3() {
@@ -39,9 +53,19 @@ public class TestController {
 		return "caa/member/SearchPWMember";
 	}
 	
+
 	@GetMapping("/test5")
 	public String test5() {
 		return "caa/businessStatus/BusinessStatus";
+	}
+	@GetMapping("/testtest")
+	public String testtest() {
+		return "caa/member/testtest";
+	}
+	
+	@GetMapping("/qnaList")
+	public String qnaList() {
+		return "caa/member/qnaList";
 	}
 
 }

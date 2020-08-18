@@ -39,54 +39,40 @@
 										class="nav nav-line nav-color-info d-flex align-items-center justify-contents-center">
 										<a class="nav-link active" href="iRecommendation">업종별 등급<span
 											class="badge badge-info ml-2">8</span></a> <a class="nav-link"
-											href="iRecommendation2">상권 유형 판별</a> <a class="nav-link" href="#">안정성 우수 업종<span
+											href="iRecommendation2">상권 유형 판별</a> <a class="nav-link"
+											href="iRecommendation3">안정성 우수 업종<span
 											class="badge badge-danger ml-2">2</span></a>
 									</div>
-<!-- 									<div class="d-flex d-md-inline ml-md-auto py-2 py-md-0"> -->
-<!-- 										<div class="dropdown d-inline mr-3 mr-md-2"> -->
-<!-- 											<button class="btn btn-info btn-round dropdown-toggle" -->
-<!-- 												type="button" id="dropdownMenuButton" data-toggle="dropdown" -->
-<!-- 												aria-haspopup="true" aria-expanded="false">Actions -->
-<!-- 											</button> -->
-<!-- 											<div class="dropdown-menu" -->
-<!-- 												aria-labelledby="dropdownMenuButton"> -->
-<!-- 												<a class="dropdown-item" href="#">Action</a> <a -->
-<!-- 													class="dropdown-item" href="#">Another action</a> <a -->
-<!-- 													class="dropdown-item" href="#">Something else here</a> -->
-<!-- 											</div> -->
-<!-- 										</div> -->
-<!-- 										<a href="#" class="btn btn-info btn-border btn-round"> <span -->
-<!-- 											class="btn-label"> <i class="fa fa-plus"></i></span> Add New -->
-<!-- 										</a> -->
-<!-- 									</div> -->
+
 								</div>
 							</div>
-
-
-							<!-- --------------------------- -->
 						</div>
-						<div class="page-category">
 
-							<div class="col-md-6">
-								<div class="card">
-									<div class="card-header">
-										<div class="card-title">Radar Chart</div>
-									</div>
-									<div class="card-body">
-										<div class="chart-container">
-											<canvas id="radarChart"></canvas>
-										</div>
+
+						<!-- --------------------------- -->
+					</div>
+					<div class="page-category">
+
+						<div class="col-md-6">
+							<div class="card">
+								<div class="card-header">
+									<div class="card-title">Radar Chart</div>
+								</div>
+								<div class="card-body">
+									<div class="chart-container">
+										<canvas id="radarChart"></canvas>
 									</div>
 								</div>
 							</div>
-
 						</div>
-
 
 					</div>
+
+
 				</div>
 			</div>
 		</div>
+	</div>
 </body>
 
 <script>
