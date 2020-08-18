@@ -6,7 +6,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>CAA 상권분석</title>
 </head>
 <body>
 <tiles:insertAttribute name="head"></tiles:insertAttribute>

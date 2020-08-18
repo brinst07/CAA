@@ -112,15 +112,11 @@
 <!-- Atlantis JS -->
 <script src="/resources/assets/js/atlantis.min.js"></script>
 
-<!-- Atlantis DEMO methods, don't include it in your project! -->
-<script src="/resources/assets/js/setting-demo.js"></script>
-<script src="/resources/assets/js/demo.js"></script>
+
 <!-- CSS Files -->
 <link rel="stylesheet" href="/resources/assets/css/bootstrap.min.css">
 <link rel="stylesheet" href="/resources/assets/css/atlantis.css">
 
-<!-- CSS Just for demo purpose, don't include it in your project -->
-<link rel="stylesheet" href="/resources/assets/css/demo.css">
 <title>CAA 상권분석프로그램</title>
 </head>
 <body>
