@@ -38,5 +38,10 @@ public class TestController {
 	public String test4() {
 		return "caa/member/SearchPWMember";
 	}
+	
+	@GetMapping("/test5")
+	public String test5() {
+		return "caa/businessStatus/BusinessStatus";
+	}
 
 }
