@@ -18,10 +18,14 @@ public class TestController {
 	
 	@GetMapping("/JoinMember")
 	public String JoinMember() {
-		return "caa/JoinMember";
+		return "caa/member/JoinMember";
 	}
 	
 
+	@GetMapping("/noticeList")
+	public String noticeList() {
+		return "caa/notice/noticeList";
+	}
 	
 	@GetMapping("/iRecommendation")
 	public String IRtest() {
