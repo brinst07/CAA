@@ -7,15 +7,14 @@
 <title>Atlantis Bootstrap 4 Admin Dashboard</title>
 <meta content='width=device-width, initial-scale=1.0, shrink-to-fit=no'
 	name='viewport' />
-<link rel="icon" href="/resources/assets/img/icon.ico"
-	type="image/x-icon" />
+<link rel="icon" href="/resources/assets/img/icon.ico" type="image/x-icon" />
 <!-- Fonts and icons -->
 <script src="/resources/assets/js/plugin/webfont/webfont.min.js"></script>
 <style type="text/css">
-#logo {
-	width: 250px;
-	padding-bottom: 20px;
-}
+	#logo{
+		width: 250px;
+		padding-bottom: 20px;
+	}
 </style>
 <script>
 	WebFont.load({
@@ -32,28 +31,15 @@
 			sessionStorage.fonts = true;
 		}
 	});
-	
-
-	function sendEmail() {
-			var name = document.getElementById("name").value;
-			var email = document.getElementById("email").value;
-			if(name == "" || email == ""){
-				alert("모든 정보를 입력해주세요.");
-			}else {
-				alert("회원님의 아이디 정보가 "+email +"로 발송되었습니다.");
-				}
-		};
-
 </script>
 
 <!-- CSS Files -->
-<!-- <link rel="stylesheet" href="/resources/assets/css/bootstrap.min.css"> -->
-<!-- <link rel="stylesheet" href="/resources/assets/css/atlantis.css"> -->
+<!-- <link rel="stylesheet" href="/resources/assets/css/bootstrap.min.css">
+<link rel="stylesheet" href="/resources/assets/css/atlantis.css">
 
-<!-- <!-- CSS Just for demo purpose, don't include it in your project -->
--->
-<!-- <link rel="stylesheet" href="/resources/assets/css/demo.css"> -->
-
+CSS Just for demo purpose, don't include it in your project
+<link rel="stylesheet" href="/resources/assets/css/demo.css">
+ -->
 </head>
 <body>
 	<div class="wrapper fullheight-side sidebar_minimize">
@@ -63,49 +49,50 @@
 				<div class="panel-header">
 					<div class="page-inner border-bottom pb-0 mb-3">
 						<div class="d-flex align-items-left flex-column">
-							<h2 class="pb-2 fw-bold">회원정보 찾기</h2>
+							<h2 class="pb-2 fw-bold">QnA</h2>
 							<div class="nav-scroller d-flex">
-								<div
-									class="nav nav-line nav-color-info d-flex align-items-center justify-contents-center">
-									<a class="nav-link active" href="test3">아이디 찾기</a> <a
-										class="nav-link" href="test4">비밀번호 찾기</a>
-								</div>
-							</div>
+								
 						</div>
 					</div>
 				</div>
 				<div class="page-inner">
-					<!-- 이름 /이메일 /아이디 입력란 -->
-					<form action="">
-						<div class="form-group" align="center">
-							<!-- thinpeopleLogo -->
-							<div>
-								<img id="logo" alt="logo"
-									src="/resources/assets/img/thinkpeopleLogo.png">
-							</div>
-							<label for="password">이름&nbsp&nbsp&nbsp</label><input
-								style="display: inline; width: 500px" type="text"
-								class="form-control" id="name" placeholder="Enter Name">
-						</div>
-						<div class="form-group" align="center">
-							<label for="email2">이메일&nbsp </label><input
-								style="display: inline; width: 500px" type="email"
-								class="form-control" id="email" placeholder="Enter Email">
-							<small id="emailHelp2" class="form-text text-muted">
-								ThinkPeople은 회원님의 개인정보를 보호합니다.</small>
-						</div>
-						<div></div>
-						<!-- 버튼 -->
-						<div class="card-action" align="center">
-							<button id="btnConfirm" type="button" class="btn btn-primary" onclick="sendEmail()">확인</button>
-							<button type="reset" class="btn btn-black">취소</button>
-						</div>
-					</form>
+					<!-- QnA 등록 -->
+					<div class="form-group" align="center">
+						<!-- thinpeopleLogo -->
+						<!-- <div><img id="logo" alt="logo" src="/resources/assets/img/thinkpeopleLogo.png"></div> -->
+						<label for="title">제목&nbsp&nbsp&nbsp&nbsp</label><input
+							style="display: inline; width: 500px" type="title"
+							class="form-control" id="title" placeholder="Enter Title">
+					</div>
+					<div class="form-group" align="center">
+						<label for="writer">작성자&nbsp&nbsp&nbsp</label><input
+							style="display: inline; width: 500px" type="writer"
+							class="form-control" id="writer" placeholder="작성자">
+					</div>
+					<div class="form-group" align="center">
+						<label for="contents">내용&nbsp&nbsp&nbsp&nbsp </label>
+						
+						<textarea style="display: inline; width: 500px" type="contents"
+						 class="form-control" id="contents" rows="5" placeholder="Enter Contents">
+												</textarea>
+					</div>
+					
+					
+					<div class="form-group" align="center">
+						<label for="exampleFormControlFile1">첨부파일&nbsp&nbsp</label>
+						<input type="file" class="form-control-file" id="exampleFormControlFile1">
+					</div>
+					
+					<div></div>
+					<!-- 버튼 -->
+					<div class="card-action" align="right">
+						<button class="btn btn-primary">확인</button>
+						<button class="btn btn-black">취소</button>
+					</div>
 				</div>
 			</div>
+
 		</div>
-
-
 
 	</div>
 	<!--   Core JS Files   -->
@@ -149,8 +136,7 @@
 
 	<!-- jQuery Vector Maps -->
 	<script src="/resources/assets/js/plugin/jqvmap/jquery.vmap.min.js"></script>
-	<script
-		src="/resources/assets/js/plugin/jqvmap/maps/jquery.vmap.world.js"></script>
+	<script src="/resources/assets/js/plugin/jqvmap/maps/jquery.vmap.world.js"></script>
 
 	<!-- Google Maps Plugin -->
 	<script src="/resources/assets/js/plugin/gmaps/gmaps.js"></script>
@@ -159,8 +145,7 @@
 	<script src="/resources/assets/js/plugin/dropzone/dropzone.min.js"></script>
 
 	<!-- Fullcalendar -->
-	<script
-		src="/resources/assets/js/plugin/fullcalendar/fullcalendar.min.js"></script>
+	<script src="/resources/assets/js/plugin/fullcalendar/fullcalendar.min.js"></script>
 
 	<!-- DateTimePicker -->
 	<script
@@ -171,16 +156,14 @@
 		src="/resources/assets/js/plugin/bootstrap-tagsinput/bootstrap-tagsinput.min.js"></script>
 
 	<!-- Bootstrap Wizard -->
-	<script
-		src="/resources/assets/js/plugin/bootstrap-wizard/bootstrapwizard.js"></script>
+	<script src="/resources/assets/js/plugin/bootstrap-wizard/bootstrapwizard.js"></script>
 
 	<!-- jQuery Validation -->
 	<script
 		src="/resources/assets/js/plugin/jquery.validate/jquery.validate.min.js"></script>
 
 	<!-- Summernote -->
-	<script
-		src="/resources/assets/js/plugin/summernote/summernote-bs4.min.js"></script>
+	<script src="/resources/assets/js/plugin/summernote/summernote-bs4.min.js"></script>
 
 	<!-- Select2 -->
 	<script src="/resources/assets/js/plugin/select2/select2.full.min.js"></script>
@@ -189,8 +172,7 @@
 	<script src="/resources/assets/js/plugin/sweetalert/sweetalert.min.js"></script>
 
 	<!-- Owl Carousel -->
-	<script
-		src="/resources/assets/js/plugin/owl-carousel/owl.carousel.min.js"></script>
+	<script src="/resources/assets/js/plugin/owl-carousel/owl.carousel.min.js"></script>
 
 	<!-- Magnific Popup -->
 	<script
@@ -198,6 +180,7 @@
 
 	<!-- Atlantis JS -->
 	<script src="/resources/assets/js/atlantis.min.js"></script>
+
 
 	<script>
 		$('#lineChart').sparkline([ 102, 109, 120, 99, 110, 105, 115 ], {
