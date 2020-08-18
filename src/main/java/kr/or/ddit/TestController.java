@@ -34,5 +34,15 @@ public class TestController {
 	public String test4() {
 		return "caa/member/SearchPWMember";
 	}
+	
+	@GetMapping("/testtest")
+	public String testtest() {
+		return "caa/member/testtest";
+	}
+	
+	@GetMapping("/qnaList")
+	public String qnaList() {
+		return "caa/member/qnaList";
+	}
 
 }
