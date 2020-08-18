@@ -18,11 +18,15 @@ public class TestController {
 	
 	@GetMapping("/iRecommendation")
 	public String IRtest() {
-		return "caa/iRecommendation";
+		return "caa/ir/iRecommendation";
 	}
 	@GetMapping("/iRecommendation2")
 	public String IRtest2() {
-		return "caa/iRecommendation2";
+		return "caa/ir/iRecommendation2";
+	}
+	@GetMapping("/iRecommendation3")
+	public String IRtest3() {
+		return "caa/ir/iRecommendation3";
 	}
 	@GetMapping("/test3")
 	public String test3() {
