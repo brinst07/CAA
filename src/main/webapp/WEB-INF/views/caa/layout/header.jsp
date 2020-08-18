@@ -8,7 +8,7 @@
 <meta content='width=device-width, initial-scale=1.0, shrink-to-fit=no'
 	name='viewport' />
 <link rel="icon" href="/resources/assets/img/icon.ico" type="image/x-icon" />
-
+<meta charset="UTF-8" />
 <!-- Fonts and icons -->
 <script src="/resources/assets/js/plugin/webfont/webfont.min.js"></script>
 <script>
