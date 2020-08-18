@@ -21,8 +21,6 @@ public class TestController {
 		return "caa/JoinMember";
 	}
 	
-
-	
 	@GetMapping("/iRecommendation")
 	public String IRtest() {
 		return "caa/iRecommendation";
