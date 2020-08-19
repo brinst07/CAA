@@ -13,7 +13,8 @@ public class CAAController {
 		return "caa/caa/selectPage";
 	}
 
-	/* 영현  */
+	/* ↓ 상권 추천 영현 */
+	
 	@GetMapping("/iRecommendation")
 	public String IRtest() {
 		return "caa/ir/iRecommendation";
@@ -28,15 +29,37 @@ public class CAAController {
 	public String IRtest3() {
 		return "caa/ir/iRecommendation3";
 	}
+	
+	/* ↑ 상권 추천 */
 
+	/* ↓ 매출 통계  영현 */
 	@GetMapping("/ss")
 	public String sS() {
 		return "caa/ss/sS";
 	}
+	/* ↑ 매출 통계 */
+	
+	
+	
+	/* ↓ 상권 분석 */
+	
+		/* ↓ 영현 */
+	@GetMapping("PopAnalysis")
+	public String PopAnalysis() {
+		return "caa/caa/popAnalysis";
+	}
+		/* ↑ 영현 */
+	
+	
+	
+	/* ↑ 상권 분석 */
+	
 
 	
 	@GetMapping("/SaleAnalysis")
 	public String caaSale() {
 		return "caa/caa/SalesAnalysis";
 	}
+	
+	
 }
