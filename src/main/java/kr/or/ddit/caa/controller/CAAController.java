@@ -12,7 +12,7 @@ public class CAAController {
 	public String caaSelect() {
 		return "caa/caa/selectPage";
 	}
-	
+
 	//상권분석
 	@GetMapping("/commercialanalysis")
 	public String caaResult() {
@@ -33,6 +33,13 @@ public class CAAController {
 	
 	
 	/* 영현  */
+
+	/* ↓ 상권 추천 영현 */
+	@GetMapping("iRecommendationMap")
+	public String iRecommendationMap() {
+		return "caa/ir/iRecommendationMap";
+	}
+	
 	@GetMapping("/iRecommendation")
 	public String IRtest() {
 		return "caa/ir/iRecommendation";
@@ -47,15 +54,36 @@ public class CAAController {
 	public String IRtest3() {
 		return "caa/ir/iRecommendation3";
 	}
+	
+	/* ↑ 상권 추천 */
 
+	/* ↓ 매출 통계  영현 */
 	@GetMapping("/ss")
 	public String sS() {
 		return "caa/ss/sS";
-	} 
-
+	}
+	/* ↑ 매출 통계 */
+	
+	
+	
+	/* ↓ 상권 분석 */
+	
+		/* ↓ 영현 */
+	@GetMapping("PopAnalysis")
+	public String PopAnalysis() {
+		return "caa/caa/popAnalysis";
+	}
+		/* ↑ 영현 */
+	
+	
+	
+	/* ↑ 상권 분석 */
 	
 
 	
+
+
+
 //	창수
 	
 	@GetMapping("/JoinMember")

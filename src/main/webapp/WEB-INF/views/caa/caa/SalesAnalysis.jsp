@@ -52,12 +52,22 @@
 					<div class="page-inner border-bottom pb-0 mb-3">
 						<div class="d-flex align-items-left flex-column">
 							<h2 class="pb-2 fw-bold">상권 분석</h2>
+
 							<div
 								class="nav nav-line nav-color-info d-flex align-items-center justify-contents-center">
 								<a class="nav-link" href="commercialanalysis">상권분석</a> <a
 									class="nav-link " href="industryanalysis">업종분석</a> <a
 									class="nav-link active " href="SaleAnalysis">매출분석</a> <a
 									class="nav-link " href="test4">인구분석</a>
+
+							<div class="nav-scroller d-flex">
+								<div
+									class="nav nav-line nav-color-info d-flex align-items-center justify-contents-center">
+									<a class="nav-link" href="test3">상권분석</a> <a class="nav-link"
+										href="test4">업종분석</a> <a class="nav-link active" href="test4">매출분석</a>
+									<a class="nav-link " href="PopAnalysis">인구분석</a>
+								</div>
+
 							</div>
 					
 					</div>
