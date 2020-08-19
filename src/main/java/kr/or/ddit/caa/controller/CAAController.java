@@ -14,6 +14,10 @@ public class CAAController {
 	}
 
 	/* ↓ 상권 추천 영현 */
+	@GetMapping("iRecommendationMap")
+	public String iRecommendationMap() {
+		return "caa/ir/iRecommendationMap";
+	}
 	
 	@GetMapping("/iRecommendation")
 	public String IRtest() {
