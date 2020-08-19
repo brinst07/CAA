@@ -12,4 +12,9 @@ public class CAAController {
 	public String caaSelect() {
 		return "caa/caa/selectPage";
 	}
+	
+	@GetMapping("/SaleAnalysis")
+	public String caaSale() {
+		return "caa/caa/SalesAnalysis";
+	}
 }
