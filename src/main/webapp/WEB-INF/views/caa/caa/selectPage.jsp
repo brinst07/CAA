@@ -43,31 +43,6 @@
 							</div>
 						</div>
 					</div>
-					<!-- 					<div class="col-md-4"> -->
-					<!-- 						<div class="card card-primary bg-primary-gradient"> -->
-					<!-- 							<div class="card-body"> -->
-					<!-- 								<h1 class="mt-3 b-b1 pb-2 mb-4 fw-bold"> -->
-					<!-- 									1단계 -->
-					<!-- 									</h4> -->
-					<!-- 									<div class="card-category">지역을 선택해주세요~</div> -->
-					<!-- 									<br> -->
-					<!-- 									<h1 class="mt-3 b-b1 pb-2 mb-4 fw-bold">2단계</h1> -->
-					<!-- 									<div class="card-category">영역을 선택해주세요</div> -->
-					<!-- 									<div class="page-inner"> -->
-
-					<!-- 										<button class="btn btn-primary">Default</button> -->
-					<!-- 										<button class="btn btn-primary btn-border btn-light"><</button> -->
-					<!-- 										<button class="btn btn-primary btn-border btn-light">Border</button> -->
-					<!-- 										<button class="btn btn-primary btn-border btn-light">Border</button> -->
-					<!-- 									</div> -->
-					<!-- 							</div> -->
-					<!-- 							<h4 class="mt-5 pb-3 mb-0 fw-bold">Top active pages</h4> -->
-					<!-- 							<ul class="list-unstyled"> -->
-					<!-- 								<li class="d-flex justify-content-between pb-1 pt-1"><small>/product/readypro/index.html</small> <span>7</span></li> -->
-					<!-- 								<li class="d-flex justify-content-between pb-1 pt-1"><small>/product/atlantis/demo.html</small> <span>10</span></li> -->
-					<!-- 							</ul> -->
-					<!-- 						</div> -->
-					<!-- 					</div> -->
 					<div class="col-md-4">
 						<div class="card-body">
 							<ul class="list-group list-group-bordered">
