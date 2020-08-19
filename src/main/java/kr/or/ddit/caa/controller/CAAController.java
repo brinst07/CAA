@@ -12,7 +12,26 @@ public class CAAController {
 	public String caaSelect() {
 		return "caa/caa/selectPage";
 	}
-
+	
+	//상권분석
+	@GetMapping("/commercialanalysis")
+	public String caaResult() {
+		return "caa/caa/CommercialAnalysis";
+	}
+	
+	//업종분석
+	@GetMapping("/industryanalysis")
+	public String industryanalysis() {
+		return "caa/caa/IndustryAnalysis";
+	}
+	
+	//매출분석
+	@GetMapping("/SaleAnalysis")
+	public String caaSale() {
+		return "caa/caa/SalesAnalysis";
+	}
+	
+	
 	/* 영현  */
 	@GetMapping("/iRecommendation")
 	public String IRtest() {
@@ -35,10 +54,7 @@ public class CAAController {
 	} 
 
 	
-	@GetMapping("/SaleAnalysis")
-	public String caaSale() {
-		return "caa/caa/SalesAnalysis";
-	}
+
 	
 //	창수
 	
@@ -62,5 +78,25 @@ public class CAAController {
 	public String noticeView() {
 		return "caa/notice/noticeView";
 	}
+	
+	
+	
+	
+
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	
 }
