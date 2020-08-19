@@ -32,7 +32,6 @@
 			sessionStorage.fonts = true;
 		}
 	});
-
 </script>
 
 <!-- CSS Files -->
@@ -56,9 +55,8 @@
 							<div class="nav-scroller d-flex">
 								<div
 									class="nav nav-line nav-color-info d-flex align-items-center justify-contents-center">
-									<a class="nav-link" href="test3">상권분석</a>
-									<a class="nav-link" href="test4">업종분석</a>
-									<a class="nav-link active" href="test4">매출분석</a>
+									<a class="nav-link" href="test3">상권분석</a> <a class="nav-link"
+										href="test4">업종분석</a> <a class="nav-link active" href="test4">매출분석</a>
 									<a class="nav-link " href="test4">인구분석</a>
 								</div>
 							</div>
@@ -67,31 +65,120 @@
 				</div>
 				<div class="page-inner">
 					<!-- 이름 /이메일 /아이디 입력란 -->
-					<form action="">
-						<div class="form-group" align="center">
-							<!-- thinpeopleLogo -->
-							<div>
-								<img id="logo" alt="logo"
-									src="/resources/assets/img/thinkpeopleLogo.png">
+					<div class="col-md-12">
+						<div class="card">
+							<div class="card-header">
+								<div class="card-title">1. 업종별 매출추이</div>
 							</div>
-							<label for="password">이름&nbsp&nbsp&nbsp</label><input
-								style="display: inline; width: 500px" type="text"
-								class="form-control" id="name" placeholder="Enter Name">
+							<div class="card-body">
+								<div class="chart-container">
+									<div class="chartjs-size-monitor"
+										style="position: absolute; left: 0px; top: 0px; right: 0px; bottom: 0px; overflow: hidden; pointer-events: none; visibility: hidden; z-index: -1;">
+										<div class="chartjs-size-monitor-expand"
+											style="position: absolute; left: 0; top: 0; right: 0; bottom: 0; overflow: hidden; pointer-events: none; visibility: hidden; z-index: -1;">
+											<div
+												style="position: absolute; width: 1000000px; height: 1000000px; left: 0; top: 0"></div>
+										</div>
+										<div class="chartjs-size-monitor-shrink"
+											style="position: absolute; left: 0; top: 0; right: 0; bottom: 0; overflow: hidden; pointer-events: none; visibility: hidden; z-index: -1;">
+											<div
+												style="position: absolute; width: 200%; height: 200%; left: 0; top: 0"></div>
+										</div>
+									</div>
+									<canvas id="multipleLineChart" width="306" height="300"
+										class="chartjs-render-monitor"
+										style="display: block; width: 306px; height: 300px;"></canvas>
+								</div>
+							</div>
 						</div>
-						<div class="form-group" align="center">
-							<label for="email2">이메일&nbsp </label><input
-								style="display: inline; width: 500px" type="email"
-								class="form-control" id="email" placeholder="Enter Email">
-							<small id="emailHelp2" class="form-text text-muted">
-								ThinkPeople은 회원님의 개인정보를 보호합니다.</small>
+					</div>
+					<div class="col-md-12">
+						<div class="card">
+							<div class="card-header">
+								<div class="card-title">2. 고객별 매출특성</div>
+							</div>
+							<div class="card-body">
+								<table class="table table-hover">
+									<thead>
+										<tr>
+											<th scope="col">#</th>
+											<th scope="col">First</th>
+											<th scope="col">Last</th>
+											<th scope="col">Handle</th>
+										</tr>
+									</thead>
+									<tbody>
+										<tr>
+											<td>1</td>
+											<td>Mark</td>
+											<td>Otto</td>
+											<td>@mdo</td>
+										</tr>
+										<tr>
+											<td>1</td>
+											<td>Mark</td>
+											<td>Otto</td>
+											<td>@mdo</td>
+										</tr>
+										<tr>
+											<td>1</td>
+											<td>Mark</td>
+											<td>Otto</td>
+											<td>@mdo</td>
+										</tr>
+										<tr>
+											<td>1</td>
+											<td>Mark</td>
+											<td>Otto</td>
+											<td>@mdo</td>
+										</tr>
+										<tr>
+											<td>1</td>
+											<td>Mark</td>
+											<td>Otto</td>
+											<td>@mdo</td>
+										</tr>
+										<tr>
+											<td>1</td>
+											<td>Mark</td>
+											<td>Otto</td>
+											<td>@mdo</td>
+										</tr>
+										<tr>
+											<td>1</td>
+											<td>Mark</td>
+											<td>Otto</td>
+											<td>@mdo</td>
+										</tr>
+										<tr>
+											<td>1</td>
+											<td>Mark</td>
+											<td>Otto</td>
+											<td>@mdo</td>
+										</tr>
+										<tr>
+											<td>1</td>
+											<td>Mark</td>
+											<td>Otto</td>
+											<td>@mdo</td>
+										</tr>
+										
+										<tr>
+											<td>2</td>
+											<td>Jacob</td>
+											<td>Thornton</td>
+											<td>@fat</td>
+										</tr>
+										<tr>
+											<td>3</td>
+											<td colspan="2">Larry the Bird</td>
+											<td>@twitter</td>
+										</tr>
+									</tbody>
+								</table>
+							</div>
 						</div>
-						<div></div>
-						<!-- 버튼 -->
-						<div class="card-action" align="center">
-							<button id="btnConfirm" type="button" class="btn btn-primary" onclick="sendEmail()">확인</button>
-							<button type="reset" class="btn btn-black">취소</button>
-						</div>
-					</form>
+					</div>
 				</div>
 			</div>
 		</div>
@@ -99,10 +186,6 @@
 
 
 	</div>
-	<!--   Core JS Files   -->
-	<script src="/resources/assets/js/core/jquery.3.2.1.min.js"></script>
-	<script src="/resources/assets/js/core/popper.min.js"></script>
-	<script src="/resources/assets/js/core/bootstrap.min.js"></script>
 
 	<!-- jQuery UI -->
 	<script
@@ -191,6 +274,83 @@
 	<script src="/resources/assets/js/atlantis.min.js"></script>
 
 	<script>
+		var myMultipleLineChart = new Chart(multipleLineChart, {
+			type : 'line',
+			data : {
+				labels : [ "Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul",
+						"Aug", "Sep", "Oct", "Nov", "Dec" ],
+				datasets : [
+						{
+							label : "Python",
+							borderColor : "#1d7af3",
+							pointBorderColor : "#FFF",
+							pointBackgroundColor : "#1d7af3",
+							pointBorderWidth : 2,
+							pointHoverRadius : 4,
+							pointHoverBorderWidth : 1,
+							pointRadius : 4,
+							backgroundColor : 'transparent',
+							fill : true,
+							borderWidth : 2,
+							data : [ 30, 45, 45, 68, 69, 90, 100, 158, 177,
+									200, 245, 256 ]
+						},
+						{
+							label : "PHP",
+							borderColor : "#59d05d",
+							pointBorderColor : "#FFF",
+							pointBackgroundColor : "#59d05d",
+							pointBorderWidth : 2,
+							pointHoverRadius : 4,
+							pointHoverBorderWidth : 1,
+							pointRadius : 4,
+							backgroundColor : 'transparent',
+							fill : true,
+							borderWidth : 2,
+							data : [ 10, 20, 55, 75, 80, 48, 59, 55, 23, 107,
+									60, 87 ]
+						},
+						{
+							label : "Ruby",
+							borderColor : "#f3545d",
+							pointBorderColor : "#FFF",
+							pointBackgroundColor : "#f3545d",
+							pointBorderWidth : 2,
+							pointHoverRadius : 4,
+							pointHoverBorderWidth : 1,
+							pointRadius : 4,
+							backgroundColor : 'transparent',
+							fill : true,
+							borderWidth : 2,
+							data : [ 10, 30, 58, 79, 90, 105, 117, 160, 185,
+									210, 185, 194 ]
+						} ]
+			},
+			options : {
+				responsive : true,
+				maintainAspectRatio : false,
+				legend : {
+					position : 'top',
+				},
+				tooltips : {
+					bodySpacing : 4,
+					mode : "nearest",
+					intersect : 0,
+					position : "nearest",
+					xPadding : 10,
+					yPadding : 10,
+					caretPadding : 10
+				},
+				layout : {
+					padding : {
+						left : 15,
+						right : 15,
+						top : 15,
+						bottom : 15
+					}
+				}
+			}
+		});
 		$('#lineChart').sparkline([ 102, 109, 120, 99, 110, 105, 115 ], {
 			type : 'line',
 			height : '70',
