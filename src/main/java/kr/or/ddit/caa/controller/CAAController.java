@@ -87,4 +87,11 @@ public class CAAController {
 		return "caa/notice/noticeView";
 	}
 	
+	
+	/* ↓ sns */
+	@GetMapping("snsAnalysis")
+	public String snsAnalysis() {
+		return "caa/sns/snsAnalysisFirst";
+	}
+	/* ↑ sns */
 }
