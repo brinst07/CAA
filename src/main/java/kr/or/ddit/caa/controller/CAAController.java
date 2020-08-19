@@ -60,6 +60,27 @@ public class CAAController {
 	public String caaSale() {
 		return "caa/caa/SalesAnalysis";
 	}
+//	창수
 	
+	@GetMapping("/JoinMember")
+	public String JoinMember() {
+		return "caa/member/JoinMember";
+	}
+	
+	@GetMapping("/modifyMember")
+	public String modifyMember() {
+		return "caa/member/modifyMember";
+	}
+	
+
+	@GetMapping("/noticeList")
+	public String noticeList() {
+		return "caa/notice/noticeList";
+	}
+	
+	@GetMapping("/noticeView")
+	public String noticeView() {
+		return "caa/notice/noticeView";
+	}
 	
 }
