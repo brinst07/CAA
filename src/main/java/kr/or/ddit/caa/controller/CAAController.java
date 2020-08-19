@@ -34,4 +34,9 @@ public class CAAController {
 		return "caa/ss/sS";
 	}
 
+	
+	@GetMapping("/SaleAnalysis")
+	public String caaSale() {
+		return "caa/caa/SalesAnalysis";
+	}
 }
