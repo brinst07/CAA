@@ -23,4 +23,6 @@ public class CAAMapperTests {
 		mapper.getCscodeList("1").forEach(e -> log.info(e));;
 	}
 	
+
+	
 }

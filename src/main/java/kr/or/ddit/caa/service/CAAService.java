@@ -7,4 +7,6 @@ import kr.or.ddit.caa.domain.CscodeVO;
 public interface CAAService {
 	
 	public List<CscodeVO> getCscodeList(String depth);
+	
+
 }

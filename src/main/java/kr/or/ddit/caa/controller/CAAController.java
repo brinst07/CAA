@@ -10,6 +10,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import kr.or.ddit.bs.service.BSService;
 import kr.or.ddit.caa.domain.CscodeVO;
 import kr.or.ddit.caa.service.CAAService;
 import lombok.Setter;
@@ -20,7 +21,7 @@ public class CAAController {
 	
 	@Setter(onMethod_ = @Autowired)
 	private CAAService service;
-	
+	private BSService bsservice;
 	
 	@GetMapping("/caaSelect")
 	public String caaSelect(Model model) {
@@ -31,7 +32,27 @@ public class CAAController {
 		
 		return "caa/caa/selectPage";
 	}
-
+	
+	@GetMapping("/businessstatus")
+	public String businessstatus(Model model) {
+		
+		List<CscodeVO> list = service.getCscodeList("1");
+		
+		model.addAttribute("firstDiv", list);
+		
+		return "caa/businessStatus/BusinessStatus";
+	}
+	
+	@GetMapping("/businessstatus2")
+	public String businessstatus(Model model,String select) {
+		
+		List<CscodeVO> list = bsservice.getSectorsList(select);
+		
+		model.addAttribute("bsList", list);
+		
+		return "caa/businessStatus/BusinessStatus";
+	}
+	
 	//상권분석
 	@GetMapping("/commercialanalysis")
 	public String caaResult() {
