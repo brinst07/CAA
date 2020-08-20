@@ -9,4 +9,5 @@ public interface CAAService {
 	public List<CscodeVO> getCscodeList(String depth);
 	
 
+	public List<CscodeVO> otherCscodeList(String keyword);
 }

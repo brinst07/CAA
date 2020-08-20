@@ -25,5 +25,9 @@ public class CAAServiceImpl implements CAAService {
 	}
 
 
+	@Override
+	public List<CscodeVO> otherCscodeList(String keyword) {
+		return mapper.otherCscodeList(keyword);
+	}
 
 }

@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-<title>공지사항</title>
+<title>Atlantis Bootstrap 4 Admin Dashboard</title>
 <meta content='width=device-width, initial-scale=1.0, shrink-to-fit=no'
    name='viewport' />
 <link rel="icon" href="/resources/assets/img/icon.ico"
@@ -77,8 +77,8 @@
                   <div class="page-content mail-content">
                      <div class="email-head d-lg-flex d-block">
                         <h2>
-                          <i class="flaticon-pen mr-1"></i>
-                          공지사항
+                           <i class="flaticon-round mr-1"></i>
+                           QnA
                         </h2>
                      </div>
                      <div class="email-compose-fields">
