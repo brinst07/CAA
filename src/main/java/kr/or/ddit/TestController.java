@@ -21,10 +21,30 @@ public class TestController {
 		return "caa/member/JoinMember";
 	}
 	
+	@GetMapping("/modifyMember")
+	public String modifyMember() {
+		return "caa/member/modifyMember";
+	}
+	
 
 	@GetMapping("/noticeList")
 	public String noticeList() {
 		return "caa/notice/noticeList";
+	}
+	
+	@GetMapping("/noticeView")
+	public String noticeView() {
+		return "caa/notice/noticeView";
+	}
+	
+	@GetMapping("/modifyNotice")
+	public String modifyNotice() {
+		return "caa/notice/modifyNotice";
+	}
+	
+	@GetMapping("/notificationService")
+	public String notificationService() {
+		return "caa/notificationInformation/notificationService";
 	}
 	
 	@GetMapping("/iRecommendation")

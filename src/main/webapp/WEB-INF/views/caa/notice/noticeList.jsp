@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-<title>Atlantis Bootstrap 4 Admin Dashboard</title>
+<title>공지사항</title>
 <meta content='width=device-width, initial-scale=1.0, shrink-to-fit=no'
    name='viewport' />
 <link rel="icon" href="/resources/assets/img/icon.ico"
@@ -46,6 +46,15 @@ CSS Just for demo purpose, don't include it in your project
 <link rel="stylesheet" href="/resources/assets/css/demo.css">
  -->
 </head>
+<style>
+    .btn-wrapper{
+      display: inline-block;
+    }
+    .custom-control {
+      float: left;
+      width: 150px;
+    }
+</style>
 <body>
    <div class="wrapper fullheight-side sidebar_minimize">
 
@@ -77,11 +86,18 @@ CSS Just for demo purpose, don't include it in your project
                                  </label>
                               </div>
                            </div>
-                           <div class="col-sm-12 col-md-6">
-                              <div id="multi-filter-select_filter" class="dataTables_filter">
-                                 <label>Search:<input type="search"
+                           <div id="btn-wrapper" class="col-sm-12 col-md-6">
+                              <div id="custom-control" class="dataTables_filter">
+                                 <label>Search: <th rowspan="1" colspan="1"><select
+                                          class="form-control"><option value=""></option>
+                                             <option value="title">제목</option>
+                                             <option value="writer">작성자</option>
+                                             <option value="content">내용</option></label>
+                              </div>
+                              <div id="custom-control">
+                                   <input type="search"
                                     class="form-control form-control-sm" placeholder=""
-                                    aria-controls="multi-filter-select"></label>
+                                    aria-controls="multi-filter-select">
                               </div>
                            </div>
                         </div>
@@ -121,75 +137,57 @@ CSS Just for demo purpose, don't include it in your project
                                     
                                  </thead>
                                  <tfoot>
-                                    <tr>
-                                       <th rowspan="1" colspan="1"><select
-                                          class="form-control"><option value=""></option>
-                                             <option value="Airi Satou">Airi Satou</option>
-                                             <option value="Angelica Ramos">Angelica Ramos</option>
-                                             <option value="Ashton Cox">Ashton Cox</option>
-                                             <option value="Zorita Serrano">Zorita Serrano</option></select></th>
-                                       <th rowspan="1" colspan="1"><select
-                                          class="form-control"><option value=""></option>
-                                             <option value="Accountant">Accountant</option>
-                                             <option value="Chief Executive Officer (CEO)">Chief
-                                                Executive Officer (CEO)</option>
-                                             <option value="Chief Financial Officer (CFO)">Chief
-
-
-                                             
-                                       <th rowspan="1" colspan="1"><select
-                                          class="form-control"><option value=""></option>
-                                             <option value="Edinburgh">Edinburgh</option>
-                                             <option value="London">London</option>
-                                             <option value="New York">New York</option>
+                                      
                                  </tfoot>
                                  <tbody>
                                     <tr role="row" class="odd">
-                                       <td class="sorting_1">Airi Satou</td>
-                                       <td>Accountant</td>
-                                       <td>Tokyo</td>
-                                       <td>33</td>
+                                       <td class="sorting_1">1</td>
+                                       <td>상권분석 공지사항입니다.</td>
+                                       <td>관리자</td>
+                                       <td>2020.08.01</td>
+                                       <td>432</td>
                                     </tr>
                                     <tr role="row" class="odd">
-                                       <td class="sorting_1">Airi Satou</td>
-                                       <td>Accountant</td>
-                                       <td>Tokyo</td>
-                                       <td>33</td>
+                                       <td class="sorting_1">2</td>
+                                       <td>소상공 이벤트입니다.</td>
+                                       <td>관리자</td>
+                                       <td>2020.08.02</td>
+                                       <td>56</td>
                                     </tr>
                                     <tr role="row" class="even">
-                                       <td class="sorting_1">Angelica Ramos</td>
-                                       <td>Chief Executive Officer (CEO)</td>
-                                       <td>London</td>
-                                       <td>47</td>
-
+                                       <td class="sorting_1">3</td>
+                                       <td>전화 상담 안내입니다.</td>
+                                       <td>관리자</td>
+                                       <td>2020.08.02</td>
+										<td>457</td>
                                     </tr>
                                     <tr role="row" class="odd">
-                                       <td class="sorting_1">Ashton Cox</td>
-                                       <td>Junior Technical Author</td>
-                                       <td>San Francisco</td>
-                                       <td>66</td>
-
+                                       <td class="sorting_1">4</td>
+                                       <td>알려드립니다.</td>
+                                       <td>관리자</td>
+                                       <td>2020.08.03</td>
+										<td>64</td>
                                     </tr>
                                     <tr role="row" class="even">
-                                       <td class="sorting_1">Bradley Greer</td>
-                                       <td>Software Engineer</td>
-                                       <td>London</td>
-                                       <td>41</td>
-
+                                       <td class="sorting_1">5</td>
+                                       <td>CAA를 쉽게 이용할수 있는 방법</td>
+                                       <td>관리자</td>
+                                       <td>2020.08.04</td>
+										<td>25</td>
                                     </tr>
                                     <tr role="row" class="odd">
-                                       <td class="sorting_1">Brenden Wagner</td>
-                                       <td>Software Engineer</td>
-                                       <td>San Francisco</td>
-                                       <td>28</td>
-
+                                       <td class="sorting_1">6</td>
+                                       <td>나도 이제 창업자~!</td>
+                                       <td>관리자</td>
+                                       <td>2020.08.05</td>
+										<td>42</td>
                                     </tr>
                                          <tr role="row" class="even">
-                                       <td class="sorting_1">Brenden Wagner</td>
-                                       <td>Software Engineer</td>
-                                       <td>San Francisco</td>
-                                       <td>28</td>
-
+                                       <td class="sorting_1">7</td>
+                                       <td>내 점포 분석하는 방법</td>
+                                       <td>관리자</td>
+                                       <td>2020.08.13</td>
+									<td>13</td>
                                     </tr>
                                  </tbody>
                               </table>
@@ -201,7 +199,7 @@ CSS Just for demo purpose, don't include it in your project
                                  role="status" aria-live="polite">Showing 1 to 5 of 57
                                  entries</div>
                            </div>
-                           <div class="col-sm-12 col-md-7">
+                           <div class="col-sm-12 col-md-7" align="center">
                               <div class="dataTables_paginate paging_simple_numbers"
                                  id="multi-filter-select_paginate">
                                  <ul class="pagination">

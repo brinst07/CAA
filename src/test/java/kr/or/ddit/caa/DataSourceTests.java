@@ -1,4 +1,4 @@
-package kr.or.ddit.data;
+package kr.or.ddit.caa;
 
 import static org.junit.Assert.fail;
 
