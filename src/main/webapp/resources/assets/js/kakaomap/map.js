@@ -134,6 +134,7 @@ manager.addListener('drawend', function (data) {
 			data.name = value;
 			list.push(data);
 			console.log(list);
+
 		});
 
 });
@@ -181,7 +182,20 @@ $(function () {
 			destoryRadius();
 		}
 	});
-
+	
+	$('select[name="large"]').on('change',function(){
+		console.log(this.value);
+		$.getJSON("/caa/rest/div/"+this.value,
+			function(data){
+				if(callback){
+					callback(data);
+				}
+			}).fail(function(xhr,status,err){
+				if(error){
+					error();
+				}
+			});
+	});
 });
 
 var radiusClick = function (mouseEvent) {
