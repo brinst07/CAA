@@ -59,9 +59,6 @@
 									class="nav-link " href="industryanalysis">업종분석</a> <a
 									class="nav-link active " href="SaleAnalysis">매출분석</a> <a
 									class="nav-link " href="test4">인구분석</a>
-
-						
-					
 					</div>
 				</div>
 			</div>

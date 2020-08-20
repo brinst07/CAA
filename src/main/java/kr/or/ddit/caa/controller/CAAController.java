@@ -31,6 +31,11 @@ public class CAAController {
 		return "caa/caa/SalesAnalysis";
 	}
 	
+	//cctv
+	@GetMapping("/CCTVAnalysis")
+	public String cctv() {
+		return "caa/cctv/CCTVAnalysis";
+	}
 	
 	/* 영현  */
 
