@@ -11,6 +11,7 @@
 <meta charset="UTF-8" />
 <!-- Fonts and icons -->
 <script src="/resources/assets/js/plugin/webfont/webfont.min.js"></script>
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 <script>
 	WebFont.load({
 		google : {
