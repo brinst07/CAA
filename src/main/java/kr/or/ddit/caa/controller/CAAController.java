@@ -63,4 +63,16 @@ public class CAAController {
 		return "caa/notice/noticeView";
 	}
 	
+	@GetMapping("/modifyNotice")
+	public String modifyNotice() {
+		return "caa/notice/modifyNotice";
+	}
+	
+	@GetMapping("/notificationService")
+	public String notificationService() {
+		return "caa/notificationInformation/notificationService";
+	}
+	
+	
+	
 }
