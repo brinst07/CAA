@@ -52,136 +52,137 @@
 					<div class="page-inner border-bottom pb-0 mb-3">
 						<div class="d-flex align-items-left flex-column">
 							<h2 class="pb-2 fw-bold">상권 분석</h2>
-							<div class="nav-scroller d-flex">
-								<div
-									class="nav nav-line nav-color-info d-flex align-items-center justify-contents-center">
-									<a class="nav-link" href="test3">상권분석</a> <a class="nav-link"
-										href="test4">업종분석</a> <a class="nav-link active" href="test4">매출분석</a>
-									<a class="nav-link " href="test4">인구분석</a>
+
+							<div
+								class="nav nav-line nav-color-info d-flex align-items-center justify-contents-center">
+								<a class="nav-link" href="commercialanalysis">상권분석</a> <a
+									class="nav-link " href="industryanalysis">업종분석</a> <a
+									class="nav-link active " href="SaleAnalysis">매출분석</a> <a
+									class="nav-link " href="test4">인구분석</a>
+
+						
+					
+					</div>
+				</div>
+			</div>
+			<div class="page-inner">
+				<div class="col-md-12">
+					<div class="card">
+						<div class="card-header">
+							<div class="card-title">1. 업종별 매출추이</div>
+						</div>
+						<div class="card-body">
+							<div class="chart-container">
+								<div class="chartjs-size-monitor"
+									style="position: absolute; left: 0px; top: 0px; right: 0px; bottom: 0px; overflow: hidden; pointer-events: none; visibility: hidden; z-index: -1;">
+									<div class="chartjs-size-monitor-expand"
+										style="position: absolute; left: 0; top: 0; right: 0; bottom: 0; overflow: hidden; pointer-events: none; visibility: hidden; z-index: -1;">
+										<div
+											style="position: absolute; width: 1000000px; height: 1000000px; left: 0; top: 0"></div>
+									</div>
+									<div class="chartjs-size-monitor-shrink"
+										style="position: absolute; left: 0; top: 0; right: 0; bottom: 0; overflow: hidden; pointer-events: none; visibility: hidden; z-index: -1;">
+										<div
+											style="position: absolute; width: 200%; height: 200%; left: 0; top: 0"></div>
+									</div>
 								</div>
+								<canvas id="multipleLineChart" width="306" height="300"
+									class="chartjs-render-monitor"
+									style="display: block; width: 306px; height: 300px;"></canvas>
 							</div>
 						</div>
 					</div>
 				</div>
-				<div class="page-inner">
-					<!-- 이름 /이메일 /아이디 입력란 -->
-					<div class="col-md-12">
-						<div class="card">
-							<div class="card-header">
-								<div class="card-title">1. 업종별 매출추이</div>
-							</div>
-							<div class="card-body">
-								<div class="chart-container">
-									<div class="chartjs-size-monitor"
-										style="position: absolute; left: 0px; top: 0px; right: 0px; bottom: 0px; overflow: hidden; pointer-events: none; visibility: hidden; z-index: -1;">
-										<div class="chartjs-size-monitor-expand"
-											style="position: absolute; left: 0; top: 0; right: 0; bottom: 0; overflow: hidden; pointer-events: none; visibility: hidden; z-index: -1;">
-											<div
-												style="position: absolute; width: 1000000px; height: 1000000px; left: 0; top: 0"></div>
-										</div>
-										<div class="chartjs-size-monitor-shrink"
-											style="position: absolute; left: 0; top: 0; right: 0; bottom: 0; overflow: hidden; pointer-events: none; visibility: hidden; z-index: -1;">
-											<div
-												style="position: absolute; width: 200%; height: 200%; left: 0; top: 0"></div>
-										</div>
-									</div>
-									<canvas id="multipleLineChart" width="306" height="300"
-										class="chartjs-render-monitor"
-										style="display: block; width: 306px; height: 300px;"></canvas>
-								</div>
-							</div>
+				<div class="col-md-12">
+					<div class="card">
+						<div class="card-header">
+							<div class="card-title">2. 고객별 매출특성</div>
 						</div>
-					</div>
-					<div class="col-md-12">
-						<div class="card">
-							<div class="card-header">
-								<div class="card-title">2. 고객별 매출특성</div>
-							</div>
-							<div class="card-body">
-								<table class="table table-hover">
-									<thead>
-										<tr>
-											<th scope="col">#</th>
-											<th scope="col">First</th>
-											<th scope="col">Last</th>
-											<th scope="col">Handle</th>
-										</tr>
-									</thead>
-									<tbody>
-										<tr>
-											<td>1</td>
-											<td>Mark</td>
-											<td>Otto</td>
-											<td>@mdo</td>
-										</tr>
-										<tr>
-											<td>1</td>
-											<td>Mark</td>
-											<td>Otto</td>
-											<td>@mdo</td>
-										</tr>
-										<tr>
-											<td>1</td>
-											<td>Mark</td>
-											<td>Otto</td>
-											<td>@mdo</td>
-										</tr>
-										<tr>
-											<td>1</td>
-											<td>Mark</td>
-											<td>Otto</td>
-											<td>@mdo</td>
-										</tr>
-										<tr>
-											<td>1</td>
-											<td>Mark</td>
-											<td>Otto</td>
-											<td>@mdo</td>
-										</tr>
-										<tr>
-											<td>1</td>
-											<td>Mark</td>
-											<td>Otto</td>
-											<td>@mdo</td>
-										</tr>
-										<tr>
-											<td>1</td>
-											<td>Mark</td>
-											<td>Otto</td>
-											<td>@mdo</td>
-										</tr>
-										<tr>
-											<td>1</td>
-											<td>Mark</td>
-											<td>Otto</td>
-											<td>@mdo</td>
-										</tr>
-										<tr>
-											<td>1</td>
-											<td>Mark</td>
-											<td>Otto</td>
-											<td>@mdo</td>
-										</tr>
-										
-										<tr>
-											<td>2</td>
-											<td>Jacob</td>
-											<td>Thornton</td>
-											<td>@fat</td>
-										</tr>
-										<tr>
-											<td>3</td>
-											<td colspan="2">Larry the Bird</td>
-											<td>@twitter</td>
-										</tr>
-									</tbody>
-								</table>
-							</div>
+						<div class="card-body">
+							<table class="table table-hover">
+								<thead>
+									<tr>
+										<th scope="col">#</th>
+										<th scope="col">First</th>
+										<th scope="col">Last</th>
+										<th scope="col">Handle</th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr>
+										<td>1</td>
+										<td>Mark</td>
+										<td>Otto</td>
+										<td>@mdo</td>
+									</tr>
+									<tr>
+										<td>1</td>
+										<td>Mark</td>
+										<td>Otto</td>
+										<td>@mdo</td>
+									</tr>
+									<tr>
+										<td>1</td>
+										<td>Mark</td>
+										<td>Otto</td>
+										<td>@mdo</td>
+									</tr>
+									<tr>
+										<td>1</td>
+										<td>Mark</td>
+										<td>Otto</td>
+										<td>@mdo</td>
+									</tr>
+									<tr>
+										<td>1</td>
+										<td>Mark</td>
+										<td>Otto</td>
+										<td>@mdo</td>
+									</tr>
+									<tr>
+										<td>1</td>
+										<td>Mark</td>
+										<td>Otto</td>
+										<td>@mdo</td>
+									</tr>
+									<tr>
+										<td>1</td>
+										<td>Mark</td>
+										<td>Otto</td>
+										<td>@mdo</td>
+									</tr>
+									<tr>
+										<td>1</td>
+										<td>Mark</td>
+										<td>Otto</td>
+										<td>@mdo</td>
+									</tr>
+									<tr>
+										<td>1</td>
+										<td>Mark</td>
+										<td>Otto</td>
+										<td>@mdo</td>
+									</tr>
+
+									<tr>
+										<td>2</td>
+										<td>Jacob</td>
+										<td>Thornton</td>
+										<td>@fat</td>
+									</tr>
+									<tr>
+										<td>3</td>
+										<td colspan="2">Larry the Bird</td>
+										<td>@twitter</td>
+									</tr>
+								</tbody>
+							</table>
 						</div>
 					</div>
 				</div>
 			</div>
 		</div>
+	</div>
 
 
 

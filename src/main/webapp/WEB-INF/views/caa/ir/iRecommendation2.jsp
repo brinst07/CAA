@@ -9,8 +9,6 @@
 <body>
 
 
-	<div class="main-panel full-height">
-		<div class="container">
 			<div class="main-panel full-height">
 				<div class="container">
 					<div class="page-inner">
@@ -54,7 +52,7 @@
 
 							<!-- ----------------------------------- -->
 
-							<div class="col-md-6">
+							<div class="col-md-12">
 
 								<table class="table">
 									<thead>
@@ -131,8 +129,6 @@
 					</div>
 				</div>
 			</div>
-		</div>
-	</div>
 </body>
 
 <script>

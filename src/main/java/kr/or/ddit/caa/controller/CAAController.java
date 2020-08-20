@@ -32,7 +32,32 @@ public class CAAController {
 		return "caa/caa/selectPage";
 	}
 
+	//상권분석
+	@GetMapping("/commercialanalysis")
+	public String caaResult() {
+		return "caa/caa/CommercialAnalysis";
+	}
+	
+	//업종분석
+	@GetMapping("/industryanalysis")
+	public String industryanalysis() {
+		return "caa/caa/IndustryAnalysis";
+	}
+	
+	//매출분석
+	@GetMapping("/SaleAnalysis")
+	public String caaSale() {
+		return "caa/caa/SalesAnalysis";
+	}
+	
+	
+	/* 영현  */
+
 	/* ↓ 상권 추천 영현 */
+	@GetMapping("iRecommendationMap")
+	public String iRecommendationMap() {
+		return "caa/ir/iRecommendationMap";
+	}
 	
 	@GetMapping("/iRecommendation")
 	public String IRtest() {
@@ -75,10 +100,9 @@ public class CAAController {
 	
 
 	
-	@GetMapping("/SaleAnalysis")
-	public String caaSale() {
-		return "caa/caa/SalesAnalysis";
-	}
+
+
+
 //	창수
 	
 	@GetMapping("/JoinMember")
@@ -101,5 +125,31 @@ public class CAAController {
 	public String noticeView() {
 		return "caa/notice/noticeView";
 	}
+	
+	
+	/* ↓ sns */
+	@GetMapping("snsAnalysis")
+	public String snsAnalysis() {
+		return "caa/sns/snsAnalysisFirst";
+	}
+	/* ↑ sns */
+	
+	
+
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	
 }

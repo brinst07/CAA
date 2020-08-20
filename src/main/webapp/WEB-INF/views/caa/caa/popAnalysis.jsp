@@ -39,7 +39,6 @@
 <!-- <link rel="stylesheet" href="/resources/assets/css/atlantis.css"> -->
 
 <!-- <!-- CSS Just for demo purpose, don't include it in your project -->
--->
 <!-- <link rel="stylesheet" href="/resources/assets/css/demo.css"> -->
 
 </head>
@@ -57,22 +56,150 @@
 									class="nav nav-line nav-color-info d-flex align-items-center justify-contents-center">
 									<a class="nav-link" href="test3">상권분석</a> <a class="nav-link"
 										href="test4">업종분석</a> <a class="nav-link" href="test4">매출분석</a>
-									<a class="nav-link active" href="test4">인구분석</a>
+									<a class="nav-link active" href="PopAnalysis">인구분석</a>
 								</div>
 							</div>
 						</div>
 					</div>
 				</div>
+				<div class="page-inner">
+
+					<!-- ↓ 그래프 -->
+
+					<div class="col-md-12">
+						<div class="card">
+							<div class="card-header">
+								<div class="card-title">유동인구 월별 그래프</div>
+							</div>
+							<div class="card-body">
+								<div class="chart-container">
+									<canvas id="lineChart"></canvas>
+								</div>
+							</div>
+						</div>
+					</div>
+
+					<!-- ↑ 그래프 -->
+					<!-- ↓ 표 -->
+
+
+					<!-- ----------------------------------- -->
+
+					<div class="col-md-12">
+						<div class="card">
+							<div class="card-body">
+
+								<table class="table">
+									<thead>
+										<tr>
+											<td>지역</td>
+											<td>1</td>
+											<td>2</td>
+											<td>3</td>
+											<td>4</td>
+											<td>5</td>
+											<td>6</td>
+											<td>7</td>
+											<td>8</td>
+											<td>9</td>
+											<td>10</td>
+											<td>11</td>
+											<td>12</td>
+										</tr>
+
+									</thead>
+									<tbody>
+										<tr>
+											<td>선택 영역</td>
+											<td>1</td>
+											<td>2</td>
+											<td>3</td>
+											<td>4</td>
+											<td>5</td>
+											<td>6</td>
+											<td>7</td>
+											<td>8</td>
+											<td>9</td>
+											<td>10</td>
+											<td>11</td>
+											<td>12</td>
+										</tr>
+										<tr>
+											<td>증감율</td>
+											<td>1</td>
+											<td>2</td>
+											<td>3</td>
+											<td>4</td>
+											<td>5</td>
+											<td>6</td>
+											<td>7</td>
+											<td>8</td>
+											<td>9</td>
+											<td>10</td>
+											<td>11</td>
+											<td>12</td>
+										</tr>
+
+									</tbody>
+								</table>
+
+
+
+
+							</div>
+						</div>
+					</div>
+					<!-- ------------------- -->
+					<!-- ↑ 표 -->
+
+
+					<!-- ↓ 성별 / 연령별 유동인구 그래프 -->
+					<div class="col-md-12">
+					<div class="row">
+						<!-- ↓ 성별 유동인구 그래프 -->
+						<div class="col-md-6">
+							<div class="card">
+								<div class="card-header">
+									<div class="card-title">성별 유동인구</div>
+								</div>
+								<div class="card-body">
+									<div class="chart-container">
+										<canvas id="doughnutChart" style="width: 50%; height: 50%"></canvas>
+									</div>
+								</div>
+							</div>
+						</div>
+						<!-- ↑ 성별 유동인구 그래프 -->
+
+						<!-- ↓ 연령별 유동인구 그래프 -->
+						<div class="col-md-6">
+							<div class="card">
+								<div class="card-header">
+									<div class="card-title">연령별 유동인구</div>
+								</div>
+								<div class="card-body">
+									<div class="chart-container">
+										<canvas id="GenderdoughnutChart"
+											style="width: 50%; height: 50%"></canvas>
+									</div>
+								</div>
+							</div>
+						</div>
+						<!-- ↑ 연령별 유동인구 그래프 -->
+						</div>
+					</div>
+					<!-- ↑ 성별 / 연령별 유동인구 그래프 -->
+
+
+
+				</div>
+				<!-- ↑ page-inner -->
 			</div>
 		</div>
 
 
 
 	</div>
-	<!--   Core JS Files   -->
-	<script src="/resources/assets/js/core/jquery.3.2.1.min.js"></script>
-	<script src="/resources/assets/js/core/popper.min.js"></script>
-	<script src="/resources/assets/js/core/bootstrap.min.js"></script>
 
 	<!-- jQuery UI -->
 	<script
@@ -160,33 +287,116 @@
 	<!-- Atlantis JS -->
 	<script src="/resources/assets/js/atlantis.min.js"></script>
 
-	<script>
-		$('#lineChart').sparkline([ 102, 109, 120, 99, 110, 105, 115 ], {
+	<script type="text/javascript">
+		var lineChart = document.getElementById('lineChart').getContext('2d'), doughnutChart = document
+				.getElementById('doughnutChart').getContext('2d');
+
+		var myLineChart = new Chart(lineChart, {
 			type : 'line',
-			height : '70',
-			width : '100%',
-			lineWidth : '2',
-			lineColor : '#177dff',
-			fillColor : 'rgba(23, 125, 255, 0.14)'
+			data : {
+				labels : [ "Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul",
+						"Aug", "Sep", "Oct", "Nov", "Dec" ],
+				datasets : [ {
+					label : "Active Users",
+					borderColor : "#1d7af3",
+					pointBorderColor : "#FFF",
+					pointBackgroundColor : "#1d7af3",
+					pointBorderWidth : 2,
+					pointHoverRadius : 4,
+					pointHoverBorderWidth : 1,
+					pointRadius : 4,
+					backgroundColor : 'transparent',
+					fill : true,
+					borderWidth : 2,
+					data : [ 542, 480, 430, 550, 530, 453, 380, 434, 568, 610,
+							700, 900 ]
+				} ]
+			},
+			options : {
+				responsive : true,
+				maintainAspectRatio : false,
+				legend : {
+					position : 'bottom',
+					labels : {
+						padding : 10,
+						fontColor : '#1d7af3',
+					}
+				},
+				tooltips : {
+					bodySpacing : 4,
+					mode : "nearest",
+					intersect : 0,
+					position : "nearest",
+					xPadding : 10,
+					yPadding : 10,
+					caretPadding : 10
+				},
+				layout : {
+					padding : {
+						left : 15,
+						right : 15,
+						top : 15,
+						bottom : 15
+					}
+				}
+			}
 		});
 
-		$('#lineChart2').sparkline([ 99, 125, 122, 105, 110, 124, 115 ], {
-			type : 'line',
-			height : '70',
-			width : '100%',
-			lineWidth : '2',
-			lineColor : '#f3545d',
-			fillColor : 'rgba(243, 84, 93, .14)'
-		});
+		/* 도넛 차트 */
+		var myDoughnutChart = new Chart(doughnutChart, {
+			type : 'doughnut',
+			data : {
+				datasets : [ {
+					data : [ 10, 20, 30 ],
+					backgroundColor : [ '#f3545d', '#fdaf4b', '#1d7af3' ]
+				} ],
 
-		$('#lineChart3').sparkline([ 105, 103, 123, 100, 95, 105, 115 ], {
-			type : 'line',
-			height : '70',
-			width : '100%',
-			lineWidth : '2',
-			lineColor : '#ffa534',
-			fillColor : 'rgba(255, 165, 52, .14)'
+				labels : [ 'Red', 'Yellow', 'Blue' ]
+			},
+			options : {
+				responsive : true,
+				maintainAspectRatio : false,
+				legend : {
+					position : 'bottom'
+				},
+				layout : {
+					padding : {
+						left : 20,
+						right : 20,
+						top : 20,
+						bottom : 20
+					}
+				}
+			}
+		});
+		var myDoughnutChart = new Chart(GenderdoughnutChart, {
+			type : 'doughnut',
+			data : {
+				datasets : [ {
+					data : [ 10, 30 ],
+					backgroundColor : [ '#f3545d', '#fdaf4b', '#1d7af3' ]
+				} ],
+
+				labels : [ 'Red', 'Blue' ]
+			},
+			options : {
+				responsive : true,
+				maintainAspectRatio : false,
+				legend : {
+					position : 'bottom'
+				},
+				layout : {
+					padding : {
+						left : 20,
+						right : 20,
+						top : 20,
+						bottom : 20
+					}
+				}
+			}
 		});
 	</script>
+
+
 </body>
 </html>
