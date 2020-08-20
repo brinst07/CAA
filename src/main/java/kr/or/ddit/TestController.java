@@ -65,7 +65,33 @@ public class TestController {
 	
 	@GetMapping("/qnaList")
 	public String qnaList() {
-		return "caa/member/qnaList";
+		return "caa/qna/qnaList";
+	}
+	
+	@GetMapping("/selectHistory")
+	public String selectHistory() {
+		return "caa/history/selectHistory";
+	}
+	
+	@GetMapping("/surveyList")
+	public String surveyList() {
+		return "caa/survey/surveyList";
+	}
+	
+	@GetMapping("/surveyView")
+	public String surveyView() {
+		return "caa/survey/surveyView";
 	}
 
+	
+	@GetMapping("/qnaView")
+	public String qnaView() {
+		return "caa/qna/qnaView";
+	}
+
+	
+	@GetMapping("/qnaViewTest")
+	public String qnaViewTest() {
+		return "caa/qna/qnaViewTest";
+	}
 }
