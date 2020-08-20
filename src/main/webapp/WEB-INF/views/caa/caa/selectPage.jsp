@@ -1,11 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=1a3acaea52f8fb01b6a85dfd59092f27"></script>
-
+<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=1a3acaea52f8fb01b6a85dfd59092f27&libraries=drawing"></script>
 </head>
 <body>
 	<div class="main-panel full-height">
@@ -28,17 +28,8 @@
 							</div>
 							<div class="card-body">
 								<div id="map" style="display: block; widht: 785px; height: 375px;"></div>
-								<script>
-									var container = document
-											.getElementById('map');
-									var options = {
-										center : new kakao.maps.LatLng(
-												33.450701, 126.570667),
-										level : 3
-									};
-
-									var map = new kakao.maps.Map(container,
-											options);
+								<!-- 맵과 관련된 js를 따로 관리 -->
+								<script src="/resources/assets/js/kakaomap/map.js">								
 								</script>
 							</div>
 						</div>
@@ -80,11 +71,12 @@
 								<li class="list-group-item">영역을 선택해주세요</li>
 								<li class="list-group-item">
 									<ul class="wizard-menu nav nav-pills nav-primary">
-										<li class="step" style="width: 25%;"><a class="nav-link active" href="#about" data-toggle="tab" aria-expanded="true"><i class="far fa-circle"></i><br>
+										<li class="step" style="width: 25%;" onclick="selectOverlay('CIRCLE')"><a id="circle" class="nav-link active" href="#about" data-toggle="tab" aria-expanded="true"><i class="far fa-circle"></i><br>
 												원형</a></li>
-										<li class="step" style="width: 25%;"><a class="nav-link" href="#account" data-toggle="tab"><i class="fas fa-bullseye"></i><br>반경</a></li>
-										<li class="step" style="width: 25%;"><a class="nav-link" href="#address" data-toggle="tab"><i class="fab fa-connectdevelop"></i><br>다각</a></li>
-										<li class="step" style="width: 25%;"><a class="nav-link" href="#address" data-toggle="tab"><i class="fas fa-map-marked-alt"></i><br>상권</a></li>
+										<li class="step" style="width: 25%;" onclick="selectOverlay('RECTANGLE')"><a class="nav-link" href="#address" data-toggle="tab"><i class="fab fa-connectdevelop"></i><br>사각</a></li>
+										<li class="step" style="width: 25%;" onclick="selectOverlay('POLYGON')"><a class="nav-link" href="#address" data-toggle="tab"><i class="fab fa-connectdevelop"></i><br>다각</a></li>
+										<li class="step" style="width: 25%;" ><a id="radius" class="nav-link" data-toggle="tab"><i class="fas fa-bullseye"></i><br>반경</a></li>
+										<li class="step" style="width: 25%;" onclick="test()"><a class="nav-link" href="#address" data-toggle="tab"><i class="fas fa-map-marked-alt"></i><br>상권</a></li>
 									</ul>
 								</li>
 							</ul>
@@ -95,9 +87,11 @@
 								<li class="list-group-item">
 									<button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Primary</button>
 									<div class="dropdown-menu">
-										<a class="dropdown-item" href="#">Action</a> <a class="dropdown-item" href="#">Another action</a> <a class="dropdown-item" href="#">Something else here</a>
-										<div class="dropdown-divider"></div>
-										<a class="dropdown-item" href="#">Separated link</a>
+									<select name="large">
+										<c:forEach items="${firstDiv }" var="first">
+											<option value="${first.cs_code }">${first.cs_code_name }</option>
+										</c:forEach>
+									</select>
 									</div>
 								</li>
 								<li class="list-group-item">
