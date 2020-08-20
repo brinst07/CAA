@@ -1,15 +1,34 @@
 package kr.or.ddit.caa.controller;
 
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.model;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+
+import kr.or.ddit.caa.domain.CscodeVO;
+import kr.or.ddit.caa.service.CAAService;
+import lombok.Setter;
 
 @Controller
 @RequestMapping("/caa/*")
 public class CAAController {
-
+	
+	@Setter(onMethod_ = @Autowired)
+	private CAAService service;
+	
+	
 	@GetMapping("/caaSelect")
-	public String caaSelect() {
+	public String caaSelect(Model model) {
+		
+		List<CscodeVO> list = service.getCscodeList("1");
+		
+		model.addAttribute("firstDiv", list);
+		
 		return "caa/caa/selectPage";
 	}
 
@@ -113,6 +132,12 @@ public class CAAController {
 	}
 	
 	
+	/* ↓ sns */
+	@GetMapping("snsAnalysis")
+	public String snsAnalysis() {
+		return "caa/sns/snsAnalysisFirst";
+	}
+	/* ↑ sns */
 	
 	
 

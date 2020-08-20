@@ -8,9 +8,6 @@
 </head>
 <body>
 
-
-	<div class="main-panel full-height">
-		<div class="container">
 			<div class="main-panel full-height">
 				<div class="container">
 					<div class="page-inner">
@@ -88,7 +85,6 @@
 					</div>
 				</div>
 			</div>
-		</div>
 </body>
 
 <script>
