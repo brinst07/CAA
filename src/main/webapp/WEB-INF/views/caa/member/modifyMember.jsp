@@ -60,31 +60,31 @@
                <div class="form-group" align="center" >
                   <label for="name">이름&nbsp&nbsp&nbsp</label><input
                      style="display: inline; width: 400px" type="name"
-                     class="form-control" id="name" placeholder="Enter Name"  disabled="disabled">
+                     class="form-control" id="name"  disabled="disabled">
                </div>
                
                <div class="form-group" align="center">
                   <label for="id">아이디&nbsp&nbsp&nbsp</label><input
                      style="display: inline; width: 400px;" type="id"
-                     class="form-control" id="id" placeholder="Enter ID"  disabled="disabled">&nbsp;&nbsp;&nbsp;&nbsp;
+                     class="form-control" id="id"  disabled="disabled">&nbsp;&nbsp;&nbsp;&nbsp;
                </div>
                
                <div class="form-group" align="center">
                   <label for="password">비밀번호&nbsp&nbsp&nbsp</label><input
                      style="display: inline; width: 400px" type="password"
-                     class="form-control" id="password" placeholder="Enter Password">
+                     class="form-control" id="password">
                </div>
                
                <div class="form-group" align="center">
                   <label for="password2">비밀번호 확인&nbsp&nbsp&nbsp</label><input
                      style="display: inline; width: 400px" type="password"
-                     class="form-control" id="password2" placeholder="Enter Password">
+                     class="form-control" id="password2">
                </div>
                
                <div class="form-group" align="center">
                   <label for="email">이메일&nbsp&nbsp&nbsp</label><input
                      style="display: inline; width: 400px" type="email"
-                     class="form-control" id="email" placeholder="Enter Email">&nbsp;&nbsp;&nbsp;&nbsp;
+                     class="form-control" id="email">&nbsp;&nbsp;&nbsp;&nbsp;
                </div>
               
                    

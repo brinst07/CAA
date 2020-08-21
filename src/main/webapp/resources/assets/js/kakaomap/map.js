@@ -134,6 +134,7 @@ manager.addListener('drawend', function (data) {
 			data.name = value;
 			list.push(data);
 			console.log(list);
+
 		});
 
 });
@@ -181,7 +182,37 @@ $(function () {
 			destoryRadius();
 		}
 	});
-
+	
+	$('select[name="large"]').on('change',function(){
+		var middle = $('select[name="middle"]');
+		console.log(this.value);
+		$.getJSON("/caa/rest/div/"+this.value,
+			function(data){
+				middle.children('option').remove();
+				for(var i = 0; i<data.length; i++){
+					middle.append('<option value='+data[i].cs_code+'>'+data[i].cs_code_name+'</option>');
+				}
+			}).fail(function(xhr,status,err){
+				if(error){
+					error();
+				}
+			});
+	});
+	
+		$('select[name="middle"]').on('change',function(){
+		var small = $('select[name="small"]');
+		$.getJSON("/caa/rest/div/"+this.value,
+			function(data){
+				small.children('option').remove();
+				for(var i = 0; i<data.length; i++){
+					small.append('<option value='+data[i].cs_code+'>'+data[i].cs_code_name+'</option>');
+				}
+			}).fail(function(xhr,status,err){
+				if(error){
+					error();
+				}
+			});
+	});
 });
 
 var radiusClick = function (mouseEvent) {

@@ -24,4 +24,5 @@
 	
 	<mybatis-spring:scan base-package="kr.or.ddit.caa.mapper"/>
 	<mybatis-spring:scan base-package="kr.or.ddit.ss.mapper"/>
+	<mybatis-spring:scan base-package="kr.or.ddit.bs.mapper"/>
 </beans>

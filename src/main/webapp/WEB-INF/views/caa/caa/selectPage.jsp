@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -27,38 +27,58 @@
 								</div>
 							</div>
 							<div class="card-body">
-								<div id="map" style="display: block; widht: 785px; height: 375px;"></div>
+								<div id="map" style="display: block; widht: 785px; height: 680px;"></div>
 								<!-- 맵과 관련된 js를 따로 관리 -->
-								<script src="/resources/assets/js/kakaomap/map.js">								
+								<script src="/resources/assets/js/kakaomap/map.js">
+									
 								</script>
 							</div>
 						</div>
 					</div>
-					<!-- 					<div class="col-md-4"> -->
-					<!-- 						<div class="card card-primary bg-primary-gradient"> -->
-					<!-- 							<div class="card-body"> -->
-					<!-- 								<h1 class="mt-3 b-b1 pb-2 mb-4 fw-bold"> -->
-					<!-- 									1단계 -->
-					<!-- 									</h4> -->
-					<!-- 									<div class="card-category">지역을 선택해주세요~</div> -->
-					<!-- 									<br> -->
-					<!-- 									<h1 class="mt-3 b-b1 pb-2 mb-4 fw-bold">2단계</h1> -->
-					<!-- 									<div class="card-category">영역을 선택해주세요</div> -->
-					<!-- 									<div class="page-inner"> -->
-
-					<!-- 										<button class="btn btn-primary">Default</button> -->
-					<!-- 										<button class="btn btn-primary btn-border btn-light"><</button> -->
-					<!-- 										<button class="btn btn-primary btn-border btn-light">Border</button> -->
-					<!-- 										<button class="btn btn-primary btn-border btn-light">Border</button> -->
-					<!-- 									</div> -->
-					<!-- 							</div> -->
-					<!-- 							<h4 class="mt-5 pb-3 mb-0 fw-bold">Top active pages</h4> -->
-					<!-- 							<ul class="list-unstyled"> -->
-					<!-- 								<li class="d-flex justify-content-between pb-1 pt-1"><small>/product/readypro/index.html</small> <span>7</span></li> -->
-					<!-- 								<li class="d-flex justify-content-between pb-1 pt-1"><small>/product/atlantis/demo.html</small> <span>10</span></li> -->
-					<!-- 							</ul> -->
-					<!-- 						</div> -->
-					<!-- 					</div> -->
+					<!-- Modal -->
+					<div class="modal fade bd-example-modal-lg" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+						<div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+							<div class="modal-content">
+								<div class="modal-header">
+									<h5 class="modal-title" id="exampleModalLongTitle">Modal title</h5>
+									<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+										<span aria-hidden="true">&times;</span>
+									</button>
+								</div>
+								<div class="modal-body">
+									<div class="form-group form-group-default">
+										<label>대분류</label> 
+										<select class="form-control" name="large">
+											<option></option>
+											<c:forEach items="${firstDiv }" var="first">
+												<option value="${first.cs_code}">${first.cs_code_name }</option>
+											</c:forEach>
+										</select>
+									</div>
+									<div class="form-group form-group-default">
+										<label>중분류</label> 
+										<select class="form-control" name="middle">
+											<option></option>
+										</select>
+									</div>
+									<div class="form-group form-group-default">
+										<label>소분류</label> 
+										<select class="form-control" name="small">
+											<option></option>
+											<c:forEach items="${firstDiv }" var="first">
+												<option value="${first.cs_code}">${first.cs_code_name }</option>
+											</c:forEach>
+										</select>
+									</div>
+								</div>
+								<div class="modal-footer">
+									<button type="button" class="btn btn-black reset">초기화</button>
+									<button type="button" class="btn btn-secondary reset" data-dismiss="modal">Close</button>
+									<button type="button" class="btn btn-primary">Save changes</button>
+								</div>
+							</div>
+						</div>
+					</div>
 					<div class="col-md-4">
 						<div class="card-body">
 							<ul class="list-group list-group-bordered">
@@ -71,29 +91,23 @@
 								<li class="list-group-item">영역을 선택해주세요</li>
 								<li class="list-group-item">
 									<ul class="wizard-menu nav nav-pills nav-primary">
-										<li class="step" style="width: 25%;" onclick="selectOverlay('CIRCLE')"><a id="circle" class="nav-link active" href="#about" data-toggle="tab" aria-expanded="true"><i class="far fa-circle"></i><br>
-												원형</a></li>
-										<li class="step" style="width: 25%;" onclick="selectOverlay('RECTANGLE')"><a class="nav-link" href="#address" data-toggle="tab"><i class="fab fa-connectdevelop"></i><br>사각</a></li>
-										<li class="step" style="width: 25%;" onclick="selectOverlay('POLYGON')"><a class="nav-link" href="#address" data-toggle="tab"><i class="fab fa-connectdevelop"></i><br>다각</a></li>
-										<li class="step" style="width: 25%;" ><a id="radius" class="nav-link" data-toggle="tab"><i class="fas fa-bullseye"></i><br>반경</a></li>
-										<li class="step" style="width: 25%;" onclick="test()"><a class="nav-link" href="#address" data-toggle="tab"><i class="fas fa-map-marked-alt"></i><br>상권</a></li>
+										<li class="step" style="width: 20%;" onclick="selectOverlay('CIRCLE')"><a id="circle" class="nav-link active" href="#about" data-toggle="tab" aria-expanded="true"><i
+												class="far fa-circle"></i><br> 원형</a></li>
+										<li class="step" style="width: 20%;" onclick="selectOverlay('RECTANGLE')"><a class="nav-link" href="#address" data-toggle="tab"><i class="fab fa-connectdevelop"></i><br>사각</a></li>
+										<li class="step" style="width: 20%;" onclick="selectOverlay('POLYGON')"><a class="nav-link" href="#address" data-toggle="tab"><i class="fab fa-connectdevelop"></i><br>다각</a></li>
+										<li class="step" style="width: 20%;"><a id="radius" class="nav-link" data-toggle="tab"><i class="fas fa-bullseye"></i><br>반경</a></li>
+										<li class="step" style="width: 20%;" onclick="test()"><a class="nav-link" href="#address" data-toggle="tab"><i class="fas fa-map-marked-alt"></i><br>상권</a></li>
 									</ul>
 								</li>
 							</ul>
 							<br>
 							<ul class="list-group list-group-bordered">
 								<li class="list-group-item active">3단계</li>
-								<li class="list-group-item">업종선택</li>
 								<li class="list-group-item">
-									<button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Primary</button>
-									<div class="dropdown-menu">
-									<select name="large">
-										<c:forEach items="${firstDiv }" var="first">
-											<option value="${first.cs_code }">${first.cs_code_name }</option>
-										</c:forEach>
-									</select>
-									</div>
+									<!-- Button trigger modal -->
+									<button type="button" class="btn btn-primary" data-toggle="modal" data-target=".bd-example-modal-lg">업종선택</button>
 								</li>
+
 								<li class="list-group-item">
 									<button class="btn btn-black">Default</button>
 									<button class="btn btn-info">Info</button>
@@ -101,6 +115,7 @@
 							</ul>
 						</div>
 					</div>
+
 				</div>
 			</div>
 		</div>

@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-<title>공지사항</title>
+<title>공지사항 수정</title>
 <meta content='width=device-width, initial-scale=1.0, shrink-to-fit=no'
    name='viewport' />
 <link rel="icon" href="/resources/assets/img/icon.ico"
@@ -77,8 +77,8 @@
                   <div class="page-content mail-content">
                      <div class="email-head d-lg-flex d-block">
                         <h2>
-                          <i class="flaticon-pen mr-1"></i>
-                          공지사항
+                           <i class="flaticon-pen mr-1"></i>
+									공지사항 수정
                         </h2>
                      </div>
                      <div class="email-compose-fields">
@@ -92,7 +92,7 @@
                            <div class="form-group row">
                               <label for="cc" class="col-form-label col-md-1">작성자 </label>
                               <div class="col-md-11">
-                                 <input type="text" class="form-control" id="cc" name="cc">
+                                 <input type="text" class="form-control" id="cc" name="cc"  disabled="disabled">
                               </div>
                               <br><br>
                               <div class="card-body">

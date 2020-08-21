@@ -54,12 +54,12 @@ CSS Just for demo purpose, don't include it in your project
             <div class="panel-header">
                <div class="page-inner border-bottom pb-0 mb-3">
                   <div class="d-flex align-items-left flex-column">
-                     <h2 class="pb-2 fw-bold">QnA</h2>
+                     <h2 class="pb-2 fw-bold">설문조사</h2>
 
                   </div>
-                  <img alt="" src="/resources/assets/img/thinkpeopleLogo.png"
+                  <!-- <img alt="" src="/resources/assets/img/thinkpeopleLogo.png"
                      style="width: 200px"> <img alt=""
-                     src="/resources/assets/img/business.png" style="width: 100%">
+                     src="/resources/assets/img/business.png" style="width: 100%"> -->
                </div>
             </div>
             <div class="page-inner">
@@ -82,27 +82,27 @@ CSS Just for demo purpose, don't include it in your project
                                                 aria-controls="basic-datatables" rowspan="1" colspan="1"
                                                 aria-sort="ascending"
                                                 aria-label="Name: activate to sort column descending"
-                                                style="width: 76px;">Name</th>
+                                                style="width: 76px;">번호</th>
                                              <th class="sorting" tabindex="0"
                                                 aria-controls="basic-datatables" rowspan="1" colspan="1"
                                                 aria-label="Position: activate to sort column ascending"
-                                                style="width: 96px;">Position</th>
+                                                style="width: 96px;">설문제목</th>
                                              <th class="sorting" tabindex="0"
                                                 aria-controls="basic-datatables" rowspan="1" colspan="1"
                                                 aria-label="Office: activate to sort column ascending"
-                                                style="width: 70px;">Office</th>
+                                                style="width: 70px;">기간</th>
                                              <th class="sorting" tabindex="0"
                                                 aria-controls="basic-datatables" rowspan="1" colspan="1"
                                                 aria-label="Age: activate to sort column ascending"
-                                                style="width: 27px;">Age</th>
+                                                style="width: 27px;">작성일</th>
                                              <th class="sorting" tabindex="0"
                                                 aria-controls="basic-datatables" rowspan="1" colspan="1"
                                                 aria-label="Start date: activate to sort column ascending"
-                                                style="width: 83px;">Start date</th>
-                                             <th class="sorting" tabindex="0"
+                                                style="width: 83px;">완료여부</th>
+                                             <!-- <th class="sorting" tabindex="0"
                                                 aria-controls="basic-datatables" rowspan="1" colspan="1"
                                                 aria-label="Salary: activate to sort column ascending"
-                                                style="width: 78px;">Salary</th>
+                                                style="width: 78px;">Salary</th> -->
                                           </tr>
                                        </thead>
                                        <tfoot>
@@ -112,7 +112,7 @@ CSS Just for demo purpose, don't include it in your project
                                              <th rowspan="1" colspan="1">Office</th>
                                              <th rowspan="1" colspan="1">Age</th>
                                              <th rowspan="1" colspan="1">Start date</th>
-                                             <th rowspan="1" colspan="1">Salary</th>
+                                             <!-- <th rowspan="1" colspan="1">Salary</th> -->
                                           </tr>
                                        </tfoot>
                                        <tbody>
@@ -122,7 +122,7 @@ CSS Just for demo purpose, don't include it in your project
                                              <td>Tokyo</td>
                                              <td>33</td>
                                              <td>2008/11/28</td>
-                                             <td>$162,700</td>
+                                             <!-- <td>$162,700</td> -->
                                           </tr>
                                           <tr role="row" class="odd">
                                              <td class="sorting_1">Airi Satou</td>
@@ -130,7 +130,7 @@ CSS Just for demo purpose, don't include it in your project
                                              <td>Tokyo</td>
                                              <td>33</td>
                                              <td>2008/11/28</td>
-                                             <td>$162,700</td>
+                                             <!-- <td>$162,700</td> -->
                                           </tr>
                                           <tr role="row" class="odd">
                                              <td class="sorting_1">Airi Satou</td>
@@ -138,7 +138,7 @@ CSS Just for demo purpose, don't include it in your project
                                              <td>Tokyo</td>
                                              <td>33</td>
                                              <td>2008/11/28</td>
-                                             <td>$162,700</td>
+                                             <!-- <td>$162,700</td> -->
                                           </tr>
                                           <tr role="row" class="odd">
                                              <td class="sorting_1">Airi Satou</td>
@@ -146,7 +146,7 @@ CSS Just for demo purpose, don't include it in your project
                                              <td>Tokyo</td>
                                              <td>33</td>
                                              <td>2008/11/28</td>
-                                             <td>$162,700</td>
+                                             <!-- <td>$162,700</td> -->
                                           </tr>
                                           <tr role="row" class="odd">
                                              <td class="sorting_1">Airi Satou</td>
@@ -154,7 +154,7 @@ CSS Just for demo purpose, don't include it in your project
                                              <td>Tokyo</td>
                                              <td>33</td>
                                              <td>2008/11/28</td>
-                                             <td>$162,700</td>
+                                             <!-- <td>$162,700</td> -->
                                           </tr>
                                           <tr role="row" class="odd">
                                              <td class="sorting_1">Airi Satou</td>
@@ -162,7 +162,7 @@ CSS Just for demo purpose, don't include it in your project
                                              <td>Tokyo</td>
                                              <td>33</td>
                                              <td>2008/11/28</td>
-                                             <td>$162,700</td>
+                                             <!-- <td>$162,700</td> -->
                                           </tr>
                                           <tr role="row" class="odd">
                                              <td class="sorting_1">Airi Satou</td>
@@ -170,7 +170,7 @@ CSS Just for demo purpose, don't include it in your project
                                              <td>Tokyo</td>
                                              <td>33</td>
                                              <td>2008/11/28</td>
-                                             <td>$162,700</td>
+                                             <!-- <td>$162,700</td> -->
                                           </tr>
                                           <tr role="row" class="odd">
                                              <td class="sorting_1">Airi Satou</td>
@@ -178,7 +178,7 @@ CSS Just for demo purpose, don't include it in your project
                                              <td>Tokyo</td>
                                              <td>33</td>
                                              <td>2008/11/28</td>
-                                             <td>$162,700</td>
+                                             <!-- <td>$162,700</td> -->
                                           </tr>
                                           <tr role="row" class="odd">
                                              <td class="sorting_1">Airi Satou</td>
@@ -186,7 +186,7 @@ CSS Just for demo purpose, don't include it in your project
                                              <td>Tokyo</td>
                                              <td>33</td>
                                              <td>2008/11/28</td>
-                                             <td>$162,700</td>
+                                             <!-- <td>$162,700</td> -->
                                           </tr>
                                           <tr role="row" class="odd">
                                              <td class="sorting_1">Airi Satou</td>
@@ -194,7 +194,7 @@ CSS Just for demo purpose, don't include it in your project
                                              <td>Tokyo</td>
                                              <td>33</td>
                                              <td>2008/11/28</td>
-                                             <td>$162,700</td>
+                                             <!-- <td>$162,700</td> -->
                                           </tr>
                                           <tr role="row" class="odd">
                                              <td class="sorting_1">Airi Satou</td>
@@ -202,7 +202,7 @@ CSS Just for demo purpose, don't include it in your project
                                              <td>Tokyo</td>
                                              <td>33</td>
                                              <td>2008/11/28</td>
-                                             <td>$162,700</td>
+                                             <!-- <td>$162,700</td> -->
                                           </tr>
                                        </tbody>
                                     </table>

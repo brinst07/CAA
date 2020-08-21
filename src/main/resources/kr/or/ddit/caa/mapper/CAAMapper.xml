@@ -8,4 +8,10 @@
 		from cs_code
 		where cs_code_depth = #{cs_code_depth}
 	</select>
+	
+	<select id="otherCscodeList" resultType="kr.or.ddit.caa.domain.CscodeVO">
+		select *
+		from cs_code
+		where cs_code2 = #{keyword}
+	</select>
 </mapper>
