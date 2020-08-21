@@ -59,9 +59,6 @@
 										<label>중분류</label> 
 										<select class="form-control" name="middle">
 											<option></option>
-											<c:forEach items="${firstDiv }" var="first">
-												<option value="${first.cs_code}">${first.cs_code_name }</option>
-											</c:forEach>
 										</select>
 									</div>
 									<div class="form-group form-group-default">
@@ -75,7 +72,8 @@
 									</div>
 								</div>
 								<div class="modal-footer">
-									<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+									<button type="button" class="btn btn-black reset">초기화</button>
+									<button type="button" class="btn btn-secondary reset" data-dismiss="modal">Close</button>
 									<button type="button" class="btn btn-primary">Save changes</button>
 								</div>
 							</div>
