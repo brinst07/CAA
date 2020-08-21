@@ -81,12 +81,7 @@ public class CAAController {
 	
 	/* ↑ 상권 추천 */
 
-	/* ↓ 매출 통계  영현 */
-	@GetMapping("/ss")
-	public String sS() {
-		return "caa/ss/sS";
-	}
-	/* ↑ 매출 통계 */
+
 	
 	
 	

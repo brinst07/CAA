@@ -9,7 +9,7 @@
 		
 	<bean id="hikariConfig" class="com.zaxxer.hikari.HikariConfig">
 		<property name="driverClassName" value="oracle.jdbc.OracleDriver"></property>
-		<property name="jdbcUrl" value="jdbc:oracle:thin:@localHost:1521:XE"></property>
+		<property name="jdbcUrl" value="jdbc:oracle:thin:@192.168.31.19:1521:XE"></property>
 		<property name="username" value="localcaa"></property>
 		<property name="password" value="java"></property>
 	</bean>	
@@ -23,4 +23,5 @@
 	</bean>
 	
 	<mybatis-spring:scan base-package="kr.or.ddit.caa.mapper"/>
+	<mybatis-spring:scan base-package="kr.or.ddit.ss.mapper"/>
 </beans>
