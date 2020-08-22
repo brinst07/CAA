@@ -5,9 +5,14 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<script type="text/javascript"
-	src="//dapi.kakao.com/v2/maps/sdk.js?appkey=1a3acaea52f8fb01b6a85dfd59092f27"></script>
-
+<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=1a3acaea52f8fb01b6a85dfd59092f27&libraries=drawing"></script>
+<script type="text/javascript">
+//model에 담은 json 데이터를 받는 부분
+var json = ${jsonMap['json']};
+var jsonDATA = ${jsonMap['jsonDATA']};
+console.log(json);
+console.log(jsonDATA);
+</script>
 </head>
 <body>
 	<div class="main-panel full-height">

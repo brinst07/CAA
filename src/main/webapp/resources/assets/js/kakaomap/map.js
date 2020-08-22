@@ -71,10 +71,10 @@ data = manager.getData();
 
 // Java단으로 전달해줄 객체를 생성한다.
 // 영역선택 리스트
-let list = [];
+list = [];
 
 // 업종선택 리스트
-let sectorList = [];
+sectorList = [];
 
 
 // 버튼 클릭 시 호출되는 핸들러 입니다
@@ -228,12 +228,6 @@ manager.addListener('drawend', function (data) {
 
 
 function test() {
-	var data = manager.getData();
-	console.log(data);
-	console.log(data[kakao.maps.drawing.OverlayType.POLYLINE]);
-	console.log(data[kakao.maps.drawing.OverlayType.RECTANGLE]);
-	console.log(data[kakao.maps.drawing.OverlayType.CIRCLE]);
-	console.log(data[kakao.maps.drawing.OverlayType.POLYGON]);
 
 
 }
@@ -294,6 +288,7 @@ $(function () {
 //**************************************************************************************************************** */
 
 function analysis(){
+	const data = manager.getData();
 	// 일시적으로 담았던 list에서 도형별로 추출하기 위한 배열을 생성한다.
 	let circleArray = [];
 	let rectangleArray = [];
@@ -301,19 +296,21 @@ function analysis(){
 
 	//도형별로 추출한다.
 	for(var i = 0; i<list.length; i++){
-		if(list[i].OverlayType == 'circle'){
-			let circle = new Object();
-			circle.name = list[i].name;
-			circleArray.push(circle);
+		if(list[i].overlayType == 'circle'){
+			var circleObj = new Object();
+			circleObj.name = list[i].name;
+			circleObj.x = 0;
+			circleObj.y = 0;
+			circleArray.push(circleObj);
 		}
 
-		if(list[i].OverlayType == 'rectangle'){
+		if(list[i].overlayType == 'rectangle'){
 			let rectangle = new Object();
 			rectangle.name = list[i].name;
 			rectangleArray.push(rectangle);
 		}
 
-		if(list[i].OverlayType == 'polygon'){
+		if(list[i].overlayType == 'polygon'){
 			let polygon = new Object();
 			polygon.name = list[i].name;
 			polygonArray.push(polygon);
@@ -322,23 +319,43 @@ function analysis(){
 	
 	//data 객체에 들어있는 좌표값을 각 도형배열에 넣는다.
 	for(var i = 0; i< data.circle.length; i++){
-		let circleObj = circleArray[i].circle;
-		circle.x = data.circle[i].center.x;
-		circle.y = data.circle[i].center.y;
-		circle.radius = data.circle[i].radius;
+		circleArray[i].x = data.circle[i].center.x;
+		circleArray[i].y = data.circle[i].center.y;
+		circleArray[i].radius = data.circle[i].radius;
 	};
 
 	for(var i = 0; i<data.rectangle.length; i++){
-		let rectangleObj = rectangleArray[i].rectangle;
-		rectangleObj.minx = data.rectangle[i].sPoint.x;
-		rectangleObj.miny = data.rectangle[i].sPoint.y;
-		rectangleObj.maxx = data.rectangle[i].ePoint.x;
-		rectangleObj.maxy = data.rectangle[i].ePoint.y;
+		rectangleArray[i].minx = data.rectangle[i].sPoint.x;
+		rectangleArray[i].miny = data.rectangle[i].sPoint.y;
+		rectangleArray[i].maxx = data.rectangle[i].ePoint.x;
+		rectangleArray[i].maxy = data.rectangle[i].ePoint.y;
 	}
 
 	for(var i = 0; i<data.polygon.length; i++){
-		let polygonObj = polygonArray[i].polygon;
-		polygonObj.points = data.polygon[i].points;
+		polygonArray[i].points = data.polygon[i].points;
 	}
 
+	let caaInfo = new Object();
+	caaInfo.circle = circleArray;
+	caaInfo.rectangle = rectangleArray;
+	caaInfo.polygon = polygonArray;
+	caaInfo.sector = sectorList;
+
+	var jsonCAA = JSON.stringify(caaInfo);
+	console.log(jsonCAA);
+	var jsonDATA = JSON.stringify(data);
+	//Form을 만들어서 보내는 코드
+	var form = document.createElement('form');
+	form.setAttribute('method','post');
+	form.setAttribute('action','/caa/caaAnalysis');
+	document.charset = 'utf-8';
+	var hiddenFiled = document.createElement('input');
+	hiddenFiled.setAttribute('type','hidden');
+	hiddenFiled.setAttribute('name','json');
+	hiddenFiled.setAttribute('value',jsonCAA);
+	hiddenFiled.setAttribute('name','jsonDATA');
+	hiddenFiled.setAttribute('value',jsonDATA);
+	form.appendChild(hiddenFiled);
+	document.body.appendChild(form);
+	form.submit();
 }
