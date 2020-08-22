@@ -23,6 +23,11 @@ public class SSServiceImpl implements SSService{
 		log.info("업종 선택 쿼리문");
 		return mapper.getCscodeList(depth);
 	}
+
+	@Override
+	public List<CscodeVO> otherCscodeList(String keyword) {
+		return mapper.otherCscodeList(keyword);
+	}
 	
 	
 	

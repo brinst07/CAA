@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -60,18 +60,21 @@
 
 										</select> <select name="sel2" id="sel2" style="display: none" class="form-control form-control-sm" id="selectStatus">
 
-										<!-- 상권 업종 ↓ -->
+											<!-- 상권 업종 ↓ -->
 										</select> <label id="selectStatus" class="selectgroup-item" style="padding-left: 10px"> <input type="radio" name="value" value="50" class="selectgroup-input" checked="checked"> <span class="selectgroup-button">상권업종</span>
-										</label> 
-									<select name="large">
-										<c:forEach items="${thirdComboBoxList }" var="thirdComboBoxList">
-											<option value="${thirdComboBoxList.cs_code }">${thirdComboBoxList.cs_code_name }</option>
-										</c:forEach>
-									</select>
-										
+										</label>
+										 <select class="form-control form-control-sm"  name="large" onchange="selectedLarge();">
+											<c:forEach items="${thirdComboBoxList }" var="thirdComboBoxList">
+												<option value="${thirdComboBoxList.cs_code }">${thirdComboBoxList.cs_code_name }</option>
+											</c:forEach>
+										</select>
+										<select class="form-control form-control-sm"  name="middle" style="display: none;">
+											
+										</select>
+
 										<!-- 상권 업종 ↑ -->
 
-										<button class="btn btn-primary btn-s" id="selectStatus">현황보기</button>
+										<button class="btn btn-primary btn-s" id="selectStatus" style="margin-left: 10px">현황보기</button>
 									</div>
 								</div>
 							</div>
@@ -528,89 +531,113 @@
 
 				}
 
-				   function retOption(mapArr, select){
-				       var html = '';
-				       var keys = Object.keys(mapArr);
-				       for (var i in keys) {
-				           html += "<option value=" + "'" + keys[i] + "'>" + mapArr[keys[i]] + "</option>";
-				       }
-				        
-				        $("select[id='" + select +"']").html(html);
-				   }
-				   
-				    $("select[id='sel1']").on("change", function(){
-				          var option = $("#sel1 option:selected").val();
-				           var subSelName = '';
-				           if(option == "1168") {
-				              subSelName = "sel2_2";
-				           } 
-				           else if(option == "1168") {
-				              subSelName = "sel2_2";
-				           } else if(option =="1174" ){
-				              subSelName = "sel2_3";
-				           } else if(option =="1130" ){
-				              subSelName = "sel2_4";
-				           } else if(option =="1150" ){
-				              subSelName = "sel2_5";
-				           } else if(option =="1162" ){
-				              subSelName = "sel2_6";
-				           } else if(option =="1121" ){
-				              subSelName = "sel2_7";
-				           } else if(option =="1153" ){
-				              subSelName = "sel2_8";
-				           } else if(option =="1154" ){
-				              subSelName = "sel2_9";
-				           } else if(option =="1135" ){
-				              subSelName = "sel2_10";
-				           } else if(option =="1132" ){
-				              subSelName = "sel2_11";
-				           } else if(option =="1123" ){
-				              subSelName = "sel2_12";
-				           } else if(option =="1159" ){
-				              subSelName = "sel2_13";
-				           } else if(option =="1144" ){
-				              subSelName = "sel2_14";
-				           } else if(option =="1141" ){
-				              subSelName = "sel2_15";
-				           } else if(option =="1165" ){
-				              subSelName = "sel2_16";
-				           } else if(option =="1120" ){
-				              subSelName = "sel2_17";
-				           } else if(option =="1129" ){
-				              subSelName = "sel2_18";
-				           } else if(option =="1171" ){
-				              subSelName = "sel2_19";
-				           } else if(option =="1147" ){
-				              subSelName = "sel2_20";
-				           } else if(option =="1156" ){
-				              subSelName = "sel2_21";
-				           } else if(option =="1117" ){
-				              subSelName = "sel2_22";
-				           } else if(option =="1138" ){
-				              subSelName = "sel2_23";
-				           } else if(option =="1111" ){
-				              subSelName = "sel2_24";
-				           } else if(option =="1114" ){
-				              subSelName = "sel2_25";
-				           } else if(option =="1126" ){
-				              subSelName = "sel2_26";
-				           } else{
-				              $("#sel2").hide();
-				              return;
-				           }
-				           $("#sel2").show();
-				           retOption(eval(subSelName), "sel2");
-				       })
-				       retOption(sel1, "sel1");
+				function retOption(mapArr, select) {
+					var html = '';
+					var keys = Object.keys(mapArr);
+					for ( var i in keys) {
+						html += "<option value=" + "'" + keys[i] + "'>"
+								+ mapArr[keys[i]] + "</option>";
+					}
+
+					$("select[id='" + select + "']").html(html);
+				}
+
+				$("select[id='sel1']").on("change", function() {
+					var option = $("#sel1 option:selected").val();
+					var subSelName = '';
+					if (option == "1168") {
+						subSelName = "sel2_2";
+					} else if (option == "1168") {
+						subSelName = "sel2_2";
+					} else if (option == "1174") {
+						subSelName = "sel2_3";
+					} else if (option == "1130") {
+						subSelName = "sel2_4";
+					} else if (option == "1150") {
+						subSelName = "sel2_5";
+					} else if (option == "1162") {
+						subSelName = "sel2_6";
+					} else if (option == "1121") {
+						subSelName = "sel2_7";
+					} else if (option == "1153") {
+						subSelName = "sel2_8";
+					} else if (option == "1154") {
+						subSelName = "sel2_9";
+					} else if (option == "1135") {
+						subSelName = "sel2_10";
+					} else if (option == "1132") {
+						subSelName = "sel2_11";
+					} else if (option == "1123") {
+						subSelName = "sel2_12";
+					} else if (option == "1159") {
+						subSelName = "sel2_13";
+					} else if (option == "1144") {
+						subSelName = "sel2_14";
+					} else if (option == "1141") {
+						subSelName = "sel2_15";
+					} else if (option == "1165") {
+						subSelName = "sel2_16";
+					} else if (option == "1120") {
+						subSelName = "sel2_17";
+					} else if (option == "1129") {
+						subSelName = "sel2_18";
+					} else if (option == "1171") {
+						subSelName = "sel2_19";
+					} else if (option == "1147") {
+						subSelName = "sel2_20";
+					} else if (option == "1156") {
+						subSelName = "sel2_21";
+					} else if (option == "1117") {
+						subSelName = "sel2_22";
+					} else if (option == "1138") {
+						subSelName = "sel2_23";
+					} else if (option == "1111") {
+						subSelName = "sel2_24";
+					} else if (option == "1114") {
+						subSelName = "sel2_25";
+					} else if (option == "1126") {
+						subSelName = "sel2_26";
+					} else {
+						$("#sel2").hide();
+						return;
+					}
+					$("#sel2").show();
+					retOption(eval(subSelName), "sel2");
+				})
+				retOption(sel1, "sel1");
 			});
 </script>
 
 <script type="text/javascript">
+	function selectedLarge() {
+		  var selectid =$("select[name=large]").val();
+		  $('select[name=middle]').show();
+		  $('select[name=middle]').children('option').remove();
 
-	function csCode3(){
-		
+	      
+	         $.ajax({
+	            type : 'get',
+	            url : '/ss/rest/div/'+selectid,
+	            contentType : "application/json; charset=utf-8",
+	            success : function(result, status, xhr){
+	               
+	                  console.log("Ajax 성공 : " + result);
+	                  
+	                  for(var i = 0; i<result.length; i++){
+	                     console.log(result[i]);
+	                     $('select[name=middle]').append('<option value='+result[i].cs_code+'>'+result[i].cs_code_name+'</option>');
+	                  }
+	                  
+	            },
+	            error : function(xhr,status, er){
+	               console.log("아작쓰 실패")
+	               if(error){
+	                  error(re);
+	               }
+	            }
+	         })
+
 	}
-	
 </script>
 
 

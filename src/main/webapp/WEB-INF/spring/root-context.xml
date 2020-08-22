@@ -9,7 +9,7 @@
 		
 	<bean id="hikariConfig" class="com.zaxxer.hikari.HikariConfig">
 		<property name="driverClassName" value="oracle.jdbc.OracleDriver"></property>
-		<property name="jdbcUrl" value="jdbc:oracle:thin:@localhost:1521:XE"></property>
+		<property name="jdbcUrl" value="jdbc:oracle:thin:@192.168.31.25:1521:XE"></property>
 		<property name="username" value="localcaa"></property>
 		<property name="password" value="java"></property>
 	</bean>	

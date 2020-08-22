@@ -7,4 +7,6 @@ import kr.or.ddit.caa.domain.CscodeVO;
 public interface SSMapper {
 
 	public List<CscodeVO> getCscodeList(String depth);
+	
+	public List<CscodeVO> otherCscodeList(String keyword);
 }
