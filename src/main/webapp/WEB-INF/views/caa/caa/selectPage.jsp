@@ -29,9 +29,8 @@
 							<div class="card-body">
 								<div id="map" style="display: block; widht: 785px; height: 680px;"></div>
 								<!-- 맵과 관련된 js를 따로 관리 -->
-								<script src="/resources/assets/js/kakaomap/map.js">
-									
-								</script>
+								<script src="/resources/assets/js/kakaomap/map.js"></script>
+								<script src="/resources/assets/js/kakaomap/analysis.js"></script>			
 							</div>
 						</div>
 					</div>
@@ -47,8 +46,7 @@
 								</div>
 								<div class="modal-body">
 									<div class="form-group form-group-default">
-										<label>대분류</label> 
-										<select class="form-control" name="large">
+										<label>대분류</label> <select class="form-control" name="large">
 											<option></option>
 											<c:forEach items="${firstDiv }" var="first">
 												<option value="${first.cs_code}">${first.cs_code_name }</option>
@@ -56,25 +54,19 @@
 										</select>
 									</div>
 									<div class="form-group form-group-default">
-										<label>중분류</label> 
-										<select class="form-control" name="middle">
+										<label>중분류</label> <select class="form-control" name="middle">
 											<option></option>
 										</select>
 									</div>
 									<div class="form-group form-group-default">
-										<label>소분류</label> 
-										<select class="form-control" name="small">
+										<label>소분류</label> <select class="form-control" name="small">
 											<option></option>
-											<c:forEach items="${firstDiv }" var="first">
-												<option value="${first.cs_code}">${first.cs_code_name }</option>
-											</c:forEach>
 										</select>
 									</div>
 								</div>
 								<div class="modal-footer">
-									<button type="button" class="btn btn-black reset">초기화</button>
-									<button type="button" class="btn btn-secondary reset" data-dismiss="modal">Close</button>
-									<button type="button" class="btn btn-primary">Save changes</button>
+									<button type="button" class="btn btn-secondary reset" data-dismiss="modal">닫기</button>
+									<button type="button" class="btn btn-primary" onclick="selectSector()">선택하기</button>
 								</div>
 							</div>
 						</div>
@@ -86,33 +78,35 @@
 								<li class="list-group-item">영역을 선택해주세요</li>
 							</ul>
 							<br>
-							<ul class="list-group list-group-bordered">
+							<ul id="middleul" class="list-group list-group-bordered">
 								<li class="list-group-item active">2단계</li>
 								<li class="list-group-item">영역을 선택해주세요</li>
 								<li class="list-group-item">
-									<ul class="wizard-menu nav nav-pills nav-primary">
-										<li class="step" style="width: 20%;" onclick="selectOverlay('CIRCLE')"><a id="circle" class="nav-link active" href="#about" data-toggle="tab" aria-expanded="true"><i
-												class="far fa-circle"></i><br> 원형</a></li>
-										<li class="step" style="width: 20%;" onclick="selectOverlay('RECTANGLE')"><a class="nav-link" href="#address" data-toggle="tab"><i class="fab fa-connectdevelop"></i><br>사각</a></li>
-										<li class="step" style="width: 20%;" onclick="selectOverlay('POLYGON')"><a class="nav-link" href="#address" data-toggle="tab"><i class="fab fa-connectdevelop"></i><br>다각</a></li>
-										<li class="step" style="width: 20%;"><a id="radius" class="nav-link" data-toggle="tab"><i class="fas fa-bullseye"></i><br>반경</a></li>
-										<li class="step" style="width: 20%;" onclick="test()"><a class="nav-link" href="#address" data-toggle="tab"><i class="fas fa-map-marked-alt"></i><br>상권</a></li>
+									<ul class="wizard-menu nav nav-pills nav-primary" style="width: 480px;">
+										<li class="step" style="width: 25%;" onclick="selectOverlay('CIRCLE')"><a id="circle" class="nav-link active" href="#about" data-toggle="tab" aria-expanded="true"><i
+												class="far fa-circle"></i>원형</a></li>
+										<li class="step" style="width: 25%;" onclick="selectOverlay('RECTANGLE')"><a class="nav-link" href="#address" data-toggle="tab"><i class="fab fa-connectdevelop"></i>사각</a></li>
+										<li class="step" style="width: 25%;" onclick="selectOverlay('POLYGON')"><a class="nav-link" href="#address" data-toggle="tab"><i class="fab fa-connectdevelop"></i>다각</a></li>
+										<li class="step" style="width: 25%;" onclick="test()"><a class="nav-link" href="#address" data-toggle="tab"><i class="fas fa-map-marked-alt"></i>상권</a></li>
 									</ul>
+
 								</li>
+
+
 							</ul>
 							<br>
-							<ul class="list-group list-group-bordered">
+							<ul class="list-group list-group-bordered" id="sector">
 								<li class="list-group-item active">3단계</li>
 								<li class="list-group-item">
 									<!-- Button trigger modal -->
 									<button type="button" class="btn btn-primary" data-toggle="modal" data-target=".bd-example-modal-lg">업종선택</button>
 								</li>
 
-								<li class="list-group-item">
-									<button class="btn btn-black">Default</button>
-									<button class="btn btn-info">Info</button>
-								</li>
 							</ul>
+							<br>
+							<div class="container" style="align-content: right">
+								<button class="btn btn-info" onclick="analysis()">분석</button>
+							</div>
 						</div>
 					</div>
 
