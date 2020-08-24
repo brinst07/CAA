@@ -1,5 +1,6 @@
 package kr.or.ddit.caa.controller;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -12,7 +13,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import kr.or.ddit.bs.service.BSService;
 import kr.or.ddit.caa.domain.CscodeVO;
@@ -126,15 +127,34 @@ public class CAAController {
 	}
 		/* ↑ 영현 */
 	
-	@PostMapping("/caaAnalysis")
+	@PostMapping(value = "/caaAnalysis")
 	public String CAAAnalysis(String json,String jsonDATA, Model model) {
-		log.info("상권분석 화면 전환을 위한 메소드");
-		HttpHeaders header = new HttpHeaders();
-		header.add("Content-type","text/plain;charset=utf-8");
-		Map<String, String> jsonMap = new HashMap<String, String>();
+		log.info("상권분석 화면 전환을 위한 메소드 Pot");
+		Map<String, String> jsonMap = new HashMap<>();
 		jsonMap.put("json", json);
 		jsonMap.put("jsonDATA", jsonDATA);
-		model.addAllAttributes(jsonMap);
+		log.info(jsonMap.get("json"));
+		log.info(jsonMap.get("jsonDATA"));
+//		
+//		model.addAllAttributes(jsonMap);
+		model.addAttribute("json", json);
+		model.addAttribute("jsonDATA", jsonDATA);
+		return "caa/caa/CommercialAnalysis";
+//		return "home";
+	}
+	
+	@GetMapping(value = "/caaAnalysis")
+	public String CAAAnalysis(Model model) {
+		log.info("상권분석 화면 전환을 위한 메소드 Get");
+//		Map<String, String> jsonMap = new HashMap<>();
+//		jsonMap.put("json", json);
+//		jsonMap.put("jsonDATA", jsonDATA);
+//		log.info(jsonMap.get("json"));
+//		log.info(jsonMap.get("jsonDATA"));
+//		
+//		model.addAllAttributes(jsonMap);
+//		model.addAttribute("json", json);
+//		model.addAttribute("jsonDATA", jsonDATA);
 		return "caa/caa/CommercialAnalysis";
 	}
 	

@@ -349,13 +349,15 @@ function analysis(){
 	form.setAttribute('method','post');
 	form.setAttribute('action','/caa/caaAnalysis');
 	document.charset = 'utf-8';
-	var hiddenFiled = document.createElement('input');
-	hiddenFiled.setAttribute('type','hidden');
-	hiddenFiled.setAttribute('name','json');
-	hiddenFiled.setAttribute('value',jsonCAA);
-	hiddenFiled.setAttribute('name','jsonDATA');
-	hiddenFiled.setAttribute('value',jsonDATA);
-	form.appendChild(hiddenFiled);
+	var hiddenFiled1 = document.createElement('input');
+	hiddenFiled1.setAttribute('type','hidden');
+	hiddenFiled1.setAttribute('name','json');
+	hiddenFiled1.setAttribute('value',jsonCAA);
+	var hiddenFiled2 = document.createElement('input');
+	hiddenFiled2.setAttribute('name','jsonDATA');
+	hiddenFiled2.setAttribute('value',jsonDATA);
+	form.appendChild(hiddenFiled1);
+	form.appendChild(hiddenFiled2);
 	document.body.appendChild(form);
 	form.submit();
 }

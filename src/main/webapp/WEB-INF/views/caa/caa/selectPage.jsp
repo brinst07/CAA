@@ -8,6 +8,12 @@
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=1a3acaea52f8fb01b6a85dfd59092f27&libraries=drawing"></script>
 </head>
 <body>
+
+<form id="test" method="post" action="/caa/caaAnalysis">
+	<input type="hidden" name="json" value="test">
+	<input type="hidden" name="jsonDATA" value="tttt">
+</form>
+
 	<div class="main-panel full-height">
 		<div class="container">
 			<div class="panel-header">
@@ -105,7 +111,7 @@
 							</ul>
 							<br>
 							<div class="container" style="align-content: right">
-								<button class="btn btn-info" onclick="analysis()">분석</button>
+								<button class="btn btn-info" onclick="analysis()" type="button">분석</button>
 							</div>
 						</div>
 					</div>
@@ -113,8 +119,6 @@
 				</div>
 			</div>
 		</div>
-	</div>
-	</div>
 	</div>
 </body>
 </html>

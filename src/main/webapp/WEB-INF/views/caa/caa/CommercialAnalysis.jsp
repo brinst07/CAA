@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -8,13 +9,17 @@
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=1a3acaea52f8fb01b6a85dfd59092f27&libraries=drawing"></script>
 <script type="text/javascript">
 //model에 담은 json 데이터를 받는 부분
-var json = ${jsonMap['json']};
-var jsonDATA = ${jsonMap['jsonDATA']};
+var json = '${json}';
+var jsonDATA = '${jsonDATA}';
 console.log(json);
 console.log(jsonDATA);
 </script>
 </head>
 <body>
+
+
+
+
 	<div class="main-panel full-height">
 		<div class="container">
 			<div class="panel-header">
@@ -164,8 +169,6 @@ console.log(jsonDATA);
 				</div>
 			</div>
 		</div>
-	</div>
-	</div>
 	</div>
 </body>
 <script type="text/javascript">
