@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
    pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%> 
 <!DOCTYPE html>
 <html>
 <head>
@@ -56,6 +58,7 @@ CSS Just for demo purpose, don't include it in your project
     }
 </style>
 <body>
+
    <div class="wrapper fullheight-side sidebar_minimize">
 
       <div class="main-panel full-height">
@@ -64,7 +67,7 @@ CSS Just for demo purpose, don't include it in your project
                <div class="page-inner border-bottom pb-0 mb-3">
                   <div class="d-flex align-items-left flex-column">
                      <h2 class="pb-2 fw-bold">공지 사항</h2>
-
+						
                   </div>
                </div>
             </div>
@@ -140,7 +143,7 @@ CSS Just for demo purpose, don't include it in your project
                                       
                                  </tfoot>
                                  <tbody>
-                                    <tr role="row" class="odd">
+                                <!--     <tr role="row" class="odd">
                                        <td class="sorting_1">1</td>
                                        <td>상권분석 공지사항입니다.</td>
                                        <td>관리자</td>
@@ -188,8 +191,24 @@ CSS Just for demo purpose, don't include it in your project
                                        <td>관리자</td>
                                        <td>2020.08.13</td>
 									<td>13</td>
-                                    </tr>
+                                    </tr> -->
+                                     <c:forEach items="${list }" var="board">
+                                             <tr>
+                                                <td><c:out value="${board.board_id }" /></td>
+                                                <td><a class="move"
+                                                   href='<c:out value="${board.board_id }"></c:out>'><c:out
+                                                         value="${board.board_title }"></c:out><b>[<c:out
+                                                            value="${board.board_reply_count } " />]
+                                                   </b></a></td>
+                                                <td><c:out value="${board.board_id }" /></td>
+                                                <td><fmt:formatDate pattern="yyyy-MM-dd"
+                                                      value="${board.board_datetime }" /></td>
+                                                <td><c:out
+                                                      value="${board.board_hit }" /></td>
+                                             </tr>
+                                          </c:forEach>
                                  </tbody>
+                                   
                               </table>
                            </div>
                         </div>
