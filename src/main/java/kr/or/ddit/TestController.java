@@ -64,6 +64,11 @@ public class TestController {
 		return "caa/ss/sS";
 	}
 
+
+	@GetMapping("/test3")
+	public String test3() {
+		return "caa/member/SearchIDMember";
+	}
 	
 	@GetMapping("/test4")
 	public String test4() {

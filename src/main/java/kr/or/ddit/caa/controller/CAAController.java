@@ -1,13 +1,18 @@
 package kr.or.ddit.caa.controller;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+
 
 import kr.or.ddit.bs.service.BSService;
 import kr.or.ddit.caa.domain.CscodeVO;
@@ -54,11 +59,7 @@ public class CAAController {
 	}
 	
 
-	//상권분석
-	@GetMapping("/commercialanalysis")
-	public String caaResult() {
-		return "caa/caa/CommercialAnalysis";
-	}
+
 	
 	//업종분석
 	@GetMapping("/industryanalysis")
@@ -103,12 +104,7 @@ public class CAAController {
 	
 	/* ↑ 상권 추천 */
 
-	/* ↓ 매출 통계  영현 */
-	@GetMapping("/ss")
-	public String sS() {
-		return "caa/ss/sS";
-	}
-	/* ↑ 매출 통계 */
+
 	
 	
 	
@@ -121,6 +117,17 @@ public class CAAController {
 	}
 		/* ↑ 영현 */
 	
+	@PostMapping("/caaAnalysis")
+	public String CAAAnalysis(String json,String jsonDATA, Model model) {
+		log.info("상권분석 화면 전환을 위한 메소드");
+		HttpHeaders header = new HttpHeaders();
+		header.add("Content-type","text/plain;charset=utf-8");
+		Map<String, String> jsonMap = new HashMap<String, String>();
+		jsonMap.put("json", json);
+		jsonMap.put("jsonDATA", jsonDATA);
+		model.addAllAttributes(jsonMap);
+		return "caa/caa/CommercialAnalysis";
+	}
 	
 	
 	/* ↑ 상권 분석 */
