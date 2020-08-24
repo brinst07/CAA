@@ -1,24 +1,33 @@
 package kr.or.ddit.caa.controller;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+
+import kr.or.ddit.bs.service.BSService;
 import kr.or.ddit.caa.domain.CscodeVO;
 import kr.or.ddit.caa.service.CAAService;
 import lombok.Setter;
+import lombok.extern.log4j.Log4j;
 
 @Controller
 @RequestMapping("/caa/*")
+@Log4j
 public class CAAController {
 	
 	@Setter(onMethod_ = @Autowired)
 	private CAAService service;
-	
+	private BSService bsservice;
 	
 	@GetMapping("/caaSelect")
 	public String caaSelect(Model model) {
@@ -29,12 +38,37 @@ public class CAAController {
 		
 		return "caa/caa/selectPage";
 	}
-
-	//상권분석
-	@GetMapping("/commercialanalysis")
-	public String caaResult() {
-		return "caa/caa/CommercialAnalysis";
+	
+	@GetMapping("/businessstatus")
+	public String businessstatus(Model model) {
+		
+		List<CscodeVO> list = service.getCscodeList("1");
+		
+		model.addAttribute("firstDiv", list);
+		
+		return "caa/businessStatus/BusinessStatus";
 	}
+	
+	@GetMapping("/businessstatus2")
+	public String businessstatus(Model model,String select) {
+		
+		List<CscodeVO> list = bsservice.getSectorsList(select);
+		
+		model.addAttribute("bsList", list);
+		
+		return "caa/businessStatus/BusinessStatus";
+	}
+	
+	@GetMapping(value = "/middle", produces = {MediaType.APPLICATION_JSON_UTF8_VALUE,MediaType.APPLICATION_XML_VALUE})
+	public String getMiddel() {
+		
+		log.info("a");
+		
+		return "";
+	}
+	
+
+
 	
 	//업종분석
 	@GetMapping("/industryanalysis")
@@ -79,12 +113,7 @@ public class CAAController {
 	
 	/* ↑ 상권 추천 */
 
-	/* ↓ 매출 통계  영현 */
-	@GetMapping("/ss")
-	public String sS() {
-		return "caa/ss/sS";
-	}
-	/* ↑ 매출 통계 */
+
 	
 	
 	
@@ -97,6 +126,17 @@ public class CAAController {
 	}
 		/* ↑ 영현 */
 	
+	@PostMapping("/caaAnalysis")
+	public String CAAAnalysis(String json,String jsonDATA, Model model) {
+		log.info("상권분석 화면 전환을 위한 메소드");
+		HttpHeaders header = new HttpHeaders();
+		header.add("Content-type","text/plain;charset=utf-8");
+		Map<String, String> jsonMap = new HashMap<String, String>();
+		jsonMap.put("json", json);
+		jsonMap.put("jsonDATA", jsonDATA);
+		model.addAllAttributes(jsonMap);
+		return "caa/caa/CommercialAnalysis";
+	}
 	
 	
 	/* ↑ 상권 분석 */

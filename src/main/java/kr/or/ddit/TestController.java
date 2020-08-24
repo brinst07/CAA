@@ -59,10 +59,7 @@ public class TestController {
 	public String IRtest3() {
 		return "caa/ir/iRecommendation3";
 	}
-	@GetMapping("/ss")
-	public String sS() {
-		return "caa/ss/sS";
-	}
+
 	@GetMapping("/test3")
 	public String test3() {
 		return "caa/member/SearchIDMember";

@@ -1,11 +1,10 @@
-package kr.or.ddit.caa.mapper;
+package kr.or.ddit.ss.service;
 
 import java.util.List;
 
 import kr.or.ddit.caa.domain.CscodeVO;
 
-public interface CAAMapper {
-	
+public interface SSService {
 	public List<CscodeVO> getCscodeList(String depth);
 	
 	public List<CscodeVO> otherCscodeList(String keyword);

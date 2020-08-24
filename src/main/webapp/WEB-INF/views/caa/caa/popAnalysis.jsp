@@ -1,14 +1,11 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta http-equiv="X-UA-Compatible" content="IE=edge" />
 <title>Atlantis Bootstrap 4 Admin Dashboard</title>
-<meta content='width=device-width, initial-scale=1.0, shrink-to-fit=no'
-	name='viewport' />
-<link rel="icon" href="/resources/assets/img/icon.ico"
-	type="image/x-icon" />
+<meta content='width=device-width, initial-scale=1.0, shrink-to-fit=no' name='viewport' />
+<link rel="icon" href="/resources/assets/img/icon.ico" type="image/x-icon" />
 <!-- Fonts and icons -->
 <script src="/resources/assets/js/plugin/webfont/webfont.min.js"></script>
 <style type="text/css">
@@ -52,11 +49,8 @@
 						<div class="d-flex align-items-left flex-column">
 							<h2 class="pb-2 fw-bold">상권 분석</h2>
 							<div class="nav-scroller d-flex">
-								<div
-									class="nav nav-line nav-color-info d-flex align-items-center justify-contents-center">
-									<a class="nav-link" href="test3">상권분석</a> <a class="nav-link"
-										href="test4">업종분석</a> <a class="nav-link" href="test4">매출분석</a>
-									<a class="nav-link active" href="PopAnalysis">인구분석</a>
+								<div class="nav nav-line nav-color-info d-flex align-items-center justify-contents-center">
+									<a class="nav-link" href="test3">상권분석</a> <a class="nav-link" href="test4">업종분석</a> <a class="nav-link" href="test4">매출분석</a> <a class="nav-link active" href="PopAnalysis">인구분석</a>
 								</div>
 							</div>
 						</div>
@@ -155,37 +149,36 @@
 
 					<!-- ↓ 성별 / 연령별 유동인구 그래프 -->
 					<div class="col-md-12">
-					<div class="row">
-						<!-- ↓ 성별 유동인구 그래프 -->
-						<div class="col-md-6">
-							<div class="card">
-								<div class="card-header">
-									<div class="card-title">성별 유동인구</div>
-								</div>
-								<div class="card-body">
-									<div class="chart-container">
-										<canvas id="doughnutChart" style="width: 50%; height: 50%"></canvas>
+						<div class="row">
+							<!-- ↓ 성별 유동인구 그래프 -->
+							<div class="col-md-6">
+								<div class="card">
+									<div class="card-header">
+										<div class="card-title">성별 유동인구</div>
+									</div>
+									<div class="card-body">
+										<div class="chart-container">
+											<canvas id="doughnutChart" style="width: 50%; height: 50%"></canvas>
+										</div>
 									</div>
 								</div>
 							</div>
-						</div>
-						<!-- ↑ 성별 유동인구 그래프 -->
+							<!-- ↑ 성별 유동인구 그래프 -->
 
-						<!-- ↓ 연령별 유동인구 그래프 -->
-						<div class="col-md-6">
-							<div class="card">
-								<div class="card-header">
-									<div class="card-title">연령별 유동인구</div>
-								</div>
-								<div class="card-body">
-									<div class="chart-container">
-										<canvas id="GenderdoughnutChart"
-											style="width: 50%; height: 50%"></canvas>
+							<!-- ↓ 연령별 유동인구 그래프 -->
+							<div class="col-md-6">
+								<div class="card">
+									<div class="card-header">
+										<div class="card-title">연령별 유동인구</div>
+									</div>
+									<div class="card-body">
+										<div class="chart-container">
+											<canvas id="GenderdoughnutChart" style="width: 50%; height: 50%"></canvas>
+										</div>
 									</div>
 								</div>
 							</div>
-						</div>
-						<!-- ↑ 연령별 유동인구 그래프 -->
+							<!-- ↑ 연령별 유동인구 그래프 -->
 						</div>
 					</div>
 					<!-- ↑ 성별 / 연령별 유동인구 그래프 -->
@@ -202,14 +195,11 @@
 	</div>
 
 	<!-- jQuery UI -->
-	<script
-		src="/resources/assets/js/plugin/jquery-ui-1.12.1.custom/jquery-ui.min.js"></script>
-	<script
-		src="/resources/assets/js/plugin/jquery-ui-touch-punch/jquery.ui.touch-punch.min.js"></script>
+	<script src="/resources/assets/js/plugin/jquery-ui-1.12.1.custom/jquery-ui.min.js"></script>
+	<script src="/resources/assets/js/plugin/jquery-ui-touch-punch/jquery.ui.touch-punch.min.js"></script>
 
 	<!-- jQuery Scrollbar -->
-	<script
-		src="/resources/assets/js/plugin/jquery-scrollbar/jquery.scrollbar.min.js"></script>
+	<script src="/resources/assets/js/plugin/jquery-scrollbar/jquery.scrollbar.min.js"></script>
 
 	<!-- Moment JS -->
 	<script src="/resources/assets/js/plugin/moment/moment.min.js"></script>
@@ -218,8 +208,7 @@
 	<script src="/resources/assets/js/plugin/chart.js/chart.min.js"></script>
 
 	<!-- jQuery Sparkline -->
-	<script
-		src="/resources/assets/js/plugin/jquery.sparkline/jquery.sparkline.min.js"></script>
+	<script src="/resources/assets/js/plugin/jquery.sparkline/jquery.sparkline.min.js"></script>
 
 	<!-- Chart Circle -->
 	<script src="/resources/assets/js/plugin/chart-circle/circles.min.js"></script>
@@ -228,17 +217,14 @@
 	<script src="/resources/assets/js/plugin/datatables/datatables.min.js"></script>
 
 	<!-- Bootstrap Notify -->
-	<script
-		src="/resources/assets/js/plugin/bootstrap-notify/bootstrap-notify.min.js"></script>
+	<script src="/resources/assets/js/plugin/bootstrap-notify/bootstrap-notify.min.js"></script>
 
 	<!-- Bootstrap Toggle -->
-	<script
-		src="/resources/assets/js/plugin/bootstrap-toggle/bootstrap-toggle.min.js"></script>
+	<script src="/resources/assets/js/plugin/bootstrap-toggle/bootstrap-toggle.min.js"></script>
 
 	<!-- jQuery Vector Maps -->
 	<script src="/resources/assets/js/plugin/jqvmap/jquery.vmap.min.js"></script>
-	<script
-		src="/resources/assets/js/plugin/jqvmap/maps/jquery.vmap.world.js"></script>
+	<script src="/resources/assets/js/plugin/jqvmap/maps/jquery.vmap.world.js"></script>
 
 	<!-- Google Maps Plugin -->
 	<script src="/resources/assets/js/plugin/gmaps/gmaps.js"></script>
@@ -247,28 +233,22 @@
 	<script src="/resources/assets/js/plugin/dropzone/dropzone.min.js"></script>
 
 	<!-- Fullcalendar -->
-	<script
-		src="/resources/assets/js/plugin/fullcalendar/fullcalendar.min.js"></script>
+	<script src="/resources/assets/js/plugin/fullcalendar/fullcalendar.min.js"></script>
 
 	<!-- DateTimePicker -->
-	<script
-		src="/resources/assets/js/plugin/datepicker/bootstrap-datetimepicker.min.js"></script>
+	<script src="/resources/assets/js/plugin/datepicker/bootstrap-datetimepicker.min.js"></script>
 
 	<!-- Bootstrap Tagsinput -->
-	<script
-		src="/resources/assets/js/plugin/bootstrap-tagsinput/bootstrap-tagsinput.min.js"></script>
+	<script src="/resources/assets/js/plugin/bootstrap-tagsinput/bootstrap-tagsinput.min.js"></script>
 
 	<!-- Bootstrap Wizard -->
-	<script
-		src="/resources/assets/js/plugin/bootstrap-wizard/bootstrapwizard.js"></script>
+	<script src="/resources/assets/js/plugin/bootstrap-wizard/bootstrapwizard.js"></script>
 
 	<!-- jQuery Validation -->
-	<script
-		src="/resources/assets/js/plugin/jquery.validate/jquery.validate.min.js"></script>
+	<script src="/resources/assets/js/plugin/jquery.validate/jquery.validate.min.js"></script>
 
 	<!-- Summernote -->
-	<script
-		src="/resources/assets/js/plugin/summernote/summernote-bs4.min.js"></script>
+	<script src="/resources/assets/js/plugin/summernote/summernote-bs4.min.js"></script>
 
 	<!-- Select2 -->
 	<script src="/resources/assets/js/plugin/select2/select2.full.min.js"></script>
@@ -277,12 +257,10 @@
 	<script src="/resources/assets/js/plugin/sweetalert/sweetalert.min.js"></script>
 
 	<!-- Owl Carousel -->
-	<script
-		src="/resources/assets/js/plugin/owl-carousel/owl.carousel.min.js"></script>
+	<script src="/resources/assets/js/plugin/owl-carousel/owl.carousel.min.js"></script>
 
 	<!-- Magnific Popup -->
-	<script
-		src="/resources/assets/js/plugin/jquery.magnific-popup/jquery.magnific-popup.min.js"></script>
+	<script src="/resources/assets/js/plugin/jquery.magnific-popup/jquery.magnific-popup.min.js"></script>
 
 	<!-- Atlantis JS -->
 	<script src="/resources/assets/js/atlantis.min.js"></script>
