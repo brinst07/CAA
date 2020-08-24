@@ -567,26 +567,38 @@ $(document).ready(function() {
 	    retOption(sel1, "sel1");
 });
 
+
+
 	function selected() {
-		var select = '음식' 
-		var selectedList = (function () {
+		//콤보박스에서 선택한 값 꺼내기
+		var select =$("select[id=selectStatus]").val();
+		$('#detailselectStatus').show();
+		$('#detailselectStatus').children('option').remove();
 			$.ajax({
 				type : 'get',
-				url : '{pageContext.request.contextPath}/controller/businessstatus2?select='+select,
+				url : '/caa/rest/businessstatus/'+select,
 				contentType : "application/json; charset=utf-8",
 				success : function(result, status, xhr){
-					if(callback){
-						callback(result);
-					}
+					
+						console.log("아작쓰 성공 : " + result);
+						
+						for(var i = 0; i<result.length; i++){
+							console.log(result[i]);
+							$('#detailselectStatus').append('<option value='+result[i].cs_code+'>'+result[i].cs_code_name+'</option>');
+						}
+						
+						$("#detailselectStatus").show();
 				},
 				error : function(xhr,status, er){
+					console.log("아작쓰 실패")
 					if(error){
 						error(re);
 					}
 				}
 			})
 			
-		}) 		
+			
+			
 		
 	}
 </script>
@@ -670,10 +682,13 @@ $(document).ready(function() {
 											name="value" value="50" class="selectgroup-input"
 											checked="checked"> <span class="selectgroup-button">상권업종</span>
 										</label> 
-										<select class="form-control form-control-sm" id="selectStatus">
+										<select class="form-control form-control-sm" onchange="selected()" id="selectStatus">
 											<c:forEach items="${firstDiv }" var="first">
-												<option value="${first.cs_code }" onclick="selected()">${first.cs_code_name } </option>
+												<option value="${first.cs_code }" >${first.cs_code_name } </option>
 											</c:forEach>
+										</select>
+										<select class="form-control form-control-sm"  id="detailselectStatus" style="display: none" >
+											
 										</select>
 
 										<button class="btn btn-primary btn-s" id="selectStatus">현황보기

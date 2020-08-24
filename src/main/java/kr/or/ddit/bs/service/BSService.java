@@ -7,6 +7,6 @@ import org.springframework.stereotype.Service;
 import kr.or.ddit.caa.domain.CscodeVO;
 
 public interface BSService {
-	public List<CscodeVO> getSectorsList(String string);
-
+	
+	public List<CscodeVO> select(String code);
 }
