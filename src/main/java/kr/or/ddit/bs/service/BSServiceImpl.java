@@ -18,10 +18,12 @@ public class BSServiceImpl implements BSService{
 	@Setter(onMethod_ = @Autowired)
 	private BusinessStatusMapper mapper;
 	
-	
+
+
+
 	@Override
-	public List<CscodeVO> getSectorsList(String string) {
-		log.info("세부 업종 선택 쿼리문");
-		return mapper.getSectorsList(string);
+	public List<CscodeVO> select(String code) {
+		// TODO Auto-generated method stub
+		return mapper.getDetailList(code);
 	}
 }

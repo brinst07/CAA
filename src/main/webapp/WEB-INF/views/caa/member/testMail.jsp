@@ -7,14 +7,15 @@
 <title>Atlantis Bootstrap 4 Admin Dashboard</title>
 <meta content='width=device-width, initial-scale=1.0, shrink-to-fit=no'
 	name='viewport' />
-<link rel="icon" href="/resources/assets/img/icon.ico" type="image/x-icon" />
+<link rel="icon" href="/resources/assets/img/icon.ico"
+	type="image/x-icon" />
 <!-- Fonts and icons -->
 <script src="/resources/assets/js/plugin/webfont/webfont.min.js"></script>
 <style type="text/css">
-	#logo{
-		width: 250px;
-		padding-bottom: 20px;
-	}
+#logo {
+	width: 250px;
+	padding-bottom: 20px;
+}
 </style>
 <script>
 	WebFont.load({
@@ -31,15 +32,34 @@
 			sessionStorage.fonts = true;
 		}
 	});
+
+
+	
+	function sendMail() {
+		var clientemail =$("#email2").val();
+		console.log(clientemail);
+		$.getJSON(
+			"/caa/rest/sendMail/"+clientemail ,
+			function(data){
+				console.log("ajax success : " + data);
+				alert("거리 출신 개발자 차.완.호 성.공.");
+			}).fail(function(xhr,status,err){
+				alert("거리 출신 개발자 차.완.호 실패")
+				console.log(xhr,status,err)
+			});
+		
+		
+	};
 </script>
 
 <!-- CSS Files -->
-<!-- <link rel="stylesheet" href="/resources/assets/css/bootstrap.min.css">
-<link rel="stylesheet" href="/resources/assets/css/atlantis.css">
+<!-- <link rel="stylesheet" href="/resources/assets/css/bootstrap.min.css"> -->
+<!-- <link rel="stylesheet" href="/resources/assets/css/atlantis.css"> -->
 
-CSS Just for demo purpose, don't include it in your project
-<link rel="stylesheet" href="/resources/assets/css/demo.css">
- -->
+<!-- <!-- CSS Just for demo purpose, don't include it in your project -->
+-->
+<!-- <link rel="stylesheet" href="/resources/assets/css/demo.css"> -->
+
 </head>
 <body>
 	<div class="wrapper fullheight-side sidebar_minimize">
@@ -49,50 +69,40 @@ CSS Just for demo purpose, don't include it in your project
 				<div class="panel-header">
 					<div class="page-inner border-bottom pb-0 mb-3">
 						<div class="d-flex align-items-left flex-column">
-							<h2 class="pb-2 fw-bold">QnA</h2>
+							<h2 class="pb-2 fw-bold">회원정보 찾기</h2>
 							<div class="nav-scroller d-flex">
-								
+								<div
+									class="nav nav-line nav-color-info d-flex align-items-center justify-contents-center">
+									<a class="nav-link active" href="test3">아이디 찾기</a> <a
+										class="nav-link" href="test4">비밀번호 찾기</a>
+								</div>
+							</div>
 						</div>
 					</div>
 				</div>
 				<div class="page-inner">
-					<!-- QnA 등록 -->
-					<div class="form-group" align="center">
-						<!-- thinpeopleLogo -->
-						<!-- <div><img id="logo" alt="logo" src="/resources/assets/img/thinkpeopleLogo.png"></div> -->
-						<label for="title">제목&nbsp&nbsp&nbsp&nbsp</label><input
-							style="display: inline; width: 500px" type="title"
-							class="form-control" id="title" placeholder="Enter Title">
-					</div>
-					<div class="form-group" align="center">
-						<label for="writer">작성자&nbsp&nbsp&nbsp</label><input
-							style="display: inline; width: 500px" type="writer"
-							class="form-control" id="writer" placeholder="작성자">
-					</div>
-					<div class="form-group" align="center">
-						<label for="contents">내용&nbsp&nbsp&nbsp&nbsp </label>
-						
-						<textarea style="display: inline; width: 500px" type="contents"
-						 class="form-control" id="contents" rows="5" placeholder="Enter Contents">
-												</textarea>
-					</div>
-					
-					
-					<div class="form-group" align="center">
-						<label for="exampleFormControlFile1">첨부파일&nbsp&nbsp</label>
-						<input type="file" class="form-control-file" id="exampleFormControlFile1">
-					</div>
-					
-					<div></div>
-					<!-- 버튼 -->
-					<div class="card-action" align="right">
-						<button class="btn btn-primary">확인</button>
-						<button class="btn btn-black">취소</button>
-					</div>
+						<fieldset>
+
+							<div class="box email">
+								<label for="email">이메일</label> <input type="text" id="email2"
+									name="email" autofocus autocomplete="off" required />
+							</div>
+							<!-- // .box.email -->
+
+							<!-- // .box.captcha -->
+
+							<div class="box btn">
+								<button type="button" onclick="sendMail();"  class="btn join">
+									<i class="fa fa-envelope"></i> 이메일 전송
+								</button>
+							</div>
+							<!-- // .box.btn -->
+						</fieldset>
 				</div>
 			</div>
-
 		</div>
+
+
 
 	</div>
 	<!--   Core JS Files   -->
@@ -136,7 +146,8 @@ CSS Just for demo purpose, don't include it in your project
 
 	<!-- jQuery Vector Maps -->
 	<script src="/resources/assets/js/plugin/jqvmap/jquery.vmap.min.js"></script>
-	<script src="/resources/assets/js/plugin/jqvmap/maps/jquery.vmap.world.js"></script>
+	<script
+		src="/resources/assets/js/plugin/jqvmap/maps/jquery.vmap.world.js"></script>
 
 	<!-- Google Maps Plugin -->
 	<script src="/resources/assets/js/plugin/gmaps/gmaps.js"></script>
@@ -145,7 +156,8 @@ CSS Just for demo purpose, don't include it in your project
 	<script src="/resources/assets/js/plugin/dropzone/dropzone.min.js"></script>
 
 	<!-- Fullcalendar -->
-	<script src="/resources/assets/js/plugin/fullcalendar/fullcalendar.min.js"></script>
+	<script
+		src="/resources/assets/js/plugin/fullcalendar/fullcalendar.min.js"></script>
 
 	<!-- DateTimePicker -->
 	<script
@@ -156,14 +168,16 @@ CSS Just for demo purpose, don't include it in your project
 		src="/resources/assets/js/plugin/bootstrap-tagsinput/bootstrap-tagsinput.min.js"></script>
 
 	<!-- Bootstrap Wizard -->
-	<script src="/resources/assets/js/plugin/bootstrap-wizard/bootstrapwizard.js"></script>
+	<script
+		src="/resources/assets/js/plugin/bootstrap-wizard/bootstrapwizard.js"></script>
 
 	<!-- jQuery Validation -->
 	<script
 		src="/resources/assets/js/plugin/jquery.validate/jquery.validate.min.js"></script>
 
 	<!-- Summernote -->
-	<script src="/resources/assets/js/plugin/summernote/summernote-bs4.min.js"></script>
+	<script
+		src="/resources/assets/js/plugin/summernote/summernote-bs4.min.js"></script>
 
 	<!-- Select2 -->
 	<script src="/resources/assets/js/plugin/select2/select2.full.min.js"></script>
@@ -172,7 +186,8 @@ CSS Just for demo purpose, don't include it in your project
 	<script src="/resources/assets/js/plugin/sweetalert/sweetalert.min.js"></script>
 
 	<!-- Owl Carousel -->
-	<script src="/resources/assets/js/plugin/owl-carousel/owl.carousel.min.js"></script>
+	<script
+		src="/resources/assets/js/plugin/owl-carousel/owl.carousel.min.js"></script>
 
 	<!-- Magnific Popup -->
 	<script
@@ -180,7 +195,6 @@ CSS Just for demo purpose, don't include it in your project
 
 	<!-- Atlantis JS -->
 	<script src="/resources/assets/js/atlantis.min.js"></script>
-
 
 	<script>
 		$('#lineChart').sparkline([ 102, 109, 120, 99, 110, 105, 115 ], {
