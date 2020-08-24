@@ -59,6 +59,11 @@ public class TestController {
 	public String IRtest3() {
 		return "caa/ir/iRecommendation3";
 	}
+	@GetMapping("/ss")
+	public String sS() {
+		return "caa/ss/sS";
+	}
+
 
 	@GetMapping("/test3")
 	public String test3() {
@@ -110,5 +115,10 @@ public class TestController {
 	@GetMapping("/qnaViewTest")
 	public String qnaViewTest() {
 		return "caa/qna/qnaViewTest";
+	}
+	
+	@GetMapping("/testMail")
+	public String testMail() {
+		return "caa/member/testMail";
 	}
 }

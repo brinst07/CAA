@@ -49,16 +49,7 @@ public class CAAController {
 		return "caa/businessStatus/BusinessStatus";
 	}
 	
-	@GetMapping("/businessstatus2")
-	public String businessstatus(Model model,String select) {
-		
-		List<CscodeVO> list = bsservice.getSectorsList(select);
-		
-		model.addAttribute("bsList", list);
-		
-		return "caa/businessStatus/BusinessStatus";
-	}
-	
+
 	@GetMapping(value = "/middle", produces = {MediaType.APPLICATION_JSON_UTF8_VALUE,MediaType.APPLICATION_XML_VALUE})
 	public String getMiddel() {
 		
@@ -189,7 +180,20 @@ public class CAAController {
 	
 	
 
+	//차완호
+	@GetMapping("/searchMember")
+	public String searchMember() {
+		
+		return "caa/member/SearchIDMember";
+	}
 	
+	@GetMapping("/searchID")
+	public String searchID() {
+		
+		
+		
+		return "caa/member/SearchIDMember";
+	}
 	
 	
 	

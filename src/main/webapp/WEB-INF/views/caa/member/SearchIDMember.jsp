@@ -34,15 +34,26 @@
 	});
 	
 
-	function sendEmail() {
+	function emailSend() {
 			var name = document.getElementById("name").value;
-			var email = document.getElementById("email").value;
-			if(name == "" || email == ""){
-				alert("모든 정보를 입력해주세요.");
-			}else {
-				alert("회원님의 아이디 정보가 "+email +"로 발송되었습니다.");
+			var clientemail = document.getElementById("emailText").value;
+			
+			console.log('입력 이메일' + clientemail );
+			
+			$.ajax({
+				type:"GET",
+				url:"/caa/rest/emailSeand/{clientemail}",
+				contentType : "application/json; charset=utf-8",
+				success : function(data){
+					console.log("ajax success : " + data);
+				}, error : function(e){
+					alert('street404 we can send email please check your email')
 				}
+			});
+			
 		};
+		
+	
 
 </script>
 
@@ -76,7 +87,7 @@
 				</div>
 				<div class="page-inner">
 					<!-- 이름 /이메일 /아이디 입력란 -->
-					<form action="">
+				
 						<div class="form-group" align="center">
 							<!-- thinpeopleLogo -->
 							<div>
@@ -84,23 +95,22 @@
 									src="/resources/assets/img/thinkpeopleLogo.png">
 							</div>
 							<label for="password">이름&nbsp&nbsp&nbsp</label><input
-								style="display: inline; width: 500px" type="text"
+								style="display: inline; width: 500px" type="text" name="name"
 								class="form-control" id="name" placeholder="Enter Name">
 						</div>
 						<div class="form-group" align="center">
-							<label for="email2">이메일&nbsp </label><input
+							<label for="email2">이메일&nbsp </label><input name="emailText"
 								style="display: inline; width: 500px" type="email"
-								class="form-control" id="email" placeholder="Enter Email">
+								class="form-control" id="emailText" placeholder="Enter Email">
 							<small id="emailHelp2" class="form-text text-muted">
 								ThinkPeople은 회원님의 개인정보를 보호합니다.</small>
 						</div>
 						<div></div>
 						<!-- 버튼 -->
 						<div class="card-action" align="center">
-							<button id="btnConfirm" type="button" class="btn btn-primary" onclick="sendEmail()">확인</button>
+							<button id="btnConfirm" type="button" class="btn btn-primary" onclick="emailSend()">확인</button>
 							<button type="reset" class="btn btn-black">취소</button>
 						</div>
-					</form>
 				</div>
 			</div>
 		</div>
