@@ -1,4 +1,4 @@
-package kr.or.ddit.caa.vo;
+package kr.or.ddit.caa.domain;
 
 import java.util.Date;
 
