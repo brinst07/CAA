@@ -1,11 +1,14 @@
 package kr.or.ddit.ss.controller;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import kr.or.ddit.caa.domain.CscodeVO;
@@ -23,7 +26,7 @@ public class SSController {
 	/* 영현  */
 
 	/* ↓ 매출 통계  영현 */
-	@GetMapping("/ss")
+	@GetMapping("/ir")
 	public String sS(Model model) {
 		
 		List<CscodeVO> thirdComboBoxList = service.getCscodeList("2");
@@ -33,5 +36,7 @@ public class SSController {
 		return "caa/ss/sS";
 	}
 	/* ↑ 매출 통계 */
+	
+	
 	
 }
