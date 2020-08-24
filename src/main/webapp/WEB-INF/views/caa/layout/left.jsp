@@ -34,7 +34,7 @@
 
 				</div>
 				<ul class="nav">
-					<li class="nav-item active"><a href="#dashboard" > <i class="fas fa-home"></i>
+					<li class="nav-item active" id="main" ><a href="#dashboard" > <i class="fas fa-home"></i>
 							<p>메인화면</p>
 					</a></li>
 					<li class="nav-section"><span class="sidebar-mini-icon"> <i class="fa fa-ellipsis-h"></i>
@@ -46,22 +46,22 @@
 <!-- 					<li class="nav-item"><a href="starter-template.html"> <i class="fas fa-file-contract"></i> -->
 <!-- 							<p>HR Report</p> -->
 <!-- 					</a></li> -->
-					<li class="nav-item"><a href="starter-template.html"> <i class="fas fa-chart-bar"></i>
+					<li class="nav-item" id="analysis"><a href="starter-template.html"> <i class="fas fa-chart-bar"></i>
 							<p>상권분석</p>
 					</a></li>
-					<li class="nav-item"><a href="starter-template.html"> <i class="fab fa-twitter"></i>
+					<li class="nav-item" id="sns"><a href="starter-template.html"> <i class="fab fa-twitter"></i>
 							<p>SNS분석</p>
 					</a></li>
-					<li class="nav-item"><a href="starter-template.html"> <i class="fas fa-cloud"></i>
+					<li class="nav-item" id="status"><a href="starter-template.html"> <i class="fas fa-cloud"></i>
 							<p>상권현황</p>
 					</a></li>
-					<li class="nav-item"><a href="iRecommendation"> <i class="fas fa-chart-bar"></i>
+					<li class="nav-item" id="sector"><a href="iRecommendation"> <i class="fas fa-chart-bar"></i>
 							<p>업종 추천</p>
 					</a></li>
 					<li class="nav-section"><span class="sidebar-mini-icon"> <i class="fa fa-ellipsis-h"></i>
 					</span>
 						<h4 class="text-section">게시판 메뉴</h4></li>
-					<li class="nav-item"><a data-toggle="collapse" href="#email-nav"> <i class="fas fa-clipboard-list"></i>
+					<li class="nav-item" id="notice"><a data-toggle="collapse" href="#email-nav"> <i class="fas fa-clipboard-list"></i>
 							<p>공지사항</p> <span class="caret"></span>
 					</a>
 						<div class="collapse" id="email-nav">
@@ -74,7 +74,7 @@
 								</a></li>
 							</ul>
 						</div></li>
-					<li class="nav-item"><a data-toggle="collapse" href="#messages-app-nav"> <i class="fas fa-question-circle"></i>
+					<li class="nav-item" id="qna"><a data-toggle="collapse" href="#messages-app-nav"> <i class="fas fa-question-circle"></i>
 							<p>Q&A게시판</p> <span class="caret"></span>
 					</a>
 						<div class="collapse" id="messages-app-nav">

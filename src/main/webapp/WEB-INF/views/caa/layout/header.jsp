@@ -149,7 +149,11 @@
 		<div class="container-fluid">
 			<!-- 요기다가 로고를 넣으면 될듯 -->
 			<div class="collapse" id="search-nav">
+<<<<<<< HEAD
 <!-- 				<img alt=".." src="#"> -->
+=======
+<!-- 				<img alt=".." > -->
+>>>>>>> 9c85cbec7bfb8670d1b4486da9d671babe27598f
 			</div>
 			<ul class="navbar-nav topbar-nav ml-md-auto align-items-center">
 			

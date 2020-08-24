@@ -236,6 +236,7 @@ function test() {
 
 
 $(function () {
+
 	$('#circle').attr('class', 'nav-link');
 
 	$('#radius').on("cssClassChanged", function () {
@@ -292,7 +293,8 @@ function analysis(){
 	// 일시적으로 담았던 list에서 도형별로 추출하기 위한 배열을 생성한다.
 	let circleArray = [];
 	let rectangleArray = [];
-	let polygonArray = []
+	let polygonArray = [];
+	let figureArray = [];
 
 	//도형별로 추출한다.
 	for(var i = 0; i<list.length; i++){
@@ -316,12 +318,19 @@ function analysis(){
 			polygonArray.push(polygon);
 		}
 	}
-	
+
 	//data 객체에 들어있는 좌표값을 각 도형배열에 넣는다.
 	for(var i = 0; i< data.circle.length; i++){
 		circleArray[i].x = data.circle[i].center.x;
 		circleArray[i].y = data.circle[i].center.y;
 		circleArray[i].radius = data.circle[i].radius;
+		var figureObj = new Object();
+		figureObj.name = circleArray[i].name;
+		figureObj.type = 'circle';
+		figureObj.x = circleArray[i].x;
+		figureObj.y = circleArray[i].y;
+		figureObj.radius = circleArray[i].radius;
+		figureArray.push(figureObj);
 	};
 
 	for(var i = 0; i<data.rectangle.length; i++){
@@ -329,21 +338,37 @@ function analysis(){
 		rectangleArray[i].miny = data.rectangle[i].sPoint.y;
 		rectangleArray[i].maxx = data.rectangle[i].ePoint.x;
 		rectangleArray[i].maxy = data.rectangle[i].ePoint.y;
+		var figureObj = new Object();
+		figureObj.name = rectangleArray[i].name;
+		figureObj.type = 'rectangle';
+		figureObj.minx = rectangleArray[i].minx;
+		figureObj.miny = rectangleArray[i].miny;
+		figureObj.maxx = rectangleArray[i].maxx;
+		figureObj.maxy = rectangleArray[i].maxy;
+		figureArray.push(figureObj);
 	}
 
 	for(var i = 0; i<data.polygon.length; i++){
 		polygonArray[i].points = data.polygon[i].points;
+		var figureObj = new Object();
+		figureObj.name = polygonArray[i].name;
+		figureObj.type = 'polygon';
+		figureObj.points = polygonArray[i].points;
+		figureArray.push(figureObj);
 	}
 
+
 	let caaInfo = new Object();
-	caaInfo.circle = circleArray;
 	caaInfo.rectangle = rectangleArray;
+	caaInfo.circle = circleArray;
 	caaInfo.polygon = polygonArray;
 	caaInfo.sector = sectorList;
 
+	
+	
 	var jsonCAA = JSON.stringify(caaInfo);
 	console.log(jsonCAA);
-	var jsonDATA = JSON.stringify(data);
+	var jsonDATA = JSON.stringify(figureArray);
 	//Form을 만들어서 보내는 코드
 	var form = document.createElement('form');
 	form.setAttribute('method','post');
@@ -354,6 +379,7 @@ function analysis(){
 	hiddenFiled1.setAttribute('name','json');
 	hiddenFiled1.setAttribute('value',jsonCAA);
 	var hiddenFiled2 = document.createElement('input');
+	hiddenFiled2.setAttribute('type','hidden');
 	hiddenFiled2.setAttribute('name','jsonDATA');
 	hiddenFiled2.setAttribute('value',jsonDATA);
 	form.appendChild(hiddenFiled1);
