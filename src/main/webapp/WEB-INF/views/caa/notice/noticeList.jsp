@@ -78,29 +78,12 @@ CSS Just for demo purpose, don't include it in your project
                         class="dataTables_wrapper container-fluid dt-bootstrap4">
                         <div class="row">
                            <div class="col-sm-12 col-md-6">
-                              <div class="dataTables_length" id="multi-filter-select_length">
-                                 <label>Show <select name="multi-filter-select_length"
-                                    aria-controls="multi-filter-select"
-                                    class="form-control form-control-sm"><option
-                                          value="10">10</option>
-                                       <option value="25">25</option>
-                                       <option value="50">50</option>
-                                       <option value="100">100</option></select> entries
-                                 </label>
-                              </div>
+                              
                            </div>
                            <div id="btn-wrapper" class="col-sm-12 col-md-6">
-                              <div id="custom-control" class="dataTables_filter">
-                                 <label>Search: <th rowspan="1" colspan="1"><select
-                                          class="form-control"><option value=""></option>
-                                             <option value="title">제목</option>
-                                             <option value="writer">작성자</option>
-                                             <option value="content">내용</option></label>
-                              </div>
+                             
                               <div id="custom-control">
-                                   <input type="search"
-                                    class="form-control form-control-sm" placeholder=""
-                                    aria-controls="multi-filter-select">
+                                   
                               </div>
                            </div>
                         </div>
@@ -213,48 +196,7 @@ CSS Just for demo purpose, don't include it in your project
                            </div>
                         </div>
                         <div class="row">
-                           <div class="col-sm-12 col-md-5">
-                              <div class="dataTables_info" id="multi-filter-select_info"
-                                 role="status" aria-live="polite">Showing 1 to 5 of 57
-                                 entries</div>
-                           </div>
-                           <div class="col-sm-12 col-md-7" align="center">
-                              <div class="dataTables_paginate paging_simple_numbers"
-                                 id="multi-filter-select_paginate">
-                                 <ul class="pagination">
-                                    <li class="paginate_button page-item previous disabled"
-                                       id="multi-filter-select_previous"><a href="#"
-                                       aria-controls="multi-filter-select" data-dt-idx="0"
-                                       tabindex="0" class="page-link">Previous</a></li>
-                                    <li class="paginate_button page-item active"><a
-                                       href="#" aria-controls="multi-filter-select"
-                                       data-dt-idx="1" tabindex="0" class="page-link">1</a></li>
-                                    <li class="paginate_button page-item "><a href="#"
-                                       aria-controls="multi-filter-select" data-dt-idx="2"
-                                       tabindex="0" class="page-link">2</a></li>
-                                    <li class="paginate_button page-item "><a href="#"
-                                       aria-controls="multi-filter-select" data-dt-idx="3"
-                                       tabindex="0" class="page-link">3</a></li>
-                                    <li class="paginate_button page-item "><a href="#"
-                                       aria-controls="multi-filter-select" data-dt-idx="4"
-                                       tabindex="0" class="page-link">4</a></li>
-                                    <li class="paginate_button page-item "><a href="#"
-                                       aria-controls="multi-filter-select" data-dt-idx="5"
-                                       tabindex="0" class="page-link">5</a></li>
-                                    <li class="paginate_button page-item disabled"
-                                       id="multi-filter-select_ellipsis"><a href="#"
-                                       aria-controls="multi-filter-select" data-dt-idx="6"
-                                       tabindex="0" class="page-link">…</a></li>
-                                    <li class="paginate_button page-item "><a href="#"
-                                       aria-controls="multi-filter-select" data-dt-idx="7"
-                                       tabindex="0" class="page-link">12</a></li>
-                                    <li class="paginate_button page-item next"
-                                       id="multi-filter-select_next"><a href="#"
-                                       aria-controls="multi-filter-select" data-dt-idx="8"
-                                       tabindex="0" class="page-link">Next</a></li>
-                                 </ul>
-                              </div>
-                           </div>
+                           
                         </div>
                      </div>
                   </div>
@@ -358,6 +300,66 @@ CSS Just for demo purpose, don't include it in your project
 
 
    <script>
+	$(document)
+	.ready(
+			function() {
+				$('#basic-datatables').DataTable({});
+
+				$('#multi-filter-select')
+						.DataTable(
+								{
+									"pageLength" : 5,
+									initComplete : function() {
+										this
+												.api()
+												.columns()
+												.every(
+														function() {
+															var column = this;
+															var select = $(
+																	'<select class="form-control"><option value=""></option></select>')
+																	.appendTo(
+																			$(
+																					column
+																							.footer())
+																					.empty())
+																	.on(
+																			'change',
+																			function() {
+																				var val = $.fn.dataTable.util
+																						.escapeRegex($(
+																								this)
+																								.val());
+
+																				column
+																						.search(
+																								val ? '^'
+																										+ val
+																										+ '$'
+																										: '',
+																								true,
+																								false)
+																						.draw();
+																			});
+
+															column
+																	.data()
+																	.unique()
+																	.sort()
+																	.each(
+																			function(
+																					d,
+																					j) {
+																				select
+																						.append('<option value="'+d+'">'
+																								+ d
+																								+ '</option>')
+																			});
+														});
+									}
+								});
+
+			});
       $('#lineChart').sparkline([ 102, 109, 120, 99, 110, 105, 115 ], {
          type : 'line',
          height : '70',
