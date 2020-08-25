@@ -21,7 +21,7 @@ public interface BoardMapper {
 	
 	public void insertSelectKey(BoardVO board);
 	
-	public BoardVO read(Long bno);
+	public BoardVO read(Long board_id);
 	
 	public int delete(Long bno);	
 	

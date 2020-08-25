@@ -10,11 +10,11 @@ public interface NoticeService {
 
 public void register(BoardVO board);
 	
-	public BoardVO get(Long bno);
+	public BoardVO get(String board_id);
 	
-	public boolean modify(BoardVO board);
+	public boolean modify(BoardVO board_id);
 	
-	public boolean remove(Long bno);
+	public boolean remove(BoardVO board_id);
 	
 	
 	public List<BoardVO> getList();

@@ -23,24 +23,25 @@ public class NoticeServiceImpl implements NoticeService{
 
 	@Override
 	public void register(BoardVO board) {
-		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
-	public BoardVO get(Long bno) {
-		// TODO Auto-generated method stub
-		return null;
+	public BoardVO get(String board_id) {
+		log.info("get....." + board_id);
+		return mapper.read(board_id);	
 	}
 
 	@Override
-	public boolean modify(BoardVO board) {
-		// TODO Auto-generated method stub
-		return false;
+	public boolean modify(BoardVO board_id) {
+		
+		 log.info("modify ...." + board_id);
+
+	      return mapper.update(board_id) == 1;
 	}
 
 	@Override
-	public boolean remove(Long bno) {
+	public boolean remove(BoardVO bno) {
 		// TODO Auto-generated method stub
 		return false;
 	}

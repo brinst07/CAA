@@ -3,7 +3,39 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="kr.or.ddit.notice.mapper.NoticeMapper">
+   
+   <!-- 리스트 출력 -->
    <select id="getList" resultType="kr.or.ddit.domain.BoardVO">
      select * from BOARD where BOARD_CATEGORY_ID = 'notice'
     </select>
+    
+    <!-- 상세글 출력 -->
+    <select id="read" resultType="kr.or.ddit.domain.BoardVO">
+		select * from BOARD where board_id = #{board_id} and  BOARD_CATEGORY_ID = 'notice'
+	</select>
+	
+	<!--글 수정 -->
+	
+	<update id="update">
+		update board set
+		board_id =#{board_id},
+		member_id =#{member_id },
+		board_title =#{board_title},
+		board_content =#{board_content},
+		board_datetime =#{board_datetime},
+		board_reply_count =#{board_reply_count},
+		board_status =#{board_status},
+		board_category_id =#{board_category_id},
+		board_temp_save =#{board_temp_save},
+		board_hit =#{board_hit}
+	</update>
+	
+	<!-- 게시글 삭제 -->
+	
+	<delete id="delete">
+		delete from board
+		where board_id = #{board_id}
+	</delete>
+	
+	
 </mapper>

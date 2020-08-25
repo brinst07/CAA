@@ -1,9 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
    pageEncoding="UTF-8"%>
+   <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%> 
 <!DOCTYPE html>
 <html>
 <head>
-<meta http-equiv="X-UA-Compatible" content="IE=edge" />
 <title>공지사항 수정</title>
 <meta content='width=device-width, initial-scale=1.0, shrink-to-fit=no'
    name='viewport' />
@@ -33,9 +34,6 @@
       }
    });
 
-   function sendEmail() {
-
-   };
 </script>
 
    <!-- CSS Files -->
@@ -86,35 +84,38 @@
                            <div class="form-group row">
                               <label for="to" class="col-form-label col-md-1">제목 </label>
                               <div class="col-md-11">
-                                 <input type="text" class="form-control" id="to" name="to">
+                                 <input type="text" class="form-control" id="title" name="title"
+                                 value='<c:out value="${board.board_title }"/>' readonly="readonly">
                               </div>
                            </div>
                            <div class="form-group row">
                               <label for="cc" class="col-form-label col-md-1">작성자 </label>
                               <div class="col-md-11">
-                                 <input type="text" class="form-control" id="cc" name="cc"  disabled="disabled">
+                               <input type="text" class="form-control" id="cc" name="cc"
+                                 value='<c:out value="${board.member_id }"/>' readonly="readonly">
                               </div>
-                              <br><br>
-                              <div class="card-body">
+                            </div>
                      <form action="upload.php" class="dropzone">
                         <div class="dz-message" data-dz-message>
                            
-                           <label for="cc" class="col-form-label col-md-1">첨부파일 </label>
                            <h4 class="message">첨부파일</h4>
                         </div>
                         <div class="fallback">
                            <input name="file" type="file" multiple />
                         </div>
                      </form>
-                  </div>
-                           </div>
                         </form>
                      </div>
                      <div class="email-editor">
-                        <div id="editor"></div>
+                        <div id="editor">${board.board_content}</div>
                         <div class="email-action">
-                           <button class="btn btn-primary">등록</button>
-                           <button class="btn btn-black">취소</button>
+                           <button data-oper='modify' class="btn btn-default" onclick="location.href='/notice/modifyNotice?board=<c:out value="${board.board_id }"/>'">수정</button>
+                           <button class="btn btn-primary" color="red">삭제</button>
+                           <button data-oper='list' class="btn btn-info" onclick="location.href='/notice/noticeList'">목록</button>
+                           
+                           <form id='operForm' action="/notice/modifyNotice" method="get">
+                           <input type='hidden' id="board_id" name='board_id' value='<c:out value="${board.board_id }"/>'>
+                           </form>
                            
                         </div>
                      </div>
@@ -122,31 +123,7 @@
                </div>
             </div>
          </div>
-         <!-- <footer class="footer">
-            <div class="container-fluid">
-               <nav class="pull-left">
-                  <ul class="nav">
-                     <li class="nav-item">
-                        <a class="nav-link" href="http://www.themekita.com">
-                           ThemeKita
-                        </a>
-                     </li>
-                     <li class="nav-item">
-                        <a class="nav-link" href="#">
-                           Help
-                        </a>
-                     </li>
-                     <li class="nav-item">
-                        <a class="nav-link" href="#">
-                           Licenses
-                        </a>
-                     </li>
-                  </ul>
-               </nav>
-                           
-            </div>
-         </footer>
-      </div> -->
+        
       <div class="quick-sidebar">
          <a href="#" class="close-quick-sidebar">
             <i class="flaticon-cross"></i>
@@ -187,7 +164,7 @@
    <script src="../assets/js/atlantis.min.js"></script>
    <!-- Atlantis DEMO methods, don't include it in your project! -->
    <script src="../assets/js/setting-demo.js"></script>
-   <script>
+   <script>`
       $('#editor').summernote({
          fontNames: ['Arial', 'Arial Black', 'Comic Sans MS', 'Courier New'],
          tabsize: 2,
@@ -223,8 +200,25 @@
                } );
             }
          });
-
       });
    </script>
+   
+ <script type="text/javascript">
+   $(document).ready(function(){
+	   var operForm = $("#operForm");
+	   
+	   $("button[data-oper='modify']").on("click",function(e){
+		   operForm.attr("action","/notice/modifyNotice")
+		   operForm.submit
+	   });
+	   
+	   $("button[data-oper='list']").on("click",function(e){
+		   operForm.find("#board_id").remove();
+		   operForm.attr("action","/notice/noticeList")
+		   operForm.submit
+	   });
+	   
+   });
+   </script> 
 </body>
 </html>
