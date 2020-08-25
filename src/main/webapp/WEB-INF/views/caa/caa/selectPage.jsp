@@ -6,6 +6,7 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=1a3acaea52f8fb01b6a85dfd59092f27&libraries=drawing"></script>
+<script type="text/javascript" src="/resources/assets/js/kakaomap/analysis.js"></script>
 <script type="text/javascript">
 $(function(){
 	$('#analysis').addClass('active');
@@ -107,7 +108,7 @@ $(function(){
 
 							</ul>
 							<br>
-							<ul class="list-group list-group-bordered" id="sector">
+							<ul class="list-group list-group-bordered" id="sector3">
 								<li class="list-group-item active">3단계</li>
 								<li class="list-group-item">
 									<!-- Button trigger modal -->
