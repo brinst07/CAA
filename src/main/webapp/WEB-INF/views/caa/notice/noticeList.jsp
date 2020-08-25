@@ -126,60 +126,12 @@ CSS Just for demo purpose, don't include it in your project
                                       
                                  </tfoot>
                                  <tbody>
-                                <!--     <tr role="row" class="odd">
-                                       <td class="sorting_1">1</td>
-                                       <td>상권분석 공지사항입니다.</td>
-                                       <td>관리자</td>
-                                       <td>2020.08.01</td>
-                                       <td>432</td>
-                                    </tr>
-                                    <tr role="row" class="odd">
-                                       <td class="sorting_1">2</td>
-                                       <td>소상공 이벤트입니다.</td>
-                                       <td>관리자</td>
-                                       <td>2020.08.02</td>
-                                       <td>56</td>
-                                    </tr>
-                                    <tr role="row" class="even">
-                                       <td class="sorting_1">3</td>
-                                       <td>전화 상담 안내입니다.</td>
-                                       <td>관리자</td>
-                                       <td>2020.08.02</td>
-										<td>457</td>
-                                    </tr>
-                                    <tr role="row" class="odd">
-                                       <td class="sorting_1">4</td>
-                                       <td>알려드립니다.</td>
-                                       <td>관리자</td>
-                                       <td>2020.08.03</td>
-										<td>64</td>
-                                    </tr>
-                                    <tr role="row" class="even">
-                                       <td class="sorting_1">5</td>
-                                       <td>CAA를 쉽게 이용할수 있는 방법</td>
-                                       <td>관리자</td>
-                                       <td>2020.08.04</td>
-										<td>25</td>
-                                    </tr>
-                                    <tr role="row" class="odd">
-                                       <td class="sorting_1">6</td>
-                                       <td>나도 이제 창업자~!</td>
-                                       <td>관리자</td>
-                                       <td>2020.08.05</td>
-										<td>42</td>
-                                    </tr>
-                                         <tr role="row" class="even">
-                                       <td class="sorting_1">7</td>
-                                       <td>내 점포 분석하는 방법</td>
-                                       <td>관리자</td>
-                                       <td>2020.08.13</td>
-									<td>13</td>
-                                    </tr> -->
+                               
                                      <c:forEach items="${list }" var="board">
                                              <tr>
                                                 <td><c:out value="${board.board_id }" /></td>
                                                 <td><a class="move"
-                                                   href='<c:out value="${board.board_id }"></c:out>'><c:out
+                                                   href='/notice/get?board_id=<c:out value="${board.board_id }"></c:out>'><c:out
                                                          value="${board.board_title }"></c:out><b>[<c:out
                                                             value="${board.board_reply_count } " />]
                                                    </b></a></td>
@@ -195,8 +147,8 @@ CSS Just for demo purpose, don't include it in your project
                               </table>
                            </div>
                         </div>
-                        <div class="row">
-                           
+                          <div class="email-action">
+                           <button class="btn btn-primary">등록</button>
                         </div>
                      </div>
                   </div>
