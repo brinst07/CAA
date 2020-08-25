@@ -149,8 +149,6 @@
 				</div>
 			</div>
 
-			<!-- 				for문 돌아갈 곳 끝 -->
-
 
 			<div class="col-md-12">
 				<div class="card">
@@ -208,6 +206,8 @@
 				</div>
 			</div>
 		</div>
+	</div>
+	</div>
 	</div>
 </body>
 <script type="text/javascript">
