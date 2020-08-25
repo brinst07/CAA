@@ -43,5 +43,11 @@
 	<mybatis-spring:scan base-package="kr.or.ddit.qna.mapper" />
 	<mybatis-spring:scan base-package="kr.or.ddit.ss.mapper" />
 	<mybatis-spring:scan base-package="kr.or.ddit.bs.mapper" />
+	<mybatis-spring:scan base-package="kr.or.ddit.notice.mapper" />
+
+
+
+	<context:component-scan base-package="kr.or.ddit.example.component"></context:component-scan>
+	
 
 </beans>

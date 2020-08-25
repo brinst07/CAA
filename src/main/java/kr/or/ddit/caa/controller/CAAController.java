@@ -15,6 +15,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.google.gson.JsonObject;
+
 import kr.or.ddit.bs.service.BSService;
 import kr.or.ddit.caa.domain.CscodeVO;
 import kr.or.ddit.caa.service.CAAService;
@@ -126,7 +128,6 @@ public class CAAController {
 		jsonMap.put("jsonDATA", jsonDATA);
 		log.info(jsonMap.get("json"));
 		log.info(jsonMap.get("jsonDATA"));
-//		
 //		model.addAllAttributes(jsonMap);
 		model.addAttribute("json", json);
 		model.addAttribute("jsonDATA", jsonDATA);
