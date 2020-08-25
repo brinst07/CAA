@@ -1,30 +1,69 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head>
-<meta  charset="UTF-8"/>
+<meta charset="UTF-8" />
 <title>회원가입</title>
 <meta content='width=device-width, initial-scale=1.0, shrink-to-fit=no'
-   name='viewport' />
-<link rel="icon" href="/resources/assets/img/icon.ico" type="image/x-icon" />
+	name='viewport' />
+<link rel="icon" href="/resources/assets/img/icon.ico"
+	type="image/x-icon" />
 <meta charset="UTF-8" />
 <!-- Fonts and icons -->
 <script src="/resources/assets/js/plugin/webfont/webfont.min.js"></script>
+<script src="/resources/assets/js/validation.js"></script>
 <script>
-   WebFont.load({
-      google : {
-         "families" : [ "Lato:300,400,700,900" ]
-      },
-      custom : {
-         "families" : [ "Flaticon", "Font Awesome 5 Solid",
-               "Font Awesome 5 Regular", "Font Awesome 5 Brands",
-               "simple-line-icons" ],
-         urls : [ '/resources/assets/css/fonts.min.css' ]
-      },
-      active : function() {
-         sessionStorage.fonts = true;
-      }
-   });
+	WebFont.load({
+		google : {
+			"families" : [ "Lato:300,400,700,900" ]
+		},
+		custom : {
+			"families" : [ "Flaticon", "Font Awesome 5 Solid",
+					"Font Awesome 5 Regular", "Font Awesome 5 Brands",
+					"simple-line-icons" ],
+			urls : [ '/resources/assets/css/fonts.min.css' ]
+		},
+		active : function() {
+			sessionStorage.fonts = true;
+		}
+	});
+
+	function emailCheck() {
+		var client_email = $('#email').val();
+		var passwordKey = null;			
+		if( client_email.validationMAIL()){
+			
+			$.ajax({
+				type:"POST",
+				url:"/member/rest/checkmail", 
+ 				  data: 'client_email='+client_email,
+// 				data : client_email,
+				dataType : "text",
+				//contentType : "application/json; charset=utf-8",
+				success : function(result){
+					console.log("ajax success : " + result);
+					alert("메일 발송 완료")
+					$('#hiddenpassword').val(result);
+					passwordKey = result;
+					$('#hiddenpassword').val(passwordKey);
+				}, error : function(e){
+					alert('street404 we can send email please check your email')
+				}
+			});
+			
+			
+		}
+		else {
+			alert("이메일을 확인해주세요.")
+			return false;
+		}
+	}
+	
+
+
+
+
 </script>
 
 <!-- CSS Files -->
@@ -37,202 +76,360 @@
 </head>
 
 <body>
-   <div class="wrapper fullheight-side sidebar_minimize">
-      
+	<div class="wrapper fullheight-side sidebar_minimize">
 
-      <div class="main-panel full-height">
-         <div class="container">
-            <div class="panel-header">
-               <div class="page-inner border-bottom pb-0 mb-3">
-                  <div class="d-flex align-items-left flex-column">
-                     <h2 class="pb-2 fw-bold">회원가입</h2>
-                     <div class="nav-scroller d-flex">
-                        <div
-                           class="nav nav-line nav-color-info d-flex align-items-center justify-contents-center">
-                        </div>
-                        
-                     </div>
-                  </div>
-               </div>                           
-            </div>
-            <div class="page-inner">
-               <!-- 이름 /이메일 /아이디 입력란 -->
-               <div class="form-group" align="center">
-                  <label for="name">이름&nbsp&nbsp&nbsp</label><input
-                     style="display: inline; width: 500px" type="name"
-                     class="form-control" id="name" placeholder="Enter Name">
-               </div>
-               
-               <div class="form-group" align="center">
-                  <label for="id">아이디&nbsp&nbsp&nbsp</label><input
-                     style="display: inline; width: 400px;" type="id"
-                     class="form-control" id="id" placeholder="Enter ID">&nbsp;&nbsp;&nbsp;&nbsp;
-                    <button class="btn btn-info">중복확인</button>
-               </div>
-               
-               <div class="form-group" align="center">
-                  <label for="password">비밀번호&nbsp&nbsp&nbsp</label><input
-                     style="display: inline; width: 500px" type="password"
-                     class="form-control" id="password" placeholder="Enter Password">
-               </div>
-               
-               <div class="form-group" align="center">
-                  <label for="password2">비밀번호 확인&nbsp&nbsp&nbsp</label><input
-                     style="display: inline; width: 480px" type="password"
-                     class="form-control" id="password2" placeholder="Enter Password">
-               </div>
-               
-               <div class="form-group" align="center">
-                  <label for="email">이메일&nbsp&nbsp&nbsp</label><input
-                     style="display: inline; width: 400px" type="email"
-                     class="form-control" id="email" placeholder="Enter Email">&nbsp;&nbsp;&nbsp;&nbsp;
-                  <button class="btn btn-info">이메일 인증</button>
-               </div>
-               
-               <div class="form-group" align="center">
-                  <label for="Certification Number">인증번호&nbsp&nbsp&nbsp</label><input
-                     style="display: inline; width: 400px" type="Certification Number"
-                     class="form-control" id="Certification Number" placeholder="Enter Certification Number">&nbsp;&nbsp;&nbsp;&nbsp;
-                    <button class="btn btn-info">확인</button>
-               </div>
-               
-               <div class="form-group" align="center">
-                  <label for="Captcha">캡챠&nbsp;&nbsp;&nbsp; </label><input
-                     style="display: inline; width: 400px" type="Captcha"
-                     class="form-control" id="id" placeholder="Enter Captcha">&nbsp;&nbsp;&nbsp;&nbsp;
-                      <button class="btn btn-info">확인</button>
-                  <small id="Captcha" class="form-text text-muted"><br>
-                     ThinkPeople은 회원님의 개인정보를 보호합니다.</small>
-               </div>
-               <div></div>
-               <!-- 버튼 -->
-               <div class="card-action" align="right"><br>
-                  <button class="btn btn-primary">확인</button>&nbsp;&nbsp;&nbsp;&nbsp;
-                  <button class="btn btn-black">취소</button>
-               </div>
-            </div>
-         </div>
-        
-      </div>
 
-   
-   </div>
-   <!--   Core JS Files   -->
-   <script src="../assets/js/core/jquery.3.2.1.min.js"></script>
-   <script src="../assets/js/core/popper.min.js"></script>
-   <script src="../assets/js/core/bootstrap.min.js"></script>
+		<div class="main-panel full-height">
+			<div class="container">
+				<div class="panel-header">
+					<div class="page-inner border-bottom pb-0 mb-3">
+						<div class="d-flex align-items-left flex-column">
+							<h2 class="pb-2 fw-bold">회원가입</h2>
+							<div class="nav-scroller d-flex">
+								<div
+									class="nav nav-line nav-color-info d-flex align-items-center justify-contents-center">
+								</div>
 
-   <!-- jQuery UI -->
-   <script
-      src="../assets/js/plugin/jquery-ui-1.12.1.custom/jquery-ui.min.js"></script>
-   <script
-      src="../assets/js/plugin/jquery-ui-touch-punch/jquery.ui.touch-punch.min.js"></script>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="page-inner">
+					<div class="page-header">
+						<h4 class="page-title">회원가입 입력창</h4>
+						<ul class="breadcrumbs">
+							<li class="nav-home"><a href="#"> <i
+									class="flaticon-home"></i>
+							</a></li>
+							<li class="separator"><i class="flaticon-right-arrow"></i></li>
+							<li class="nav-item"><a href="#">회원가입</a></li>
+							<li class="separator"><i class="flaticon-right-arrow"></i></li>
+							<li class="nav-item"><a href="#">회원가입 입력창</a></li>
+						</ul>
+					</div>
+					<div class="row">
+						<div class="col-md-12">
+							<div class="card">
 
-   <!-- jQuery Scrollbar -->
-   <script
-      src="../assets/js/plugin/jquery-scrollbar/jquery.scrollbar.min.js"></script>
+								<form action="" id="exampleValidation" novalidate="novalidate">
+									<div class="card-body">
+										<div class="form-group form-show-validation row">
+											<label for="name"
+												class="col-lg-3 col-md-3 col-sm-4 mt-sm-2 text-right">아이디
+												<span class="required-label">*</span>
+											</label>
+											<div class="col-lg-4 col-md-9 col-sm-8">
+												<input type="text" class="form-control" id="id"
+													name="member_id" placeholder="Enter Username" required="">
+											</div>
+										</div>
+										<div class="form-group form-show-validation row">
+											<label for="username"
+												class="col-lg-3 col-md-3 col-sm-4 mt-sm-2 text-right">이름
+												<span class="required-label">*</span>
+											</label>
+											<div class="col-lg-4 col-md-9 col-sm-8">
+												<div class="input-group">
+													<div class="input-group-prepend">
+														<span class="input-group-text" id="username-addon">@</span>
+													</div>
+													<input type="text" class="form-control"
+														placeholder="username" aria-label="username"
+														aria-describedby="username-addon" id="username"
+														name="member_username" required="">
+												</div>
+											</div>
+										</div>
+										<div class="form-group form-show-validation row">
+											<label for="email"
+												class="col-lg-3 col-md-3 col-sm-4 mt-sm-2 text-right">이메일
+												<span class="required-label">*</span>
+											</label>
+											<div class="col-lg-4 col-md-9 col-sm-8" style="float: left:">
+												<input type="email" class="form-control" id="email"
+													placeholder="Enter Email" name="member_email" required="">
+											</div>
+											<button class="btn btn-primary btn-round btn-lg"
+												type="button" onclick="emailCheck()" style="float: right;">인증번호</button>
+										</div>
+										<div class="form-group form-show-validation row">
+											<label for="confirmpassword"
+												class="col-lg-3 col-md-3 col-sm-4 mt-sm-2 text-right">인증번호
+												확인 <span class="required-label">*</span>
+											</label>
+											<div class="col-lg-4 col-md-9 col-sm-8">
+												<input type="hidden" class="form-control" id="hiddenpassword"
+													name="member_emailword" value=""> <input
+													type="password" class="form-control" id="confirmemailword"
+													name="confirmemailword" placeholder="Enter PasswordKey"
+													required="">
+											</div>
+										</div>
+										<div class="form-group form-show-validation row">
+											<label for="password"
+												class="col-lg-3 col-md-3 col-sm-4 mt-sm-2 text-right">비밀번호
+												<span class="required-label">*</span>
+											</label>
+											<div class="col-lg-4 col-md-9 col-sm-8">
+												<input type="password" class="form-control" id="password"
+													name="member_password" placeholder="Enter Password"
+													required="">
+											</div>
+										</div>
+										<div class="form-group form-show-validation row">
+											<label for="confirmpassword"
+												class="col-lg-3 col-md-3 col-sm-4 mt-sm-2 text-right">비밀번호
+												확인 <span class="required-label">*</span>
+											</label>
+											<div class="col-lg-4 col-md-9 col-sm-8">
+												<input type="password" class="form-control"
+													id="confirmpassword" name="confirmpassword"
+													placeholder="Enter Password" required="">
+											</div>
+										</div>
+										<div class="separator-solid"></div>
 
-   <!-- Moment JS -->
-   <script src="../assets/js/plugin/moment/moment.min.js"></script>
+										<div class="form-group form-show-validation row">
+											<label for="birth"
+												class="col-lg-3 col-md-3 col-sm-4 mt-sm-2 text-right">생일
+												<span class="required-label">*</span>
+											</label>
+											<div class="col-lg-4 col-md-9 col-sm-8">
+												<div class="input-group">
+													<input type="text" class="form-control" id="birth"
+														name="birth" required="">
+													<div class="input-group-append">
+														<span class="input-group-text"> <i
+															class="fa fa-calendar-o"></i>
+														</span>
+													</div>
+												</div>
+											</div>
+										</div>
 
-   <!-- Chart JS -->
-   <script src="../assets/js/plugin/chart.js/chart.min.js"></script>
+										<div class="separator-solid"></div>
+										<div class="form-group form-show-validation row">
+											<label class="col-lg-3 col-md-3 col-sm-4 mt-sm-2 text-right">프로필
+												이미지<span class="required-label">*</span>
+											</label>
+											<div class="col-lg-4 col-md-9 col-sm-8">
+												<div class="input-file input-file-image">
+													<img class="img-upload-preview img-circle" width="100"
+														height="100" src="http://placehold.it/100x100"
+														alt="preview"> <input type="file"
+														class="form-control form-control-file" id="uploadImg"
+														name="uploadImg" accept="image/*" required=""> <label
+														for="uploadImg" class="btn btn-primary btn-round btn-lg"><i
+														class="fa fa-file-image"></i> Upload a Image</label>
+												</div>
+											</div>
+										</div>
+										<div class="form-check">
+											<div class="row">
+												<label class="col-lg-3 col-md-3 col-sm-4 mt-sm-2 text-right">동의
+													<span class="required-label">*</span>
+												</label>
+												<div
+													class="col-lg-4 col-md-9 col-sm-8 d-flex align-items-center">
+													<div class="custom-control custom-checkbox">
+														<input type="checkbox" class="custom-control-input"
+															id="agree" name="agree" required=""> <label
+															class="custom-control-label" for="agree">정보이용을
+															동의합니다.</label>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+									<div class="card-action">
+										<div class="row">
+											<div class="col-md-12">
+												<input class="btn btn-success" type="submit" value="가입하기">
+												<button class="btn btn-danger" type="reset">취소</button>
+											</div>
+										</div>
+									</div>
+								</form>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
 
-   <!-- jQuery Sparkline -->
-   <script
-      src="../assets/js/plugin/jquery.sparkline/jquery.sparkline.min.js"></script>
+		</div>
 
-   <!-- Chart Circle -->
-   <script src="../assets/js/plugin/chart-circle/circles.min.js"></script>
 
-   <!-- Datatables -->
-   <script src="../assets/js/plugin/datatables/datatables.min.js"></script>
+	</div>
+	<!--   Core JS Files   -->
+	<script src="/resources/assets/js/core/jquery.3.2.1.min.js"></script>
+	<script src="/resources/assets/js/core/popper.min.js"></script>
+	<script src="/resources/assets/js/core/bootstrap.min.js"></script>
 
-   <!-- Bootstrap Notify -->
-   <script
-      src="../assets/js/plugin/bootstrap-notify/bootstrap-notify.min.js"></script>
+	<!-- jQuery UI -->
+	<script
+		src="/resources/assets/js/plugin/jquery-ui-1.12.1.custom/jquery-ui.min.js"></script>
+	<script
+		src="/resources/assets/js/plugin/jquery-ui-touch-punch/jquery.ui.touch-punch.min.js"></script>
 
-   <!-- Bootstrap Toggle -->
-   <script
-      src="../assets/js/plugin/bootstrap-toggle/bootstrap-toggle.min.js"></script>
+	<!-- jQuery Scrollbar -->
+	<script
+		src="/resources/assets/js/plugin/jquery-scrollbar/jquery.scrollbar.min.js"></script>
 
-   <!-- jQuery Vector Maps -->
-   <script src="../assets/js/plugin/jqvmap/jquery.vmap.min.js"></script>
-   <script src="../assets/js/plugin/jqvmap/maps/jquery.vmap.world.js"></script>
+	<!-- Moment JS -->
+	<script src="/resources/assets/js/plugin/moment/moment.min.js"></script>
 
-   <!-- Google Maps Plugin -->
-   <script src="../assets/js/plugin/gmaps/gmaps.js"></script>
+	<!-- Chart JS -->
+	<script src="/resources/assets/js/plugin/chart.js/chart.min.js"></script>
 
-   <!-- Dropzone -->
-   <script src="../assets/js/plugin/dropzone/dropzone.min.js"></script>
+	<!-- jQuery Sparkline -->
+	<script
+		src="/resources/assets/js/plugin/jquery.sparkline/jquery.sparkline.min.js"></script>
 
-   <!-- Fullcalendar -->
-   <script src="../assets/js/plugin/fullcalendar/fullcalendar.min.js"></script>
+	<!-- Chart Circle -->
+	<script src="/resources/assets/js/plugin/chart-circle/circles.min.js"></script>
 
-   <!-- DateTimePicker -->
-   <script
-      src="../assets/js/plugin/datepicker/bootstrap-datetimepicker.min.js"></script>
+	<!-- Datatables -->
+	<script src="/resources/assets/js/plugin/datatables/datatables.min.js"></script>
 
-   <!-- Bootstrap Tagsinput -->
-   <script
-      src="../assets/js/plugin/bootstrap-tagsinput/bootstrap-tagsinput.min.js"></script>
+	<!-- Bootstrap Notify -->
+	<script
+		src="/resources/assets/js/plugin/bootstrap-notify/bootstrap-notify.min.js"></script>
 
-   <!-- Bootstrap Wizard -->
-   <script src="../assets/js/plugin/bootstrap-wizard/bootstrapwizard.js"></script>
+	<!-- Bootstrap Toggle -->
+	<script
+		src="/resources/assets/js/plugin/bootstrap-toggle/bootstrap-toggle.min.js"></script>
 
-   <!-- jQuery Validation -->
-   <script
-      src="../assets/js/plugin/jquery.validate/jquery.validate.min.js"></script>
+	<!-- jQuery Vector Maps -->
+	<script src="/resources/assets/js/plugin/jqvmap/jquery.vmap.min.js"></script>
+	<script
+		src="/resources/assets/js/plugin/jqvmap/maps/jquery.vmap.world.js"></script>
 
-   <!-- Summernote -->
-   <script src="../assets/js/plugin/summernote/summernote-bs4.min.js"></script>
+	<!-- Google Maps Plugin -->
+	<script src="/resources/assets/js/plugin/gmaps/gmaps.js"></script>
 
-   <!-- Select2 -->
-   <script src="../assets/js/plugin/select2/select2.full.min.js"></script>
+	<!-- Dropzone -->
+	<script src="/resources/assets/js/plugin/dropzone/dropzone.min.js"></script>
 
-   <!-- Sweet Alert -->
-   <script src="../assets/js/plugin/sweetalert/sweetalert.min.js"></script>
+	<!-- Fullcalendar -->
+	<script
+		src="/resources/assets/js/plugin/fullcalendar/fullcalendar.min.js"></script>
 
-   <!-- Owl Carousel -->
-   <script src="../assets/js/plugin/owl-carousel/owl.carousel.min.js"></script>
+	<!-- DateTimePicker -->
+	<script
+		src="/resources/assets/js/plugin/datepicker/bootstrap-datetimepicker.min.js"></script>
 
-   <!-- Magnific Popup -->
-   <script
-      src="../assets/js/plugin/jquery.magnific-popup/jquery.magnific-popup.min.js"></script>
+	<!-- Bootstrap Tagsinput -->
+	<script
+		src="/resources/assets/js/plugin/bootstrap-tagsinput/bootstrap-tagsinput.min.js"></script>
 
-   <!-- Atlantis JS -->
-   <script src="../assets/js/atlantis.min.js"></script>
+	<!-- Bootstrap Wizard -->
+	<script
+		src="/resources/assets/js/plugin/bootstrap-wizard/bootstrapwizard.js"></script>
 
-   <!-- Atlantis DEMO methods, don't include it in your project! -->
-   <script src="../assets/js/setting-demo.js"></script>
-   <script src="../assets/js/demo.js"></script>
-   <script>
-      $('#lineChart').sparkline([ 102, 109, 120, 99, 110, 105, 115 ], {
-         type : 'line',
-         height : '70',
-         width : '100%',
-         lineWidth : '2',
-         lineColor : '#177dff',
-         fillColor : 'rgba(23, 125, 255, 0.14)'
-      });
+	<!-- jQuery Validation -->
+	<script
+		src="/resources/assets/js/plugin/jquery.validate/jquery.validate.min.js"></script>
 
-      $('#lineChart2').sparkline([ 99, 125, 122, 105, 110, 124, 115 ], {
-         type : 'line',
-         height : '70',
-         width : '100%',
-         lineWidth : '2',
-         lineColor : '#f3545d',
-         fillColor : 'rgba(243, 84, 93, .14)'
-      });
+	<!-- Summernote -->
+	<script
+		src="/resources/assets/js/plugin/summernote/summernote-bs4.min.js"></script>
 
-      $('#lineChart3').sparkline([ 105, 103, 123, 100, 95, 105, 115 ], {
-         type : 'line',
-         height : '70',
-         width : '100%',
-         lineWidth : '2',
-         lineColor : '#ffa534',
-         fillColor : 'rgba(255, 165, 52, .14)'
-      });
-   </script>
+	<!-- Select2 -->
+	<script src="/resources/assets/js/plugin/select2/select2.full.min.js"></script>
+
+	<!-- Sweet Alert -->
+	<script src="/resources/assets/js/plugin/sweetalert/sweetalert.min.js"></script>
+
+	<!-- Owl Carousel -->
+	<script
+		src="/resources/assets/js/plugin/owl-carousel/owl.carousel.min.js"></script>
+
+	<!-- Magnific Popup -->
+	<script
+		src="/resources/assets/js/plugin/jquery.magnific-popup/jquery.magnific-popup.min.js"></script>
+
+	<!-- Atlantis JS -->
+	<script src="/resources/assets/js/atlantis.min.js"></script>
+
+
+	<script>
+		$('#lineChart').sparkline([ 102, 109, 120, 99, 110, 105, 115 ], {
+			type : 'line',
+			height : '70',
+			width : '100%',
+			lineWidth : '2',
+			lineColor : '#177dff',
+			fillColor : 'rgba(23, 125, 255, 0.14)'
+		});
+
+		$('#lineChart2').sparkline([ 99, 125, 122, 105, 110, 124, 115 ], {
+			type : 'line',
+			height : '70',
+			width : '100%',
+			lineWidth : '2',
+			lineColor : '#f3545d',
+			fillColor : 'rgba(243, 84, 93, .14)'
+		});
+
+		$('#lineChart3').sparkline([ 105, 103, 123, 100, 95, 105, 115 ], {
+			type : 'line',
+			height : '70',
+			width : '100%',
+			lineWidth : '2',
+			lineColor : '#ffa534',
+			fillColor : 'rgba(255, 165, 52, .14)'
+		});
+	</script>
+	<script>
+		$('#birth').datetimepicker({
+			format : 'MM/DD/YYYY'
+		});
+
+		$('#state').select2({
+			theme : "bootstrap"
+		});
+
+		/* validate */
+
+		// validation when select change
+		$("#state").change(function() {
+			$(this).valid();
+		})
+
+		// validation when inputfile change
+		$("#uploadImg").on("change", function() {
+			$(this).parent('form').validate();
+		})
+
+		$("#exampleValidation").validate(
+				{
+					validClass : "success",
+					rules : {
+						gender : {
+							required : true
+						},
+						confirmpassword : {
+							equalTo : "#password"
+						},
+						confirmemailword : {
+							equalTo : "#hiddenpassword"
+						},
+						birth : {
+							date : true
+						},
+						uploadImg : {
+							required : true,
+						},
+					},
+					highlight : function(element) {
+						$(element).closest('.form-group').removeClass(
+								'has-success').addClass('has-error');
+					},
+					success : function(element) {
+						$(element).closest('.form-group').removeClass(
+								'has-error').addClass('has-success');
+					},
+				});
+	</script>
 </body>
 </html>
