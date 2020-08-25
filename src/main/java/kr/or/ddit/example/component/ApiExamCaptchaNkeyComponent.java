@@ -80,6 +80,8 @@ public class ApiExamCaptchaNkeyComponent implements ApiExamCaptchaNkeyService{
 	      requestHeaders.put("X-Naver-Client-Id", clientId);
 	      requestHeaders.put("X-Naver-Client-Secret", clientSecret);
 	      String responseBody = get(apiURL, requestHeaders);
+	      
+	      
 
 	      return responseBody;
 	}
