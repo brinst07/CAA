@@ -113,6 +113,8 @@
 <!-- Atlantis JS -->
 <script src="/resources/assets/js/atlantis.min.js"></script>
 
+<!--  -->
+<script src="/resources/assets/js/core/jquery.ajax-cross-origin.min.js"></script>
 
 <!-- CSS Files -->
 <link rel="stylesheet" href="/resources/assets/css/bootstrap.min.css">

@@ -136,7 +136,7 @@ function selectSector() {
 	
 	swal("선택완료!", smalltext + "가 선택되었습니다.");
 
-	$('#sector').append("<li class='list-group-item'>" + $.trim(smalltext) +
+	$('#sector3').append("<li class='list-group-item'>" + $.trim(smalltext) +
 					"<i class='flaticon-cross' onclick='deleteSector(\"" + smalltext + "\")'></i></li>");
 	
 
@@ -146,7 +146,7 @@ function selectSector() {
 function deleteSector(name){
 	for(var i = 0; i<sectorList.length; i++){
 		if(name == sectorList[i]){
-			$('#sector li:contains("' + name + '")').remove();
+			$('#sector3 li:contains("' + name + '")').remove();
 			swal("삭제완료!", name + "가 삭제되었습니다.");
 			sectorList.splice(i,1);
 		}
@@ -358,11 +358,12 @@ function analysis(){
 	}
 
 
+
 	let caaInfo = new Object();
 	caaInfo.rectangle = rectangleArray;
 	caaInfo.circle = circleArray;
 	caaInfo.polygon = polygonArray;
-	caaInfo.sector = sectorList;
+
 
 	
 	
@@ -376,8 +377,8 @@ function analysis(){
 	document.charset = 'utf-8';
 	var hiddenFiled1 = document.createElement('input');
 	hiddenFiled1.setAttribute('type','hidden');
-	hiddenFiled1.setAttribute('name','json');
-	hiddenFiled1.setAttribute('value',jsonCAA);
+	hiddenFiled1.setAttribute('name','sector');
+	hiddenFiled1.setAttribute('value',sectorList);
 	var hiddenFiled2 = document.createElement('input');
 	hiddenFiled2.setAttribute('type','hidden');
 	hiddenFiled2.setAttribute('name','jsonDATA');
