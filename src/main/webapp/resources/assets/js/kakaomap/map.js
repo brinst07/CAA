@@ -74,7 +74,7 @@ data = manager.getData();
 list = [];
 
 // 업종선택 리스트
-sectorList = [];
+let sectorList = [];
 
 
 // 버튼 클릭 시 호출되는 핸들러 입니다
@@ -110,6 +110,8 @@ function selectSector() {
 	}
 	const smallval = $('select[name="small"]').val();
 	const smalltext = $('select[name="small"] option:selected').text();
+	const middletext = $('select[name="middle"] option:selected').text();
+	const largetext = $('select[name="large"] option:selected').text();
 	
 	for(var i = 0; i<sectorList.length; i++){
 		if(smallval == sectorList[i]){
@@ -130,13 +132,14 @@ function selectSector() {
 		})
 		return;
 	}
-
-	
-	sectorList.push(smalltext);
-	
+	var sectorObj = new Object();
+	sectorObj.large = largetext;
+	sectorObj.middle = middletext;
+	sectorObj.small = smalltext;
+	sectorList.push(sectorObj);
 	swal("선택완료!", smalltext + "가 선택되었습니다.");
 
-	$('#sector').append("<li class='list-group-item'>" + $.trim(smalltext) +
+	$('#sector3').append("<li class='list-group-item'>" + $.trim(smalltext) +
 					"<i class='flaticon-cross' onclick='deleteSector(\"" + smalltext + "\")'></i></li>");
 	
 
@@ -146,7 +149,7 @@ function selectSector() {
 function deleteSector(name){
 	for(var i = 0; i<sectorList.length; i++){
 		if(name == sectorList[i]){
-			$('#sector li:contains("' + name + '")').remove();
+			$('#sector3 li:contains("' + name + '")').remove();
 			swal("삭제완료!", name + "가 삭제되었습니다.");
 			sectorList.splice(i,1);
 		}
@@ -327,8 +330,8 @@ function analysis(){
 		var figureObj = new Object();
 		figureObj.name = circleArray[i].name;
 		figureObj.type = 'circle';
-		figureObj.x = circleArray[i].x;
-		figureObj.y = circleArray[i].y;
+		figureObj.cx = circleArray[i].x;
+		figureObj.cy = circleArray[i].y;
 		figureObj.radius = circleArray[i].radius;
 		figureArray.push(figureObj);
 	};
@@ -358,14 +361,16 @@ function analysis(){
 	}
 
 
+
 	let caaInfo = new Object();
 	caaInfo.rectangle = rectangleArray;
 	caaInfo.circle = circleArray;
 	caaInfo.polygon = polygonArray;
-	caaInfo.sector = sectorList;
+
 
 	
-	
+	var sectorList1 = JSON.stringify(sectorList);
+	console.log(sectorList1);
 	var jsonCAA = JSON.stringify(caaInfo);
 	console.log(jsonCAA);
 	var jsonDATA = JSON.stringify(figureArray);
@@ -376,8 +381,8 @@ function analysis(){
 	document.charset = 'utf-8';
 	var hiddenFiled1 = document.createElement('input');
 	hiddenFiled1.setAttribute('type','hidden');
-	hiddenFiled1.setAttribute('name','json');
-	hiddenFiled1.setAttribute('value',jsonCAA);
+	hiddenFiled1.setAttribute('name','sector');
+	hiddenFiled1.setAttribute('value',sectorList1);
 	var hiddenFiled2 = document.createElement('input');
 	hiddenFiled2.setAttribute('type','hidden');
 	hiddenFiled2.setAttribute('name','jsonDATA');

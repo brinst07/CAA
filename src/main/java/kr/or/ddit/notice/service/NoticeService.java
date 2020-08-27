@@ -8,18 +8,15 @@ import kr.or.ddit.domain.BoardVO;
 
 public interface NoticeService {
 
-public void register(BoardVO board);
+   public void register(BoardVO board_id);
 	
-	public BoardVO get(Long bno);
+	public BoardVO get(String board_id);
 	
 	public boolean modify(BoardVO board);
 	
-	public boolean remove(Long bno);
-	
+	public int remove(String board_id);
 	
 	public List<BoardVO> getList();
 	
-	public int getTotal(Criteria cri);
 	
-	public List<BoardAttachVO> getAttachList(Long bno);
 }

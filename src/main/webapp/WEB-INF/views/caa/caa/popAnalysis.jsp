@@ -1,12 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<!DOCTYPE html>
-<html>
-<head>
-<meta http-equiv="X-UA-Compatible" content="IE=edge" />
-<title>Atlantis Bootstrap 4 Admin Dashboard</title>
-<meta content='width=device-width, initial-scale=1.0, shrink-to-fit=no' name='viewport' />
 <link rel="icon" href="/resources/assets/img/icon.ico" type="image/x-icon" />
-<!-- Fonts and icons -->
 <script src="/resources/assets/js/plugin/webfont/webfont.min.js"></script>
 <style type="text/css">
 #logo {
@@ -30,16 +23,6 @@
 		}
 	});
 </script>
-
-<!-- CSS Files -->
-<!-- <link rel="stylesheet" href="/resources/assets/css/bootstrap.min.css"> -->
-<!-- <link rel="stylesheet" href="/resources/assets/css/atlantis.css"> -->
-
-<!-- <!-- CSS Just for demo purpose, don't include it in your project -->
-<!-- <link rel="stylesheet" href="/resources/assets/css/demo.css"> -->
-
-</head>
-<body>
 	<div class="wrapper fullheight-side sidebar_minimize">
 
 		<div class="main-panel full-height">
@@ -49,8 +32,11 @@
 						<div class="d-flex align-items-left flex-column">
 							<h2 class="pb-2 fw-bold">상권 분석</h2>
 							<div class="nav-scroller d-flex">
-								<div class="nav nav-line nav-color-info d-flex align-items-center justify-contents-center">
-									<a class="nav-link" href="test3">상권분석</a> <a class="nav-link" href="test4">업종분석</a> <a class="nav-link" href="test4">매출분석</a> <a class="nav-link active" href="PopAnalysis">인구분석</a>
+								<div class="nav nav-line nav-color-info d-flex align-items-center justify-contents-center" id="navmenu">
+								<a class="nav-link active" href="/caa/commercialanalysis">상권분석</a> 
+								<a class="nav-link" href="/caa/industryanalysis">업종분석</a> 
+								<a class="nav-link" href="/caa/SaleAnalysis">매출분석</a> 
+								<a class="nav-link" href="/caa/popAnalysis">인구분석</a>
 								</div>
 							</div>
 						</div>
@@ -67,7 +53,7 @@
 							</div>
 							<div class="card-body">
 								<div class="chart-container">
-									<canvas id="lineChart"></canvas>
+									<canvas id="multipleLineChart"></canvas>
 								</div>
 							</div>
 						</div>
@@ -266,56 +252,67 @@
 	<script src="/resources/assets/js/atlantis.min.js"></script>
 
 	<script type="text/javascript">
-		var lineChart = document.getElementById('lineChart').getContext('2d'), doughnutChart = document
-				.getElementById('doughnutChart').getContext('2d');
+	
+	var popListMap = ${popListMap[0]['QUIT']};
+	
+	
+	
 
-		var myLineChart = new Chart(lineChart, {
-			type : 'line',
-			data : {
-				labels : [ "Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul",
-						"Aug", "Sep", "Oct", "Nov", "Dec" ],
-				datasets : [ {
-					label : "Active Users",
-					borderColor : "#1d7af3",
-					pointBorderColor : "#FFF",
-					pointBackgroundColor : "#1d7af3",
-					pointBorderWidth : 2,
-					pointHoverRadius : 4,
-					pointHoverBorderWidth : 1,
-					pointRadius : 4,
-					backgroundColor : 'transparent',
-					fill : true,
-					borderWidth : 2,
-					data : [ 542, 480, 430, 550, 530, 453, 380, 434, 568, 610,
-							700, 900 ]
+		
+		/* 멀티 차트 */
+		var multipleLineChart = document.getElementById('multipleLineChart').getContext('2d');
+
+		var myMultipleLineChart = new Chart(multipleLineChart, {
+			type: 'line',
+			data: {
+				labels: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
+				datasets: [{
+					label: "탑승 승객 수",
+					borderColor: "#1d7af3",
+					pointBorderColor: "#FFF",
+					pointBackgroundColor: "#1d7af3",
+					pointBorderWidth: 2,
+					pointHoverRadius: 4,
+					pointHoverBorderWidth: 1,
+					pointRadius: 4,
+					backgroundColor: 'transparent',
+					fill: true,
+					borderWidth: 2,
+					data : [ ${popListMap[0]['RIDE']}, ${popListMap[1]['RIDE']}, ${popListMap[2]['RIDE']}, ${popListMap[3]['RIDE']}, ${popListMap[4]['RIDE']}, ${popListMap[5]['RIDE']}, ${popListMap[6]['RIDE']}, ${popListMap[7]['RIDE']}, ${popListMap[8]['RIDE']}, ${popListMap[9]['RIDE']},
+						${popListMap[10]['RIDE']}, ${popListMap[11]['RIDE']} ]
+				},{
+					label: "하차 승객 수",
+					borderColor: "#59d05d",
+					pointBorderColor: "#FFF",
+					pointBackgroundColor: "#59d05d",
+					pointBorderWidth: 2,
+					pointHoverRadius: 4,
+					pointHoverBorderWidth: 1,
+					pointRadius: 4,
+					backgroundColor: 'transparent',
+					fill: true,
+					borderWidth: 2,
+					data: [${popListMap[0]['QUIT']}, ${popListMap[1]['QUIT']}, ${popListMap[2]['QUIT']}, ${popListMap[3]['QUIT']}, ${popListMap[4]['QUIT']}, ${popListMap[5]['QUIT']}, ${popListMap[6]['QUIT']}, ${popListMap[7]['QUIT']}, ${popListMap[8]['QUIT']}, ${popListMap[9]['QUIT']},
+						${popListMap[10]['QUIT']}, ${popListMap[11]['QUIT']} ]
 				} ]
 			},
 			options : {
-				responsive : true,
-				maintainAspectRatio : false,
-				legend : {
-					position : 'bottom',
-					labels : {
-						padding : 10,
-						fontColor : '#1d7af3',
-					}
+				responsive: true,
+				maintainAspectRatio: false,
+				legend: {
+					position: 'top',
 				},
-				tooltips : {
-					bodySpacing : 4,
-					mode : "nearest",
-					intersect : 0,
-					position : "nearest",
-					xPadding : 10,
-					yPadding : 10,
-					caretPadding : 10
+				tooltips: {
+					bodySpacing: 4,
+					mode:"nearest",
+					intersect: 0,
+					position:"nearest",
+					xPadding:10,
+					yPadding:10,
+					caretPadding:10
 				},
-				layout : {
-					padding : {
-						left : 15,
-						right : 15,
-						top : 15,
-						bottom : 15
-					}
+				layout:{
+					padding:{left:15,right:15,top:15,bottom:15}
 				}
 			}
 		});
@@ -374,7 +371,3 @@
 			}
 		});
 	</script>
-
-
-</body>
-</html>

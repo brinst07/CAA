@@ -1,8 +1,10 @@
 package kr.or.ddit.caa.controller;
 
-import java.util.HashMap;
+import java.io.IOException;
 import java.util.List;
 import java.util.Map;
+
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
@@ -11,7 +13,12 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
+import com.fasterxml.jackson.core.JsonParseException;
+import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.JsonMappingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.google.gson.Gson;
 
 import kr.or.ddit.bs.service.BSService;
 import kr.or.ddit.caa.domain.CscodeVO;
@@ -60,12 +67,12 @@ public class CAAController {
 	
 
 
-	
-	//업종분석
-	@GetMapping("/industryanalysis")
-	public String industryanalysis() {
-		return "caa/caa/IndustryAnalysis";
-	}
+//	
+//	//업종분석
+//	@GetMapping("/industryanalysis")
+//	public String industryanalysis() {
+//		return "caa/caa/IndustryAnalysis";
+//	}
 	
 	//매출분석
 	@GetMapping("/saleanalysis")
@@ -74,6 +81,7 @@ public class CAAController {
 		model.addAttribute("list",list);
 		return "caa/caa/SalesAnalysis";
 	}
+
 	
 	//cctv
 	@GetMapping("/CCTVAnalysis")
@@ -112,47 +120,78 @@ public class CAAController {
 	
 	/* ↓ 상권 분석 */
 	
-		/* ↓ 영현 */
-	@GetMapping("PopAnalysis")
-	public String PopAnalysis() {
-		return "caa/caa/popAnalysis";
-	}
-		/* ↑ 영현 */
+
 	
 	@PostMapping(value = "/caaAnalysis")
-	public String CAAAnalysis(String json,String jsonDATA, Model model) {
+	public String CAAAnalysis(String sector,String jsonDATA, Model model,HttpSession session) {
 		log.info("상권분석 화면 전환을 위한 메소드 Pot");
-		Map<String, String> jsonMap = new HashMap<>();
-		jsonMap.put("json", json);
-		jsonMap.put("jsonDATA", jsonDATA);
-		log.info(jsonMap.get("json"));
-		log.info(jsonMap.get("jsonDATA"));
-//		model.addAllAttributes(jsonMap);
-		model.addAttribute("json", json);
-		model.addAttribute("jsonDATA", jsonDATA);
+
+		Gson gson = new Gson();
+		
+		ObjectMapper objectMapper = new ObjectMapper();
+		try {
+			List<Map<String, Object>> jsonMapList = objectMapper.readValue(jsonDATA, new TypeReference<List<Map<String, Object>>>() {});
+			String json = gson.toJson(jsonMapList);
+//			model.addAttribute("jsonMapList", jsonMapList);
+			session.setAttribute("jsonMapList", json);
+			log.info(json);
+			log.info(sector);
+			List<Map<String, String>> sectorList = objectMapper.readValue(sector, new TypeReference<List<Map<String,String>>>() {});
+			String sectorJson = gson.toJson(sectorList); 
+			log.info(sectorJson);
+			session.setAttribute("sector", sectorJson);
+		} catch (JsonParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (JsonMappingException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
 		return "caa/caa/CommercialAnalysis";
-//		return "home";
 	}
 	
 	@GetMapping(value = "/caaAnalysis")
-	public String CAAAnalysis(Model model) {
-		log.info("상권분석 화면 전환을 위한 메소드 Get");
-//		Map<String, String> jsonMap = new HashMap<>();
-//		jsonMap.put("json", json);
-//		jsonMap.put("jsonDATA", jsonDATA);
-//		log.info(jsonMap.get("json"));
-//		log.info(jsonMap.get("jsonDATA"));
-//		
-//		model.addAllAttributes(jsonMap);
-//		model.addAttribute("json", json);
-//		model.addAttribute("jsonDATA", jsonDATA);
-		return "caa/caa/CommercialAnalysis";
+	public void CAAAnalysis() {
+		
+		log.info("get test");
+		
 	}
 	
 	
 	/* ↑ 상권 분석 */
 	
-
+	//상권분석
+	@GetMapping("/commercialanalysis")
+	public String commercialAnalysis() {
+		return "caa/caa/CommercialAnalysis";
+	}
+	
+	//업종분석
+	@GetMapping("/industryanalysis")
+	public String industryanalysis() {
+		return "caa/caa/IndustryAnalysis";
+	}
+	
+	//매출분석
+	@GetMapping("/SaleAnalysis")
+	public String caaSale() {
+		return "caa/caa/SalesAnalysis";
+	}
+	
+	/* 전영현 ↓ */
+	//인구분석
+	@GetMapping("PopAnalysis")
+	public String PopAnalysis(Model model) {
+		List<Map<String, String>> popListMap = service.getSubwayPop();
+		
+		model.addAttribute("popListMap", popListMap);
+		return "caa/caa/popAnalysis";
+	}
+	/* 전영현 ↑ */
 	
 
 

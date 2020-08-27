@@ -42,7 +42,6 @@ $(function(){
 								<div id="map" style="display: block; widht: 785px; height: 680px;"></div>
 								<!-- 맵과 관련된 js를 따로 관리 -->
 								<script src="/resources/assets/js/kakaomap/map.js"></script>
-								<script src="/resources/assets/js/kakaomap/analysis.js"></script>			
 							</div>
 						</div>
 					</div>
@@ -107,7 +106,7 @@ $(function(){
 
 							</ul>
 							<br>
-							<ul class="list-group list-group-bordered" id="sector">
+							<ul class="list-group list-group-bordered" id="sector3">
 								<li class="list-group-item active">3단계</li>
 								<li class="list-group-item">
 									<!-- Button trigger modal -->

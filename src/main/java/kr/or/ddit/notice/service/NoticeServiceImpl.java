@@ -5,8 +5,6 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import kr.or.ddit.caa.domain.Criteria;
-import kr.or.ddit.domain.BoardAttachVO;
 import kr.or.ddit.domain.BoardVO;
 import kr.or.ddit.notice.mapper.NoticeMapper;
 import lombok.AllArgsConstructor;
@@ -22,27 +20,31 @@ public class NoticeServiceImpl implements NoticeService{
 	private NoticeMapper mapper;
 
 	@Override
-	public void register(BoardVO board) {
-		// TODO Auto-generated method stub
-		
+	   public void register(BoardVO board) {
+	      
+	      log.info(board);
+	      
+	      mapper.insert(board);
 	}
 
 	@Override
-	public BoardVO get(Long bno) {
-		// TODO Auto-generated method stub
-		return null;
+	public BoardVO get(String board_id) {
+		log.info("get....." + board_id);
+		return mapper.read(board_id);	
 	}
 
 	@Override
 	public boolean modify(BoardVO board) {
-		// TODO Auto-generated method stub
-		return false;
+		
+		 log.info("modify ...." + board);
+
+	      return mapper.modify(board) == 1;
 	}
 
 	@Override
-	public boolean remove(Long bno) {
-		// TODO Auto-generated method stub
-		return false;
+	public int remove(String board_id) {
+		log.info("remove" + board_id);
+		return mapper.remove(board_id);
 	}
 
 	@Override
@@ -52,17 +54,9 @@ public class NoticeServiceImpl implements NoticeService{
 		return list;
 	}
 
-	@Override
-	public int getTotal(Criteria cri) {
-		// TODO Auto-generated method stub
-		return 0;
-	}
+	
 
-	@Override
-	public List<BoardAttachVO> getAttachList(Long bno) {
-		// TODO Auto-generated method stub
-		return null;
-	}
+	
 
 	
 }

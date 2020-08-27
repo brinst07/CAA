@@ -13,6 +13,26 @@
 		select *
 		from cs_code
 		where cs_code2 = #{keyword}
+		
+	</select>
+	
+	<select id="getSubwayPop" resultType="java.util.HashMap">
+		select SP.SUBWAY_MONTH month, SUM(SP.SUBWAY_RIDE) ride,  SUM(SP.SUBWAY_QUIT) quit
+		from SUBWAY_PASSENGER SP
+		         inner join SUBWAY_STATION SS
+		                    on SP.SUBWAY_STATION_ID = SS.SUBWAY_STATION_ID
+		                        and SS.SUBWAY_STATION_NAME LIKE '%동묘%'
+		                        and SP.SUBWAY_YEAR = 2019
+		group by SP.SUBWAY_MONTH order by SP.SUBWAY_MONTH asc
+	</select>
+	
+	<select id="getStoreList" resultType="kr.or.ddit.caa.domain.StoreVO">
+		select *
+		from store
+		where STORE_CS_CODE_NAME = #{store_cs_code_name} and 
+			<foreach collection="storeList" item="item" index="index" open="(" close=")" separator="or">
+				STORE_SER_CODE_NAME LIKE  '%'||#{item.middle}||'%'
+			</foreach>
 	</select>
 	
 	
