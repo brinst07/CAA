@@ -23,6 +23,7 @@ import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 
 import kr.or.ddit.bs.service.BSService;
@@ -116,16 +117,21 @@ public class CAAController {
 	@PostMapping(value = "/caaAnalysis")
 	public String CAAAnalysis(String sector,String jsonDATA, Model model,HttpSession session) {
 		log.info("상권분석 화면 전환을 위한 메소드 Pot");
-		Map<String, String> jsonMap = new HashMap<>();
-		jsonMap.put("sector", sector);
-		jsonMap.put("jsonDATA", jsonDATA);
+
+		Gson gson = new Gson();
 		
 		ObjectMapper objectMapper = new ObjectMapper();
 		try {
 			List<Map<String, Object>> jsonMapList = objectMapper.readValue(jsonDATA, new TypeReference<List<Map<String, Object>>>() {});
+			String json = gson.toJson(jsonMapList);
 //			model.addAttribute("jsonMapList", jsonMapList);
-			session.setAttribute("jsonMapList", jsonMapList);
-			log.info(jsonMapList);
+			session.setAttribute("jsonMapList", json);
+			log.info(json);
+			log.info(sector);
+			List<Map<String, String>> sectorList = objectMapper.readValue(sector, new TypeReference<List<Map<String,String>>>() {});
+			String sectorJson = gson.toJson(sectorList); 
+			log.info(sectorJson);
+			session.setAttribute("sector", sectorJson);
 		} catch (JsonParseException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -136,31 +142,40 @@ public class CAAController {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		log.info(jsonMap.get("sector"));
-		session.setAttribute("sector", sector);
-		
 		
 		return "caa/caa/CommercialAnalysis";
+	}
+	
+	@GetMapping(value = "/caaAnalysis")
+	public void CAAAnalysis() {
+		
+		log.info("get test");
+		
 	}
 	
 	
 	/* ↑ 상권 분석 */
 	
+	//상권분석
+	@GetMapping("/commercialanalysis")
+	public String commercialAnalysis() {
+		return "caa/caa/CommercialAnalysis";
+	}
+	
 	//업종분석
-	@PostMapping("/industryanalysis")
-	public String industryanalysis(List<Map<String, Object>> jsonMapList) {
-		log.info(jsonMapList);
+	@GetMapping("/industryanalysis")
+	public String industryanalysis() {
 		return "caa/caa/IndustryAnalysis";
 	}
 	
 	//매출분석
-	@PostMapping("/SaleAnalysis")
+	@GetMapping("/SaleAnalysis")
 	public String caaSale() {
 		return "caa/caa/SalesAnalysis";
 	}
 	
 	//인구분석
-	@PostMapping("PopAnalysis")
+	@GetMapping("/popAnalysis")
 	public String PopAnalysis() {
 		return "caa/caa/popAnalysis";
 	}

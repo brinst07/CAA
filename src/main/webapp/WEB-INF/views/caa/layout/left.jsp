@@ -15,18 +15,18 @@
 					</div>
 					<!-- 사이드바 user정보 -->
 					<div class="info">
-						<a data-toggle="collapse" href="#collapseExample" aria-expanded="true"> <span> Hizrian <span class="user-level">Administrator</span> <span class="caret"></span>
+						<a data-toggle="collapse" href="collapseExample" aria-expanded="true"> <span> Hizrian <span class="user-level">Administrator</span> <span class="caret"></span>
 						</span>
 						</a>
 						<div class="clearfix"></div>
 
 						<div class="collapse in" id="collapseExample">
 							<ul class="nav">
-								<li><a href="#profile"> <span class="link-collapse">My Profile</span>
+								<li><a > <span class="link-collapse">My Profile</span>
 								</a></li>
-								<li><a href="#edit"> <span class="link-collapse">Edit Profile</span>
+								<li><a > <span class="link-collapse">Edit Profile</span>
 								</a></li>
-								<li><a href="#settings"> <span class="link-collapse">Settings</span>
+								<li><a > <span class="link-collapse">Settings</span>
 								</a></li>
 							</ul>
 						</div>
@@ -34,7 +34,7 @@
 
 				</div>
 				<ul class="nav">
-					<li class="nav-item active" id="main" ><a href="#dashboard" > <i class="fas fa-home"></i>
+					<li class="nav-item active" id="main" ><a  > <i class="fas fa-home"></i>
 							<p>메인화면</p>
 					</a></li>
 					<li class="nav-section"><span class="sidebar-mini-icon"> <i class="fa fa-ellipsis-h"></i>
@@ -61,7 +61,7 @@
 					<li class="nav-section"><span class="sidebar-mini-icon"> <i class="fa fa-ellipsis-h"></i>
 					</span>
 						<h4 class="text-section">게시판 메뉴</h4></li>
-					<li class="nav-item" id="notice"><a data-toggle="collapse" href="#email-nav"> <i class="fas fa-clipboard-list"></i>
+					<li class="nav-item" id="notice"><a data-toggle="collapse" > <i class="fas fa-clipboard-list"></i>
 							<p>공지사항</p> <span class="caret"></span>
 					</a>
 						<div class="collapse" id="email-nav">
@@ -74,7 +74,7 @@
 								</a></li>
 							</ul>
 						</div></li>
-					<li class="nav-item" id="qna"><a data-toggle="collapse" href="#messages-app-nav"> <i class="fas fa-question-circle"></i>
+					<li class="nav-item" id="qna"><a data-toggle="collapse" > <i class="fas fa-question-circle"></i>
 							<p>Q&A게시판</p> <span class="caret"></span>
 					</a>
 						<div class="collapse" id="messages-app-nav">
