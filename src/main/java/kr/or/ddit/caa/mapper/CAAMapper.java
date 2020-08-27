@@ -20,4 +20,6 @@ public interface CAAMapper {
 	/* 영현 ↑ */
 
 	public List<StoreVO> getStoreList(SectorParamVO vo);
+
+	public String getSectorCode(String sectorName);
 }

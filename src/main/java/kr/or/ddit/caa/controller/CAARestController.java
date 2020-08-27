@@ -55,7 +55,7 @@ import lombok.extern.log4j.Log4j;
 @AllArgsConstructor
 public class CAARestController {
 	@Autowired
-	private CAAService serivce;
+	private CAAService service;
 	@Autowired
 	private BSService bsservice;
 	@Autowired
@@ -68,7 +68,7 @@ public class CAARestController {
 
 		// Ajax는 view resolver나 tilesResolver로 가지 않기 때문에 Status 값을 넣어줘야한다.
 		// 따라서 상태값을 같이 전달해주기 위해 ResponseEntity를 사용한다.
-		return new ResponseEntity<List<CscodeVO>>(serivce.otherCscodeList(keyword), HttpStatus.OK);
+		return new ResponseEntity<List<CscodeVO>>(service.otherCscodeList(keyword), HttpStatus.OK);
 	}
 
 	@GetMapping(value = "/businessstatus/{select}", produces = { MediaType.APPLICATION_JSON_UTF8_VALUE,
@@ -117,53 +117,83 @@ public class CAARestController {
 	@PostMapping(value = "/sector", produces = { MediaType.APPLICATION_JSON_UTF8_VALUE })
 	public void sector(@RequestBody SectorJsonVo sectorJsonVo) {
 		String ServiceKey = "21SOlCjmfqUliASu82VGE2%2FXQ1uFeVzXzPQ7egYRvgT7cKF1cBdfAONRgbHRnpHFgtd3NlHgCOj2kblMeWg6iQ%3D%3D";
-		System.out.println("secotrJsonVo : " + sectorJsonVo);
-		String url = "http://apis.data.go.kr/B553077/api/open/sdsc/storeZoneInRadius?radius=" + sectorJsonVo.getRadius() + "&cx=" + sectorJsonVo.getCx()
-				+ "&cy=" + sectorJsonVo.getCy() + "&ServiceKey=" + ServiceKey + "&type=json";
+		String url = "http://apis.data.go.kr/B553077/api/open/sdsc/storeZoneInRadius?radius=" + sectorJsonVo.getRadius()
+				+ "&cx=" + sectorJsonVo.getCx() + "&cy=" + sectorJsonVo.getCy() + "&ServiceKey=" + ServiceKey
+				+ "&type=json";
 		HttpClient httpClient = new DefaultHttpClient();
 		ResponseHandler<String> responseHandler = new BasicResponseHandler();
-
 		HttpGet httpGet = new HttpGet();
 		SectorParamVO vo = null;
 		try {
 			vo = new SectorParamVO();
 			vo.setStoreList(sectorJsonVo.getSectors());
+
+			// 업종코드를 전달하기 위해 DB에서 코드를 추출한다.
+			List<Map<String, String>> sectorFind = sectorJsonVo.getSectors();
+			List<Map<String, String>> sectorList = service.getSectorCode(sectorFind);
+
 			httpGet.setURI(new URI(url));
 			String responseBody = httpClient.execute(httpGet, responseHandler);
 
 			ObjectMapper objectMapper = new ObjectMapper();
+
 			Map<String, Map<String, List<Map<String, Object>>>> list = objectMapper.readValue(responseBody,
 					new TypeReference<Map<String, Map<String, Object>>>() {
 					});
+
+			// 선택한 영역의 데이터 전처리 후 필요한 데이터만을 저장하는 list
 			List<Map<String, Object>> finalList = list.get("body").get("items");
+
 			List<List<StoreVO>> store = new ArrayList<List<StoreVO>>();
-			// 중분류 대분류별 추이
+
+			// 중분류 대분류별 추이를 저장할 list
+			List<List<Map<String, Object>>> ubsoList = new ArrayList<List<Map<String, Object>>>();
 			
+			// 선택한 영역의 개수만큼 for문이 돌아가게 로직 구성한다.
 			for (int i = 0; i < finalList.size(); i++) {
 				vo.setStore_cs_code_name((String) finalList.get(i).get("mainTrarNm"));
-				List<StoreVO> storeMiddle = serivce.getStoreList(vo);
+				// DB에 있는 선택한 상권의 업종의 년도별 추이를 긁어온다.
+				List<StoreVO> storeMiddle = service.getStoreList(vo);
+				// TODO List에서 Map<String,List>형식으로 바꿔서 이름과 map을 같이 저장하면 좋을 듯함
 				store.add(storeMiddle);
-				
-				//상권번호
+
+				// 상권번호
 				log.info(finalList.get(i).get("trarNo"));
-				
-				url = "http://apis.data.go.kr/B553077/api/open/sdsc/storeListInArea?key="+finalList.get(i).get("trarNo")+"&ServiceKey="+ServiceKey+"&type=json";
-				httpGet.setURI(new URI(url));
-				responseBody = httpClient.execute(httpGet, responseHandler);
-				Map<String, Map<String, List<Map<String, Object>>>> ubso = objectMapper.readValue(responseBody,
-						new TypeReference<Map<String, Map<String, Object>>>() {
-						});
-				
-				log.info(ubso);
+
+				// for문으로 분류 선택 개수에 다르게 조회하게 로직 구성
+				// 상권번호를 통해서 상권내 상가업소 조회
+				for (int j = 0; j < sectorList.size(); j++) {
+					for (Map.Entry<String, String> entry : sectorList.get(j).entrySet()) {
+						String div = "";
+						String temp = "";
+						if(entry.getKey().equals("large")) {
+							div = "&indsLclsCd="+entry.getValue();
+							temp = entry.getValue();
+						}else if(entry.getKey().equals("middle")) {
+							div = "&indsMclsCd="+entry.getValue();
+							temp = entry.getValue();
+						}else {
+							div = "&indsSclsCd="+entry.getValue();
+							temp = entry.getValue();
+						}
+						url = "http://apis.data.go.kr/B553077/api/open/sdsc/storeListInArea?key="
+								+ finalList.get(i).get("trarNo") + "&ServiceKey=" + ServiceKey + "&type=json"+div;
+						httpGet.setURI(new URI(url));
+						responseBody = httpClient.execute(httpGet, responseHandler);
+						Map<String, Map<String, List<Map<String, Object>>>> ubso = objectMapper.readValue(responseBody,
+								new TypeReference<Map<String, Map<String, Object>>>() {
+								});
+
+						Map<String, String> ubsoMap = new HashMap<String, String>();
+						ubsoMap.put(temp, Integer.toString(ubso.get("body").get("items").size()));
+						//선택한 현재 상권의 대, 중, 소 분류별로 조회해서 저장.
+						List<Map<String, Object>> ubsosmall = ubso.get("body").get("items");
+						ubsoList.add(ubsosmall);
+					}
+				}
 			}
-			
-			
-			
-			
-			
 
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 

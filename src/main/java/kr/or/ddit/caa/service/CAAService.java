@@ -21,6 +21,8 @@ public interface CAAService {
 	public List<Map<String, String>> getSubwayPop(); // 나중에 파라미터로 지역 넣어야함
 	/* 영현 ↑ */
 	public List<StoreVO> getStoreList(SectorParamVO vo);
+
+	public List<Map<String, String>> getSectorCode(List<Map<String, String>> sectorFind);
 	
 	
 }
