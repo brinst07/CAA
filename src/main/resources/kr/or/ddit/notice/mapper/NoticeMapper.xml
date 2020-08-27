@@ -16,26 +16,35 @@
 	
 	<!--글 수정 -->
 	
-	<update id="update">
-		update board set
-		board_id =#{board_id},
-		member_id =#{member_id },
-		board_title =#{board_title},
-		board_content =#{board_content},
-		board_datetime =#{board_datetime},
-		board_reply_count =#{board_reply_count},
-		board_status =#{board_status},
-		board_category_id =#{board_category_id},
-		board_temp_save =#{board_temp_save},
-		board_hit =#{board_hit}
+	<update id="modify">
+		update board 
+		set board_id =#{board_id},
+		member_id = #{member_id },
+		board_title = #{board_title},
+		board_content = #{board_content},
+		board_datetime = sysdate,
+		board_reply_count = #{board_reply_count},
+		board_status = #{board_status},
+		board_category_id = #{board_category_id},
+		board_temp_save = #{board_temp_save},
+		board_hit = board_hit + 1
+		where board_id = #{board_id}
 	</update>
+
+
 	
 	<!-- 게시글 삭제 -->
 	
-	<delete id="delete">
+	<delete id="remove">
 		delete from board
 		where board_id = #{board_id}
 	</delete>
 	
+	<!-- 게시글 등록  -->
+   <insert id="insert">
+      insert into board (board_id, member_id, board_title, board_content, board_datetime,
+                     board_reply_count, board_status, board_category_id, board_temp_save, board_hit)
+      values (seq_board.nextval, '1', #{board_title}, #{board_content}, sysdate, '3', 'y', 'notice','y', '1')
+   </insert>
 	
 </mapper>

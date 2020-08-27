@@ -1,12 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<!DOCTYPE html>
-<html>
-<head>
-<meta http-equiv="X-UA-Compatible" content="IE=edge" />
-<title>Atlantis Bootstrap 4 Admin Dashboard</title>
-<meta content='width=device-width, initial-scale=1.0, shrink-to-fit=no' name='viewport' />
 <link rel="icon" href="/resources/assets/img/icon.ico" type="image/x-icon" />
-<!-- Fonts and icons -->
 <script src="/resources/assets/js/plugin/webfont/webfont.min.js"></script>
 <style type="text/css">
 #logo {
@@ -30,16 +23,6 @@
 		}
 	});
 </script>
-
-<!-- CSS Files -->
-<!-- <link rel="stylesheet" href="/resources/assets/css/bootstrap.min.css"> -->
-<!-- <link rel="stylesheet" href="/resources/assets/css/atlantis.css"> -->
-
-<!-- <!-- CSS Just for demo purpose, don't include it in your project -->
-<!-- <link rel="stylesheet" href="/resources/assets/css/demo.css"> -->
-
-</head>
-<body>
 	<div class="wrapper fullheight-side sidebar_minimize">
 
 		<div class="main-panel full-height">
@@ -49,8 +32,11 @@
 						<div class="d-flex align-items-left flex-column">
 							<h2 class="pb-2 fw-bold">상권 분석</h2>
 							<div class="nav-scroller d-flex">
-								<div class="nav nav-line nav-color-info d-flex align-items-center justify-contents-center">
-									<a class="nav-link" href="test3">상권분석</a> <a class="nav-link" href="test4">업종분석</a> <a class="nav-link" href="test4">매출분석</a> <a class="nav-link active" href="PopAnalysis">인구분석</a>
+								<div class="nav nav-line nav-color-info d-flex align-items-center justify-contents-center" id="navmenu">
+								<a class="nav-link active" href="/caa/commercialanalysis">상권분석</a> 
+								<a class="nav-link" href="/caa/industryanalysis">업종분석</a> 
+								<a class="nav-link" href="/caa/SaleAnalysis">매출분석</a> 
+								<a class="nav-link" href="/caa/popAnalysis">인구분석</a>
 								</div>
 							</div>
 						</div>
@@ -385,7 +371,3 @@
 			}
 		});
 	</script>
-
-
-</body>
-</html>

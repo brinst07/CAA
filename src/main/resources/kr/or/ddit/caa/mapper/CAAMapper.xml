@@ -25,4 +25,13 @@
 		                        and SP.SUBWAY_YEAR = 2019
 		group by SP.SUBWAY_MONTH order by SP.SUBWAY_MONTH asc
 	</select>
+	
+	<select id="getStoreList" resultType="kr.or.ddit.caa.domain.StoreVO">
+		select *
+		from store
+		where STORE_CS_CODE_NAME = #{store_cs_code_name} and 
+			<foreach collection="storeList" item="item" index="index" open="(" close=")" separator="or">
+				STORE_SER_CODE_NAME LIKE  '%'||#{item.middle}||'%'
+			</foreach>
+	</select>
 </mapper>

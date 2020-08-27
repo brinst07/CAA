@@ -7,6 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import kr.or.ddit.caa.domain.CscodeVO;
+import kr.or.ddit.caa.domain.SectorParamVO;
+import kr.or.ddit.caa.domain.StoreVO;
 import kr.or.ddit.caa.mapper.CAAMapper;
 import lombok.Setter;
 import lombok.extern.log4j.Log4j;
@@ -36,5 +38,12 @@ public class CAAServiceImpl implements CAAService {
 	public List<Map<String, String>> getSubwayPop() {
 		return mapper.getSubwayPop();
 	}
+
+	public List<StoreVO> getStoreList(SectorParamVO vo) {
+		return mapper.getStoreList(vo);
+	}
+
+
+
 
 }

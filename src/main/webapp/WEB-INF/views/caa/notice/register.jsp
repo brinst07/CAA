@@ -1,11 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
    pageEncoding="UTF-8"%>
-   <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%> 
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <!DOCTYPE html>
 <html>
 <head>
-<title>공지사항 수정</title>
+<title>공지사항</title>
 <meta content='width=device-width, initial-scale=1.0, shrink-to-fit=no'
    name='viewport' />
 <link rel="icon" href="/resources/assets/img/icon.ico"
@@ -33,7 +33,6 @@
          sessionStorage.fonts = true;
       }
    });
-
 </script>
 
    <!-- CSS Files -->
@@ -75,27 +74,42 @@
                   <div class="page-content mail-content">
                      <div class="email-head d-lg-flex d-block">
                         <h2>
-                           <i class="flaticon-pen mr-1"></i>
-									공지사항 수정
+                           <i class="flaticon-round mr-1"></i>
+                          		 공지사항
                         </h2>
                      </div>
                      <div class="email-compose-fields">
-                        <form>
+                        <form id="operForm" role="form" action="/notice/register" method="post">
                            <div class="form-group row">
                               <label for="to" class="col-form-label col-md-1">제목 </label>
                               <div class="col-md-11">
-                                 <input type="text" class="form-control" id="title" name="title"
-                                 value='<c:out value="${board.board_title }"/>' readonly="readonly">
+                                 <input type="text" class="form-control" id="title" name="board_title">
                               </div>
                            </div>
                            <div class="form-group row">
                               <label for="cc" class="col-form-label col-md-1">작성자 </label>
                               <div class="col-md-11">
-                               <input type="text" class="form-control" id="cc" name="cc"
+                                 <input type="text" class="form-control" id="member_id" name="member_id"
                                  value='<c:out value="${board.member_id }"/>' readonly="readonly">
                               </div>
-                            </div>
-                     <form action="upload.php" class="dropzone">
+                              <br><br>
+                              <div class="card-body">
+                  			</div>
+                           </div>
+                     </div>
+                     <div class="email-editor">
+                     <div class="form-group row">
+                              <label for="to" class="col-form-label col-md-1">내용 </label>
+                              <div class="col-md-11">
+                              <textarea class="form-control" rows="4" id="board_content" name="board_content" ></textarea>
+                              </div>
+                           </div>
+                            
+                           
+                           
+                           
+                           
+                           <form action="upload.php" class="dropzone">
                         <div class="dz-message" data-dz-message>
                            
                            <h4 class="message">첨부파일</h4>
@@ -104,47 +118,25 @@
                            <input name="file" type="file" multiple />
                         </div>
                      </form>
-                        </form>
-                     </div>
-                     <div class="email-editor">
-                        <div id="editor">${board.board_content}</div>
                         <div class="email-action">
-                           <button data-oper='modify' class="btn btn-default" onclick="location.href='/notice/modifyNotice?board=<c:out value="${board.board_id }"/>'">수정</button>
-                           <button class="btn btn-primary" color="red">삭제</button>
-                           <button data-oper='list' class="btn btn-info" onclick="location.href='/notice/noticeList'">목록</button>
-                           
-                           <form id='operForm' action="/notice/modifyNotice" method="get">
-                           <input type='hidden' id="board_id" name='board_id' value='<c:out value="${board.board_id }"/>'>
-                           </form>
-                           
+                           <button data-oper='register' type="button" class="btn btn-default">등록</button>
+                           <button class="btn btn-info" onclick="location.href='/notice/noticeList'">목록</button>
                         </div>
-                     </div>
+                      </div>
                   </div>
                </div>
             </div>
          </div>
-        
+       
       <div class="quick-sidebar">
          <a href="#" class="close-quick-sidebar">
             <i class="flaticon-cross"></i>
          </a>
-         
-                  
-                     <div class="messages-form">
-                        <div class="messages-form-control">
-                           <input type="text" placeholder="Type here" class="form-control input-pill input-solid message-input">
-                        </div>
-                        <div class="messages-form-tool">
-                           <a href="#" class="attachment">
-                              <i class="flaticon-file"></i>
-                           </a>
-                        </div>
-                     </div>
                   </div>
                </div>
                
 
-                           
+                           </form>
                
       
    </div>
@@ -163,8 +155,8 @@
    <!-- Atlantis JS -->
    <script src="../assets/js/atlantis.min.js"></script>
    <!-- Atlantis DEMO methods, don't include it in your project! -->
-   <script src="../assets/js/setting-demo.js"></script>
-   <script>`
+   <script src="../assets	/js/setting-demo.js"></script>
+   <script>
       $('#editor').summernote({
          fontNames: ['Arial', 'Arial Black', 'Comic Sans MS', 'Courier New'],
          tabsize: 2,
@@ -200,25 +192,25 @@
                } );
             }
          });
+
       });
    </script>
-   
- <script type="text/javascript">
-   $(document).ready(function(){
-	   var operForm = $("#operForm");
-	   
-	   $("button[data-oper='modify']").on("click",function(e){
-		   operForm.attr("action","/notice/modifyNotice")
-		   operForm.submit
-	   });
-	   
-	   $("button[data-oper='list']").on("click",function(e){
-		   operForm.find("#board_id").remove();
-		   operForm.attr("action","/notice/noticeList")
-		   operForm.submit
-	   });
-	   
-   });
-   </script> 
+   <script type="text/javascript">
+      $(document).ready(function() {
+
+         var operForm = $("#operForm");
+         
+         var textareaVal = $("textarea[name=board_content]").text();
+
+         console.log("내용로그 "+textareaVal);
+
+         $("button[data-oper='register']").on("click", function(e) {
+         
+            operForm.attr("action", "/notice/register").submit();
+         });
+
+         
+      });
+      </script>
 </body>
 </html>

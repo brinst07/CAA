@@ -95,7 +95,18 @@
                               </div>
                               <br><br>
                               <div class="card-body">
-                     <form action="upload.php" class="dropzone">
+                  </div>
+                           </div>
+                        </form>
+                     </div>
+                     <div class="email-editor">
+                     <div class="form-group row">
+                              <label for="to" class="col-form-label col-md-1">내용 </label>
+                              <div class="col-md-11">
+                              <textarea class="form-control" rows="4" name="content" readonly="readonly"><c:out value="${board.board_content }"></c:out> </textarea>
+                              </div>
+                           </div>
+                           <form action="upload.php" class="dropzone">
                         <div class="dz-message" data-dz-message>
                            
                            <h4 class="message">첨부파일</h4>
@@ -104,16 +115,9 @@
                            <input name="file" type="file" multiple />
                         </div>
                      </form>
-                  </div>
-                           </div>
-                        </form>
-                     </div>
-                     <div class="email-editor">
-                        <div id="editor" >${board.board_content}</div>
                         <div class="email-action">
-                           <button class="btn btn-default" onclick="location.href='/modifyNotice?board=<c:out value="${board.board_id }"/>'">수정</button>
+                           <button class="btn btn-default" onclick="location.href='/notice/modify?board_id=<c:out value="${board.board_id }"/>'">수정</button>
                            <button class="btn btn-info" onclick="location.href='/notice/noticeList'">목록</button>
-                           
                         </div>
                       </div>
                   </div>
@@ -125,9 +129,6 @@
          <a href="#" class="close-quick-sidebar">
             <i class="flaticon-cross"></i>
          </a>
-         
-                  
-                     
                   </div>
                </div>
                
@@ -151,7 +152,7 @@
    <!-- Atlantis JS -->
    <script src="../assets/js/atlantis.min.js"></script>
    <!-- Atlantis DEMO methods, don't include it in your project! -->
-   <script src="../assets/js/setting-demo.js"></script>
+   <script src="../assets	/js/setting-demo.js"></script>
    <script>
       $('#editor').summernote({
          fontNames: ['Arial', 'Arial Black', 'Comic Sans MS', 'Courier New'],

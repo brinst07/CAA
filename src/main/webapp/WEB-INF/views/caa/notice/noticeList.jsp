@@ -120,7 +120,6 @@ CSS Just for demo purpose, don't include it in your project
                                           aria-label="Age: activate to sort column ascending"
                                           style="width: 27px;">조회수</th>
                                     </tr>
-                                    
                                  </thead>
                                  <tfoot>
                                       
@@ -138,8 +137,7 @@ CSS Just for demo purpose, don't include it in your project
                                                 <td><c:out value="${board.board_id }" /></td>
                                                 <td><fmt:formatDate pattern="yyyy-MM-dd"
                                                       value="${board.board_datetime }" /></td>
-                                                <td><c:out
-                                                      value="${board.board_hit }" /></td>
+                                                <td><c:out value="${board.board_hit }" /></td>
                                              </tr>
                                           </c:forEach>
                                  </tbody>
@@ -148,7 +146,7 @@ CSS Just for demo purpose, don't include it in your project
                            </div>
                         </div>
                           <div class="email-action">
-                           <button class="btn btn-primary">등록</button>
+                           <button class="btn btn-primary" onclick="location.href='/notice/register?board_id=<c:out value="${board.board_id }"/>'">등록</button>
                         </div>
                      </div>
                   </div>

@@ -8,5 +8,7 @@ public interface NoticeMapper {
 
 	public List<BoardVO> getList();
 	public BoardVO read(String board_id);
-	public int update(BoardVO board_id);
+	public int modify(BoardVO board);
+	public int remove(String board_id);
+	public void insert(BoardVO board_id);
 }
