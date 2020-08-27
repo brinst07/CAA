@@ -79,12 +79,11 @@
                         </h2>
                      </div>
                      <div class="email-compose-fields">
-                        <form>
+                        <form id="operForm" role="form" action="/notice/register" method="post">
                            <div class="form-group row">
                               <label for="to" class="col-form-label col-md-1">제목 </label>
                               <div class="col-md-11">
-                                 <input type="text" class="form-control" id="title" name="title"
-                                 value='<c:out value="${board.board_title }"/>' readonly="readonly">
+                                 <input type="text" class="form-control" id="title" name="board_title">
                               </div>
                            </div>
                            <div class="form-group row">
@@ -95,17 +94,21 @@
                               </div>
                               <br><br>
                               <div class="card-body">
-                  </div>
+                  			</div>
                            </div>
-                        </form>
                      </div>
                      <div class="email-editor">
                      <div class="form-group row">
                               <label for="to" class="col-form-label col-md-1">내용 </label>
                               <div class="col-md-11">
-                              <textarea class="form-control" rows="4" name="content" readonly="readonly"><c:out value="${board.board_content }"></c:out> </textarea>
+                              <textarea class="form-control" rows="4" id="board_content" name="board_content" ></textarea>
                               </div>
                            </div>
+                            
+                           
+                           
+                           
+                           
                            <form action="upload.php" class="dropzone">
                         <div class="dz-message" data-dz-message>
                            
@@ -116,7 +119,7 @@
                         </div>
                      </form>
                         <div class="email-action">
-                           <button class="btn btn-default" onclick="location.href='/notice/modify?board_id=<c:out value="${board.board_id }"/>'">수정</button>
+                           <button data-oper='register' type="button" class="btn btn-default">등록</button>
                            <button class="btn btn-info" onclick="location.href='/notice/noticeList'">목록</button>
                         </div>
                       </div>
@@ -133,7 +136,7 @@
                </div>
                
 
-                           
+                           </form>
                
       
    </div>
@@ -192,5 +195,22 @@
 
       });
    </script>
+   <script type="text/javascript">
+      $(document).ready(function() {
+
+         var operForm = $("#operForm");
+         
+         var textareaVal = $("textarea[name=board_content]").text();
+
+         console.log("내용로그 "+textareaVal);
+
+         $("button[data-oper='register']").on("click", function(e) {
+         
+            operForm.attr("action", "/notice/register").submit();
+         });
+
+         
+      });
+      </script>
 </body>
 </html>
