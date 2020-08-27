@@ -116,87 +116,135 @@ public class CAARestController {
 	// JSON은 HTML의 Body의 문자열로 저장되어 전송되는데 그걸 받겠다는 게 ReqeustBody
 	@PostMapping(value = "/sector", produces = { MediaType.APPLICATION_JSON_UTF8_VALUE })
 	public void sector(@RequestBody SectorJsonVo sectorJsonVo) {
-		String ServiceKey = "21SOlCjmfqUliASu82VGE2%2FXQ1uFeVzXzPQ7egYRvgT7cKF1cBdfAONRgbHRnpHFgtd3NlHgCOj2kblMeWg6iQ%3D%3D";
-		String url = "http://apis.data.go.kr/B553077/api/open/sdsc/storeZoneInRadius?radius=" + sectorJsonVo.getRadius()
-				+ "&cx=" + sectorJsonVo.getCx() + "&cy=" + sectorJsonVo.getCy() + "&ServiceKey=" + ServiceKey
-				+ "&type=json";
-		HttpClient httpClient = new DefaultHttpClient();
-		ResponseHandler<String> responseHandler = new BasicResponseHandler();
-		HttpGet httpGet = new HttpGet();
-		SectorParamVO vo = null;
-		try {
-			vo = new SectorParamVO();
-			vo.setStoreList(sectorJsonVo.getSectors());
+		
+		List<Map<String, String>> jsonMapList = sectorJsonVo.getJsonMapList();
+		// 영역의 업종 추이를 관리하는 리스트 생성
+		List<List<StoreVO>> totalStore = new ArrayList<>();
+		
+		// 분류별 데이터를 넣을 List를 생성한다.
+		List<Map<String, String>> ubsoList = new ArrayList<Map<String, String>>();
+		
+		//선택한 영역의 개수만큼 for문이 돌아간다.
+		for (int i = 0; i < jsonMapList.size(); i++) {
+			String ServiceKey = "21SOlCjmfqUliASu82VGE2%2FXQ1uFeVzXzPQ7egYRvgT7cKF1cBdfAONRgbHRnpHFgtd3NlHgCOj2kblMeWg6iQ%3D%3D";
+			String url = "http://apis.data.go.kr/B553077/api/open/sdsc/storeZoneInRadius?radius="
+					+ jsonMapList.get(i).get("radius") + "&cx=" + jsonMapList.get(i).get("cx") + "&cy="
+					+ jsonMapList.get(i).get("cy") + "&ServiceKey=" + ServiceKey + "&type=json";
 
-			// 업종코드를 전달하기 위해 DB에서 코드를 추출한다.
-			List<Map<String, String>> sectorFind = sectorJsonVo.getSectors();
-			List<Map<String, String>> sectorList = service.getSectorCode(sectorFind);
-
-			httpGet.setURI(new URI(url));
-			String responseBody = httpClient.execute(httpGet, responseHandler);
-
-			ObjectMapper objectMapper = new ObjectMapper();
-
-			Map<String, Map<String, List<Map<String, Object>>>> list = objectMapper.readValue(responseBody,
-					new TypeReference<Map<String, Map<String, Object>>>() {
-					});
-
-			// 선택한 영역의 데이터 전처리 후 필요한 데이터만을 저장하는 list
-			List<Map<String, Object>> finalList = list.get("body").get("items");
-
-			List<List<StoreVO>> store = new ArrayList<List<StoreVO>>();
-
-			// 중분류 대분류별 추이를 저장할 list
-			List<List<Map<String, Object>>> ubsoList = new ArrayList<List<Map<String, Object>>>();
+			HttpClient httpClient = new DefaultHttpClient();
+			ResponseHandler<String> responseHandler = new BasicResponseHandler();
+			HttpGet httpGet = new HttpGet();
 			
-			// 선택한 영역의 개수만큼 for문이 돌아가게 로직 구성한다.
-			for (int i = 0; i < finalList.size(); i++) {
-				vo.setStore_cs_code_name((String) finalList.get(i).get("mainTrarNm"));
-				// DB에 있는 선택한 상권의 업종의 년도별 추이를 긁어온다.
-				List<StoreVO> storeMiddle = service.getStoreList(vo);
-				// TODO List에서 Map<String,List>형식으로 바꿔서 이름과 map을 같이 저장하면 좋을 듯함
-				store.add(storeMiddle);
+			//DB에 파라미터로 넣을 VO 생성
+			SectorParamVO vo = null;
 
-				// 상권번호
-				log.info(finalList.get(i).get("trarNo"));
+			try {
+				vo = new SectorParamVO();
+				
+				// Mybatis foreach를 돌리기 위해 list 통채로 삽입한다.
+				vo.setStoreList(sectorJsonVo.getSectors());
 
-				// for문으로 분류 선택 개수에 다르게 조회하게 로직 구성
-				// 상권번호를 통해서 상권내 상가업소 조회
-				for (int j = 0; j < sectorList.size(); j++) {
-					for (Map.Entry<String, String> entry : sectorList.get(j).entrySet()) {
-						String div = "";
-						String temp = "";
-						if(entry.getKey().equals("large")) {
-							div = "&indsLclsCd="+entry.getValue();
-							temp = entry.getValue();
-						}else if(entry.getKey().equals("middle")) {
-							div = "&indsMclsCd="+entry.getValue();
-							temp = entry.getValue();
-						}else {
-							div = "&indsSclsCd="+entry.getValue();
-							temp = entry.getValue();
+				// 업종코드를 전달하기 위해 DB에서 코드를 추출한다.
+				List<Map<String, String>> sectorFind = sectorJsonVo.getSectors();
+				List<Map<String, String>> sectorList = service.getSectorCode(sectorFind);
+
+				httpGet.setURI(new URI(url));
+				String responseBody = httpClient.execute(httpGet, responseHandler);
+
+				ObjectMapper objectMapper = new ObjectMapper();
+				
+				// Jsp에서 가져온 도형의 정보를 RestAPI로 보내서 정보를 java형식으로 mapping하여 받는 부분
+				Map<String, Map<String, List<Map<String, Object>>>> list = objectMapper.readValue(responseBody,
+						new TypeReference<Map<String, Map<String, Object>>>() {
+						});
+				
+				// 선택한 영역의 데이터 전처리 후 필요한 데이터만을 저장하는 list
+				List<Map<String, Object>> finalList = list.get("body").get("items");
+
+				List<List<StoreVO>> store = new ArrayList<List<StoreVO>>();
+
+				// 상권이름을 저장하기 위한 배열을 선언한다.
+				List<String> scName = new ArrayList();
+
+				// 하단에서 분류별 숫자를 체크하기 위해 변수를 선언해준다.
+				int large = 0, middle = 0, small = 0;
+				
+				// 선택한 영역 안의 상권의 개수만큼 for문이 돌아감
+				for (int j = 0; j < finalList.size(); j++) {
+
+					// 선택한 영역에는 여러가지 상권이 존재하기 때문에 먼저 배열에 상권이름을 저장한다.
+					scName.add((String) finalList.get(j).get("mainTrarNm"));
+
+					// 상권번호
+					log.info(finalList.get(i).get("trarNo"));
+					
+					
+					// for문으로 분류 선택 개수에 다르게 조회하게 로직 구성
+					// 상권번호를 통해서 상권내 상가업소 조회
+					for (int k = 0; k < sectorList.size(); k++) {
+						// 분류별 2차 배열
+						
+
+						for (Map.Entry<String, String> entry : sectorList.get(j).entrySet()) {
+							String div = "";
+							String temp = "";
+							if (entry.getKey().equals("large")) {
+								div = "&indsLclsCd=" + entry.getValue();
+							} else if (entry.getKey().equals("middle")) {
+								div = "&indsMclsCd=" + entry.getValue();
+							} else {
+								div = "&indsSclsCd=" + entry.getValue();
+							}
+							temp = entry.getKey();
+							url = "http://apis.data.go.kr/B553077/api/open/sdsc/storeListInArea?key="
+									+ finalList.get(i).get("trarNo") + "&ServiceKey=" + ServiceKey + "&type=json" + div;
+							httpGet.setURI(new URI(url));
+							responseBody = httpClient.execute(httpGet, responseHandler);
+							Map<String, Map<String, List<Map<String, Object>>>> ubso = objectMapper
+									.readValue(responseBody, new TypeReference<Map<String, Map<String, Object>>>() {
+									});
+
+							
+							
+							int ubsoCount = ubso.get("body").get("items").size();
+							
+							if(temp.equals("large")) {
+								large += ubsoCount;
+							}else if(temp.equals("middle")) {
+								middle += ubsoCount;
+							}else if(temp.equals("small")){
+								small += ubsoCount;
+							}
+							
+							/*
+							 * ubsoMap.put(temp, ubso.get("body").get("items").size())); // 선택한 현재 상권의 대, 중,
+							 * 소 분류별로 조회해서 저장. ubsoList.add(ubsoMap);
+							 */
 						}
-						url = "http://apis.data.go.kr/B553077/api/open/sdsc/storeListInArea?key="
-								+ finalList.get(i).get("trarNo") + "&ServiceKey=" + ServiceKey + "&type=json"+div;
-						httpGet.setURI(new URI(url));
-						responseBody = httpClient.execute(httpGet, responseHandler);
-						Map<String, Map<String, List<Map<String, Object>>>> ubso = objectMapper.readValue(responseBody,
-								new TypeReference<Map<String, Map<String, Object>>>() {
-								});
-
-						Map<String, String> ubsoMap = new HashMap<String, String>();
-						ubsoMap.put(temp, Integer.toString(ubso.get("body").get("items").size()));
-						//선택한 현재 상권의 대, 중, 소 분류별로 조회해서 저장.
-						List<Map<String, Object>> ubsosmall = ubso.get("body").get("items");
-						ubsoList.add(ubsosmall);
+						
 					}
 				}
+				//위에서 구한 현재 선택한 영역의 대, 중, 소 분류별로 조회해서 숫자를 더해 저장한 값들을 map에 넣는다.
+				Map<String,String> ubso = new HashMap<>();
+				ubso.put("large", Integer.toString(large));
+				ubso.put("middle", Integer.toString(middle));
+				ubso.put("small", Integer.toString(small));
+				
+				//관리에 용이하도록 List에 넣는다.
+				ubsoList.add(ubso);
+				
+
+				// DB에서 상권이름 그리고 분류로 select를 하기 위해서 VO에 저장하는 과정을 거친다.
+				vo.setStore_cs_code_name(scName);
+
+				List<StoreVO> storeList = service.getStoreList(vo);
+				
+				totalStore.add(storeList);
+
+			} catch (Exception e) {
+				e.printStackTrace();
 			}
 
-		} catch (Exception e) {
-			e.printStackTrace();
 		}
-
 	}
-
 }
