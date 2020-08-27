@@ -8,7 +8,7 @@
 		from cs_code
 		where cs_code_depth = #{cs_code_depth}
 	</select>
-	
+
 	<select id="otherCscodeList" resultType="kr.or.ddit.caa.domain.CscodeVO">
 		select *
 		from cs_code
@@ -25,13 +25,28 @@
 		                        and SP.SUBWAY_YEAR = 2019
 		group by SP.SUBWAY_MONTH order by SP.SUBWAY_MONTH asc
 	</select>
-	
+
 	<select id="getStoreList" resultType="kr.or.ddit.caa.domain.StoreVO">
-		select *
+		select STORE_YEAR,STORE_BUNGI,STORE_SER_CODE_NAME,STORE_SM_COUNT
 		from store
-		where STORE_CS_CODE_NAME = #{store_cs_code_name} and 
-			<foreach collection="storeList" item="item" index="index" open="(" close=")" separator="or">
-				STORE_SER_CODE_NAME LIKE  '%'||#{item.middle}||'%'
-			</foreach>
+		where STORE_CS_CODE_NAME = #{store_cs_code_name} and
+		<foreach collection="storeList" item="item" index="index" open="(" close=")" separator="or">
+			STORE_SER_CODE_NAME LIKE '%'||#{item.middle}||'%'
+		</foreach>
+		group by STORE_YEAR, STORE_BUNGI,STORE_SM_COUNT,STORE_SER_CODE_NAME
+		order by store_year desc, STORE_BUNGI asc
 	</select>
+
+	<select id="getSectorCode" resultType="string">
+		select cs_code
+		from cs_code
+		where cs_code_name = #{cs_code_name}
+	</select>
+	
+	
+<!-- 	동적 쿼리, 파라미터  수정해야함-->
+	<select id="SalesByIndustryList" resultType="kr.or.ddit.caa.domain.SalesByIndustryVO">
+select * from SALES_TEMP where SALES_SER_NAME like '%한식음식점%' and SALES_BD_NAME like '%고분다리골목시장%' and SALES_YEAR ='2019'
+	</select>
+	
 </mapper>

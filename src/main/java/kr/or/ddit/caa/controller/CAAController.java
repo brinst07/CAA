@@ -1,25 +1,18 @@
 package kr.or.ddit.caa.controller;
 
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.model;
-
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.core.type.TypeReference;
@@ -27,12 +20,14 @@ import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.common.reflect.TypeToken;
 import com.google.gson.Gson;
+
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 
 import kr.or.ddit.bs.service.BSService;
 import kr.or.ddit.caa.domain.CscodeVO;
+import kr.or.ddit.caa.domain.SalesByIndustryVO;
 import kr.or.ddit.caa.service.CAAService;
 import lombok.Setter;
 import lombok.extern.log4j.Log4j;
@@ -77,7 +72,20 @@ public class CAAController {
 	
 
 
+//	
+//	//업종분석
+//	@GetMapping("/industryanalysis")
+//	public String industryanalysis() {
+//		return "caa/caa/IndustryAnalysis";
+//	}
 	
+	//매출분석
+	@GetMapping("/saleanalysis")
+	public String caaSale(Map map, Model model) {
+		List<SalesByIndustryVO> list = service.SalesByIndustryList(map);
+		model.addAttribute("list",list);
+		return "caa/caa/SalesAnalysis";
+	}
 
 	
 	//cctv
@@ -289,6 +297,9 @@ public class CAAController {
 		
 		return "caa/member/SearchIDMember";
 	}
+	
+
+
 	
 	
 	

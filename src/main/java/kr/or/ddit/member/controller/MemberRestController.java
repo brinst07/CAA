@@ -74,7 +74,7 @@ public class MemberRestController {
 		
 		String from = "chawanho9@gmail.com";
 		String to = client_email;
-		String subject = "제목";
+		String subject = "ThinkPeople에서 보낸 인증번호 입니다.";
 		String passwordKey = password.excuteGenerate();
 		String contents = "인증번호는 ["+passwordKey+"] 입니다.";
 		try {
