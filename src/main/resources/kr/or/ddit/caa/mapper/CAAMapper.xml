@@ -14,4 +14,11 @@
 		from cs_code
 		where cs_code2 = #{keyword}
 	</select>
+	
+	
+<!-- 	동적 쿼리, 파라미터  수정해야함-->
+	<select id="SalesByIndustryList" resultType="kr.or.ddit.caa.domain.SalesByIndustryVO">
+select * from SALES_TEMP where SALES_SER_NAME like '%한식음식점%' and SALES_BD_NAME like '%고분다리골목시장%' and SALES_YEAR ='2019'
+	</select>
+	
 </mapper>

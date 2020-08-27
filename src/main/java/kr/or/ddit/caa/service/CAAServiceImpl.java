@@ -1,11 +1,13 @@
 package kr.or.ddit.caa.service;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import kr.or.ddit.caa.domain.CscodeVO;
+import kr.or.ddit.caa.domain.SalesByIndustryVO;
 import kr.or.ddit.caa.mapper.CAAMapper;
 import lombok.Setter;
 import lombok.extern.log4j.Log4j;
@@ -28,6 +30,13 @@ public class CAAServiceImpl implements CAAService {
 	@Override
 	public List<CscodeVO> otherCscodeList(String keyword) {
 		return mapper.otherCscodeList(keyword);
+	}
+
+
+	@Override
+	public List<SalesByIndustryVO> SalesByIndustryList(Map map) {
+		
+		return mapper.SalesByIndustryList(map);
 	}
 
 }

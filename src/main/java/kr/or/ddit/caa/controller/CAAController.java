@@ -1,12 +1,10 @@
 package kr.or.ddit.caa.controller;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -15,10 +13,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import com.google.gson.JsonObject;
-
 import kr.or.ddit.bs.service.BSService;
 import kr.or.ddit.caa.domain.CscodeVO;
+import kr.or.ddit.caa.domain.SalesByIndustryVO;
 import kr.or.ddit.caa.service.CAAService;
 import lombok.Setter;
 import lombok.extern.log4j.Log4j;
@@ -71,8 +68,10 @@ public class CAAController {
 	}
 	
 	//매출분석
-	@GetMapping("/SaleAnalysis")
-	public String caaSale() {
+	@GetMapping("/saleanalysis")
+	public String caaSale(Map map, Model model) {
+		List<SalesByIndustryVO> list = service.SalesByIndustryList(map);
+		model.addAttribute("list",list);
 		return "caa/caa/SalesAnalysis";
 	}
 	
@@ -215,6 +214,9 @@ public class CAAController {
 		
 		return "caa/member/SearchIDMember";
 	}
+	
+
+
 	
 	
 	

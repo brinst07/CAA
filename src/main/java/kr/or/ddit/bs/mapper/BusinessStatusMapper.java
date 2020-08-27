@@ -9,4 +9,5 @@ public interface BusinessStatusMapper {
 	
 
 	public List<CscodeVO> getDetailList(String code);
+	
 }
