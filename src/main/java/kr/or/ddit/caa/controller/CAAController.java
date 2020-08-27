@@ -1,5 +1,7 @@
 package kr.or.ddit.caa.controller;
 
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.model;
+
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -159,11 +161,17 @@ public class CAAController {
 		return "caa/caa/SalesAnalysis";
 	}
 	
+	/* 전영현 ↓ */
 	//인구분석
-	@PostMapping("PopAnalysis")
-	public String PopAnalysis() {
+	@GetMapping("PopAnalysis")
+	public String PopAnalysis(Model model) {
+		List<Map<String, String>> popListMap = service.getSubwayPop();
+		
+		model.addAttribute("popListMap", popListMap);
 		return "caa/caa/popAnalysis";
 	}
+	/* 전영현 ↑ */
+	
 
 
 
