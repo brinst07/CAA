@@ -20,6 +20,9 @@ import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.common.reflect.TypeToken;
 import com.google.gson.Gson;
+import com.google.gson.JsonArray;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
 
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
@@ -81,7 +84,22 @@ public class CAAController {
 	
 	//매출분석
 	@GetMapping("/saleanalysis")
-	public String caaSale(Map map, Model model) {
+	public String caaSale(Map map, Model model, HttpSession session,JsonParser jsonParser  ) {
+		
+	      String stringJavaList = (String) session.getAttribute("jsonMapList");
+	      String stringJavaSector = (String) session.getAttribute("sector");
+	      
+	      JsonArray jsonArrayList = (JsonArray) jsonParser.parse(stringJavaList);
+	      JsonArray jsonArraySector = (JsonArray) jsonParser.parse(stringJavaSector);
+	      
+	      System.out.println("jsonArrayList : "+jsonArrayList);
+	      System.out.println("jsonArraySector: "+jsonArraySector);
+	      
+	      for (int i = 0; i < jsonArraySector.size(); i++) {
+	    	  JsonObject jsonObject = (JsonObject) jsonArrayList.get(i);
+	    	  System.out.println(i+ "번쨰 "+jsonObject);
+	      }
+		
 		List<SalesByIndustryVO> list = service.SalesByIndustryList(map);
 		model.addAttribute("list",list);
 		return "caa/caa/SalesAnalysis";
@@ -209,6 +227,7 @@ public class CAAController {
 		System.out.println(jsonArray);
 		System.out.println(jsonArray2);
 		
+		System.out.println("바로 여기");
 		for (int i = 0; i < jsonArray.size(); i++) {
 			JsonObject jsonObject = (JsonObject) jsonArray.get(i);
 			System.out.println(jsonObject.get("name"));

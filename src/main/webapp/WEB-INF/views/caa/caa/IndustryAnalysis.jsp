@@ -251,6 +251,28 @@
             </div>
             <div class="col-md-12">
 
+					<table class="table table-bordered table-head-bg-info table-bordered-bd-info mt-4">
+						<thead>
+							<tr>
+								<th scope="col">상권평가지수</th>
+								<th scope="col">증감률</th>
+								<th scope="col">안정성</th>
+								<th scope="col">영업력</th>
+								<th scope="col">구매력</th>
+								<th scope="col">집객력</th>
+								<th scope="col">성장성</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<td>67</td>
+								<td>0.75</td>
+								<td>11.8</td>
+								<td>10</td>
+								<td>5</td>
+								<td>16</td>
+								<td>14</td>
+							</tr>
 
                 <table class="table table-bordered table-head-bg-info table-bordered-bd-info mt-4">
                     <thead>
