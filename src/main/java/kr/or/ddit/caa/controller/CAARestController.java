@@ -115,7 +115,7 @@ public class CAARestController {
 	// JSON을 보낼때는 @ReqeustBody로 받아야함
 	// JSON은 HTML의 Body의 문자열로 저장되어 전송되는데 그걸 받겠다는 게 ReqeustBody
 	@PostMapping(value = "/sector", produces = { MediaType.APPLICATION_JSON_UTF8_VALUE })
-	public void sector(@RequestBody SectorJsonVo sectorJsonVo) {
+	public ResponseEntity<Map<String, Object>> sector(@RequestBody SectorJsonVo sectorJsonVo) {
 		
 		List<Map<String, String>> jsonMapList = sectorJsonVo.getJsonMapList();
 		// 영역의 업종 추이를 관리하는 리스트 생성
@@ -123,6 +123,9 @@ public class CAARestController {
 		
 		// 분류별 데이터를 넣을 List를 생성한다.
 		List<Map<String, String>> ubsoList = new ArrayList<Map<String, String>>();
+		
+		// 모든 정보를 넣을 리스트를 생성한다.
+		Map<String, Object> totalMap = new HashMap<String, Object>();
 		
 		//선택한 영역의 개수만큼 for문이 돌아간다.
 		for (int i = 0; i < jsonMapList.size(); i++) {
@@ -175,8 +178,6 @@ public class CAARestController {
 					// 선택한 영역에는 여러가지 상권이 존재하기 때문에 먼저 배열에 상권이름을 저장한다.
 					scName.add((String) finalList.get(j).get("mainTrarNm"));
 
-					// 상권번호
-					log.info(finalList.get(i).get("trarNo"));
 					
 					
 					// for문으로 분류 선택 개수에 다르게 조회하게 로직 구성
@@ -246,5 +247,10 @@ public class CAARestController {
 			}
 
 		}
+		
+		// JSP단으로 전달을 위해 Map에 넣어서 전달한다.
+		totalMap.put("totalStore", totalStore);
+		totalMap.put("ubsoList", ubsoList);
+		return new ResponseEntity<Map<String,Object>>(totalMap,HttpStatus.OK);
 	}
 }

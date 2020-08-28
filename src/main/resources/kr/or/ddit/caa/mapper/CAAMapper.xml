@@ -27,13 +27,17 @@
 	</select>
 
 	<select id="getStoreList" resultType="kr.or.ddit.caa.domain.StoreVO">
-		select STORE_YEAR,STORE_BUNGI,STORE_SER_CODE_NAME,STORE_SM_COUNT
+		select STORE_YEAR,STORE_BUNGI,STORE_SER_CODE_NAME,sum(STORE_SM_COUNT)
 		from store
-		where STORE_CS_CODE_NAME = #{store_cs_code_name} and
-		<foreach collection="storeList" item="item" index="index" open="(" close=")" separator="or">
+		where 
+		<foreach collection="store_cs_code_name" item="sector" index="index" open="(" close=") and" separator="or">
+			STORE_CS_CODE_NAME = #{sector}
+		</foreach>
+		
+		<foreach collection="storeList" item="item" index="index" open="(" close=")" separator="or" >
 			STORE_SER_CODE_NAME LIKE '%'||#{item.middle}||'%'
 		</foreach>
-		group by STORE_YEAR, STORE_BUNGI,STORE_SM_COUNT,STORE_SER_CODE_NAME
+		group by STORE_YEAR, STORE_BUNGI,STORE_SER_CODE_NAME
 		order by store_year desc, STORE_BUNGI asc
 	</select>
 

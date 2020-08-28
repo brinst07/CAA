@@ -1,33 +1,117 @@
+
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <c:set var="sector" value="${sector }"></c:set>
 <script type="text/javascript">
-$(function(){
-	// 사용자가 선택한 값을 가져오는 코드
-	var sectorDATA = '${sector}';
-	var json = '${jsonMapList}';
-	var jsonMapList = JSON.parse(json);
-	var sectorList = JSON.parse(sectorDATA);
-	//업종별 분석을 하기위해 상권을 조회하는 부분
-			var d =  {
-				jsonMapList : jsonMapList,
-				sectors : sectorList
-			};
-			console.log(d);
-			$.ajax({
-				url : '/caa/rest/sector',
-				type : 'POST',
-				traditional : true,
-				contentType : "application/json",
-				data : JSON.stringify(d)
-			}).done(function(data){
-				console.log(data);
-			}).fail(function(xhr,status){
-				alert(xhr);
-			});
-		
-	
-});	
+	$(function() {
+		// 사용자가 선택한 값을 가져오는 코드
+		var sectorDATA = '${sector}';
+		var json = '${jsonMapList}';
+		var jsonMapList = JSON.parse(json);
+		var sectorList = JSON.parse(sectorDATA);
+		//업종별 분석을 하기위해 상권을 조회하는 부분
+		var d = {
+			jsonMapList : jsonMapList,
+			sectors : sectorList
+		};
+		console.log(d);
+		$
+				.ajax({
+					url : '/caa/rest/sector',
+					type : 'POST',
+					traditional : true,
+					contentType : "application/json",
+					data : JSON.stringify(d)
+				})
+				.done(
+						function(data) {
+							//JAVA단에서 받아온 데이터로 차트 출력한다.
+							var totalScore = data.totalScore;
+							var ubsoList = data.ubsoList;
+							// 차트에 값을 넣기 위한 작업을 한다.
+
+							for (var i = 0; i < totalScore.length; i++) {
+								var myMultipleLineChart = new Chart(
+										multipleLineChart,
+										{
+											type : 'line',
+											data : {
+												labels : [ "2018-1", "2018-2",
+														"2018-3", "2018-4",
+														"2019-1", "2019-2",
+														"2019-3", "2019-4",
+														"2020-1" ],
+												datasets : [
+														{
+															label : "Python",
+															borderColor : "#1d7af3",
+															pointBorderColor : "#FFF",
+															pointBackgroundColor : "#1d7af3",
+															pointBorderWidth : 2,
+															pointHoverRadius : 4,
+															pointHoverBorderWidth : 1,
+															pointRadius : 4,
+															backgroundColor : 'transparent',
+															fill : true,
+															borderWidth : 2,
+															data : [ 30, 45,
+																	45, 68, 69,
+																	90, 100,
+																	158, 177,
+																	200, 245,
+																	256 ]
+														},
+														{
+															label : "Ruby",
+															borderColor : "#f3545d",
+															pointBorderColor : "#FFF",
+															pointBackgroundColor : "#f3545d",
+															pointBorderWidth : 2,
+															pointHoverRadius : 4,
+															pointHoverBorderWidth : 1,
+															pointRadius : 4,
+															backgroundColor : 'transparent',
+															fill : true,
+															borderWidth : 2,
+															data : [ 10, 30,
+																	58, 79, 90,
+																	105, 117,
+																	160, 185,
+																	210, 185,
+																	194 ]
+														} ]
+											},
+											options : {
+												responsive : true,
+												maintainAspectRatio : false,
+												legend : {
+													position : 'top',
+												},
+												tooltips : {
+													bodySpacing : 4,
+													mode : "nearest",
+													intersect : 0,
+													position : "nearest",
+													xPadding : 10,
+													yPadding : 10,
+													caretPadding : 10
+												},
+												layout : {
+													padding : {
+														left : 15,
+														right : 15,
+														top : 15,
+														bottom : 15
+													}
+												}
+											}
+										});
+							}
+						}).fail(function(xhr, status) {
+					alert(xhr);
+				});
+
+	});
 </script>
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=1a3acaea52f8fb01b6a85dfd59092f27"></script>
 <div class="main-panel full-height">
@@ -324,67 +408,4 @@ $(function(){
 		styleWrapper : true,
 		styleText : true
 	})
-
-	var myMultipleLineChart = new Chart(multipleLineChart, {
-		type : 'line',
-		data : {
-			labels : [ "Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug",
-					"Sep", "Oct", "Nov", "Dec" ],
-			datasets : [
-					{
-						label : "Python",
-						borderColor : "#1d7af3",
-						pointBorderColor : "#FFF",
-						pointBackgroundColor : "#1d7af3",
-						pointBorderWidth : 2,
-						pointHoverRadius : 4,
-						pointHoverBorderWidth : 1,
-						pointRadius : 4,
-						backgroundColor : 'transparent',
-						fill : true,
-						borderWidth : 2,
-						data : [ 30, 45, 45, 68, 69, 90, 100, 158, 177, 200,
-								245, 256 ]
-					},
-					{
-						label : "Ruby",
-						borderColor : "#f3545d",
-						pointBorderColor : "#FFF",
-						pointBackgroundColor : "#f3545d",
-						pointBorderWidth : 2,
-						pointHoverRadius : 4,
-						pointHoverBorderWidth : 1,
-						pointRadius : 4,
-						backgroundColor : 'transparent',
-						fill : true,
-						borderWidth : 2,
-						data : [ 10, 30, 58, 79, 90, 105, 117, 160, 185, 210,
-								185, 194 ]
-					} ]
-		},
-		options : {
-			responsive : true,
-			maintainAspectRatio : false,
-			legend : {
-				position : 'top',
-			},
-			tooltips : {
-				bodySpacing : 4,
-				mode : "nearest",
-				intersect : 0,
-				position : "nearest",
-				xPadding : 10,
-				yPadding : 10,
-				caretPadding : 10
-			},
-			layout : {
-				padding : {
-					left : 15,
-					right : 15,
-					top : 15,
-					bottom : 15
-				}
-			}
-		}
-	});
 </script>
