@@ -209,6 +209,7 @@ public class CAAController {
 		System.out.println(jsonArray);
 		System.out.println(jsonArray2);
 		
+		System.out.println("바로 여기");
 		for (int i = 0; i < jsonArray.size(); i++) {
 			JsonObject jsonObject = (JsonObject) jsonArray.get(i);
 			System.out.println(jsonObject.get("name"));

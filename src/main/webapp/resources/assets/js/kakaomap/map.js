@@ -326,13 +326,22 @@ function analysis(){
 	for(var i = 0; i< data.circle.length; i++){
 		circleArray[i].x = data.circle[i].center.x;
 		circleArray[i].y = data.circle[i].center.y;
+		circleArray[i].ex = data.circle[i].ePoint.x;
+		circleArray[i].ey = data.circle[i].ePoint.y;
+		circleArray[i].sx = data.circle[i].sPoint.x;
+		circleArray[i].sy = data.circle[i].sPoint.y;
 		circleArray[i].radius = data.circle[i].radius;
 		var figureObj = new Object();
 		figureObj.name = circleArray[i].name;
 		figureObj.type = 'circle';
 		figureObj.cx = circleArray[i].x;
 		figureObj.cy = circleArray[i].y;
+		figureObj.ex = circleArray[i].ex;
+		figureObj.ey = circleArray[i].ey;
+		figureObj.sx = circleArray[i].sx;
+		figureObj.sy = circleArray[i].sy;
 		figureObj.radius = circleArray[i].radius;
+		
 		figureArray.push(figureObj);
 	};
 
