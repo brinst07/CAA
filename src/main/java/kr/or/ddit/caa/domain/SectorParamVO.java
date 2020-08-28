@@ -7,6 +7,6 @@ import lombok.Data;
 @Data
 public class SectorParamVO {
 	
-	private String store_cs_code_name;
+	private List<String> store_cs_code_name;
 	private List<Map<String,String>> storeList;
 }

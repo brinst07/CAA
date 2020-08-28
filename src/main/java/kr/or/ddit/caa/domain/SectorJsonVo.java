@@ -6,9 +6,7 @@ import java.util.Map;
 import lombok.Data;
 @Data
 public class SectorJsonVo {
-	private String radius;
-	private String cx;
-	private String cy;
+	private List<Map<String,String>> jsonMapList;
 	private List<Map<String,String>> sectors;
 
 	

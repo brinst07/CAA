@@ -18,7 +18,12 @@ import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.google.common.reflect.TypeToken;
 import com.google.gson.Gson;
+import com.google.gson.JsonArray;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
+
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
@@ -203,10 +208,49 @@ public class CAAController {
 	/* 전영현 ↓ */
 	//인구분석
 	@GetMapping("PopAnalysis")
-	public String PopAnalysis(Model model) {
+	public String PopAnalysis(Model model, HttpSession session) {
 		List<Map<String, String>> popListMap = service.getSubwayPop();
-		
 		model.addAttribute("popListMap", popListMap);
+		
+		log.info("session의 jsonMapList값보기");
+		log.info(session.getAttribute("jsonMapList"));
+		
+		String stringJava = (String) session.getAttribute("jsonMapList");
+		String sectorJson = (String) session.getAttribute("sector");
+		
+		JsonParser jsonParser = new JsonParser();
+		
+		
+		JsonArray jsonArray = (JsonArray) jsonParser.parse(stringJava);
+		JsonArray jsonArray2 = (JsonArray) jsonParser.parse(sectorJson);
+		
+		System.out.println(jsonArray);
+		System.out.println(jsonArray2);
+		
+		for (int i = 0; i < jsonArray.size(); i++) {
+			JsonObject jsonObject = (JsonObject) jsonArray.get(i);
+			System.out.println(jsonObject.get("name"));
+		}
+		
+		for (int i = 0; i < jsonArray2.size(); i++) {
+			JsonObject jsonObject = (JsonObject) jsonArray2.get(i);
+			System.out.println(jsonObject.get("large"));
+			
+		}
+
+	
+		
+//		ObjectMapper objectMapper = new ObjectMapper();
+//		objectMapper.readValue(src, objectMapper.readValue(session.getAttribute("jsonMapList"), new TypeReference<List<Map<String, Object>>>() {});)
+		
+		
+//		List<Map<String, Object>> jsonMapList = (List<Map<String, Object>>) session.getAttribute("jsonMapList");
+		
+		
+//		log.info("List에서 꺼내기");
+//		Map<String, String> jsonMap = jsonMapList.get(0);
+//		log.info(jsonMap.get("name"));
+		
 		return "caa/caa/popAnalysis";
 	}
 	/* 전영현 ↑ */
