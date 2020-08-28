@@ -49,9 +49,9 @@ $(function(){
 						<h2 class="pb-2 fw-bold">상권분석</h2>
 						<div class="nav-scroller d-flex">
 							<div class="nav nav-line nav-color-info d-flex align-items-center justify-contents-center" id="navmenu">
-								<a class="nav-link active" href="/caa/commercialanalysis">상권분석</a> 
-								<a class="nav-link" href="/caa/industryanalysis">업종분석</a> 
-								<a class="nav-link" href="/caa/SaleAnalysis">매출분석</a> 
+								<a class="nav-link " href="/caa/commercialanalysis">상권분석</a> 
+								<a class="nav-link active" href="/caa/industryanalysis">업종분석</a> 
+								<a class="nav-link" href="/caa/saleanalysis">매출분석</a> 
 								<a class="nav-link" href="/caa/popAnalysis">인구분석</a>
 							</div>
 						</div>

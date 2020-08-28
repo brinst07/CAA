@@ -159,7 +159,8 @@ public class CAARestController {
 
 				// 상권번호
 				log.info(finalList.get(i).get("trarNo"));
-
+				
+				
 				// for문으로 분류 선택 개수에 다르게 조회하게 로직 구성
 				// 상권번호를 통해서 상권내 상가업소 조회
 				for (int j = 0; j < sectorList.size(); j++) {
@@ -171,6 +172,7 @@ public class CAARestController {
 							temp = entry.getValue();
 						}else if(entry.getKey().equals("middle")) {
 							div = "&indsMclsCd="+entry.getValue();
+							log.info(div);
 							temp = entry.getValue();
 						}else {
 							div = "&indsSclsCd="+entry.getValue();

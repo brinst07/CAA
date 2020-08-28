@@ -19,6 +19,9 @@ import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.gson.Gson;
+import com.google.gson.JsonArray;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
 
 import kr.or.ddit.bs.service.BSService;
 import kr.or.ddit.caa.domain.CscodeVO;
@@ -76,7 +79,22 @@ public class CAAController {
 	
 	//매출분석
 	@GetMapping("/saleanalysis")
-	public String caaSale(Map map, Model model) {
+	public String caaSale(Map map, Model model, HttpSession session,JsonParser jsonParser  ) {
+		
+	      String stringJavaList = (String) session.getAttribute("jsonMapList");
+	      String stringJavaSector = (String) session.getAttribute("sector");
+	      
+	      JsonArray jsonArrayList = (JsonArray) jsonParser.parse(stringJavaList);
+	      JsonArray jsonArraySector = (JsonArray) jsonParser.parse(stringJavaSector);
+	      
+	      System.out.println("jsonArrayList : "+jsonArrayList);
+	      System.out.println("jsonArraySector: "+jsonArraySector);
+	      
+	      for (int i = 0; i < jsonArraySector.size(); i++) {
+	    	  JsonObject jsonObject = (JsonObject) jsonArrayList.get(i);
+	    	  System.out.println(i+ "번쨰 "+jsonObject);
+	      }
+		
 		List<SalesByIndustryVO> list = service.SalesByIndustryList(map);
 		model.addAttribute("list",list);
 		return "caa/caa/SalesAnalysis";
