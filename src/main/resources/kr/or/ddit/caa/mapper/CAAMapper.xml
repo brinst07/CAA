@@ -27,7 +27,7 @@
 	</select>
 
 	<select id="getStoreList" resultType="kr.or.ddit.caa.domain.StoreVO">
-		select STORE_YEAR,STORE_BUNGI,STORE_SER_CODE_NAME,sum(STORE_SM_COUNT)
+		select STORE_YEAR,STORE_BUNGI,STORE_SER_CODE_NAME,sum(STORE_SM_COUNT) as STORE_SM_COUNT
 		from store
 		where 
 		<foreach collection="store_cs_code_name" item="sector" index="index" open="(" close=") and" separator="or">

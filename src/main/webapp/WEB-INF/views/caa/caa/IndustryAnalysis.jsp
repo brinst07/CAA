@@ -43,33 +43,39 @@
             })
             .done(
                 function (data) {
+
                     //JAVA단에서 받아온 데이터로 차트 출력한다.
-                    const totalScore = data.totalScore;
+                    const totalStore = data.totalStore;
+
+                    console.log(totalStore);
+
                     const ubsoList = data.ubsoList;
                     // 차트에 값을 넣기 위한 작업을 한다.
 
                     var datasetsList = [];
 
-                    for (let i = totalScore[0].length - 1; i > 0; i--) {
+                    for (let i = totalStore[0].length - 1; i > 0; i--) {
                         // 역순으로 2018-1 이런식으로 label을 동적으로 생성해서 넣어준다.
-                        myMultipleLineChart.data.labels.push(totalScore[i].store_year + "-" + totalScore[i].store_bungi);
-                    };
+                        myMultipleLineChart.data.labels.push(totalStore[0][i].store_year + "-" + totalStore[0][i].store_bungi);
+                    }
+                    ;
 
-                    for (let j = 0; i < totalScore.length; j++) {
+                    for (let j = 0; j < totalStore.length; j++) {
                         let datasets = [];
-                        for (let l = 0; l < totalScore[j].length; l++) {
-                            datasets.push(totalScore[i][j].store_sm_count);
+                        for (let l = 0; l < totalStore[j].length; l++) {
+                            datasets.push(totalStore[j][l].store_sm_count);
                         }
                         datasetsList.push(datasets);
-                    };
+                    }
+                    ;
 
-                    for (let k = 0; k < totalScore.length; k++) {
+                    for (let k = 0; k < totalStore.length; k++) {
                         myMultipleLineChart.data.datasets.push(
                             {
-                                label: jsonMapList[i].name,
-                                borderColor: color[i].borderColor,
-                                pointBorderColor: color[i].pointBorderColor,
-                                pointBackGroundColor: color[i].pointBackGroundColor,
+                                label: jsonMapList[k].name,
+                                borderColor: color[k].borderColor,
+                                pointBorderColor: color[k].pointBorderColor,
+                                pointBackGroundColor: color[k].pointBackGroundColor,
                                 pointBorderWidth: 2,
                                 pointHoverRadius: 4,
                                 pointHoverBorderWidth: 1,
@@ -80,9 +86,8 @@
                                 data: datasetsList[k]
                             }
                         );
-                    };
-
-
+                    }
+                    ;
 
 
                 }).fail(function (xhr, status) {
@@ -251,29 +256,6 @@
             </div>
             <div class="col-md-12">
 
-					<table class="table table-bordered table-head-bg-info table-bordered-bd-info mt-4">
-						<thead>
-							<tr>
-								<th scope="col">상권평가지수</th>
-								<th scope="col">증감률</th>
-								<th scope="col">안정성</th>
-								<th scope="col">영업력</th>
-								<th scope="col">구매력</th>
-								<th scope="col">집객력</th>
-								<th scope="col">성장성</th>
-							</tr>
-						</thead>
-						<tbody>
-							<tr>
-								<td>67</td>
-								<td>0.75</td>
-								<td>11.8</td>
-								<td>10</td>
-								<td>5</td>
-								<td>16</td>
-								<td>14</td>
-							</tr>
-
                 <table class="table table-bordered table-head-bg-info table-bordered-bd-info mt-4">
                     <thead>
                     <tr>
@@ -297,9 +279,32 @@
                         <td>14</td>
                     </tr>
 
+                    <table class="table table-bordered table-head-bg-info table-bordered-bd-info mt-4">
+                        <thead>
+                        <tr>
+                            <th scope="col">상권평가지수</th>
+                            <th scope="col">증감률</th>
+                            <th scope="col">안정성</th>
+                            <th scope="col">영업력</th>
+                            <th scope="col">구매력</th>
+                            <th scope="col">집객력</th>
+                            <th scope="col">성장성</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <td>67</td>
+                            <td>0.75</td>
+                            <td>11.8</td>
+                            <td>10</td>
+                            <td>5</td>
+                            <td>16</td>
+                            <td>14</td>
+                        </tr>
 
-                    </tbody>
-                </table>
+
+                        </tbody>
+                    </table>
             </div>
         </div>
     </div>
