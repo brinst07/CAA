@@ -1,12 +1,4 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<!DOCTYPE html>
-<html>
-<head>
-<meta http-equiv="X-UA-Compatible" content="IE=edge" />
-<title>Atlantis Bootstrap 4 Admin Dashboard</title>
-<meta content='width=device-width, initial-scale=1.0, shrink-to-fit=no' name='viewport' />
-<link rel="icon" href="/resources/assets/img/icon.ico" type="image/x-icon" />
-<meta charset="UTF-8" />
 <!-- Fonts and icons -->
 <script src="/resources/assets/js/plugin/webfont/webfont.min.js"></script>
 <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
@@ -109,9 +101,6 @@
 <link rel="stylesheet" href="/resources/assets/css/bootstrap.min.css">
 <link rel="stylesheet" href="/resources/assets/css/atlantis.css">
 
-<title>CAA 상권분석프로그램</title>
-</head>
-<body>
 	<div class="wrapper fullheight-side sidebar_minimize">
 		<!-- Logo Header -->
 		<div class="logo-header position-fixed" data-background-color="blue">
@@ -219,5 +208,3 @@
 			</div>
 		</nav>
 		<!-- End Navbar -->
-</body>
-</html>

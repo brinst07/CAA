@@ -1,11 +1,4 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
-</head>
-<body>
 	<div class="sidebar sidebar-style-2" data-background-color="blue">
 		<div class="sidebar-wrapper scrollbar scrollbar-inner">
 			<div class="sidebar-content">
@@ -89,5 +82,3 @@
 			</div>
 		</div>
 	</div>
-</body>
-</html>

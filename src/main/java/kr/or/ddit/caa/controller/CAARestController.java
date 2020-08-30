@@ -186,7 +186,7 @@ public class CAARestController {
                   // 분류별 2차 배열
                   
 
-                  for (Map.Entry<String, String> entry : sectorList.get(j).entrySet()) {
+                  for (Map.Entry<String, String> entry : sectorList.get(k).entrySet()) {
                      String div = "";
                      String temp = "";
                      if (entry.getKey().equals("large")) {
@@ -198,7 +198,7 @@ public class CAARestController {
                      }
                      temp = entry.getKey();
                      url = "http://apis.data.go.kr/B553077/api/open/sdsc/storeListInArea?key="
-                           + finalList.get(i).get("trarNo") + "&ServiceKey=" + ServiceKey + "&type=json" + div;
+                           + finalList.get(j).get("trarNo") + "&ServiceKey=" + ServiceKey + "&type=json" + div;
                      httpGet.setURI(new URI(url));
                      responseBody = httpClient.execute(httpGet, responseHandler);
                      Map<String, Map<String, List<Map<String, Object>>>> ubso = objectMapper
