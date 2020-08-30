@@ -19,13 +19,18 @@ public class BoardVO {
 	private String board_category_id;
 	private String board_temp_save;
 	private String board_hit;
+	
+	
+	
+	
+	
+	
+	
+	// ?
+	private Long bno;
+
+
+	
 	private List<BoardAttachVO> attachList;
-	
-	
-	
-	
-	
-	
-	
 
 }

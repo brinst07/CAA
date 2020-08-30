@@ -122,22 +122,32 @@ CSS Just for demo purpose, don't include it in your project
 														<c:forEach items="${list }" var="board">
 															<tr>
 																<td><c:out value="${board.board_id }" /></td>
-																<%--                      <td><a href='/board/get?bno=<c:out value="${board.bno }"/>'><c:out value="${board.title }" /></a></td> --%>
-																<td><a class="move"
-																	href='<c:out value="${board.board_id }"></c:out>'><c:out
-																			value="${board.board_title }"></c:out><b>[<c:out
+																<%-- <td><a href='/qna/get?board_id=<c:out value="${board.board_id }"/>'>
+																<c:out value="${board.board_title }" /></a></td> --%>
+																<td><a class="move" href='/qna/get?board_id=<c:out value="${board.board_id }"></c:out>'>
+																<c:out value="${board.board_title }"></c:out></a><b>[<c:out
 																				value="${board.board_reply_count } " />]
 																	</b></a></td>
-																<td><c:out value="${board.board_id }" /></td>
+																<td><c:out value="${board.member_id }" /></td>
 																<td><fmt:formatDate pattern="yyyy-MM-dd"
 																		value="${board.board_datetime }" /></td>
-																<td><fmt:formatDate pattern="yyyy-MM-dd"
-																		value="${board.board_datetime }" /></td>
+																<%-- <td><fmt:formatDate pattern="yyyy-MM-dd"
+																		value="${board.board_datetime }" /></td> --%>
+																<td><c:out value="${board.board_hit }" /></td>
 															</tr>
 														</c:forEach>
-
+														
 													</tbody>
+													
 												</table>
+												<!-- <button data-oper='register' class="btn btn-black" onclick="location.href='/qna/register'">등록</button> -->
+												
+												
+												
+												
+												
+												
+												<button data-oper='register' class="btn btn-primary" onclick="location.href='/qna/register'">등록</button>
 											</div>
 										</div>
 										<div class="row">

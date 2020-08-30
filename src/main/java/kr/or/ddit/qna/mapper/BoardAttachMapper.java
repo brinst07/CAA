@@ -10,8 +10,8 @@ public interface BoardAttachMapper {
 	
 	public void insert(BoardAttachVO vo);
 	
-	public void delete(String uuid);
+	public void delete(String file_id);
 	
-	public List<BoardAttachVO> findByBno(Long bno);
+	public List<BoardAttachVO> findByBoardId(String board_id);
 
 }
