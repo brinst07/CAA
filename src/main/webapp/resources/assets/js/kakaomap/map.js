@@ -68,6 +68,8 @@ var options = { // Drawing Manager를 생성할 때 사용할 옵션입니다
 var manager = new kakao.maps.drawing.DrawingManager(
 	options);
 data = manager.getData();
+console.log(manager);
+console.log(data);
 
 // Java단으로 전달해줄 객체를 생성한다.
 // 영역선택 리스트

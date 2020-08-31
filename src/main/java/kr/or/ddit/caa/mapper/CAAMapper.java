@@ -16,7 +16,9 @@ public interface CAAMapper {
 	
 	public List<SalesByIndustryVO> SalesByIndustryList(Map map);
 	/* 영현 ↓ */
-	public List<Map<String, String>> getSubwayPop(); // 나중에 파라미터로 지역 넣어야함
+	
+	// 원에 포함된 지하철을 전부 가져온다.
+	List<Map<String, String>> getCircleSubway();
 	/* 영현 ↑ */
 
 	public List<StoreVO> getStoreList(SectorParamVO vo);

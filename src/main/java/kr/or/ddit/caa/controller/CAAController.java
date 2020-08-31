@@ -21,6 +21,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.common.reflect.TypeToken;
 import com.google.gson.Gson;
 import com.google.gson.JsonArray;
+import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 
@@ -209,48 +210,29 @@ public class CAAController {
 	//인구분석
 	@GetMapping("PopAnalysis")
 	public String PopAnalysis(Model model, HttpSession session) {
-		List<Map<String, String>> popListMap = service.getSubwayPop();
-		model.addAttribute("popListMap", popListMap);
+//		List<Map<String, String>> popListMap = service.getSubwayPop();
+//		model.addAttribute("popListMap", popListMap);
 		
-		log.info("session의 jsonMapList값보기");
-		log.info(session.getAttribute("jsonMapList"));
-		
-		String stringJava = (String) session.getAttribute("jsonMapList");
-		String sectorJson = (String) session.getAttribute("sector");
+		String jsonMapList = (String) session.getAttribute("jsonMapList");
 		
 		JsonParser jsonParser = new JsonParser();
 		
+		// 원 안에 포함된 기차 역의 위치를 여러개 가져온다. 
+		// 1. 지하철역 이름
+		// 2. 경도, 위도 좌표
+		// 3. 월 별 유동 인구 수
+		List<Map<String, String>> FigureMapList = service.getFigureSubway(jsonMapList);
 		
-		JsonArray jsonArray = (JsonArray) jsonParser.parse(stringJava);
-		JsonArray jsonArray2 = (JsonArray) jsonParser.parse(sectorJson);
+		System.out.println(FigureMapList);
 		
-		System.out.println(jsonArray);
-		System.out.println(jsonArray2);
+		model.addAttribute("circleMapList", FigureMapList);
 		
-		System.out.println("바로 여기");
-		for (int i = 0; i < jsonArray.size(); i++) {
-			JsonObject jsonObject = (JsonObject) jsonArray.get(i);
-			System.out.println(jsonObject.get("name"));
-		}
+
 		
-		for (int i = 0; i < jsonArray2.size(); i++) {
-			JsonObject jsonObject = (JsonObject) jsonArray2.get(i);
-			System.out.println(jsonObject.get("large"));
-			
-		}
+
 
 	
 		
-//		ObjectMapper objectMapper = new ObjectMapper();
-//		objectMapper.readValue(src, objectMapper.readValue(session.getAttribute("jsonMapList"), new TypeReference<List<Map<String, Object>>>() {});)
-		
-		
-//		List<Map<String, Object>> jsonMapList = (List<Map<String, Object>>) session.getAttribute("jsonMapList");
-		
-		
-//		log.info("List에서 꺼내기");
-//		Map<String, String> jsonMap = jsonMapList.get(0);
-//		log.info(jsonMap.get("name"));
 		
 		return "caa/caa/popAnalysis";
 	}

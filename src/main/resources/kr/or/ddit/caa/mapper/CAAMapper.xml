@@ -16,14 +16,16 @@
 		
 	</select>
 	
-	<select id="getSubwayPop" resultType="java.util.HashMap">
-		select SP.SUBWAY_MONTH month, SUM(SP.SUBWAY_RIDE) ride,  SUM(SP.SUBWAY_QUIT) quit
-		from SUBWAY_PASSENGER SP
-		         inner join SUBWAY_STATION SS
-		                    on SP.SUBWAY_STATION_ID = SS.SUBWAY_STATION_ID
-		                        and SS.SUBWAY_STATION_NAME LIKE '%동묘%'
-		                        and SP.SUBWAY_YEAR = 2019
-		group by SP.SUBWAY_MONTH order by SP.SUBWAY_MONTH asc
+	<select id="getCircleSubway" resultType="java.util.HashMap">
+	select SP.SUBWAY_YEAR year,SP.SUBWAY_MONTH month, SUM(SP.SUBWAY_RIDE) ride,  SUM(SP.SUBWAY_QUIT) quit, SS.SUBWAY_STATION_LATITUDE LATITUDE, SS.SUBWAY_STATION_LONGITUDE LONGITUDE, SS.SUBWAY_STATION_NAME
+	from SUBWAY_PASSENGER SP
+	         inner join SUBWAY_STATION SS
+	                    on SP.SUBWAY_STATION_ID = SS.SUBWAY_STATION_ID
+	                           and SUBSTR(to_char(SUBWAY_DATE),1,6) >= to_char(add_months(sysdate,-12),'yyyymm')
+	
+	
+	group by SP.SUBWAY_YEAR, SP.SUBWAY_MONTH, SS.SUBWAY_STATION_LATITUDE , SS.SUBWAY_STATION_LONGITUDE, SS.SUBWAY_STATION_NAME
+	order by SP.SUBWAY_YEAR, SP.SUBWAY_MONTH
 	</select>
 
 	<select id="getStoreList" resultType="kr.or.ddit.caa.domain.StoreVO">
