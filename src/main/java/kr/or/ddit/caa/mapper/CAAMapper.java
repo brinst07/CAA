@@ -22,4 +22,7 @@ public interface CAAMapper {
 	public List<StoreVO> getStoreList(SectorParamVO vo);
 
 	public String getSectorCode(String sectorName);
+	
 }
+
+

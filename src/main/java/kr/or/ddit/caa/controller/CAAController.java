@@ -82,29 +82,7 @@ public class CAAController {
 //		return "caa/caa/IndustryAnalysis";
 //	}
 	
-	//매출분석
-	@GetMapping("/saleanalysis")
-	public String caaSale(Map map, Model model, HttpSession session,JsonParser jsonParser  ) {
-		
-	      String stringJavaList = (String) session.getAttribute("jsonMapList");
-	      String stringJavaSector = (String) session.getAttribute("sector");
-	      
-	      JsonArray jsonArrayList = (JsonArray) jsonParser.parse(stringJavaList);
-	      JsonArray jsonArraySector = (JsonArray) jsonParser.parse(stringJavaSector);
-	      
-	      System.out.println("jsonArrayList : "+jsonArrayList);
-	      System.out.println("jsonArraySector: "+jsonArraySector);
-	      
-	      for (int i = 0; i < jsonArraySector.size(); i++) {
-	    	  JsonObject jsonObject = (JsonObject) jsonArrayList.get(i);
-	    	  System.out.println(i+ "번쨰 "+jsonObject);
-	      }
-		
-		List<SalesByIndustryVO> list = service.SalesByIndustryList(map);
-		model.addAttribute("list",list);
-		return "caa/caa/SalesAnalysis";
-	}
-
+	
 	
 	//cctv
 	@GetMapping("/CCTVAnalysis")
@@ -186,7 +164,14 @@ public class CAAController {
 	
 	
 	/* ↑ 상권 분석 */
-	
+	//매출분석
+		@GetMapping("/saleanalysis")
+		public String caaSale(Map map, Model model, HttpSession session,JsonParser jsonParser  ) {
+
+			return "caa/caa/SalesAnalysis";
+		}
+
+		
 	//상권분석
 	@GetMapping("/commercialanalysis")
 	public String commercialAnalysis() {

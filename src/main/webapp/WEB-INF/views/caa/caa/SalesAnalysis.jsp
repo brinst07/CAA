@@ -27,6 +27,39 @@
 }
 </style>
 <script>
+$(function () {
+	// 사용자가 선택한 값을 가져오는 코드
+	var sectorDATA = '${sector}';
+	var json = '${jsonMapList}';
+	var jsonMapList = JSON.parse(json);
+	var sectorList = JSON.parse(sectorDATA);
+	//업종별 분석을 하기위해 상권을 조회하는 부분
+	var d = {
+	    jsonMapList: jsonMapList,
+	    sectors: sectorList
+	};
+	console.log(d);
+	$.ajax({
+	        url: '/caa/rest/sales',
+	        type: 'POST',
+	        traditional: true,
+	        contentType: "application/json",
+	        data: JSON.stringify(d)
+	    })
+	    .done(
+	        function (data) {
+	
+
+                //JAVA단에서 받아온 데이터로 차트 출력한다.
+				console.log(data)				
+			var result = data;
+	
+	        }).fail(function (xhr, status) {
+	    alert(xhr);
+	});
+});
+</script>
+<script>
 	WebFont.load({
 		google : {
 			"families" : [ "Lato:300,400,700,900" ]
@@ -42,6 +75,7 @@
 		}
 	});
 </script>
+sadsafasd
 <div class="wrapper fullheight-side sidebar_minimize">
 
 	<div class="main-panel full-height">
@@ -93,8 +127,8 @@
 											<th scope="col" colspan="6" style="text-align: center;"center" ><span>${list[0].sales_ser_name }</th>
 										</tr>
 										<tr>
-											<th scope="col" class="thfont" align="center"
-												style="text-align: center;">분기</th>
+											<th scope="col" class="thfont" align="center"style="text-align: center;">분기</th>
+											<th scope="col" class="thfont" align="center"style="text-align: center;">업종</th>
 											<th scope="col" class="thfont" style="text-align: center;">당월
 												매출 금액</th>
 											<th scope="col" class="thfont" style="text-align: center;"center" ><span>당월매출
@@ -111,10 +145,9 @@
 
 										<c:forEach items="${list }" var="Info" varStatus="i">
 											<tr>
-												<td style="text-align: center;">${Info.sales_year}년
-													${Info.sales_bungi_code} 분기</td>
-												<td style="text-align: right;">${Info.sales_mnt_price }
-													원</td>
+												<td style="text-align: center;">${Info.sales_year}년 ${Info.sales_bungi_code} 분기</td>
+												<td style="text-align: center;"></td>
+												<td style="text-align: right;">${Info.sales_mnt_price }원</td>
 												<td style="text-align: center;">${Info.sales_mnt_count }
 													건</td>
 												<td style="text-align: center;">${Info.sales_store_count }
