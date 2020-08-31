@@ -5,6 +5,8 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import kr.or.ddit.caa.domain.Criteria;
+import kr.or.ddit.domain.BoardAttachVO;
 import kr.or.ddit.domain.BoardVO;
 import kr.or.ddit.notice.mapper.NoticeMapper;
 import lombok.AllArgsConstructor;
@@ -52,6 +54,16 @@ public class NoticeServiceImpl implements NoticeService{
 		List<BoardVO> list = mapper.getList();
 		list.forEach(e -> log.info(e));
 		return list;
+	}
+	
+	@Override
+	public int getTotal(Criteria cri) {
+		return 0;
+	}
+
+	@Override
+	public List<BoardAttachVO> getAttachList(Long bno) {
+		return null;
 	}
 
 

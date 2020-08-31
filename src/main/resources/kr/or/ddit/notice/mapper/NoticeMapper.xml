@@ -42,6 +42,6 @@
       values (seq_board.nextval, '1', #{board_title}, #{board_content}, sysdate, '3', 'y', 'notice','y', '1')
    </insert>
    
-<!--    파일등록 -->
+
 	
 </mapper>

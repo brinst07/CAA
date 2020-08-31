@@ -77,61 +77,88 @@
                         </h2>
                      </div>
                      <div class="email-compose-fields">
-                         <form role="form" action="/notice/modify" id="noticeModify" method="post">
-                           <div class="form-group row">
-                              <label for="to" class="col-form-label col-md-1">제목 </label>
-                              <div class="col-md-11">
-                                 <input type="text" class="form-control" id="board_title" name="board_title"
-                                 value='<c:out value="${board.board_title }"/>'>
-                                 <input type='hidden' id="board_id" name='board_id' value='<c:out value="${board.board_id }"/>'>
-                              </div>
-                           </div>
-                           <div class="form-group row">
-                              <label for="cc" class="col-form-label col-md-1">작성자 </label>
-                              <div class="col-md-11">
-                                 <input type="text" class="form-control" id="member_id" name="member_id"
-                                 value='<c:out value="${board.member_id }"/>' readonly="readonly">
-                              </div>
-                              <br><br>
-                              <div class="card-body">
-                              <div class="form-group row">
-                              <label for="cc" class="col-form-label col-md-1">내용 </label>
-                              <div class="col-md-11">
-                              <textarea id="editor" name="board_content"></textarea>
-                              
-                  </div>
-                     </div>
-                              
-                     <form action="upload.php" class="dropzone" enctype="multipart/form-data" method="post">
-                        <div class="dz-message" data-dz-message>
-                           
-                           <h4 class="message">첨부파일</h4>
-                        </div>
-                        <div>
-                           <input name="uploadFile" type="file" multiple />
-                        </div>
-                     </form>
-                           </div>
-                     <div class="email-editor">
-<%--                         <div id="editor" name="board_content" id="board_content"><c:out value="${board.board_content }"/></div> --%>
-							<!-- <textarea id="editor" name="board_content"></textarea> -->
-                        <div class="email-action">
-                        <br>
-                        <div id='btn'>
-                           <button  data-oper='modify' type="submit" class="btn btn-default">확인</button>
-                           <button  data-oper='remove' type="submit" class="btn btn-primary">삭제</button>
-                           <button  data-oper='list' class="btn btn-info" onclick="location.href='/notice/noticeList'">목록</button>
-                         </div>
-                           <form id='operForm' action="/notice/modify" method="post">
-<%--                            <input type='hidden' id="board_id" name='board_id' value='<c:out value="${board.board_id }"/>'> --%>
-                           </form>
-                        </div>
-                      </div>
+
+
+
+								<form role="form" action="/notice/modify" id="noticeModify" method="post">
+
+
+									<div class="form-group row">
+										<label for="to" class="col-form-label col-md-1">제목 </label>
+										<div class="col-md-11">
+											<input type="text" class="form-control" id="board_title"
+												name="board_title"
+												value='<c:out value="${board.board_title }"/>'>
+												<input type="hidden" id="board_id" name="board_id" value='<c:out value="${board.board_id}"/>'>
+										</div>
+									</div>
+									<div class="form-group row">
+										<label for="cc" class="col-form-label col-md-1">작성자 </label>
+										<div class="col-md-11">
+											<input type="text" class="form-control" id="member_id"
+												name="member_id"
+												value='<c:out value="${board.member_id }"/>'
+												readonly="readonly">
+										</div>
+
+
+
+										<br> <br>
+										<div class="card-body">
+
+											<div class="form-group row">
+												<label for="to" class="col-form-label col-md-1">내용 </label>
+												<div class="col-md-11">
+												
+												<textarea id="editor" name="board_content"></textarea>
+												
+												
+													<%-- <input type="text" class="form-control" id="title" name="title"
+                                 value='<c:out value="${board.board_content }"/>' readonly="readonly"> --%>
+													<%-- <textarea class="form-control" rows="3" name='board_content'><c:out value="${board.board_content }" /></textarea> --%>
+												</div>
+											</div> 
+
+											<form action="upload.php" class="dropzone">
+												<div class="dz-message" data-dz-message>
+
+													<label for="cc" class="col-form-label col-md-1">첨부파일
+													</label>
+													<h4 class="message">첨부파일</h4>
+												</div>
+												<div class="fallback">
+													<input name="file" type="file" multiple />
+												</div>
+											</form>
+										</div>
+
+									</div>
+							</div>
+							
+							<div class="email-editor">
+								<div id="editor"></div>
+								<div class="email-action">
+									<button  data-oper='modify' type="submit" class="btn btn-default">확인</button>
+                         			<button  data-oper='remove' type="submit" class="btn btn-primary">삭제</button>
+                       			    <button  data-oper='list' class="btn btn-info" onclick="location.href='/notice/noticeList'">목록</button>
+
+
+									<form id="operForm" actions="/notice/modify" method="post">
+										<%-- <input type="hidden" id="board_id" name="board_id" value='<c:out value="${board.board_id }"/>'> --%>
+
+									</form>
+
+
+
+
+
+								</div>
+							</div>
                   </div>
                </div>
             </div>
          </div>
-      </form>
+         
       <div class="quick-sidebar">
          <a href="#" class="close-quick-sidebar">
             <i class="flaticon-cross"></i>

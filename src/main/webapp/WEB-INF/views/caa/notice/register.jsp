@@ -93,30 +93,73 @@
                               </div>
                               <br><br>
                               <div class="card-body">
-                  			</div>
                            </div>
                      </div>
                      <div class="email-editor">
                      <div class="form-group row">
                               <label for="to" class="col-form-label col-md-1">내용 </label>
-                              <div class="col-md-11">
                               <textarea class="form-control" rows="4" id="board_content" name="board_content" ></textarea>
-                              </div>
-                           </div>
+<!--                               <div class="col-md-11"> -->
+<!--                               </div> -->
+                           
+                           <form role="form" actions="/notice/register" method="post">
+
+
+												<input type="hidden" id="board_id" name="board_id"
+													value='10'> <input type="hidden" id="member_id"
+													name="member_id" value='admin'> <input
+													type="hidden" id="board_datetime" name="board_datetime"
+													value='2020/08/23'> <input type="hidden"
+													id="board_status" name="board_status" value='y'> <input
+													type="hidden" id="board_category_id"
+													name="board_category_id" value='1'> <input
+													type="hidden" id="board_temp_save" name="board_temp_save"
+													value='y'> <input type="hidden" id="board_hit"
+													name="board_hit" value='10'>
+											</form>
+
+
+
+											<div class="row">
+												<div class="col-lg-12">
+													<div class="panel panel-default">
+														<div class="panel-heading">  <label for="cc" class="col-form-label col-md-1">첨부파일
+													</label></div>
+														<!-- /.panel-heading -->
+														<div class="panel-body">
+															<div class="form-group uploadDiv">
+																<input type="file" name='uploadFile' multiple>
+															</div>
+															<div class='uploadResult'>
+																<ul>
+																</ul>
+															</div>
+														</div>
+														<!--  end panel-body -->
+													</div>
+													<!--  end panel-body -->
+												</div>
+												<!-- end panel -->
+											</div>
+											<!-- /.row -->
                             
                            
                            
                            
                            
-                           <form action="upload.php" class="dropzone" enctype="multipart/form-data" method="post">
+                           <form action="/notice/uploadFormAction" enctype="multipart/form"
+												method="post" enctype=class="dropzone">
                         <div class="dz-message" data-dz-message>
-                           
-                           <h4 class="message">첨부파일</h4>
+                         
                         </div>
-                        <div>
-                           <input name="uploadFile" type="file" multiple />
-                        </div>
+                        
                      </form>
+                     </div>
+                   </div>
+                     
+                     
+                     
+                     
                         <div class="email-action">
                            <button data-oper='register' type="button" class="btn btn-default">등록</button>
                            <button class="btn btn-info" onclick="location.href='/notice/noticeList'">목록</button>
@@ -212,114 +255,6 @@
       });
       </script>
       
-      <script type="text/javascript">
       
-//       <!-- 파일 업로드를 위한 코드-->
-      <?php
-      if (isset($_FILES)) {
-          $file = $_FILES["file"];
-          // print_r($file);
-          $error = $file["error"];
-          $name = $file["name"];
-          $type = $file["type"];
-          $size = $file["size"];
-          $tmp_name = $file["tmp_name"];
-          if ( $error > 0 ) {
-              echo "Error: " . $error . "<br>";
-          }
-          else {
-            echo "Upload: " . $name . "<br>";
-            echo "Type: " . $type . "<br>";
-            echo "Size: " . ($size/1024/1024) . " Mb<br>";
-            echo "Stored in: " . $tmp_name;
-          }
-      }
-      else {
-          echo "File is not selected";
-      }
-      ?>
-
-//       <!-- 파일 업로드를 제한코드-->
-      
-      <?php
-      $allowedExts = array("gif", "jpeg", "jpg", "png");
-
-      if (isset($_FILES)) {
-          $file = $_FILES["file"];
-          $error = $file["error"];
-          $name = $file["name"];
-          $type = $file["type"];
-          $size = $file["size"];
-          $tmp_name = $file["tmp_name"];
-         
-          if ( $error > 0 ) {
-              echo "Error: " . $error . "<br>";
-          }
-          else {
-              $temp = explode(".", $name);
-              // print_r($temp);
-              $extension = end($temp);
-              //echo $extension;
-             
-              if ( ($size/1024/1024) < 2.) && in_array($extension, $allowedExts) ) {
-                  echo "Upload: " . $name . "<br>";
-                  echo "Type: " . $type . "<br>";
-                  echo "Size: " . ($size/1024/1024) . " Mb<br>";
-                  echo "Stored in: " . $tmp_name;
-              }
-              else {
-                  echo ($size/1024/1024) . " Mbyte is bigger than 2 Mb ";
-                  echo $extension . "format file is not allowed to upload ! ";
-              }
-          }
-      }
-      else {
-          echo "File is not selected";
-      }
-      ?>
-//       <!-- 파일 업로드를 임시복사본-->
-      <?php
-      $allowedExts = array("gif", "jpeg", "jpg", "png");
-
-      if (isset($_FILES)) {
-          $file = $_FILES["file"];
-          $error = $file["error"];
-          $name = $file["name"];
-          $type = $file["type"];
-          $size = $file["size"];
-          $tmp_name = $file["tmp_name"];
-         
-          if ( $error > 0 ) {
-              echo "Error: " . $error . "<br>";
-          }
-          else {
-              $temp = explode(".", $name);
-              $extension = end($temp);
-             
-              if ( ($size/1024/1024) < 2. && in_array($extension, $allowedExts) ) {
-                  //echo "Upload: " . $name . "<br>";
-                  //echo "Type: " . $type . "<br>";
-                  //echo "Size: " . ($size / 1024 / 1024) . " Mb<br>";
-                  //echo "Stored in: " . $tmp_name;
-                  if (file_exists("upload/" . $name)) {
-                      echo $name . " already exists. ";
-                  }
-                  else {
-                      move_uploaded_file($tmp_name, "upload/" . $name);
-                      echo "Stored in: " . "upload/" . $name;
-                  }
-              }
-              else {
-                  echo ($size/1024/1024) . " Mbyte is bigger than 2 Mb ";
-                  echo $extension . "format file is not allowed to upload ! ";
-              }
-          }
-      }
-      else {
-          echo "File is not selected";
-      }
-      ?>
-      
-</script>
 </body>
 </html>
