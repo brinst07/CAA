@@ -34,11 +34,11 @@ public class NoticeServiceImpl implements NoticeService{
 	}
 
 	@Override
-	public boolean modify(BoardVO board) {
+	public boolean modify(BoardVO board_id) {
 		
-		 log.info("modify ...." + board);
+		 log.info("modify ...." + board_id);
 
-	      return mapper.modify(board) == 1;
+	      return mapper.modify(board_id) == 1;
 	}
 
 	@Override
@@ -53,6 +53,8 @@ public class NoticeServiceImpl implements NoticeService{
 		list.forEach(e -> log.info(e));
 		return list;
 	}
+
+
 
 	
 

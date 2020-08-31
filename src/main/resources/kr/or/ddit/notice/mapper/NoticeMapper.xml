@@ -17,18 +17,13 @@
 	<!--글 수정 -->
 	
 	<update id="modify">
-		update board 
-		set board_id =#{board_id},
-		member_id = #{member_id },
-		board_title = #{board_title},
-		board_content = #{board_content},
-		board_datetime = sysdate,
-		board_reply_count = #{board_reply_count},
-		board_status = #{board_status},
-		board_category_id = #{board_category_id},
-		board_temp_save = #{board_temp_save},
-		board_hit = board_hit + 1
-		where board_id = #{board_id}
+		update board  
+		set 
+		member_id = '2',
+		board_title = #{board_title ,jdbcType=VARCHAR},
+		board_content = #{board_content,jdbcType=VARCHAR},
+		board_datetime = sysdate
+		where board_id = #{board_id,jdbcType=VARCHAR}
 	</update>
 
 
@@ -46,5 +41,7 @@
                      board_reply_count, board_status, board_category_id, board_temp_save, board_hit)
       values (seq_board.nextval, '1', #{board_title}, #{board_content}, sysdate, '3', 'y', 'notice','y', '1')
    </insert>
+   
+<!--    파일등록 -->
 	
 </mapper>
