@@ -1,9 +1,6 @@
 package kr.or.ddit.domain;
 
 import java.util.Date;
-import java.util.List;
-
-import kr.or.ddit.qna.domain.BoardAttachVO;
 import lombok.Data;
 
 @Data
@@ -21,16 +18,5 @@ public class BoardVO {
 	private String board_hit;
 	
 	
-	
-	
-	
-	
-	
-	// ?
-	private Long bno;
-
-
-	
-	private List<BoardAttachVO> attachList;
 
 }

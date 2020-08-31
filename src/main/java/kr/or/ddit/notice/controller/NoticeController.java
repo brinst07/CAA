@@ -1,15 +1,28 @@
 package kr.or.ddit.notice.controller;
 
+import java.io.File;
+import java.io.FileOutputStream;
+import java.nio.file.Files;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+import java.util.UUID;
+
+import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import kr.or.ddit.domain.AttachFileDTO;
 import kr.or.ddit.domain.BoardVO;
 import kr.or.ddit.notice.service.NoticeService;
 import lombok.AllArgsConstructor;
@@ -93,5 +106,98 @@ public class NoticeController<Criteria> {
           
           return "redirect:/notice/noticeList";
        }
+	
+	// 파일 업로드
+
+		private String getFolder() {
+			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+
+			Date date = new Date();
+
+			String str = sdf.format(date);
+
+			return str.replace("-", File.separator);
+		}
+
+		private boolean checkImageType(File file) {
+			try {
+				String contentType = Files.probeContentType(file.toPath());
+
+				return contentType.startsWith("image");
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+
+			return false;
+		}
+
+		@GetMapping("/uploadAjax")
+		public void uploadAjax() {
+			log.info("upload ajax");
+		}
+
+		// produces -> 보낼때 타입 consumes -> 받을때 타입
+		@PostMapping(value = "/uploadAjaxAction", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+		// @ResponseBody -> body를 mapping
+		// @ResponseBody 붙은 메서드에서 타입을 반환하면 자동으로 타입 정보가 JSON 객체로 변환되어 전송됩니다.
+		@ResponseBody
+		public ResponseEntity<List<AttachFileDTO>> uploadAjaxPost(MultipartFile[] uploadFile) {
+
+			List<AttachFileDTO> list = new ArrayList<>();
+			String uploadFolder = "C:\\upload";
+			String uploadFolderPath = getFolder();
+			// make folder --------
+			File uploadPath = new File(uploadFolder, uploadFolderPath);
+
+			if (uploadPath.exists() == false) {
+				uploadPath.mkdirs();
+			}
+			// make yyyy/MM/dd folder
+
+			for (MultipartFile multipartFile : uploadFile) {
+
+				AttachFileDTO attachDTO = new AttachFileDTO();
+
+				String uploadFileName = multipartFile.getOriginalFilename();
+
+				// IE has file path
+				uploadFileName = uploadFileName.substring(uploadFileName.lastIndexOf("\\") + 1);
+				log.info("only file name: " + uploadFileName);
+				attachDTO.setFileName(uploadFileName);
+
+				UUID uuid = UUID.randomUUID();
+
+				uploadFileName = uuid.toString() + "_" + uploadFileName;
+
+				try {
+					File saveFile = new File(uploadPath, uploadFileName);
+					multipartFile.transferTo(saveFile);
+
+					attachDTO.setUuid(uuid.toString());
+					attachDTO.setUploadPath(uploadFolderPath);
+
+					// check image type file
+					if (checkImageType(saveFile)) {
+
+						attachDTO.setImage(true);
+
+						FileOutputStream thumbnail = new FileOutputStream(new File(uploadPath, "s_" + uploadFileName));
+
+//		  					Thumbnailator.createThumbnail(multipartFile.getInputStream(), thumbnail, 100, 100);
+	//
+//		  					thumbnail.close();
+					}
+
+					// add to List
+					list.add(attachDTO);
+
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+				// 썸네일, 확장자 제한, 이미지파일을 처리
+
+			} // end for
+			return new ResponseEntity<>(list, HttpStatus.OK);
+		}
 	
 }
