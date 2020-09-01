@@ -70,14 +70,25 @@
 				)
 	</insert>
 	
+	<select id="selectKey" resultType="string">
+		SELECT seq_board.nextval board_id
+			FROM DUAL
+	</select>
 	
-	<insert id="insertSelectKey">
-		<selectKey keyProperty="board_id" order="BEFORE" resultType="long">
-			select seq_board.nextval from dual
-		</selectKey>
-		insert into board(board_id,board_title,board_content,member_id)
-		values(#{board_id}, #{board_title},#{board_content},#{member_id})
+	<insert id="insertSelectKey"  parameterType="kr.or.ddit.qna.domain.BoardVO">
+		insert into board(board_id,board_title,board_content,member_id, board_datetime, board_category_id)
+		values(#{board_id}, #{board_title},#{board_content},#{member_id}, sysdate, #{board_category_id})
 	</insert>
+	
+	
+	
+	<!-- board_id로 return 받아서 boardAttachMapper.xml에서 board_id 값을 바꿔주기 -->
+	<!-- <select id="updateBoardIdSeq" resultType="Integer">
+		insert board_file set board_id = #{board_id}
+		RETURNING seq_board;
+	
+	</select> -->
+	
 	
 	<!-- 게시글 등록 쿼리 -->
 	<!-- <insert id="insert" parameterType="kr.or.ddit.">

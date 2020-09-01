@@ -32,7 +32,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import kr.or.ddit.caa.domain.Criteria;
 import kr.or.ddit.qna.domain.AttachFileDTO;
 import kr.or.ddit.qna.domain.BoardAttachVO;
 import kr.or.ddit.qna.domain.BoardVO;
@@ -110,6 +109,8 @@ public class BoardController {
 
 		return "caa/qna/register";
 	}
+	
+	
 
 	@PostMapping("/register")
 	public String register(BoardVO board, RedirectAttributes rttr) {
@@ -126,9 +127,9 @@ public class BoardController {
 		log.info("===============================");
 
 		
-		// service.register(board);
+		 service.register(board);
 
-		// rttr.addFlashAttribute("result", board.getBoard_id());
+		 rttr.addFlashAttribute("result", board.getBoard_id());
 
 		return "redirect:/qna/list";
 	}
@@ -325,7 +326,22 @@ public class BoardController {
 	}
 	
 	
+	
+	@GetMapping(value = "/getAttachList",
+			produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+		@ResponseBody
+		public ResponseEntity<List<BoardAttachVO>> getAttachList(String board_id) {
+		
+		log.info("getAttachList " + board_id);
+		
+		return new ResponseEntity<>(service.getAttachList(board_id), HttpStatus.OK);
+		
+	}
 
+	
+	
+	
+	
 	/*
 	 * //등록
 	 * 

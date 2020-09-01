@@ -1,7 +1,9 @@
 package kr.or.ddit.qna.service;
 
 import java.util.List;
+import java.util.Map;
 
+import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -37,8 +39,16 @@ public class BoardServiceImpl implements BoardService {
 		
 		
 		  log.info("register....." + board);
+		  board.setMember_id("admin");
+		  board.setBoard_category_id("qna");
+		  board.setBoard_temp_save("y");
 		  
+		  String board_id = mapper.selectKey();
+		  board.setBoard_id(board_id);
 		  mapper.insertSelectKey(board);
+		  
+		  
+		 // mapper.insert(board);
 		  
 		  if (board.getAttachList() == null || board.getAttachList().size() <= 0) {
 		  return; 
@@ -47,7 +57,7 @@ public class BoardServiceImpl implements BoardService {
 		  
 		  board.getAttachList().forEach(attach -> { 
 			  
-			  attach.setBoard_id(board.getBoard_id());
+		  attach.setBoard_id(board.getBoard_id());
 		  attachMapper.insert(attach); 
 		  
 		  });
@@ -64,6 +74,11 @@ public class BoardServiceImpl implements BoardService {
 		 
 		
 	}
+	
+	
+
+	
+	
 
 	@Override
 	public BoardVO get(String board_id) {
@@ -107,10 +122,7 @@ public class BoardServiceImpl implements BoardService {
 		return 0;
 	}
 
-	@Override
-	public List<BoardAttachVO> getAttachList(Long bno) {
-		return null;
-	}
+	
 
 //	@Override
 //	public boolean modify(String board_id) {
@@ -127,6 +139,38 @@ public class BoardServiceImpl implements BoardService {
 		
 		return mapper.modify(board_id) == 1;
 	}
+
+
+
+
+
+
+	@Override
+	public List<BoardAttachVO> getAttachList(String board_id) {
+
+		log.info("get Attach list by board_id" + board_id);
+		
+		return attachMapper.findByBoardId(board_id);
+	}
+
+
+
+
+
+	
+	
+	
+
+
+	/*
+	 * @Override public Integer insertSelectKey(Map<String, Object> map) {
+	 * 
+	 * this.attachMapper.insert("board.insertSelectKey", map);
+	 * 
+	 * return Integer.valueOf(String.valueOf(map.get("boardID"))); }
+	 */
+
+
 
 	////////////////////////////////////////////////////
 
