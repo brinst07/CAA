@@ -19,7 +19,6 @@ import lombok.extern.log4j.Log4j;
 
 @Log4j
 @Service
-@AllArgsConstructor
 // @NoArgsConstructor -> 아무것도 없는 생성자
 public class BoardServiceImpl implements BoardService {
 
@@ -151,7 +150,9 @@ public class BoardServiceImpl implements BoardService {
 		log.info("get Attach list by board_id" + board_id);
 		
 		return attachMapper.findByBoardId(board_id);
-	}}
+	}
+	
+}
 
 
 
