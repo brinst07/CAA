@@ -14,7 +14,7 @@
 	</delete>
 
 	<select id="findByBoardId"
-		resultType="kr.or.ddit.qna.mapper.BoardAttachMapper">
+		resultType="kr.or.ddit.qna.domain.BoardAttachVO">
 		select * from board_file where board_id = #{board_id}
 	</select>
 </mapper>

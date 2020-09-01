@@ -263,7 +263,7 @@
       });
    </script> -->
    
-   <script >
+   <!-- <script >
       $(document).ready(function() {
          $('#basic-datatables').DataTable({
          });
@@ -293,7 +293,7 @@
          });
 
       });
-   </script>
+   </script> -->
    
    
    <script type="text/javascript">
