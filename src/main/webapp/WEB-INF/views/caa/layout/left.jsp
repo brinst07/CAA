@@ -42,7 +42,7 @@
 					<li class="nav-item" id="analysis"><a href="starter-template.html"> <i class="fas fa-chart-bar"></i>
 							<p>상권분석</p>
 					</a></li>
-					<li class="nav-item" id="sns"><a href="starter-template.html"> <i class="fab fa-twitter"></i>
+					<li class="nav-item" id="sns"><a href="/sns/snsAnalysisFirst"> <i class="fab fa-twitter"></i>
 							<p>SNS분석</p>
 					</a></li>
 					<li class="nav-item" id="status"><a href="starter-template.html"> <i class="fas fa-cloud"></i>
