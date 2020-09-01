@@ -23,30 +23,12 @@ public interface BoardService {
 
 	public List<BoardAttachVO> getAttachList(String board_id);
 	
-	
-	
-	//public Integer insertSelectKey(Map<String, Object> map);
-	
-
-	
-	
-	
-//	public void register(BoardVO board);
-//	
-//	public BoardVO get(String board_id);
-//	
-//	public boolean modify(BoardVO board);
-//	
-////	public boolean remove(String board_id);
-//	
-//	public int remove(String board_id);
-//	
-////	public List<BoardVO> getList();
-//	
-//	public List<BoardVO> getList(Criteria cri);
-//	
-//	public int getTotal(Criteria cri);
-//	
-//	public List<BoardAttachVO> getAttachList(Long bno);
-
 }
+	
+	
+	
+	
+
+	
+	
+	

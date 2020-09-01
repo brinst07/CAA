@@ -151,7 +151,7 @@ public class BoardServiceImpl implements BoardService {
 		log.info("get Attach list by board_id" + board_id);
 		
 		return attachMapper.findByBoardId(board_id);
-	}
+	}}
 
 
 
@@ -162,105 +162,5 @@ public class BoardServiceImpl implements BoardService {
 	
 
 
-	/*
-	 * @Override public Integer insertSelectKey(Map<String, Object> map) {
-	 * 
-	 * this.attachMapper.insert("board.insertSelectKey", map);
-	 * 
-	 * return Integer.valueOf(String.valueOf(map.get("boardID"))); }
-	 */
 
 
-
-	////////////////////////////////////////////////////
-
-//	@Setter(onMethod_ = @Autowired)
-//	private BoardMapper mapper;
-//	
-//	@Setter(onMethod_ = @Autowired)
-//	private BoardAttachMapper attachMapper;
-//
-//	@Transactional
-//	@Override
-//	public void register(BoardVO board) {
-//		log.info("get..." + board);
-//
-//		mapper.insertSelectKey(board);
-//		
-//		/*
-//		 * if(board.getAttachList() == null || board.getAttachList().size() <= 0) {
-//		 * return; }
-//		 */
-//		
-//		/*
-//		 * board.getAttachList().forEach(attach->{ attach.setBno(board.getBno());
-//		 * attachMapper.insert(attach); });
-//		 */
-//	}
-//
-//	@Override
-//	public BoardVO get(String board_id) {
-//		log.info("get...." + board_id);
-//
-//		return mapper.read(board_id);
-//	}
-//
-//	@Override
-//	public boolean modify(BoardVO board) {
-//
-//		log.info("modify ...." + board);
-//
-//		return mapper.update(board) == 1;
-//	}
-//
-//	/*
-//	 * @Override public boolean remove(String board_id) {
-//	 * 
-//	 * log.info("remove...." + board_id);
-//	 * 
-//	 * return mapper.delete(board_id) == 1; }
-//	 */
-//	
-//	@Override
-//	   public int remove(String board_id) {
-//	      log.info("remove" + board_id);
-//	      return mapper.remove(board_id);
-//	   }
-//
-////	@Override
-////	public List<BoardVO> getList() {
-////
-////		log.info("getList...");
-////
-////		return mapper.getList();
-////	}
-//
-//	@Override
-//	public List<BoardVO> getList(Criteria cri) {
-//		
-//		log.info("get List with criteria : " + cri);
-//		List<BoardVO> list = mapper.getList();
-//		list.forEach(e -> log.info(e));
-//		return list;
-//	}
-//
-//	@Override
-//	public int getTotal(Criteria cri) {
-//		
-//		log.info("get total count");
-//		
-//		return mapper.getTotalCount(cri);
-//		
-//	}
-//
-//	@Override
-//	public List<BoardAttachVO> getAttachList(Long bno) {
-//		
-//		log.info("get Attach list by bno" + bno);
-//		
-//		return attachMapper.findByBno(bno);
-//	}
-//	
-
-	////////////////////////////////////////////
-}

@@ -96,7 +96,7 @@
 				</div>
 				<div class="page-inner">
 					<div class="page-header">
-						<h4 class="page-title">회원가입 입력창</h4>
+						<h4 class="page-title">회원가입</h4>
 						<ul class="breadcrumbs">
 							<li class="nav-home"><a href="#"> <i
 									class="flaticon-home"></i>
@@ -113,16 +113,28 @@
 
 								<form action="" id="exampleValidation" novalidate="novalidate">
 									<div class="card-body">
+									
+									
 										<div class="form-group form-show-validation row">
-											<label for="name"
-												class="col-lg-3 col-md-3 col-sm-4 mt-sm-2 text-right">아이디
+											<label for="member_id"
+												   class="col-lg-3 col-md-3 col-sm-4 mt-sm-2 text-right">아이디
 												<span class="required-label">*</span>
 											</label>
 											<div class="col-lg-4 col-md-9 col-sm-8">
-												<input type="text" class="form-control" id="id"
+												<input type="text" class="form-control" id="member_id"
 													name="member_id" placeholder="Enter Username" required="">
+													<div class="check_font" id="id_check"></div>
 											</div>
+											
+<!-- 											<div class="form-group"> -->
+<!-- 												<label for="member_id">아이디</label> <input type="text" -->
+<!-- 													class="form-control" id=""member_id"" name="member_id" -->
+<!-- 													placeholder="ID" required> -->
+<!-- 												<div class="check_font" id="id_check"></div> -->
+<!-- 											</div> -->
 										</div>
+										
+										
 										<div class="form-group form-show-validation row">
 											<label for="username"
 												class="col-lg-3 col-md-3 col-sm-4 mt-sm-2 text-right">이름
@@ -140,6 +152,8 @@
 												</div>
 											</div>
 										</div>
+										
+										
 										<div class="form-group form-show-validation row">
 											<label for="email"
 												class="col-lg-3 col-md-3 col-sm-4 mt-sm-2 text-right">이메일
@@ -149,13 +163,14 @@
 												<input type="email" class="form-control" id="email"
 													placeholder="Enter Email" name="member_email" required="">
 											</div>
+											
+											
 											<button class="btn btn-primary btn-round btn-lg"
 												type="button" onclick="emailCheck()" style="float: right;">인증번호</button>
 										</div>
 										<div class="form-group form-show-validation row">
 											<label for="confirmpassword"
-												class="col-lg-3 col-md-3 col-sm-4 mt-sm-2 text-right">인증번호
-												확인 <span class="required-label">*</span>
+												class="col-lg-3 col-md-3 col-sm-4 mt-sm-2 text-right">인증번호 확인 <span class="required-label">*</span>
 											</label>
 											<div class="col-lg-4 col-md-9 col-sm-8">
 												<input type="hidden" class="form-control" id="hiddenpassword"
@@ -165,6 +180,8 @@
 													required="">
 											</div>
 										</div>
+										
+										
 										<div class="form-group form-show-validation row">
 											<label for="password"
 												class="col-lg-3 col-md-3 col-sm-4 mt-sm-2 text-right">비밀번호
@@ -176,10 +193,11 @@
 													required="">
 											</div>
 										</div>
+										
+										
 										<div class="form-group form-show-validation row">
 											<label for="confirmpassword"
-												class="col-lg-3 col-md-3 col-sm-4 mt-sm-2 text-right">비밀번호
-												확인 <span class="required-label">*</span>
+												class="col-lg-3 col-md-3 col-sm-4 mt-sm-2 text-right">비밀번호 확인 <span class="required-label">*</span>
 											</label>
 											<div class="col-lg-4 col-md-9 col-sm-8">
 												<input type="password" class="form-control"
@@ -188,6 +206,7 @@
 											</div>
 										</div>
 										<div class="separator-solid"></div>
+
 
 										<div class="form-group form-show-validation row">
 											<label for="birth"
@@ -207,10 +226,10 @@
 											</div>
 										</div>
 
+
 										<div class="separator-solid"></div>
 										<div class="form-group form-show-validation row">
-											<label class="col-lg-3 col-md-3 col-sm-4 mt-sm-2 text-right">프로필
-												이미지<span class="required-label">*</span>
+											<label class="col-lg-3 col-md-3 col-sm-4 mt-sm-2 text-right">프로필 이미지<span class="required-label">*</span>
 											</label>
 											<div class="col-lg-4 col-md-9 col-sm-8">
 												<div class="input-file input-file-image">
@@ -335,7 +354,7 @@
 		src="/resources/assets/js/plugin/summernote/summernote-bs4.min.js"></script>
 
 	<!-- Select2 -->
-	<script src="/resources/assets/js/plugin/select2/select2.full.min.js"></script>
+	<script src="/resources/assets/js/plugin/select2/select2.full.min.js"></script>                                                            
 
 	<!-- Sweet Alert -->
 	<script src="/resources/assets/js/plugin/sweetalert/sweetalert.min.js"></script>
@@ -431,5 +450,51 @@
 					},
 				});
 	</script>
+	
+	<script>
+// 아이디 유효성 검사(1 = 중복 / 0 != 중복)
+	$("#member_id").blur(function() {
+		// id = "id_reg" / name = "userId"
+		var member_id = $('#member_id').val();
+		$.ajax({
+			url : '/member/rest/idCheck?member_id='+ member_id,
+			type : 'get',
+			success : function(data) {
+				var over = data.over;
+				console.log(over);
+							
+				if (over == 1) {
+						// 1 : 아이디가 중복되는 문구
+						$("#id_check").text("사용중인 아이디입니다 ");
+						$("#id_check").css("color", "red");
+						$("#reg_submit").attr("disabled", true);
+					} else {
+						
+						if(idJ.test(member_id)){
+							// 0 : 아이디 길이 / 문자열 검사
+							$("#id_check").text("");
+							$("#reg_submit").attr("disabled", false);
+				
+						} else if(member_id == ""){
+							
+							$('#id_check').text('아이디를 입력해주세요 :)');
+							$('#id_check').css('color', 'red');
+							$("#reg_submit").attr("disabled", true);				
+							
+						} else {
+							
+							$('#id_check').text("아이디는 소문자와 숫자 4~12자리만 가능합니다 :) :)");
+							$('#id_check').css('color', 'red');
+							$("#reg_submit").attr("disabled", true);
+						}
+						
+					}
+				}, error : function() {
+						console.log("실패");
+				}
+			});
+		});
+</script>
+
 </body>
 </html>
