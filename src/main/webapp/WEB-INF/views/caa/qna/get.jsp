@@ -123,16 +123,9 @@
                         <div class="fallback">
                            <input name="file" type="file" multiple />
                         </div>
-                     </form>
-                  </div>
-                  
-                  
- 
-                           </div>
-                        </form>
-                     </div>
-                     
-                     <div class="row">
+                        
+                        
+                        <div class="row">
 			<div class="col-lg-12">
 				<div class="panel panel-default">
 					
@@ -153,6 +146,27 @@
 			<!-- end panel -->
 		</div>
 		<!-- /.row -->
+                        
+                        
+                        
+                        
+                     </form>
+                  </div>
+                  
+                  
+ 
+                           </div>
+                        </form>
+                     </div>
+                     
+         
+         
+         
+         
+         
+         
+         
+         
                      
                      
                      <div class="email-editor">
