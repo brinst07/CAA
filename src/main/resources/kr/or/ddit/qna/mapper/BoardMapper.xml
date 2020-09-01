@@ -58,7 +58,7 @@
 							)
 		values (
 				seq_board.nextval, 
-				'10', 
+				'admin', 
 				#{board_title}, 
 				#{board_content}, 
 				sysdate, 
@@ -68,6 +68,15 @@
 				'y', 
 				'1'
 				)
+	</insert>
+	
+	
+	<insert id="insertSelectKey">
+		<selectKey keyProperty="board_id" order="BEFORE" resultType="long">
+			select seq_board.nextval from dual
+		</selectKey>
+		insert into board(board_id,board_title,board_content,member_id)
+		values(#{board_id}, #{board_title},#{board_content},#{member_id})
 	</insert>
 	
 	<!-- 게시글 등록 쿼리 -->

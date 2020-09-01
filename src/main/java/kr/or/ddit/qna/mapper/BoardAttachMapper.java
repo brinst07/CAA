@@ -10,7 +10,7 @@ public interface BoardAttachMapper {
 	
 	public void insert(BoardAttachVO vo);
 	
-	public void delete(String file_id);
+	public void delete(String uuid);
 	
 	public List<BoardAttachVO> findByBoardId(String board_id);
 
