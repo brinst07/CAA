@@ -3,12 +3,11 @@ package kr.or.ddit.caa.service;
 import java.util.List;
 import java.util.Map;
 
-import javax.servlet.http.HttpSession;
-
 import kr.or.ddit.caa.domain.CscodeVO;
 import kr.or.ddit.caa.domain.SalesByIndustryVO;
 import kr.or.ddit.caa.domain.SectorParamVO;
 import kr.or.ddit.caa.domain.StoreVO;
+import kr.or.ddit.caa.domain.SubwayPopVO;
 
 public interface CAAService {
 	
@@ -28,7 +27,7 @@ public interface CAAService {
 	 * @param jsonMapList
 	 * @return
 	 */
-	public List<Map<String, String>> getFigureSubway(String jsonMapList);
+	public List<SubwayPopVO> getFigureSubway(String jsonMapList);
 	
 	/* 영현 ↑ */
 	public List<StoreVO> getStoreList(SectorParamVO vo);

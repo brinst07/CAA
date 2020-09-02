@@ -1,6 +1,7 @@
 package kr.or.ddit.caa.controller;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -18,13 +19,7 @@ import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.google.common.reflect.TypeToken;
 import com.google.gson.Gson;
-import com.google.gson.JsonArray;
-import com.google.gson.JsonElement;
-import com.google.gson.JsonObject;
-import com.google.gson.JsonParser;
-
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
@@ -32,6 +27,7 @@ import com.google.gson.JsonParser;
 import kr.or.ddit.bs.service.BSService;
 import kr.or.ddit.caa.domain.CscodeVO;
 import kr.or.ddit.caa.domain.SalesByIndustryVO;
+import kr.or.ddit.caa.domain.SubwayPopVO;
 import kr.or.ddit.caa.service.CAAService;
 import lombok.Setter;
 import lombok.extern.log4j.Log4j;
@@ -215,17 +211,24 @@ public class CAAController {
 		
 		String jsonMapList = (String) session.getAttribute("jsonMapList");
 		
-		JsonParser jsonParser = new JsonParser();
-		
 		// 원 안에 포함된 기차 역의 위치를 여러개 가져온다. 
 		// 1. 지하철역 이름
 		// 2. 경도, 위도 좌표
 		// 3. 월 별 유동 인구 수
-		List<Map<String, String>> FigureMapList = service.getFigureSubway(jsonMapList);
+		List<SubwayPopVO> FigureMapList = service.getFigureSubway(jsonMapList);
 		
-		System.out.println(FigureMapList);
+		Gson gson = new Gson();
+		String jsonFigure = gson.toJson(FigureMapList);
+		System.out.println(jsonFigure);
 		
-		model.addAttribute("circleMapList", FigureMapList);
+
+		
+		
+		
+		
+		
+		
+		model.addAttribute("jsonFigure", jsonFigure);
 		
 
 		

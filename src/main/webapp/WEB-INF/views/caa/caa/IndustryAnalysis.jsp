@@ -114,6 +114,7 @@
 
 								var myDoughnutChart = new Chart(douChartName, {
 									type : 'doughnut',
+									
 									data : {
 										datasets : [ {
 											data : [ ubsoList[j].large, ubsoList[j].middle, ubsoList[j].small],
