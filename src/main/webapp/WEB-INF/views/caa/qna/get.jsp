@@ -337,7 +337,7 @@
 		           var fileCallPath =  encodeURIComponent( attach.uploadPath+ "/s_"+attach.uuid +"_"+attach.fileName);
 		           
 		           str += "<li data-path='"+attach.uploadPath+"' data-uuid='"+attach.uuid+"' data-filename='"+attach.fileName+"' data-type='"+attach.fileType+"' ><div>";
-		           str += "<img src='/display?fileName="+fileCallPath+"'>";
+		           str += "<img src='/qna/display?fileName="+fileCallPath+"'>";
 		           str += "</div>";
 		           str +"</li>";
 		         }else{

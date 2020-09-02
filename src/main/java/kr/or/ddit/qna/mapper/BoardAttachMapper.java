@@ -12,7 +12,7 @@ public interface BoardAttachMapper {
 	
 	public List<BoardAttachVO> findByBoardId(String board_id);
 	
-	
+//	public void deleteAll(String board_id);
 
 }
 

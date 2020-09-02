@@ -17,5 +17,9 @@
 		resultType="kr.or.ddit.qna.domain.BoardAttachVO">
 		select * from board_file where board_id = #{board_id}
 	</select>
+	
+<!-- 	<delete id="deleteAll"> -->
+<!-- 		delete board_file where board_id = #{board_id} -->
+<!-- 	</delete> -->
 </mapper>
 

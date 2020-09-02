@@ -106,7 +106,11 @@ public class BoardServiceImpl implements BoardService {
 	@Override
 	public int remove(String board_id) {
 		log.info("remove" + board_id);
+		
+//		attachMapper.deleteAll(board_id);
+		
 		return mapper.remove(board_id);
+//		return mapper.delete(board_id);
 	}
 
 	@Override
