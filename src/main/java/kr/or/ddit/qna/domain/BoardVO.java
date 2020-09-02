@@ -4,7 +4,10 @@ package kr.or.ddit.qna.domain;
 import java.util.Date;
 import java.util.List;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
+
 
 @Data
 public class BoardVO {

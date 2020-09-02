@@ -11,6 +11,7 @@
 		<property name="jdbcUrl" value="jdbc:log4jdbc:oracle:thin:@112.220.114.130:1521:XE"></property>
 		<property name="username" value="THINKPEOPLE"></property>
 		<property name="password" value="java"></property>
+		
 	</bean>
 
 	<bean id="dataSource" class="com.zaxxer.hikari.HikariDataSource" destroy-method="close">
@@ -40,10 +41,11 @@
 	</bean>
 
 	<mybatis-spring:scan base-package="kr.or.ddit.caa.mapper" />
-	<mybatis-spring:scan base-package="kr.or.ddit.qna.mapper" />
+	<mybatis-spring:scan base-package="kr.or.ddit.qna.mapper" /> 
 	<mybatis-spring:scan base-package="kr.or.ddit.ss.mapper" />
 	<mybatis-spring:scan base-package="kr.or.ddit.bs.mapper" />
 	<mybatis-spring:scan base-package="kr.or.ddit.notice.mapper" />
+	<mybatis-spring:scan base-package="kr.or.ddit.member.mapper" />
 
 
 

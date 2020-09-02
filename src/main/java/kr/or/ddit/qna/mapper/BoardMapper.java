@@ -19,11 +19,13 @@ public interface BoardMapper {
 
 	public void insert(BoardVO board);
 	
+	public String selectKey();
+	
 	public void insertSelectKey(BoardVO board);
 	
 	public BoardVO read(Long board_id);
 	
-	public int delete(Long bno);	
+	public int delete(String board_id);	
 	
 	public int update(BoardVO board);
 	

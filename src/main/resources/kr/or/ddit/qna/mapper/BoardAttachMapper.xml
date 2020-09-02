@@ -3,7 +3,8 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="kr.or.ddit.qna.mapper.BoardAttachMapper">
-	<insert id="insert">
+
+	<insert id="insert" parameterType="kr.or.ddit.qna.domain.BoardAttachVO">
 		insert into board_file(uuid, uploadpath, filename, filetype, board_id)
 		values (#{uuid}, #{uploadPath}, #{fileName}, #{fileType}, #{board_id})
 	</insert>
@@ -12,8 +13,13 @@
 		delete from board_file where uuid = #{uuid}
 	</delete>
 
-	<select id="findByBno"
-		resultType="kr.or.ddit.qna.mapper.BoardAttachMapper">
+	<select id="findByBoardId"
+		resultType="kr.or.ddit.qna.domain.BoardAttachVO">
 		select * from board_file where board_id = #{board_id}
 	</select>
+	
+<!-- 	<delete id="deleteAll"> -->
+<!-- 		delete board_file where board_id = #{board_id} -->
+<!-- 	</delete> -->
 </mapper>
+

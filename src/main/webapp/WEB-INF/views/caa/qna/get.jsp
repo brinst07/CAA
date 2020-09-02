@@ -123,25 +123,50 @@
                         <div class="fallback">
                            <input name="file" type="file" multiple />
                         </div>
+                        
+                        
+                        <div class="row">
+			<div class="col-lg-12">
+				<div class="panel panel-default">
+					
+					<div class="panel-heading">Files</div>
+					<!-- /.panel-heading -->
+					<div class="panel-body">
+						
+						<div class='uploadResult'>
+							<ul>
+							</ul>
+						</div>
+						
+					</div>
+					<!-- end panel-body -->
+				</div>
+				<!-- end panel-body -->
+			</div>
+			<!-- end panel -->
+		</div>
+		<!-- /.row -->
+                        
+                        
+                        
+                        
                      </form>
                   </div>
                   
                   
-                  
-                  
-                  
-                  
-                  
-                  
-                  
-                  
-                  
-                  
+ 
                            </div>
                         </form>
                      </div>
                      
-                     
+         
+         
+         
+         
+         
+         
+         
+         
                      
                      
                      <div class="email-editor">
@@ -208,27 +233,28 @@
                   </div>
                </div>
                
-
+		
+		
                            
                
       
    </div>
    <!--   Core JS Files   -->
-   <script src="../assets/js/core/jquery.3.2.1.min.js"></script>
-   <script src="../assets/js/core/popper.min.js"></script>
-   <script src="../assets/js/core/bootstrap.min.js"></script>
+   <script src="/resources/assets/js/core/jquery.3.2.1.min.js"></script>
+   <script src="/resources/assets/js/core/popper.min.js"></script>
+   <script src="/resources/assets/js/core/bootstrap.min.js"></script>
    <!-- jQuery UI -->
-   <script src="../assets/js/plugin/jquery-ui-1.12.1.custom/jquery-ui.min.js"></script>
-   <script src="../assets/js/plugin/jquery-ui-touch-punch/jquery.ui.touch-punch.min.js"></script>
+   <script src="/resources/assets/js/plugin/jquery-ui-1.12.1.custom/jquery-ui.min.js"></script>
+   <script src="/resources/assets/js/plugin/jquery-ui-touch-punch/jquery.ui.touch-punch.min.js"></script>
    <!-- Bootstrap Toggle -->
-   <script src="../assets/js/plugin/bootstrap-toggle/bootstrap-toggle.min.js"></script>
+   <script src="/resources/assets/js/plugin/bootstrap-toggle/bootstrap-toggle.min.js"></script>
    <!-- jQuery Scrollbar -->
-   <script src="../assets/js/plugin/jquery-scrollbar/jquery.scrollbar.min.js"></script>
-   <script src="../assets/js/plugin/summernote/summernote-bs4.min.js"></script>
+   <script src="/resources/assets/js/plugin/jquery-scrollbar/jquery.scrollbar.min.js"></script>
+   <script src="/resources/assets/js/plugin/summernote/summernote-bs4.min.js"></script>
    <!-- Atlantis JS -->
-   <script src="../assets/js/atlantis.min.js"></script>
+   <script src="/resources/assets/js/atlantis.min.js"></script>
    <!-- Atlantis DEMO methods, don't include it in your project! -->
-   <script src="../assets/js/setting-demo.js"></script>
+   <script src="/resources/assets/js/setting-demo.js"></script>
    <!-- <script>
       $('#editor').summernote({
          fontNames: ['Arial', 'Arial Black', 'Comic Sans MS', 'Courier New'],
@@ -237,7 +263,7 @@
       });
    </script> -->
    
-   <script >
+   <!-- <script >
       $(document).ready(function() {
          $('#basic-datatables').DataTable({
          });
@@ -267,7 +293,7 @@
          });
 
       });
-   </script>
+   </script> -->
    
    
    <script type="text/javascript">
@@ -289,6 +315,48 @@
 	   
    });
    
+   </script>
+   
+   <script>
+   
+   $(document).ready(function(){
+	   (function(){
+	
+		   var board_id = '<c:out value="${board.board_id}"/>';
+		   
+		   $.getJSON("/qna/getAttachList", {board_id: board_id}, function(arr){
+		        	
+		       console.log(arr);
+		       
+		       var str = "";
+		       
+		       $(arr).each(function(i, attach){
+		       
+		         //image type
+		         if(attach.fileType){
+		           var fileCallPath =  encodeURIComponent( attach.uploadPath+ "/s_"+attach.uuid +"_"+attach.fileName);
+		           
+		           str += "<li data-path='"+attach.uploadPath+"' data-uuid='"+attach.uuid+"' data-filename='"+attach.fileName+"' data-type='"+attach.fileType+"' ><div>";
+		           str += "<img src='/qna/display?fileName="+fileCallPath+"'>";
+		           str += "</div>";
+		           str +"</li>";
+		         }else{
+		             
+		           str += "<li data-path='"+attach.uploadPath+"' data-uuid='"+attach.uuid+"' data-filename='"+attach.fileName+"' data-type='"+attach.fileType+"' ><div>";
+		           str += "<span> "+ attach.fileName+"</span><br/>";
+		           str += "<img src='/resources/img/attach.png'></a>";
+		           str += "</div>";
+		           str +"</li>";
+		         }
+		       });
+		       
+		       $(".uploadResult ul").html(str);
+		       
+		       
+		     });//end getjson
+		     
+	   })(); // end function
+   });
    </script>
    
 </body>

@@ -257,68 +257,38 @@
 
 
 <script type="text/javascript">
-	$(document)
-			.ready(
-					function() {
+	$(document).ready(function() {
 
-						var operForm = $("#operForm");
+			var operForm = $("#operForm");
 
-						var textareaVal = $("textarea[name=board_content]")
-								.text();
+			var textareaVal = $("textarea[name=board_content]").text();
 
-						console.log(textareaVal);
+			console.log(textareaVal);
 
-						$("button[data-oper='register']")
-								.on(
-										"click",
-										function(e) {
+				$("button[data-oper='register']").on("click",function(e) {
 
-											// 추가한거
-											e.preventDefault();
+					// 추가한거
+					e.preventDefault();
 
-											console.log("Submit clicked");
+					console.log("Submit clicked");
 
-											var str = "";
+					var str = "";
 
-											$(".uploadResult ul li")
-													.each(
-															function(i, obj) {
+					$(".uploadResult ul li").each(function(i, obj) {
 
-																var jobj = $(obj);
+						var jobj = $(obj);
 
-																console
-																		.dir(jobj);
+						console.dir(jobj);
 
-																str += "<input type='hidden' name='attachList["
-																		+ i
-																		+ "].fileName'value='"
-																		+ jobj
-																				.data("filename")
-																		+ "'>";
-																str += "<input type='hidden' name='attachList["
-																		+ i
-																		+ "].uuid'value='"
-																		+ jobj
-																				.data("uuid")
-																		+ "'>";
-																str += "<input type='hidden' name='attachList["
-																		+ i
-																		+ "].uploadPath'value='"
-																		+ jobj
-																				.data("path")
-																		+ "'>";
-																str += "<input type='hidden' name='attachList["
-																		+ i
-																		+ "].fileType'value='"
-																		+ jobj
-																				.data("type")
-																		+ "'>";
+						str += "<input type='hidden' name='attachList["+ i+ "].fileName'value='"+ jobj.data("filename")+ "'>";
+						str += "<input type='hidden' name='attachList["+ i+ "].uuid'value='"+ jobj.data("uuid")+ "'>";
+						str += "<input type='hidden' name='attachList["+ i+ "].uploadPath'value='"+ jobj.data("path")+ "'>";
+						str += "<input type='hidden' name='attachList["+ i+ "].fileType'value='"+ jobj.data("type")+ "'>";
 
-															});
+						});
 
-											operForm.append(str).attr("action",
-													"/qna/register").submit();
-										});
+						operForm.append(str).attr("action","/qna/register").submit();
+						});
 
 						var regex = new RegExp("(.*?)\.(exe|sh|zip|alz)$");
 						var maxSize = 5242880; //5MB
