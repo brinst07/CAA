@@ -1,7 +1,8 @@
 package kr.or.ddit.member.util;
-import java.util.Random;
 
 import org.springframework.stereotype.Component;
+
+import java.util.Random;
 
 @Component
 public class GenerateCertCharacter{

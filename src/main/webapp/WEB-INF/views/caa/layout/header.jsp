@@ -22,6 +22,7 @@
 <script src="/resources/assets/js/core/jquery.3.2.1.min.js"></script>
 <script src="/resources/assets/js/core/popper.min.js"></script>
 <script src="/resources/assets/js/core/bootstrap.min.js"></script>
+<script src="/resources/assets/js/jquery.xml2json.js"></script>
 
 <!-- jQuery UI -->
 <script src="/resources/assets/js/plugin/jquery-ui-1.12.1.custom/jquery-ui.min.js"></script>

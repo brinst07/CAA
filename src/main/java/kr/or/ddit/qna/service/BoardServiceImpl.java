@@ -1,21 +1,17 @@
 package kr.or.ddit.qna.service;
 
-import java.util.List;
-import java.util.Map;
-
-import org.apache.ibatis.session.SqlSession;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
-
 import kr.or.ddit.caa.domain.Criteria;
 import kr.or.ddit.qna.domain.BoardAttachVO;
 import kr.or.ddit.qna.domain.BoardVO;
 import kr.or.ddit.qna.mapper.BoardAttachMapper;
 import kr.or.ddit.qna.mapper.BoardMapper;
-import lombok.AllArgsConstructor;
 import lombok.Setter;
 import lombok.extern.log4j.Log4j;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
+import java.util.List;
 
 @Log4j
 @Service

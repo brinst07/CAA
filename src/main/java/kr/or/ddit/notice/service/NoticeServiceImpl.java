@@ -1,10 +1,5 @@
 package kr.or.ddit.notice.service;
 
-import java.util.List;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-
 import kr.or.ddit.caa.domain.Criteria;
 import kr.or.ddit.domain.BoardAttachVO;
 import kr.or.ddit.domain.BoardVO;
@@ -12,6 +7,10 @@ import kr.or.ddit.notice.mapper.NoticeMapper;
 import lombok.AllArgsConstructor;
 import lombok.Setter;
 import lombok.extern.log4j.Log4j;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Log4j
 @Service

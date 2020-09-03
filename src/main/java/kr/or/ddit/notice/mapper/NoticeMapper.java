@@ -1,8 +1,8 @@
 package kr.or.ddit.notice.mapper;
 
-import java.util.List;
-
 import kr.or.ddit.domain.BoardVO;
+
+import java.util.List;
 
 public interface NoticeMapper {
 

@@ -84,5 +84,8 @@ order by SUBWAY_YEAR,
 	<select id="SalesByIndustryList" resultType="kr.or.ddit.caa.domain.SalesByIndustryVO">
 select * from SALES_TEMP where SALES_SER_NAME like '%한식음식점%' and SALES_BD_NAME like '%고분다리골목시장%' and SALES_YEAR ='2019'
 	</select>
-	
+
+	<select id="getIndiList" resultType="kr.or.ddit.caa.domain.IndiVO">
+		select * from INDICATOR where INDI_SIGUNGU_NAME = #{indi_sigungu_name}
+	</select>
 </mapper>

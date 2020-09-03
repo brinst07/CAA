@@ -1,12 +1,10 @@
 package kr.or.ddit.qna.domain;
 
 
+import lombok.Data;
+
 import java.util.Date;
 import java.util.List;
-
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
 
 
 @Data

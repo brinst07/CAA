@@ -1,20 +1,15 @@
 package kr.or.ddit.ss.controller;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
+import kr.or.ddit.caa.domain.CscodeVO;
+import kr.or.ddit.ss.service.SSService;
+import lombok.Setter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import kr.or.ddit.caa.domain.CscodeVO;
-import kr.or.ddit.caa.service.CAAService;
-import kr.or.ddit.ss.service.SSService;
-import lombok.Setter;
+import java.util.List;
 
 @Controller
 @RequestMapping("/caa/*")

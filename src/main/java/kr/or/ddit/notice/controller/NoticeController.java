@@ -1,5 +1,19 @@
 package kr.or.ddit.notice.controller;
 
+import kr.or.ddit.domain.AttachFileDTO;
+import kr.or.ddit.domain.BoardVO;
+import kr.or.ddit.notice.service.NoticeService;
+import lombok.AllArgsConstructor;
+import lombok.extern.log4j.Log4j;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
 import java.io.File;
 import java.io.FileOutputStream;
 import java.nio.file.Files;
@@ -8,25 +22,6 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.UUID;
-
-import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
-import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
-
-import kr.or.ddit.domain.AttachFileDTO;
-import kr.or.ddit.domain.BoardVO;
-import kr.or.ddit.notice.service.NoticeService;
-import lombok.AllArgsConstructor;
-import lombok.extern.log4j.Log4j;
 
 @Controller
 @Log4j

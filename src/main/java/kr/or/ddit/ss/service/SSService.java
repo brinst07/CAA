@@ -1,8 +1,8 @@
 package kr.or.ddit.ss.service;
 
-import java.util.List;
-
 import kr.or.ddit.caa.domain.CscodeVO;
+
+import java.util.List;
 
 public interface SSService {
 	public List<CscodeVO> getCscodeList(String depth);

@@ -1,10 +1,10 @@
 package kr.or.ddit.notice.service;
 
-import java.util.List;
-
 import kr.or.ddit.caa.domain.Criteria;
 import kr.or.ddit.domain.BoardAttachVO;
 import kr.or.ddit.domain.BoardVO;
+
+import java.util.List;
 
 
 public interface NoticeService {

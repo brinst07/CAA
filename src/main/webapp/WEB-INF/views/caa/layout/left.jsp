@@ -39,7 +39,7 @@
 <!-- 					<li class="nav-item"><a href="starter-template.html"> <i class="fas fa-file-contract"></i> -->
 <!-- 							<p>HR Report</p> -->
 <!-- 					</a></li> -->
-					<li class="nav-item" id="analysis"><a href="starter-template.html"> <i class="fas fa-chart-bar"></i>
+					<li class="nav-item" id="analysis"><a href="/caa/caaSelect"> <i class="fas fa-chart-bar"></i>
 							<p>상권분석</p>
 					</a></li>
 					<li class="nav-item" id="sns"><a href="/sns/snsAnalysisFirst"> <i class="fab fa-twitter"></i>
