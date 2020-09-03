@@ -29,16 +29,28 @@ import kr.or.ddit.caa.domain.CscodeVO;
 import kr.or.ddit.caa.domain.SalesByIndustryVO;
 import kr.or.ddit.caa.domain.SubwayPopVO;
 import kr.or.ddit.caa.service.CAAService;
-import lombok.Setter;
+import lombok.AllArgsConstructor;
 import lombok.extern.log4j.Log4j;
+import org.springframework.http.MediaType;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+
+import javax.servlet.http.HttpSession;
+import java.io.IOException;
+import java.util.List;
+import java.util.Map;
 
 @Controller
 @RequestMapping("/caa/*")
 @Log4j
+@AllArgsConstructor
 public class CAAController {
 	
-	@Setter(onMethod_ = @Autowired)
 	private CAAService service;
+
 	private BSService bsservice;
 	
 	@GetMapping("/caaSelect")
@@ -103,11 +115,7 @@ public class CAAController {
 	}
 
 	
-	//cctv
-	@GetMapping("/CCTVAnalysis")
-	public String cctv() {
-		return "caa/cctv/CCTVAnalysis";
-	}
+
 	
 	/* 영현  */
 
@@ -303,9 +311,10 @@ public class CAAController {
 		return "caa/member/SearchIDMember";
 	}
 	
-
-
-	
+	@GetMapping("/main")
+	public String mainPage() {
+		return "caa/mainPage/main";
+	}
 	
 	
 	

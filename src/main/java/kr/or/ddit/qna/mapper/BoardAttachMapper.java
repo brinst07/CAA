@@ -1,8 +1,8 @@
 package kr.or.ddit.qna.mapper;
 
-import java.util.List;
-
 import kr.or.ddit.qna.domain.BoardAttachVO;
+
+import java.util.List;
 
 public interface BoardAttachMapper {
 	

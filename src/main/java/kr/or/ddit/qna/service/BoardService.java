@@ -1,11 +1,10 @@
 package kr.or.ddit.qna.service;
 
-import java.util.List;
-import java.util.Map;
-
 import kr.or.ddit.caa.domain.Criteria;
 import kr.or.ddit.qna.domain.BoardAttachVO;
 import kr.or.ddit.qna.domain.BoardVO;
+
+import java.util.List;
 
 public interface BoardService {
 

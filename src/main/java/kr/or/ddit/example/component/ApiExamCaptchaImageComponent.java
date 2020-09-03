@@ -1,23 +1,16 @@
 package kr.or.ddit.example.component;
 
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.io.OutputStream;
+import kr.or.ddit.example.service.ApiExamCaptchaImageService;
+import lombok.Data;
+import org.springframework.stereotype.Component;
+
+import java.io.*;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
-
-import org.springframework.stereotype.Component;
-
-import kr.or.ddit.example.service.ApiExamCaptchaImageService;
-import lombok.Data;
 
 @Component
 @Data

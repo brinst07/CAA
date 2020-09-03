@@ -1,8 +1,5 @@
 package kr.or.ddit.sns.controller;
 
-import java.net.URI;
-import java.net.URISyntaxException;
-
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.HttpClient;
@@ -12,6 +9,8 @@ import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.HttpClients;
 import org.apache.http.util.EntityUtils;
 import org.springframework.stereotype.Component;
+
+import java.net.URI;
 @Component
 public class TextAnalysis {
 

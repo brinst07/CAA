@@ -1,5 +1,7 @@
 package kr.or.ddit.caa.service;
 
+import kr.or.ddit.caa.domain.*;
+
 import java.util.List;
 import java.util.Map;
 
@@ -33,6 +35,7 @@ public interface CAAService {
 	public List<StoreVO> getStoreList(SectorParamVO vo);
 
 	public List<Map<String, String>> getSectorCode(List<Map<String, String>> sectorFind);
-	
-	
+
+
+    public List<IndiVO> getIndiList(String var);
 }

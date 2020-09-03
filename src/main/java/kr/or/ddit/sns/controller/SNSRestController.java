@@ -1,14 +1,10 @@
 package kr.or.ddit.sns.controller;
 
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.LinkedHashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
-
+import com.twitter.penguin.korean.TwitterKoreanProcessorJava;
+import com.twitter.penguin.korean.tokenizer.KoreanTokenizer;
+import kr.or.ddit.sns.domain.WordVO;
+import lombok.Setter;
+import lombok.extern.log4j.Log4j;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
@@ -20,21 +16,12 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-
-import com.twitter.penguin.korean.TwitterKoreanProcessorJava;
-import com.twitter.penguin.korean.tokenizer.KoreanTokenizer;
-
-import kr.or.ddit.sns.domain.WordVO;
-import lombok.Setter;
-import lombok.extern.log4j.Log4j;
 import scala.collection.Seq;
-import twitter4j.Query;
-import twitter4j.QueryResult;
-import twitter4j.Status;
-import twitter4j.Twitter;
-import twitter4j.TwitterException;
-import twitter4j.TwitterFactory;
+import twitter4j.*;
 import twitter4j.conf.ConfigurationBuilder;
+
+import java.io.IOException;
+import java.util.*;
 
 @RestController
 @RequestMapping("/sns/rest/*")

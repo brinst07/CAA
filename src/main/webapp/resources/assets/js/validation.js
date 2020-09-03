@@ -7,7 +7,7 @@
 String.prototype.validationID = function(){
    // <input type=text name=mem_id/>
    // "a001".validationID();
-   return /^[a-z][0-9]{3}$/.test(this);
+   return /^[a-zA-Z0-9]{4,12}$/.test(this);
 };
 String.prototype.validationPWD = function(){
    // "asdfasdf".validationPWD()
@@ -57,7 +57,7 @@ String.prototype.validationCOMTEL = function(){
 
 String.prototype.validationMAIL = function(){
 	// test@test.com or test@test.co.kr
-	return /^[a-z0-9]+@[a-z]+(\.[a-z]+){1,2}$/.test(this);
+	return /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/.test(this);
 };
 
 String.prototype.validationHP = function(){

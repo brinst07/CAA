@@ -7,10 +7,11 @@ import lombok.Data;
 public class BoardAttachVO {
 	private String board_id;
 	private String file_id;
-	
-	
-	
+	private String uuid;
+
 	private String uploadPath;
 	private String fileName;
+	private boolean fileType;
+	
 
 }

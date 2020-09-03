@@ -1,5 +1,25 @@
 package kr.or.ddit.qna.controller;
 
+import kr.or.ddit.domain.AttachFileDTO;
+import kr.or.ddit.qna.domain.BoardAttachVO;
+import kr.or.ddit.qna.domain.BoardVO;
+import kr.or.ddit.qna.service.BoardService;
+import lombok.AllArgsConstructor;
+import lombok.extern.log4j.Log4j;
+import net.coobird.thumbnailator.Thumbnailator;
+import org.springframework.core.io.FileSystemResource;
+import org.springframework.core.io.Resource;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.util.FileCopyUtils;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.UnsupportedEncodingException;
@@ -11,32 +31,6 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.UUID;
-
-import org.springframework.core.io.FileSystemResource;
-import org.springframework.core.io.Resource;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
-import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.util.FileCopyUtils;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestHeader;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
-
-import kr.or.ddit.domain.AttachFileDTO;
-import kr.or.ddit.qna.domain.BoardAttachVO;
-import kr.or.ddit.qna.domain.BoardVO;
-import kr.or.ddit.qna.service.BoardService;
-import lombok.AllArgsConstructor;
-import lombok.extern.log4j.Log4j;
-import net.coobird.thumbnailator.Thumbnailator;
 
 @Controller
 @Log4j
@@ -325,7 +319,7 @@ public class BoardController {
 	
 	
 	
-	@GetMapping(value = "/getAttachList",
+		@GetMapping(value = "/getAttachList",
 			produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
 		@ResponseBody
 		public ResponseEntity<List<BoardAttachVO>> getAttachList(String board_id) {

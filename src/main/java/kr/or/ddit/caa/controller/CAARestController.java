@@ -1,18 +1,12 @@
 package kr.or.ddit.caa.controller;
 
-import java.io.IOException;
-import java.io.UnsupportedEncodingException;
-import java.net.URI;
-import java.net.URISyntaxException;
-import java.net.URLEncoder;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
-import javax.mail.internet.MimeMessage;
-
-import org.apache.http.client.ClientProtocolException;
+import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import kr.or.ddit.bs.service.BSService;
+import kr.or.ddit.caa.domain.*;
+import kr.or.ddit.caa.service.CAAService;
+import lombok.AllArgsConstructor;
+import lombok.extern.log4j.Log4j;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.ResponseHandler;
 import org.apache.http.client.methods.HttpGet;
@@ -24,28 +18,14 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.mail.javamail.JavaMailSenderImpl;
 import org.springframework.mail.javamail.MimeMessageHelper;
-import org.springframework.mail.javamail.MimeMessagePreparator;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
-import com.fasterxml.jackson.core.type.TypeReference;
-import com.fasterxml.jackson.databind.DeserializationFeature;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.google.gson.Gson;
-
-import kr.or.ddit.bs.service.BSService;
-import kr.or.ddit.caa.domain.CscodeVO;
-import kr.or.ddit.caa.domain.SectorJsonVo;
-import kr.or.ddit.caa.domain.SectorParamVO;
-import kr.or.ddit.caa.domain.StoreVO;
-import kr.or.ddit.caa.service.CAAService;
-import lombok.AllArgsConstructor;
-import lombok.extern.log4j.Log4j;
+import javax.mail.internet.MimeMessage;
+import java.net.URI;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/caa/rest/*")
@@ -250,5 +230,13 @@ public class CAARestController {
       totalMap.put("totalStore", totalStore);
       totalMap.put("ubsoList", ubsoList);
       return new ResponseEntity<Map<String,Object>>(totalMap,HttpStatus.OK);
+   }
+
+   @GetMapping(value = "/main/{var}", produces = { MediaType.APPLICATION_JSON_UTF8_VALUE })
+   public ResponseEntity<List<IndiVO>> indiList(@PathVariable("var")String var){
+
+      List<IndiVO> list = service.getIndiList(var);
+
+      return new ResponseEntity<List<IndiVO>>(list,HttpStatus.OK);
    }
 }

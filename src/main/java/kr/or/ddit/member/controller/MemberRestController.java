@@ -1,28 +1,20 @@
 package kr.or.ddit.member.controller;
 
-import java.util.Map;
-
-import javax.mail.internet.MimeMessage;
-
+import kr.or.ddit.member.service.MemberService;
+import kr.or.ddit.member.util.GenerateCertCharacter;
+import lombok.AllArgsConstructor;
+import lombok.Setter;
+import lombok.extern.log4j.Log4j;
 import org.apache.commons.collections.map.HashedMap;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
-import kr.or.ddit.member.service.MemberService;
-import kr.or.ddit.member.util.GenerateCertCharacter;
-import lombok.AllArgsConstructor;
-import lombok.Setter;
-import lombok.extern.log4j.Log4j;
+import javax.mail.internet.MimeMessage;
+import java.util.Map;
 
 @RestController
 @Log4j
@@ -109,4 +101,19 @@ public class MemberRestController {
 		map.put("over", chk);
 		return new ResponseEntity<Map<String,Object>>(map, HttpStatus.OK);
 	}
+	
+	// 이메일 중복 체크 컨트롤러
+		@RequestMapping(value = "/checkmail", produces = { MediaType.APPLICATION_JSON_UTF8_VALUE})
+		public ResponseEntity<Map<String,Object>> emailCheck(@RequestParam("member_email") String member_email) {
+			log.info("ajaxController");
+
+			// service, mapper에서 member_id를 변수로한 중복확인 메서드를 만들고 값이 있을경우 chk = 1, 없을 경우 0를
+			// 대입해준다.
+			int echk;
+
+			echk = service.checkmail(member_email);
+			Map<String,Object> map = new HashedMap();
+			map.put("eover", echk);
+			return new ResponseEntity<Map<String,Object>>(map, HttpStatus.OK);
+		}
 }

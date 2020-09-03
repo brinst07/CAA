@@ -1,5 +1,9 @@
 package kr.or.ddit.example.component;
 
+import kr.or.ddit.example.service.ApiExamCaptchaNkeyService;
+import lombok.Data;
+import org.springframework.stereotype.Component;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
@@ -9,11 +13,6 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.HashMap;
 import java.util.Map;
-
-import org.springframework.stereotype.Component;
-
-import kr.or.ddit.example.service.ApiExamCaptchaNkeyService;
-import lombok.Data;
 
 @Component
 @Data

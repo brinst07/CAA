@@ -1,5 +1,7 @@
 package kr.or.ddit.caa.mapper;
 
+import kr.or.ddit.caa.domain.*;
+
 import java.util.List;
 import java.util.Map;
 
@@ -25,4 +27,6 @@ public interface CAAMapper {
 	public List<StoreVO> getStoreList(SectorParamVO vo);
 
 	public String getSectorCode(String sectorName);
+
+    public List<IndiVO> getIndiList(String var);
 }
