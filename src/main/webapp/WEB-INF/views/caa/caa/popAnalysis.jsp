@@ -279,10 +279,32 @@ for (var i = 0; i < popDataSelect.length; i++) {
 			tempArrayQuit.push((popData[j].quit));
 		}
 	} 
-	mapPopDataRide.set((popDataSelect[i]).replace(/\"/gi, ""), tempArrayRide);
-	mapPopDataQuit.set((popDataSelect[i]).replace(/\"/gi, ""), tempArrayQuit);
+	mapPopDataRide.set((popDataSelect[i]).replace(/\"/gi, "").toString(), tempArrayRide);
+	mapPopDataQuit.set((popDataSelect[i]).replace(/\"/gi, "").toString(), tempArrayQuit);
 	
 }
+
+$(function(){
+	var key2 = mapPopDataRide.keys();
+	for (var i = 0; i < mapPopDataRide.size; i++) {
+		console.log(mapPopDataRide.get(key2[i]));
+	}
+	
+	const mapIterator = mapPopDataRide.entries();
+	 
+	while ( !mapIterator.next().done ) {
+	  const [key, value] = mapIterator.next().value;
+	  console.log(key +' , ' +value);  
+	}
+	
+	for (const [key, value] of mapPopDataRide) {
+		  console.log(mapPopDataRide.get(key))
+		  console.log(key)
+		}
+
+
+
+})
 
 
 
@@ -308,9 +330,7 @@ for (var i = 0; i < popDataSelect.length; i++) {
 	
 	
 	$(function(){
-		$(document).ajaxStop(function(){
-			alert('아작스 끝');
-		});
+
 		
 	
 	
@@ -622,12 +642,13 @@ for (var i = 0; i < popDataSelect.length; i++) {
 	
 	// 승차 증감율
 	tableTags += ' <tr>';
-	for (var u in mapPopDataRide) {
-		console.log(u);
-		for (var j = 0; j < mapPopDataRide.get(u).length; j++) {
+	for (const [key, value] of mapPopDataRide) {
+		
+		for (var j = 0; j < mapPopDataRide.get(key).length; j++) {
 			
 			if (j==0) {
 				tableTags += '<td></td>';
+				console.log(mapPopDataRide.get(key));
 			}
 			else if((popDataSelect[i]).replace(/\"/gi, "") == key.replace(/\"/gi, "")){
 				tableTags += ' 										<td>'+Math.ceil((((popData[j].ride - popData[j-1].ride) / popData[j-1].ride) * 100)) +'% <div style="color:blue; display:inline">▲</div></td> ';			
@@ -656,14 +677,14 @@ for (var i = 0; i < popDataSelect.length; i++) {
 	
 	// 하차 증감율
 	tableTags += ' <tr>';
-	for (var j = 0; j < popData.length; j++) {
-		if(j==0 || popData[j].selectName.replace(/\"/gi, "") != popData[(j+1 > popData.length) ? j+1 : j].selectName.replace(/\"/gi, "")){
-			tableTags += '<td></td>';
-		}
-		else if((popDataSelect[i]).replace(/\"/gi, "") == popData[j].selectName.replace(/\"/gi, "")){
-	tableTags += ' 										<td>'+Math.ceil((((popData[j].quit - popData[j-1].quit) / popData[j-1].quit) * 100)) +'% <div style="color:blue; display:inline">▲</div></td> ';
-		}
-	}
+// 	for (var j = 0; j < popData.length; j++) {
+// 		if(j==0 || popData[j].selectName.replace(/\"/gi, "") != popData[(j+1 > popData.length) ? j+1 : j].selectName.replace(/\"/gi, "")){
+// 			tableTags += '<td></td>';
+// 		}
+// 		else if((popDataSelect[i]).replace(/\"/gi, "") == popData[j].selectName.replace(/\"/gi, "")){
+// 	tableTags += ' 										<td>'+Math.ceil((((popData[j].quit - popData[j-1].quit) / popData[j-1].quit) * 100)) +'% <div style="color:blue; display:inline">▲</div></td> ';
+// 		}
+// 	}
 	tableTags += ' </tr>';
 	
 	} // 지역 이름을 위해 2중 포문 사용
