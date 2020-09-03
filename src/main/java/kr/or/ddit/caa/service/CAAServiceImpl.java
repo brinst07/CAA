@@ -8,6 +8,8 @@ import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 
+import kr.or.ddit.caa.domain.*;
+import lombok.AllArgsConstructor;
 import org.apache.commons.collections.map.HashedMap;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -16,11 +18,6 @@ import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 
-import kr.or.ddit.caa.domain.CscodeVO;
-import kr.or.ddit.caa.domain.SalesByIndustryVO;
-import kr.or.ddit.caa.domain.SectorParamVO;
-import kr.or.ddit.caa.domain.StoreVO;
-import kr.or.ddit.caa.domain.SubwayPopVO;
 import kr.or.ddit.caa.mapper.CAAMapper;
 import lombok.Setter;
 import lombok.extern.log4j.Log4j;
@@ -35,9 +32,10 @@ import java.util.Map;
 
 @Service
 @Log4j
+@AllArgsConstructor
 public class CAAServiceImpl implements CAAService {
 
-	@Setter(onMethod_ = @Autowired)
+
 	private CAAMapper mapper;
 
 	@Override
@@ -77,6 +75,11 @@ public class CAAServiceImpl implements CAAService {
 		}
 
 		return getSectorFind;
+	}
+
+	@Override
+	public List<IndiVO> getIndiList(String var) {
+		return mapper.getIndiList(var);
 	}
 
 	@Override
