@@ -21,6 +21,6 @@ public interface NoticeService {
 	
 	public int getTotal(Criteria cri);
 
-	public List<BoardAttachVO> getAttachList(Long bno);
+	public List<BoardAttachVO> getAttachList(String board_id);
 	
 }

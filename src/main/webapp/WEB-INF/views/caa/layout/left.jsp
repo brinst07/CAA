@@ -54,19 +54,24 @@
 					<li class="nav-section"><span class="sidebar-mini-icon"> <i class="fa fa-ellipsis-h"></i>
 					</span>
 						<h4 class="text-section">게시판 메뉴</h4></li>
-					<li class="nav-item" id="notice"><a data-toggle="collapse" > <i class="fas fa-clipboard-list"></i>
-							<p>공지사항</p> <span class="caret"></span>
-					</a>
-						<div class="collapse" id="email-nav">
-							<ul class="nav nav-collapse">
-								<li><a href="email-inbox.html"> <span class="sub-item">Inbox</span>
-								</a></li>
-								<li><a href="email-compose.html"> <span class="sub-item">Email Compose</span>
-								</a></li>
-								<li><a href="email-detail.html"> <span class="sub-item">Email Detail</span>
-								</a></li>
-							</ul>
-						</div></li>
+<!-- 					<li class="nav-item" id="notice"><a data-toggle="collapse" > <i class="fas fa-clipboard-list"></i> -->
+<!-- 							<p>공지사항</p> <span class="caret"></span> -->
+<!-- 					</a> -->
+					<li class="nav-item" id="notice"><a href="/notice/noticeList"> <i class="fas fa-clipboard-list"></i>
+                     <p>공지사항</p>
+               </a></li>
+					
+<!-- 						<div class="collapse" id="email-nav"> -->
+<!-- 							<ul class="nav nav-collapse"> -->
+<!-- 								<li><a href="email-inbox.html"> <span class="sub-item">Inbox</span> -->
+<!-- 								</a></li> -->
+<!-- 								<li><a href="email-compose.html"> <span class="sub-item">Email Compose</span> -->
+<!-- 								</a></li> -->
+<!-- 								<li><a href="email-detail.html"> <span class="sub-item">Email Detail</span> -->
+<!-- 								</a></li> -->
+<!-- 							</ul> -->
+<!-- 						</div> -->
+					</li>
 					<li class="nav-item" id="qna"><a data-toggle="collapse" > <i class="fas fa-question-circle"></i>
 							<p>Q&A게시판</p> <span class="caret"></span>
 					</a>
