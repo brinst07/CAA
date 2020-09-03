@@ -93,6 +93,7 @@ public class CAAServiceImpl implements CAAService {
 			jsonMap.put("LongitudeEndBoundary", jsonObject.get("ex").toString());
 			jsonMap.put("LatitudeStartBoundary", jsonObject.get("sy").toString());
 			jsonMap.put("LongitudeStartBoundary", jsonObject.get("sx").toString());
+			jsonMap.put("selectName", jsonObject.get("name").toString());
 			System.out.println(jsonMap);
 			subwayPopTempList = mapper.getCircleSubway(jsonMap);
 			

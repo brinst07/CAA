@@ -219,6 +219,7 @@ public class CAAController {
 		
 		Gson gson = new Gson();
 		String jsonFigure = gson.toJson(FigureMapList);
+		String jsonMap = gson.toJson(jsonMapList);
 		System.out.println(jsonFigure);
 		
 
@@ -227,7 +228,7 @@ public class CAAController {
 		
 		
 		
-		
+		model.addAttribute("jsonMap", jsonMap);
 		model.addAttribute("jsonFigure", jsonFigure);
 		
 

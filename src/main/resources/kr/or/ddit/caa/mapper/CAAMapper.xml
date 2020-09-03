@@ -19,11 +19,11 @@
 	<select id="getCircleSubway" parameterType="hashMap" resultType="kr.or.ddit.caa.domain.SubwayPopVO">
 select SUBWAY_YEAR year,
        SUBWAY_MONTH month,
-       SUBWAY_STATION_ID staion_id,
 
 
        SUM(SUBWAY_RIDE) ride,
-       SUM(SUBWAY_QUIT) quit
+       SUM(SUBWAY_QUIT) quit,
+       #{selectName} selectName
 
 from SUBWAY_PASSENGER
 where SUBSTR(to_char(SUBWAY_DATE), 1, 6) >= to_char(add_months(sysdate, -12), 'yyyymm')
@@ -52,8 +52,7 @@ where SUBSTR(to_char(SUBWAY_DATE), 1, 6) >= to_char(add_months(sysdate, -12), 'y
                           ]]>
 )
 group by SUBWAY_YEAR,
-         SUBWAY_MONTH,
-         SUBWAY_STATION_ID
+         SUBWAY_MONTH
 order by SUBWAY_YEAR,
          SUBWAY_MONTH
 	</select>
