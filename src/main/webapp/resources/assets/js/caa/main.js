@@ -139,5 +139,7 @@ const chart1 = function(val) {
             console.log(xhr, status);
         }
     });
+
+
 }
 
