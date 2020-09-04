@@ -86,8 +86,7 @@ public class NoticeServiceImpl implements NoticeService{
 	@Override
 	public List<BoardVO> getList(BoardVO boardVO) {
 		List<BoardVO> list = mapper.getList(boardVO);
-		log.info("-----------------getList--------------");
-		log.info(list.size());
+		
 		
 		return list;
 	}

@@ -121,8 +121,7 @@ CSS Just for demo purpose, don't include it in your project
                                                 <td><c:out value="${board.board_id }" /></td>
                                                 <td><a class="move"
                                                    href='/notice/get?board_id=<c:out value="${board.board_id }"></c:out>'><c:out
-                                                         value="${board.board_title }"></c:out><b>[<c:out
-                                                            value="${board.board_reply_count } " />]
+                                                         value="${board.board_title }"></c:out><b>
                                                    </b></a></td>
                                                 <td><c:out value="${board.member_id }" /></td>
                                                 <td><fmt:formatDate pattern="yyyy-MM-dd"

@@ -61,26 +61,16 @@ import net.coobird.thumbnailator.Thumbnailator;
 public class NoticeController {
 
 	private NoticeService service;
-	
-	
-	
-
 	// 목록 출력
 	@GetMapping("/noticeList")
 	public String list(Model model, BoardVO boardVO) {
-		log.info("list");
 		
-		
-
 		boardVO.setBoard_category_id("notice");
-		
 		
 		List<BoardVO> boardList =  service.getList(boardVO);
 		
 		model.addAttribute("list" , boardList);
 		
-		
-
 		
 		return "caa/notice/noticeList";
 	}
