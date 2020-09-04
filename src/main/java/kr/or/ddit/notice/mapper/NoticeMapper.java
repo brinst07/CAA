@@ -6,13 +6,25 @@ import org.apache.ibatis.annotations.Param;
 
 import kr.or.ddit.domain.BoardVO;
 
-import java.util.List;
-
 public interface NoticeMapper {
 
 	public List<BoardVO> getList(BoardVO boardVO);
-	
-	public BoardVO read(String board_id);
+
+	/**
+	 * 조회수 증가 메서드
+	 * @param boardVO
+	 * @return int형을 반환 실패시 : 0, 성공시 : 1
+	 */
+	public int getHit(BoardVO boardVO);
+
+
+
+	/**
+	 * 상세 조회를 하기 위해서 2개의 값을 넘겨줌
+	 * @param boardVO
+	 * @return BoardVO
+	 */
+	public BoardVO get(BoardVO boardVO);
 	
 	public int modify(BoardVO board_id);
 	
@@ -24,7 +36,8 @@ public interface NoticeMapper {
 	
 	public void insertSelectKey(BoardVO board);
 	
-	public BoardVO read(Long board_id);
+
+	public BoardVO read(BoardVO boardVO);
 	
 	public int delete(Long bno);	
 	

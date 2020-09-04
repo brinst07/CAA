@@ -77,18 +77,27 @@ public class NoticeController {
 
 	// 조회
 	@GetMapping("/get")
-	public String get(@RequestParam("board_id") String board_id, Model model) {
-		log.info("/get");
-		model.addAttribute("board", service.get(board_id));
+	public String get(@RequestParam("board_id") String board_id, Model model, BoardVO boardVO) {
+		boardVO.setBoard_category_id("notice");
+		model.addAttribute("board", service.get(boardVO));
+		
+		// 조회수 증가
+		boardVO.setBoard_id(board_id);
+		service.getHit(boardVO);
+		
 		return "caa/notice/noticeView";
 	}
 
 	// 수정
 
 	@GetMapping("/modify")
-	public String modify(@RequestParam("board") String board, Model model) {
-		log.info("/modify");
-		model.addAttribute("board", service.get(board));
+	public String modify(@RequestParam("board") String board, Model model, BoardVO boardVO) {
+
+
+		boardVO.setBoard_id(board);
+		boardVO.setBoard_category_id("notice");
+
+		model.addAttribute("board", service.get(boardVO));
 
 		return "caa/notice/modify";
 	}

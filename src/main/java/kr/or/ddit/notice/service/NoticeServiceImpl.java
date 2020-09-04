@@ -24,10 +24,10 @@ import java.util.List;
 @AllArgsConstructor
 public class NoticeServiceImpl implements NoticeService{
 
-	@Setter(onMethod_ = @Autowired )
+	@Setter
 	private NoticeMapper mapper;
 	
-	@Setter(onMethod_ = @Autowired)
+	@Setter
 	private NoticeAttachMapper attachMapper;
 
 	@Transactional
@@ -63,10 +63,18 @@ public class NoticeServiceImpl implements NoticeService{
 		  });
 	}
 
+
+
+
+
 	@Override
-	public BoardVO get(String board_id) {
-		log.info("get....." + board_id);
-		return mapper.read(board_id);	
+	public BoardVO get(BoardVO boardVO) {
+		return mapper.read(boardVO);
+	}
+
+	@Override
+	public int getHit(BoardVO boardVO) {
+		return mapper.getHit(boardVO);
 	}
 
 	@Override

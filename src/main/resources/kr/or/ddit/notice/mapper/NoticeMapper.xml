@@ -6,14 +6,15 @@
    
    <!-- 리스트 출력 -->
    <select id="getList" parameterType="kr.or.ddit.domain.BoardVO" resultType="kr.or.ddit.domain.BoardVO">
-     select * from BOARD where board_category_id = #{board_category_id}
-     and BOARD_STATUS = 'y'
-     
+    	select rownum boardnum , board.*
+		from BOARD
+		where BOARD_CATEGORY_ID = #{board_category_id} and BOARD_STATUS = 'y'
     </select>
-    
-    <!-- 상세글 출력 -->
+     
+
+    <!-- 상세글 출력 get -->
     <select id="read" resultType="kr.or.ddit.domain.BoardVO">
-		select * from BOARD where board_id = #{board_id} and  BOARD_CATEGORY_ID = 'notice'
+		select * from BOARD where board_id = #{board_id} and  BOARD_CATEGORY_ID = #{board_category_id}
 	</select>
 	
 	<!--글 수정 -->
@@ -53,6 +54,14 @@
 		insert into board(board_id,board_title,board_content,member_id, board_datetime, board_category_id)
 		values(#{board_id}, #{board_title},#{board_content},#{member_id}, sysdate, #{board_category_id})
 	</insert>
+
+	<update id="getHit" parameterType="kr.or.ddit.domain.BoardVO">
+		update BOARD
+		set BOARD_HIT = BOARD_HIT + 1
+		where BOARD_ID = #{board_id}
+		  and BOARD_CATEGORY_ID = #{board_category_id}
+
+	</update>
    
 
 	
