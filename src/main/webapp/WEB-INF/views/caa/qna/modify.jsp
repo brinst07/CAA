@@ -2,75 +2,88 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
-<!DOCTYPE html>
-<html>
-<head>
-<meta http-equiv="X-UA-Compatible" content="IE=edge" />
-<title>Atlantis Bootstrap 4 Admin Dashboard</title>
-<meta content='width=device-width, initial-scale=1.0, shrink-to-fit=no'
-	name='viewport' />
-<link rel="icon" href="/resources/assets/img/icon.ico"
-	type="image/x-icon" />
-<!-- Fonts and icons -->
-<script src="/resources/assets/js/plugin/webfont/webfont.min.js"></script>
-<style type="text/css">
-#logo {
-	width: 250px;
-	padding-bottom: 20px;
-}
-</style>
-<script>
-	WebFont.load({
-		google : {
-			"families" : [ "Lato:300,400,700,900" ]
-		},
-		custom : {
-			"families" : [ "Flaticon", "Font Awesome 5 Solid",
-					"Font Awesome 5 Regular", "Font Awesome 5 Brands",
-					"simple-line-icons" ],
-			urls : [ '/resources/assets/css/fonts.min.css' ]
-		},
-		active : function() {
-			sessionStorage.fonts = true;
-		}
-	});
 
-	function sendEmail() {
 
-	};
-</script>
 
-<!-- CSS Files -->
-<link rel="stylesheet" href="/resources/assets/css/bootstrap.min.css">
-<link rel="stylesheet" href="/resources/assets/css/atlantis.css">
-<!-- CSS Just for demo purpose, don't include it in your project -->
-<link rel="stylesheet" href="/resources/assets/css/demo.css">
-</head>
+
 <body>
-	<div class="wrapper sidebar_minimize fullheight-side">
-		<!-- Logo Header -->
-		<div class="logo-header position-fixed" data-background-color="blue">
+	<div class="main-panel full-height">
+		<div class="container">
+			<div class="page-inner">
+				<div class="row justify-content-center">
+					<div class="col-12 col-lg-10 col-xl-9">
+						<div class="row align-items-center">
+							<div class="col">
+								<h4 class="page-title">QnA</h4>
+								<h6 class="page-pretitle">Questions and Answers</h6>
+							</div>
+							<div class="col-auto">
+								<a href="#" class="btn btn-light btn-border"> 확인 </a> 
+								<a href="#" class="btn btn-light btn-border"> 삭제 </a> 
+								<a href="/qna/list" class="btn btn-primary ml-2"> 취소 </a>
+							</div>
+						</div>
+						<div class="page-divider"></div>
+						<div class="row">
+							<div class="col-md-12">
+								<div class="card card-invoice">
+									<div class="card-header">
+										<div class="invoice-header">
+										
+											<input type="text" class="form-control" id="board_title"
+												name="board_title"
+												value='<c:out value="${board.board_title }"/>'>
+												
+											<%-- <h3 class="invoice-title">
+												<c:out value="${board.board_title }"></c:out>
+											</h3> --%>
+										</div>
+									</div>
+									<div class="card-body">
+										<div class="separator-solid"></div>
+										<div class="row">
+											<div class="col-md-8 info-invoice">
+												<h5 class="sub">날짜</h5>
+												<p>
+													<c:out value="${board.board_datetime }"></c:out>
+												</p>
+											</div>
+											<div class="col-md-8 info-invoice">
+												<h5 class="sub">작성자</h5>
+												<p>
+													<c:out value="${board.member_id }"></c:out>
+												</p>
+											</div>
 
-			<a href="index.html" class="logo"> <img
-				src="../assets/img/logo.svg" alt="navbar brand" class="navbar-brand">
-			</a>
-			<button class="navbar-toggler sidenav-toggler ml-auto" type="button"
-				data-toggle="collapse" data-target="collapse" aria-expanded="false"
-				aria-label="Toggle navigation">
-				<span class="navbar-toggler-icon"> <i class="icon-menu"></i>
-				</span>
-			</button>
-			<button class="topbar-toggler more">
-				<i class="icon-options-vertical"></i>
-			</button>
-			<div class="nav-toggle">
-				<button class="btn btn-toggle toggle-sidebar">
-					<i class="icon-menu"></i>
-				</button>
+										</div>
+
+										<div class="separator-solid"></div>
+										<h5 class="sub">내용</h5>
+										<div style="height: 300px;">
+											<c:out value="${board.board_content }"></c:out>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
 			</div>
 		</div>
-		<!-- End Logo Header -->
 
+	</div>
+
+
+
+
+
+</body>
+
+
+
+
+<%-- <body>
+	<div class="wrapper sidebar_minimize fullheight-side">
 		<div class="main-panel full-height">
 			<div class="container container-full">
 				<div class="page-inner">
@@ -118,9 +131,7 @@
 												<textarea id="editor" name="board_content"></textarea>
 												
 												
-													<%-- <input type="text" class="form-control" id="title" name="title"
-                                 value='<c:out value="${board.board_content }"/>' readonly="readonly"> --%>
-													<%-- <textarea class="form-control" rows="3" name='board_content'><c:out value="${board.board_content }" /></textarea> --%>
+													
 												</div>
 											</div> 
 
@@ -156,17 +167,13 @@
 
 
 									<form id="operForm" actions="/qna/modify" method="post">
-										<%-- <input type="hidden" id="board_id" name="board_id" value='<c:out value="${board.board_id }"/>'> --%>
 
 									</form>
 
 
 
 
-									<%-- <form id='operform' action="/qna/modify" method="get">
-                           	<input type='hidden' id='board_id' name='board_id' value='<c:out value="${board.board_id }"/>'>
-                           </form> --%>
-
+								
 								</div>
 							</div>
 						</div>
@@ -174,31 +181,7 @@
 				</div>
 			</div>
 			</form>
-			<!-- <footer class="footer">
-            <div class="container-fluid">
-               <nav class="pull-left">
-                  <ul class="nav">
-                     <li class="nav-item">
-                        <a class="nav-link" href="http://www.themekita.com">
-                           ThemeKita
-                        </a>
-                     </li>
-                     <li class="nav-item">
-                        <a class="nav-link" href="#">
-                           Help
-                        </a>
-                     </li>
-                     <li class="nav-item">
-                        <a class="nav-link" href="#">
-                           Licenses
-                        </a>
-                     </li>
-                  </ul>
-               </nav>
-                           
-            </div>
-         </footer>
-      </div> -->
+			
 			<div class="quick-sidebar">
 				<a href="#" class="close-quick-sidebar"> <i
 					class="flaticon-cross"></i>
@@ -342,44 +325,9 @@
 
       });
    </script>
-   
-
-	<!-- <script type="text/javascript">
-		$(document).on('click', '#modify', function() {
-			var url = "qna/modify";
-			url = url + "?board_id=" + $
-			{
-				board.board_id
-			}
-			;
-			url = url + "&mode=edit"
-
-			location.href = url;
-		})
-	</script> -->
-
-	<!-- <script type="text/javascript">
-   $(document).ready(function(){
-	 
-	   var operForm = $("#operForm");
-	   
-	   $("button[data-oper='modify']").on("click", function(e){
-		   
-		   operForm.attr("action", "/qna/modify").submit();
-	   });
-	   
-	   $("button[data-oper='list']").on("click", function(e){
-		 
-		   openForm.find("board_id").remove();
-		   openForm.attr("action", "/qna/list")
-		   openForm.submit();
-	   });
-	   
-   }); -->
+</body> --%>
 
 
-
-</body>
 </html>
 
 
@@ -390,125 +338,3 @@
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<%-- <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
-
-
-
-<div class="row">
-  <div class="col-lg-12">
-    <h1 class="page-header">Board Read</h1>
-  </div>
-  <!-- /.col-lg-12 -->
-</div>
-<!-- /.row -->
-
-<div class="row">
-  <div class="col-lg-12">
-    <div class="panel panel-default">
-
-      <div class="panel-heading">Board Read Page</div>
-      <!-- /.panel-heading -->
-      <div class="panel-body">
-
-        <form role="form" action="/board/modify" method="post">
-        
-        <input type='hidden' name='pageNum' value='<c:out value="${cri.pageNum }"/>'/>
-        <input type='hidden' name='amount' value='<c:out value="${cri.amount }"/>'/>
-        <input type='hidden' name='keyword' value='<c:out value="${cri.keyword }"/>'/>
-        <input type='hidden' name='type' value='<c:out value="${cri.type }"/>'/>
-        
-          <div class="form-group">
-            <label>Bno</label> <input class="form-control" name='bno' value='<c:out value="${board.bno} "></c:out> 'readonly="readonly">
-          </div>
-
-          <div class="form-group">
-            <label>Title</label> <input class="form-control" name='title' value='<c:out value="${board.title} "></c:out> '>
-          </div>
-          
-          <div class="form-group">
-            <label>Text area</label>
-            <textarea class="form-control" rows="3" name='content' ><c:out value="${board.content }"></c:out></textarea>
-          </div>
-
-          <div class="form-group">
-            <label>Writer</label> <input class="form-control" name='writer' value='<c:out value="${board.writer }"></c:out> 'readonly="readonly">
-          </div>
-          
-          <div class="form-group">
-            <label>Writer</label> <input class="form-control" name='regDate' value='<fmt:formatDate value="${board.regdate}" pattern="yyyy/MM/dd"/> 'readonly="readonly">
-          </div>
-          
-          <div class="form-group">
-            <label>Writer</label> <input class="form-control" name='updateDate' value='<fmt:formatDate value="${board.updateDate}" pattern="yyyy/MM/dd"/> 'readonly="readonly">
-          </div>
-
-          <button type="submit" class="btn btn-default" data-oper="modify">Modify</button>
-          <button type="submit" class="btn btn-danger" data-oper="remove">Remove</button>
-          <button type="submit" class="btn btn-info" data-oper="list">List</button>
-        </form>
-
-      </div>
-      <!--  end panel-body -->
-
-    </div>
-    <!--  end panel-body -->
-  </div>
-  <!-- end panel -->
-</div>
-<!-- /.row -->
-<script type="text/javascript">
-$(function(){
-	var formObj = $('form');
-	
-	$('button').on('click', function(e){
-		e.preventDefault();
-		
-		var operation = $(this).data("oper");
-		
-		console.log(operation);
-		
-		if(operation === 'remove'){
-			formObj.attr("action", "/board/remove");
-		} else if (operation === 'list'){
-			formObj.attr("action", "/board/list").attr("method", "get");
-			var pageNumTag = $("input[name='pageNum']").clone();
-			var amountTag = $("input[name='amount']").clone();
-			var keywordTag = $("input[name='keyword']").clone();
-			var typeTag = $("input[name='type']").clone();
-			
-			formObj.empty();
-			formObj.append(pageNumTag);
-			formObj.append(amountTag);
-			formObj.append(keywordTag);
-			formObj.append(typeTag);
-		}
-		formObj.submit();
-	});
-});
-
-</script>
-
- --%>

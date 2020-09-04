@@ -22,6 +22,9 @@ public interface BoardService {
 
 	public List<BoardAttachVO> getAttachList(String board_id);
 	
+	public void boardHitUpdate(String board_id);
+
+	
 }
 	
 	

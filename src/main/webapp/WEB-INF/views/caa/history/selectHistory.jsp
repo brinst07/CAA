@@ -29,45 +29,100 @@
 							<div class="card-body">
 								<div id="map" style="display: block; widht: 785px; height: 375px;"></div>
 								<script>
-									var container = document
-											.getElementById('map');
+									
+									// 지도를 표시할 div
+									var container = document.getElementById('map');
 									var options = {
-										center : new kakao.maps.LatLng(
-												33.450701, 126.570667),
-										level : 3
+										center : new kakao.maps.LatLng(33.450701, 126.570667), // 지도의 중심좌표
+										level : 3 // 지도의 확대 레벨
 									};
 
-									var map = new kakao.maps.Map(container,
-											options);
+									// 지도를 생성합니다.
+									var map = new kakao.maps.Map(container, options);
+									
+									// 일반 지도와 스카이뷰로 지도 타입을 전환할 수 있는 지도 타입 컨트롤을 생성합니다
+									var mapTypeControl = new kakao.maps.MapTypeControl();
+									
+									// 지도에 컨트롤을 추가해야 지도위에 표시됩니다
+									// kakao.maps.ControlPosition은 컨트롤이 표시될 위치를 정의하는데 TOPRIGHT는 오른쪽 위를 의미
+									map.addControl(mapTypeControl, kakao.maps.ControlPosition.TOPRIGHT);
+									
+									// 지도 확대 축소를 제어할 수 있는 줌 컨트롤을 생성합니다
+									var zoomControl = new kakao.maps.ZoomControl();
+									map.addControl(zoomControl, kakao.maps.ControlPosition.RIGHT);
+									
+									// 지도의 현재 영역을 얻어옵니다.
+									var bounds = map.getBounds();
+									var boundStr = bounds.toString();
+
+									// 영역의 남서쪽 좌표를 얻어옵니다
+									var swLatLng = bounds.getSouthWest();
+
+									// 영역의 북동쪽 좌표를 얻어옵니다
+									var neLatLng = bounds.getNorthEast();
+									
+									
+									console.log(boundStr);
+									
+									console.log(swLatLng);
+									console.log(neLatLng);
+									
+									
+									var mapContainer = document.getElementById('map'), // 지도를 표시할 div
+										mapOption = {
+											center: new kakao.map.LatLng(33.450701, 126.570667), // 지도의 중심좌표
+											level: 3 // 지도의 확대 레벨
+									};
+									
+									var map = new kakao.maps.Map(mapContainer, mapOption); // 지도를 생성합니다
+									
+									// 마커를 표시할 위치와 title 객체 배열입니다
+									var positions = [
+										{
+											title: '카카오',
+											latlng: new kakao.maps.LatLng(33.450705, 126.570677)
+										},
+										{
+											title: '생태연못',
+											latlng: new kakao.maps.LatLng(33.450936, 126.569477)
+										},
+										{
+											title: '텃밭',
+											latlng: new kakao.maps.LatLng(33.450879, 1236.569940)
+										},
+										{
+											title: '근린공원',
+											latlng: new kakao.maps.LatLng(33.451393, 126.570738)
+										}
+									];
+									
+									// 머커 이미지의 이미지 주소입니당
+									var imageSrc = "https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/markerStar.png"; 
+									
+									for (var i = 0; i < positions.length; i++){
+										
+										// 마커 이미지의 이미지 크기
+										var imageSize = new kakao.map.Size(24, 35);
+										
+										// 마커 이미지를 생성
+										var markerImage = new kakao.maps.MarkerImage(imageSrc, imageSize);
+										
+										// 마커를 생성합니다
+										var marker = new kakao.maps.Marker({
+											map: map, // 마커를 표시할 지도
+											position: position[i].latlng, // 마커를 표시할 위치
+											title: positions[i].title, // 마커의 타이틀, 마커에 마우스를 올리면 타이틀이 표시
+											image: markerImage // 마커 이미지 
+										});
+									}
+									
+
 								</script>
 							</div>
 						</div>
 					</div>
-					<!-- 					<div class="col-md-4"> -->
-					<!-- 						<div class="card card-primary bg-primary-gradient"> -->
-					<!-- 							<div class="card-body"> -->
-					<!-- 								<h1 class="mt-3 b-b1 pb-2 mb-4 fw-bold"> -->
-					<!-- 									1단계 -->
-					<!-- 									</h4> -->
-					<!-- 									<div class="card-category">지역을 선택해주세요~</div> -->
-					<!-- 									<br> -->
-					<!-- 									<h1 class="mt-3 b-b1 pb-2 mb-4 fw-bold">2단계</h1> -->
-					<!-- 									<div class="card-category">영역을 선택해주세요</div> -->
-					<!-- 									<div class="page-inner"> -->
-
-					<!-- 										<button class="btn btn-primary">Default</button> -->
-					<!-- 										<button class="btn btn-primary btn-border btn-light"><</button> -->
-					<!-- 										<button class="btn btn-primary btn-border btn-light">Border</button> -->
-					<!-- 										<button class="btn btn-primary btn-border btn-light">Border</button> -->
-					<!-- 									</div> -->
-					<!-- 							</div> -->
-					<!-- 							<h4 class="mt-5 pb-3 mb-0 fw-bold">Top active pages</h4> -->
-					<!-- 							<ul class="list-unstyled"> -->
-					<!-- 								<li class="d-flex justify-content-between pb-1 pt-1"><small>/product/readypro/index.html</small> <span>7</span></li> -->
-					<!-- 								<li class="d-flex justify-content-between pb-1 pt-1"><small>/product/atlantis/demo.html</small> <span>10</span></li> -->
-					<!-- 							</ul> -->
-					<!-- 						</div> -->
-					<!-- 					</div> -->
+					
+					
 					<div class="col-md-4">
 						<div class="card-body">
 							<ul class="list-group list-group-bordered">
@@ -78,33 +133,18 @@
 							<ul class="list-group list-group-bordered">
 								<li class="list-group-item active">2단계</li>
 								<li class="list-group-item">점포를 선택해주세요</li>
-								<!-- <li class="list-group-item">
-									<ul class="wizard-menu nav nav-pills nav-primary">
-										<li class="step" style="width: 25%;"><a class="nav-link active" href="#about" data-toggle="tab" aria-expanded="true"><i class="far fa-circle"></i><br>
-												원형</a></li>
-										<li class="step" style="width: 25%;"><a class="nav-link" href="#account" data-toggle="tab"><i class="fas fa-bullseye"></i><br>반경</a></li>
-										<li class="step" style="width: 25%;"><a class="nav-link" href="#address" data-toggle="tab"><i class="fab fa-connectdevelop"></i><br>다각</a></li>
-										<li class="step" style="width: 25%;"><a class="nav-link" href="#address" data-toggle="tab"><i class="fas fa-map-marked-alt"></i><br>상권</a></li>
-									</ul>
-								</li> -->
+								
+								
+								
+								
 							</ul>
 							<br>
-							<!-- <ul class="list-group list-group-bordered">
-								<li class="list-group-item active">3단계</li>
-								<li class="list-group-item">업종선택</li>
-								<li class="list-group-item">
-									<button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Primary</button>
-									<div class="dropdown-menu">
-										<a class="dropdown-item" href="#">Action</a> <a class="dropdown-item" href="#">Another action</a> <a class="dropdown-item" href="#">Something else here</a>
-										<div class="dropdown-divider"></div>
-										<a class="dropdown-item" href="#">Separated link</a>
-									</div>
-								</li>
-								<li class="list-group-item">
-									<button class="btn btn-black">Default</button>
-									<button class="btn btn-info">Info</button>
-								</li>
-							</ul> -->
+							
+							
+							
+							
+							
+							
 						</div>
 					</div>
 				</div>

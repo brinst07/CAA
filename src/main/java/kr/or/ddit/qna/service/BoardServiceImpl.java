@@ -74,10 +74,11 @@ public class BoardServiceImpl implements BoardService {
 
 	
 	
-
+	@Transactional
 	@Override
 	public BoardVO get(String board_id) {
 		log.info("get....." + board_id);
+				
 		return mapper.read(board_id);
 	}
 
@@ -150,6 +151,22 @@ public class BoardServiceImpl implements BoardService {
 		log.info("get Attach list by board_id" + board_id);
 		
 		return attachMapper.findByBoardId(board_id);
+	}
+
+
+
+
+
+
+	@Override
+	public void boardHitUpdate(String board_id) {
+		
+		log.info("hit....." + board_id);
+		
+		
+//		this.mapper.update(board_id);
+		
+//		SqlSession.update("boardHitUpdate", param);
 	}
 	
 }

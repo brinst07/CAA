@@ -18,7 +18,7 @@ public class BoardVO {
 	private String board_status;
 	private String board_category_id;
 	private String board_temp_save;
-	private String board_hit;
+	private int board_hit;
 	
 	private List<BoardAttachVO> attachList;
 

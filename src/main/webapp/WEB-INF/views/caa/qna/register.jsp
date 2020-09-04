@@ -2,6 +2,14 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
+
+<style type="text/css">
+.uploadResult ul li {
+	display: inline-block;
+	margin: 10px;
+}
+</style>
+
 <div class="wrapper sidebar_minimize fullheight-side">
 	<!-- Logo Header -->
 	<div class="logo-header position-fixed" data-background-color="blue">
@@ -44,18 +52,21 @@
 								method="post">
 
 								<div class="form-group row">
-									<label for="to" class="col-form-label col-md-1">제목 </label>
+									<label for="to" class="col-form-label col-md-1">&nbsp;&nbsp;&nbsp;&nbsp; 제목 </label>
 									<div class="col-md-11">
 										<input type="text" class="form-control" id="title"
 											name="board_title" value="">
 									</div>
-								</div>
-								<div class="form-group row">
+									
+									
+								
+								<!-- <div class="form-group row"> -->
 									<br> <br>
 									<div class="card-body">
 
+
 										<div class="form-group row">
-											<label for="to" class="col-form-label col-md-1">내용 </label>
+											<label  for="to" class="col-form-label col-md-1">&nbsp;&nbsp;내용 </label>
 
 
 
@@ -63,8 +74,10 @@
 
 
 
-											<textarea id="editor" name="board_content"></textarea>
+											<!-- <textarea id="editor" name="board_content"></textarea> -->
 										</div>
+										
+										
 
 
 										<!-- --------------- -->
@@ -79,7 +92,35 @@
 <!-- 												<input type="hidden" id="board_temp_save" name="board_temp_save" value='y'>  -->
 <!-- 												<input type="hidden" id="board_hit" name="board_hit" value='10'> -->
 <!-- 											</form> -->
+						
+						
+						<div class="row">
+											<div class="col-lg-12">
+												<div class="panel panel-default">
+													<label for="cc" class="col-form-label col-md-1">첨부파일 </label>
+													<!-- <div class="panel-heading">File Attach</div> -->
+													<!-- /.panel-heading -->
+													<div class="panel-body">
+														<div class="form-group uploadDiv">
+														
+															<input type="file" name='uploadFile' multiple>
+														</div>
+														<div class='uploadResult'>
+															<ul>
+															</ul>
+														</div>
+													</div>
+													<!--  end panel-body -->
+												</div>
+												<!--  end panel-body -->
+											</div>
+											<!-- end panel -->
+										</div>
+										<!-- /.row -->
 
+
+
+						<hr>
 							<div class="email-editor">
 						<div id="editor"></div>
 						<div class="email-action">
@@ -93,7 +134,7 @@
 						</div>
 					</div>
 				</div>
-
+</div>
 
 
 
@@ -139,46 +180,25 @@
 							</form>
 
 
-						<div class="row">
-											<div class="col-lg-12">
-												<div class="panel panel-default">
-
-													<div class="panel-heading">File Attach</div>
-													<!-- /.panel-heading -->
-													<div class="panel-body">
-														<div class="form-group uploadDiv">
-															<input type="file" name='uploadFile' multiple>
-														</div>
-														<div class='uploadResult'>
-															<ul>
-															</ul>
-														</div>
-													</div>
-													<!--  end panel-body -->
-												</div>
-												<!--  end panel-body -->
-											</div>
-											<!-- end panel -->
-										</div>
-										<!-- /.row -->
+						<!-- 요깅 -->
 						
 
 
 
 
 
-							<form action="/qna/uploadFormAction" enctype="multipart/form"
-								method="post" enctype=class="dropzone">
+<!-- 							<form action="/qna/uploadFormAction" enctype="multipart/form" -->
+<!-- 								method="post" enctype=class="dropzone"> -->
 
-								<div class="dz-message" data-dz-message>
+<!-- 								<div class="dz-message" data-dz-message> -->
 
-									<label for="cc" class="col-form-label col-md-1">첨부파일 </label>
-									<h4 class="message">첨부파일</h4>
-								</div>
-								<div class="fallback">
-									<input name="file" type="file" multiple />
-								</div>
-							</form>
+<!-- 									<label for="cc" class="col-form-label col-md-1">첨부파일 </label> -->
+<!-- 									<h4 class="message">첨부파일</h4> -->
+<!-- 								</div> -->
+<!-- 								<div class="fallback"> -->
+<!-- 									<input name="file" type="file" multiple /> -->
+<!-- 								</div> -->
+<!-- 							</form> -->
 						</div>
 					</div>
 
@@ -230,13 +250,11 @@
 		</div>
 	</div>
 </div>
-</div>
 
 
 
 
 
-</div>
 <script>
 	$('#editor').summernote('code', '${board.board_content}');
 
@@ -245,6 +263,8 @@
 		fontNames : [ 'Arial', 'Arial Black', 'Comic Sans MS', 'Courier New' ],
 		tabsize : 2,
 		height : 300,
+// 	    minHeight: 1000,      // 최소 높이값(null은 제한 없음)
+// 	    maxHeight: null,      // 최대 높이값(null은 제한 없음)
 		callbacks : {
 			onImageUpload : function(files, editor, welEditable) {
 				for (var i = files.length - 1; i >= 0; i--) {
@@ -423,7 +443,6 @@
 					});
 </script>
 
-</script>
 
 
 

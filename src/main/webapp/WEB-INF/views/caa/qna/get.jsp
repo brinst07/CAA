@@ -1,195 +1,74 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
-<div class="main-panel full-height">
-    <div class="container container-full">
-        <div class="page-inner">
-            <div class="page-with-aside mail-wrapper bg-white">
-                <div class="page-content mail-content">
-                    <div class="email-head d-lg-flex d-block">
-                        <h2>
-                            <i class="flaticon-round mr-1"></i> QnA
-                        </h2>
-                    </div>
-                    <div class="email-compose-fields">
-                        <form>
-                            <div class="form-group row">
-                                <label for="title" class="col-form-label col-md-1">제목 </label>
-                                <div class="col-md-11">
-                                    <input type="text" class="form-control" id="title" name="title"
-                                           value='<c:out value="${board.board_title }"/>' readonly="readonly">
-                                </div>
-                            </div>
-                            <div class="form-group row">
-                                <label for="cc" class="col-form-label col-md-1">작성자 </label>
-                                <div class="col-md-11">
-                                    <input type="text" class="form-control" id="cc" name="cc"
-                                           value='<c:out value="${board.member_id }"/>' readonly="readonly">
-                                </div>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 
 
-                                <br> <br>
-                                <div class="card-body">
+<body>
+	<div class="main-panel full-height">
+		<div class="container">
+			<div class="page-inner">
+				<div class="row justify-content-center">
+					<div class="col-12 col-lg-10 col-xl-9">
+						<div class="row align-items-center">
+							<div class="col">
+								<h4 class="page-title">QnA</h4>
+								<h6 class="page-pretitle">Questions and Answers</h6>
+							</div>
+							<div class="col-auto">
+								<a href="#" class="btn btn-light btn-border"> 수정 </a> <a
+									href="/qna/list" class="btn btn-primary ml-2"> 목록 </a>
+							</div>
+						</div>
+						<div class="page-divider"></div>
+						<div class="row">
+							<div class="col-md-12">
+								<div class="card card-invoice">
+									<div class="card-header">
+										<div class="invoice-header">
+										
+											<h3 class="invoice-title">
+												<c:out value="${board.board_title }"></c:out>
+											</h3>
+										</div>
+									</div>
+									<div class="card-body">
+										<div class="separator-solid"></div>
+										<div class="row">
+											<div class="col-md-8 info-invoice">
+												<h5 class="sub">날짜</h5>
+												<p>
+													<c:out value="${board.board_datetime }"></c:out>
+												</p>
+											</div>
+											<div class="col-md-8 info-invoice">
+												<h5 class="sub">작성자</h5>
+												<p>
+													<c:out value="${board.member_id }"></c:out>
+												</p>
+											</div>
 
-                                    <div class="form-group row">
-                                        <label for="content" class="col-form-label col-md-1">내용 </label>
-                                        <div class="col-md-11">
-                                            <%-- <input type="text" class="form-control" id="title" name="title"
-                                 value='<c:out value="${board.board_content }"/>' readonly="readonly"> --%>
-                                            <textarea class="form-control" rows="3" name='content'
-                                                      readonly="readonly"><c:out value="${board.board_content }"/>
-                                 </textarea>
-                                        </div>
-                                    </div>
+										</div>
 
-                                    <form action="upload.php" class="dropzone">
-                                        <div class="dz-message" data-dz-message>
+										<div class="separator-solid"></div>
+										<h5 class="sub">내용</h5>
+										<div style="height: 300px;">
+											<c:out value="${board.board_content }"></c:out>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
 
-                                            <label for="cc" class="col-form-label col-md-1">첨부파일 </label>
-                                            <h4 class="message">첨부파일</h4>
-                                        </div>
-                                        <div class="fallback">
-                                            <input name="file" type="file" multiple/>
-                                        </div>
-
-
-                                        <div class="row">
-                                            <div class="col-lg-12">
-                                                <div class="panel panel-default">
-
-                                                    <div class="panel-heading">Files</div>
-                                                    <!-- /.panel-heading -->
-                                                    <div class="panel-body">
-
-                                                        <div class='uploadResult'>
-                                                            <ul>
-                                                            </ul>
-                                                        </div>
-
-                                                    </div>
-                                                    <!-- end panel-body -->
-                                                </div>
-                                                <!-- end panel-body -->
-                                            </div>
-                                            <!-- end panel -->
-                                        </div>
-                                        <!-- /.row -->
-
-
-                                    </form>
-                                </div>
-
-
-                            </div>
-                        </form>
-                    </div>
-
-
-                    <div class="email-editor">
-                        <div id="editor"></div>
-                        <div class="email-action">
-                            <button data-oper='modify' class="btn btn-primary"
-                                    onclick="location.href='/qna/modify?board=<c:out value="${board.board_id }"/>'">수정
-                            </button>
+	</div>
 
 
-                            <!-- <button class="btn btn-black">삭제</button> -->
-                            <button data-oper='list' class="btn btn-black" onclick="location.href='/qna/list'">목록
-                            </button>
-
-                            <%-- <form id='operform' action="/qna/modify" method="get">
-                               <input type='hidden' id='board_id' name='board_id' value='<c:out value="${board.board_id }"/>'>
-                           </form> --%>
-
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
 
 
-</div>
 
-
-<script type="text/javascript">
-    $(document).ready(function () {
-
-        var operForm = $("#operForm");
-
-        // 	   $("button[data-oper='modify']").on("click", function(e){
-
-        // 		   operForm.attr("action", "/qna/modify").submit();
-        // 	   });
-
-        $("button[data-oper='list']").on("click", function (e) {
-
-            operForm.find("#board_id").remove();
-            operForm.attr("action", "/qna/list")
-            operForm.submit();
-        });
-
-    });
-</script>
-
-<script>
-    $(document)
-        .ready(
-            function () {
-                (function () {
-
-                    var board_id = '<c:out value="${board.board_id}"/>';
-
-                    $
-                        .getJSON(
-                            "/qna/getAttachList",
-                            {
-                                board_id: board_id
-                            },
-                            function (arr) {
-
-                                console.log(arr);
-
-                                var str = "";
-
-                                $(arr)
-                                    .each(
-                                        function (i,
-                                                  attach) {
-
-                                            //image type
-                                            if (attach.fileType) {
-                                                var fileCallPath = encodeURIComponent(attach.uploadPath
-                                                    + "/s_"
-                                                    + attach.uuid
-                                                    + "_"
-                                                    + attach.fileName);
-
-                                                str += "<li data-path='" + attach.uploadPath + "' data-uuid='" + attach.uuid + "' data-filename='" + attach.fileName + "' data-type='" + attach.fileType + "' ><div>";
-                                                str += "<img src='/display?fileName="
-                                                    + fileCallPath
-                                                    + "'>";
-                                                str += "</div>";
-                                                str
-                                                + "</li>";
-                                            } else {
-
-                                                str += "<li data-path='" + attach.uploadPath + "' data-uuid='" + attach.uuid + "' data-filename='" + attach.fileName + "' data-type='" + attach.fileType + "' ><div>";
-                                                str += "<span> "
-                                                    + attach.fileName
-                                                    + "</span><br/>";
-                                                str += "<img src='/resources/img/attach.png'></a>";
-                                                str += "</div>";
-                                                str
-                                                + "</li>";
-                                            }
-                                        });
-
-                                $(".uploadResult ul").html(str);
-
-                            });//end getjson
-
-                })(); // end function
-            });
-</script>
+</body>
+</html>
