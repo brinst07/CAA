@@ -134,7 +134,7 @@ CSS Just for demo purpose, don't include it in your project
                                                          value="${board.board_title }"></c:out><b>[<c:out
                                                             value="${board.board_reply_count } " />]
                                                    </b></a></td>
-                                                <td><c:out value="${board.board_id }" /></td>
+                                                <td><c:out value="${board.member_id }" /></td>
                                                 <td><fmt:formatDate pattern="yyyy-MM-dd"
                                                       value="${board.board_datetime }" /></td>
                                                 <td><c:out value="${board.board_hit }" /></td>
