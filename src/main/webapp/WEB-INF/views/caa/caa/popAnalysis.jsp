@@ -548,7 +548,7 @@ var myMultipleLineChart = new Chart(
 			}
 		}
 	}
-	tableTags += ' </tr>';
+	tableTags += ' </tr>';	
 	
 	} // 지역 이름을 위해 2중 포문 사용
 	tableTags += ' </tr>';
