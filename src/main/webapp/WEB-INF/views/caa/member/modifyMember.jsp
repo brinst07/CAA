@@ -1,4 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -62,13 +64,13 @@
                <div class="form-group" align="center" >
                   <label for="name">이름&nbsp&nbsp&nbsp</label><input
                      style="display: inline; width: 400px" type="name"
-                     class="form-control" id="name"  disabled="disabled">
+                     value='<c:out value="${member.member_username }"/>' class="form-control" id="name"  disabled="disabled">
                </div>
                
                <div class="form-group" align="center">
                   <label for="id">아이디&nbsp&nbsp&nbsp</label><input
                      style="display: inline; width: 400px;" type="id"
-                     class="form-control" id="id"  disabled="disabled">&nbsp;&nbsp;&nbsp;&nbsp;
+                     value='<c:out value="${member.member_id }"/>' class="form-control" id="id"  disabled="disabled">&nbsp;&nbsp;&nbsp;&nbsp;
                </div>
                
                <div class="form-group" align="center">
@@ -86,7 +88,7 @@
                <div class="form-group" align="center">
                   <label for="email">이메일&nbsp&nbsp&nbsp</label><input
                      style="display: inline; width: 400px" type="email"
-                     class="form-control" id="email">&nbsp;&nbsp;&nbsp;&nbsp;
+                     value='<c:out value="${member.member_email }"/>'class="form-control" id="email">&nbsp;&nbsp;&nbsp;&nbsp;
                </div>
               
                    

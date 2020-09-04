@@ -311,18 +311,36 @@ $(function(){
 	const color = [];
 	var colorObj = new Object();
 	colorObj.borderColor = "#1d7af3";
-	colorObj.pointBorderColor = "#FFF";
+	colorObj.pointBackGroundColor = "#FFF";
 	colorObj.pointBorderColor = "#1d7af3";
 	color.push(colorObj);
 	var colorObj = new Object();
 	colorObj.borderColor = "#f3545d";
-	colorObj.pointBorderColor = "#FFF";
+	colorObj.pointBackGroundColor = "#FFF";
 	colorObj.pointBorderColor = "#f3545d";
 	color.push(colorObj);
 	var colorObj = new Object();
-	colorObj.borderColor = "#f1f1f1";
-	colorObj.pointBorderColor = "#FFF";
-	colorObj.pointBorderColor = "#F25961";
+	colorObj.borderColor = "#0d4e26";
+	colorObj.pointBackGroundColor = "#FFF";
+	colorObj.pointBorderColor = "#0d4e26";
+	color.push(colorObj);
+
+	var colorObj = new Object();
+	colorObj.borderColor = "#89e32d";
+	colorObj.pointBackGroundColor = "#FFF";
+	colorObj.pointBorderColor = "#89e32d";
+	color.push(colorObj);
+
+	var colorObj = new Object();
+	colorObj.borderColor = "#6822a7";
+	colorObj.pointBackGroundColor = "#FFF";
+	colorObj.pointBorderColor = "#6822a7";
+	color.push(colorObj);
+
+	var colorObj = new Object();
+	colorObj.borderColor = "#3a9978";
+	colorObj.pointBackGroundColor = "#FFF";
+	colorObj.pointBorderColor = "#3a9978";
 	color.push(colorObj);
 
 	
@@ -346,18 +364,17 @@ $(function(){
 				backgroundColor : 'transparent',
 				fill : true,
 				borderWidth : 2,
-				data :  arrayArrayPopRideData[i]
-		
-				
+				data :  arrayArrayPopRideData[0][i]
+
 			});	
 		
 		
 		
 			myMultipleLineChart.data.datasets.push({
 				label : "하차 승객 수",
-				borderColor : color[i].borderColor,
-				pointBorderColor : color[i].pointBorderColor,
-				pointBackGroundColor : color[i].pointBackGroundColor,
+				borderColor : color[i+3].borderColor,
+				pointBorderColor : color[i+3].pointBorderColor,
+				pointBackGroundColor : color[i+3].pointBackGroundColor,
 				pointBorderWidth : 2,
 				pointHoverRadius : 4,
 				pointHoverBorderWidth : 1,
@@ -365,7 +382,8 @@ $(function(){
 				backgroundColor : 'transparent',
 				fill : true,
 				borderWidth : 2,
-				data :  arrayArrayPopQuitData[i]
+				data : arrayArrayPopQuitData[0][i]
+
 		
 				
 			});
@@ -377,42 +395,7 @@ $(function(){
 	
 })
 
-	var multipleLineChart = document.getElementById('multipleLineChart')
-	.getContext('2d');
-// multipleLineChart.destroy();
 
-var myMultipleLineChart = new Chart(
-		multipleLineChart, {
-			type : 'line',
-			data : {
-				labels : [],
-				datasets : []
-			},
-			options : {
-				responsive : true,
-				maintainAspectRatio : false,
-				legend : {
-					position : 'top',
-				},
-				tooltips : {
-					bodySpacing : 4,
-					mode : "nearest",
-					intersect : 0,
-					position : "nearest",
-					xPadding : 10,
-					yPadding : 10,
-					caretPadding : 10
-				},
-				layout : {
-					padding : {
-						left : 15,
-						right : 15,
-						top : 15,
-						bottom : 15
-					}
-				}
-			}
-		});
 		
 
 
@@ -428,7 +411,9 @@ var myMultipleLineChart = new Chart(
 	
 ////////////////////////////////////// 동적으로 만들기 위한 사전 작업 (제거하기)	
 	
-	
+	var chektd = 'no';
+	var chektd2 = 'no';
+
 	
 	var cell = document.getElementById("PageIn"); 
 	while ( cell.hasChildNodes() ) { 
@@ -494,22 +479,28 @@ var myMultipleLineChart = new Chart(
 	// 승차 증감율
 	tableTags += ' <tr>';
 	for (const [key, value] of mapPopDataRide) {
-		
+
 		for (let k = 0; k < mapPopDataRide.get(key).length; k++) {
 			console.log("사이즈 : "+mapPopDataRide.get(key).length);
 			console.log("키값을 넣었을때 값 : "+mapPopDataRide.get(key));
-			if (k===0) {
+			if (k===0 && chektd2=='no') {
 				tableTags += '<td></td>';
 				console.log(mapPopDataRide.get(key)[k]);
 				console.log(key);
+				chektd2='yes';
 			}
 			else if((popDataSelect[i]).replace(/\"/gi, "") == key.replace(/\"/gi, "")){
 				let tableValue = Math.ceil((((mapPopDataRide.get(key)[k] - mapPopDataRide.get(key)[k-1]) / mapPopDataRide.get(key)[k-1]) * 100));
 				if (tableValue > 0) {
 				tableTags += ' 										<td>'+tableValue+'% <div style="color:blue; display:inline">▲</div></td> ';			
-				}else {
+				}else if(tableValue < 0){
 				tableTags += ' 										<td>'+tableValue+'% <div style="color:red; display:inline">▼</div></td> ';			
+				}else if(tableValue == 0){
+					tableTags += ' 										<td>'+tableValue+'% <div style=" display:inline">-</div></td> ';
+				}else {
+					tableTags += '<td></td>';
 				}
+
 				
 			}
 		}
@@ -532,23 +523,28 @@ var myMultipleLineChart = new Chart(
 		for (let k = 0; k < mapPopDataQuit.get(key).length; k++) {
 			console.log("사이즈 : "+mapPopDataQuit.get(key).length);
 			console.log("키값을 넣었을때 값 : "+mapPopDataQuit.get(key));
-			if (k===0) {
+			if (k===0 && chektd=='no') {
 				tableTags += '<td></td>';
 				console.log(mapPopDataQuit.get(key)[k]);
 				console.log(key);
+				chektd='yes';
 			}
 			else if((popDataSelect[i]).replace(/\"/gi, "") == key.replace(/\"/gi, "")){
 				let tableValue = Math.ceil((((mapPopDataQuit.get(key)[k] - mapPopDataQuit.get(key)[k-1]) / mapPopDataQuit.get(key)[k-1]) * 100));
 				if (tableValue > 0) {
-				tableTags += ' 										<td>'+tableValue+'% <div style="color:blue; display:inline">▲</div></td> ';			
+				tableTags += ' 										<td>'+tableValue+'% <div style="color:blue; display:inline">▲</div></td> ';
+				}else if(tableValue < 0){
+					tableTags += ' 										<td>'+tableValue+'% <div style="color:red; display:inline">▼</div></td> ';
+				}else if(tableValue == 0){
+					tableTags += ' 										<td>'+tableValue+'% <div style=" display:inline">-</div></td> ';
 				}else {
-				tableTags += ' 										<td>'+tableValue+'% <div style="color:red; display:inline">▼</div></td> ';			
+					tableTags += '<td></td>';
 				}
 				
 			}
 		}
 	}
-	tableTags += ' </tr>';	
+	tableTags += ' </tr>';
 	
 	} // 지역 이름을 위해 2중 포문 사용
 	tableTags += ' </tr>';
@@ -575,7 +571,44 @@ var myMultipleLineChart = new Chart(
 	
 	
 	///////////////////////////////////// 동적으로 테이블 생성  ↑ ////////////////////////////////
-	
+
+
+var multipleLineChart = document.getElementById('multipleLineChart')
+		.getContext('2d');
+// multipleLineChart.destroy();
+
+var myMultipleLineChart = new Chart(
+		multipleLineChart, {
+			type : 'line',
+			data : {
+				labels : [],
+				datasets : []
+			},
+			options : {
+				responsive : true,
+				maintainAspectRatio : false,
+				legend : {
+					position : 'top',
+				},
+				tooltips : {
+					bodySpacing : 4,
+					mode : "nearest",
+					intersect : 0,
+					position : "nearest",
+					xPadding : 10,
+					yPadding : 10,
+					caretPadding : 10
+				},
+				layout : {
+					padding : {
+						left : 15,
+						right : 15,
+						top : 15,
+						bottom : 15
+					}
+				}
+			}
+		});
 	
 	
 
@@ -586,289 +619,11 @@ var myMultipleLineChart = new Chart(
 
 	
 </script>
-<script type="text/javascript">
-	
-</script>
-
-
-<script type="text/javascript">
-	$(function(){
-
-		
-	
-	
-// 	var json = ${jsonFigure};
-// 	var jsonTempMap = ${jsonMap};
-// 	var jsonMap = JSON.parse(jsonTempMap);
-// 	console.log(jsonMap);
-	
-// 	jsonRideQuitData = [];
-	
-	
-	
-// 	var jsonTempMonthData = [];
-// 	var jsonTempRideData= [];
-// 	var jsonTempQuitData= [];
-	
-	
-// 	var jsonMonthData = [];
-// 	var jsonRideData = [];
-// 	var jsonQuitData = [];
-	
-// 	for (var i = 0; i < json.length; i++) {
-// 		jsonTempMonthData.push(json[i].month);
-// 		jsonTempRideData.push(json[i].ride);
-// 		jsonTempQuitData.push(json[i].quit);
-// 	}
-	
-// 	jsonMonthData.push(jsonTempMonthData);
-// 	jsonRideData.push(jsonTempRideData);
-// 	jsonQuitData.push(jsonTempQuitData);
-		
-
-///////////////////////// 그래프 /////////////////////////////////
-	
-
-// 	myMultipleLineChart.data.labels = jsonMonthData[0];
-// 	myMultipleLineChart.data.datasets.push({
-// 		label : "탑승 승객 수",
-// 		borderColor : color[0].borderColor,
-// 		pointBorderColor : color[0].pointBorderColor,
-// 		pointBackGroundColor : color[0].pointBackGroundColor,
-// 		pointBorderWidth : 2,
-// 		pointHoverRadius : 4,
-// 		pointHoverBorderWidth : 1,
-// 		pointRadius : 4,
-// 		backgroundColor : 'transparent',
-// 		fill : true,
-// 		borderWidth : 2,
-// 		data :  jsonRideData[0]
-
-		
-// 	});	
-	
-// 	myMultipleLineChart.data.datasets.push({
-// 		label : "하차 승객 수",
-// 		borderColor : color[1].borderColor,
-// 		pointBorderColor : color[1].pointBorderColor,
-// 		pointBackGroundColor : color[1].pointBackGroundColor,
-// 		pointBorderWidth : 2,
-// 		pointHoverRadius : 4,
-// 		pointHoverBorderWidth : 1,
-// 		pointRadius : 4,
-// 		backgroundColor : 'transparent',
-// 		fill : true,
-// 		borderWidth : 2,
-// 		data :  jsonQuitData[0]
-
-		
-// 	});	
-
-
-
-	
-// 	myMultipleLineChart.update();
-	
-	
-	/* 멀티 차트 */
-// 	for (var i = 0; i < json.length; i++) {
-		
-// 	 	myMultipleLineChart.data.datasets.push({
-// 		label : "탑승 승객 수",
-// 		borderColor : color[0].borderColor,
-// 		pointBorderColor : color[0].pointBorderColor,
-// 		pointBackGroundColor : color[0].pointBackGroundColor,
-// 		pointBorderWidth : 2,
-// 		pointHoverRadius : 4,
-// 		pointHoverBorderWidth : 1,
-// 		pointRadius : 4,
-// 		backgroundColor : 'transparent',
-// 		fill : true,
-// 		borderWidth : 2,
-// 		data :  jsonRideData[0]
-
-		
-// 	});	
-	 	
-	 	
-// 	 	var multipleLineChart = document.getElementById('multipleLineChart')
-// 		.getContext('2d');
-
-// 		var myMultipleLineChart = new Chart(
-// 			multipleLineChart, {
-// 				type : 'line',
-// 				data : {
-// 					labels : [],
-// 					datasets : []
-// 				},
-// 				options : {
-// 					responsive : true,
-// 					maintainAspectRatio : false,
-// 					legend : {
-// 						position : 'top',
-// 					},
-// 					tooltips : {
-// 						bodySpacing : 4,
-// 						mode : "nearest",
-// 						intersect : 0,
-// 						position : "nearest",
-// 						xPadding : 10,
-// 						yPadding : 10,
-// 						caretPadding : 10
-// 					},
-// 					layout : {
-// 						padding : {
-// 							left : 15,
-// 							right : 15,
-// 							top : 15,
-// 							bottom : 15
-// 						}
-// 					}
-// 				}
-// 			});
-	 	
-	 	
-	 	
-// 	}
-// 	var multipleLineChart = document.getElementById('multipleLineChart')
-// 			.getContext('2d');
-
-// 	var myMultipleLineChart = new Chart(
-// 			multipleLineChart, {
-// 				type : 'line',
-// 				data : {
-// 					labels : [],
-// 					datasets : []
-// 				},
-// 				options : {
-// 					responsive : true,
-// 					maintainAspectRatio : false,
-// 					legend : {
-// 						position : 'top',
-// 					},
-// 					tooltips : {
-// 						bodySpacing : 4,
-// 						mode : "nearest",
-// 						intersect : 0,
-// 						position : "nearest",
-// 						xPadding : 10,
-// 						yPadding : 10,
-// 						caretPadding : 10
-// 					},
-// 					layout : {
-// 						padding : {
-// 							left : 15,
-// 							right : 15,
-// 							top : 15,
-// 							bottom : 15
-// 						}
-// 					}
-// 				}
-// 			});
-	
-	
-	
-	
-
-		
-		
-	})
-</script>
 
 
 
 
-<script type="text/javascript">
-
-/* 멀티 차트 */
-// var multipleLineChart = document.getElementById('multipleLineChart')
-// 		.getContext('2d');
-
-// var myMultipleLineChart = new Chart(
-// 		multipleLineChart, {
-// 			type : 'line',
-// 			data : {
-// 				labels : [],
-// 				datasets : []
-// 			},
-// 			options : {
-// 				responsive : true,
-// 				maintainAspectRatio : false,
-// 				legend : {
-// 					position : 'top',
-// 				},
-// 				tooltips : {
-// 					bodySpacing : 4,
-// 					mode : "nearest",
-// 					intersect : 0,
-// 					position : "nearest",
-// 					xPadding : 10,
-// 					yPadding : 10,
-// 					caretPadding : 10
-// 				},
-// 				layout : {
-// 					padding : {
-// 						left : 15,
-// 						right : 15,
-// 						top : 15,
-// 						bottom : 15
-// 					}
-// 				}
-// 			}
-// 		});
 
 
-/* 도넛 차트 */
-// var myDoughnutChart = new Chart(doughnutChart, {
-// 	type : 'doughnut',
-// 	data : {
-// 		datasets : [ {
-// 			data : [ 10, 20, 30 ],
-// 			backgroundColor : [ '#f3545d', '#fdaf4b', '#1d7af3' ]
-// 		} ],
 
-// 		labels : [ 'Red', 'Yellow', 'Blue' ]
-// 	},
-// 	options : {
-// 		responsive : true,
-// 		maintainAspectRatio : false,
-// 		legend : {
-// 			position : 'bottom'
-// 		},
-// 		layout : {
-// 			padding : {
-// 				left : 20,
-// 				right : 20,
-// 				top : 20,
-// 				bottom : 20
-// 			}
-// 		}
-// 	}
-// });
-// var myDoughnutChart = new Chart(GenderdoughnutChart, {
-// 	type : 'doughnut',
-// 	data : {
-// 		datasets : [ {
-// 			data : [ 10, 30 ],
-// 			backgroundColor : [ '#f3545d', '#fdaf4b', '#1d7af3' ]
-// 		} ],
 
-// 		labels : [ 'Red', 'Blue' ]
-// 	},
-// 	options : {
-// 		responsive : true,
-// 		maintainAspectRatio : false,
-// 		legend : {
-// 			position : 'bottom'
-// 		},
-// 		layout : {
-// 			padding : {
-// 				left : 20,
-// 				right : 20,
-// 				top : 20,
-// 				bottom : 20
-// 			}
-// 		}
-// 	}
-// });
-</script>
