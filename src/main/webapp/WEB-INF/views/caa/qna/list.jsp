@@ -96,8 +96,10 @@
                                             <!-- <button data-oper='register' class="btn btn-black" onclick="location.href='/qna/register'">등록</button> -->
 
 
+											<hr>
+											
                                             <button data-oper='register' class="btn btn-primary"
-                                                    onclick="location.href='/qna/register'">등록
+                                                    onclick="location.href='/qna/register'" style="float: right;">등록
                                             </button>
                                         </div>
                                     </div>

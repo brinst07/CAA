@@ -17,9 +17,14 @@
 								<h4 class="page-title">QnA</h4>
 								<h6 class="page-pretitle">Questions and Answers</h6>
 							</div>
+							
+							
+							<!-- <form id="qnaModify" role="form" action="/qna/modify" method="post"> -->
+							
+							
 							<div class="col-auto">
-								<a href="#" class="btn btn-light btn-border"> 확인 </a> 
-								<a href="#" class="btn btn-light btn-border"> 삭제 </a> 
+								<a href="/qna/modify" class="btn btn-light btn-border"> 확인 </a> 
+								<a href="/qna/remove" class="btn btn-light btn-border"> 삭제 </a> 
 								<a href="/qna/list" class="btn btn-primary ml-2"> 취소 </a>
 							</div>
 						</div>
@@ -28,16 +33,13 @@
 							<div class="col-md-12">
 								<div class="card card-invoice">
 									<div class="card-header">
-										<div class="invoice-header">
-										
-											<input type="text" class="form-control" id="board_title"
-												name="board_title"
-												value='<c:out value="${board.board_title }"/>'>
-												
-											<%-- <h3 class="invoice-title">
-												<c:out value="${board.board_title }"></c:out>
-											</h3> --%>
-										</div>
+										<h5 class="sub">제목</h5>
+											<div class="invoice-header">
+											
+												<input type="text" class="form-control" id="board_title" 
+												name="board_title" value='<c:out value="${board.board_title }"/>'>
+					
+											</div>
 									</div>
 									<div class="card-body">
 										<div class="separator-solid"></div>
@@ -60,7 +62,12 @@
 										<div class="separator-solid"></div>
 										<h5 class="sub">내용</h5>
 										<div style="height: 300px;">
-											<c:out value="${board.board_content }"></c:out>
+										
+											<textarea id="editor" name="board_content"></textarea>
+										
+												</div>
+										
+										
 										</div>
 									</div>
 								</div>
@@ -78,6 +85,29 @@
 
 
 </body>
+
+
+<script>
+		$('#editor').summernote('code', '${board.board_content}');
+		
+		$('#editor').val("${board.board_content}");
+		$('#editor').summernote(
+				{
+					fontNames : [ 'Arial', 'Arial Black', 'Comic Sans MS',
+							'Courier New' ],
+					tabsize : 2,
+					height : 300,
+					callbacks: {
+						onImageUpload: function(files, editor, welEditable) {
+							for(var i = files.length -1; i >= 0; i--){
+								sendFile(files[i], this);
+							}
+						}
+					}
+				});
+	</script>
+
+
 
 
 

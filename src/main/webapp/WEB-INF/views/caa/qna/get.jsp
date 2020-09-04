@@ -16,8 +16,12 @@
 								<h6 class="page-pretitle">Questions and Answers</h6>
 							</div>
 							<div class="col-auto">
-								<a href="#" class="btn btn-light btn-border"> 수정 </a> <a
-									href="/qna/list" class="btn btn-primary ml-2"> 목록 </a>
+							
+								<button data-oper='modify' class="btn btn-light btn-border"
+	                                    onclick="location.href='/qna/modify?board=<c:out value="${board.board_id }"/>'">수정
+	                            </button>
+                            
+								<a href="/qna/list" class="btn btn-primary ml-2"> 목록 </a>
 							</div>
 						</div>
 						<div class="page-divider"></div>
