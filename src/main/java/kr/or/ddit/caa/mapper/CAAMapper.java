@@ -5,6 +5,7 @@ import java.util.Map;
 
 import kr.or.ddit.caa.domain.CscodeVO;
 import kr.or.ddit.caa.domain.SalesByIndustryVO;
+import kr.or.ddit.caa.domain.SalesParamVO;
 import kr.or.ddit.caa.domain.SectorParamVO;
 import kr.or.ddit.caa.domain.StoreVO;
 
@@ -14,7 +15,7 @@ public interface CAAMapper {
 	
 	public List<CscodeVO> otherCscodeList(String keyword);
 	
-	public List<SalesByIndustryVO> SalesByIndustryList(Map map);
+	public List<SalesByIndustryVO> SalesByIndustryList(SalesParamVO vo);
 	/* 영현 ↓ */
 	
 	// 원에 포함된 지하철을 전부 가져온다.

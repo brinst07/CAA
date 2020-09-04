@@ -18,20 +18,16 @@ import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.google.common.reflect.TypeToken;
 import com.google.gson.Gson;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 
-import com.google.gson.JsonArray;
-import com.google.gson.JsonObject;
-import com.google.gson.JsonParser;
-
 import kr.or.ddit.bs.service.BSService;
 import kr.or.ddit.caa.domain.CscodeVO;
 import kr.or.ddit.caa.domain.SalesByIndustryVO;
+import kr.or.ddit.caa.domain.SalesParamVO;
 import kr.or.ddit.caa.service.CAAService;
 import lombok.Setter;
 import lombok.extern.log4j.Log4j;
@@ -167,8 +163,23 @@ public class CAAController {
 	/* ↑ 상권 분석 */
 	//매출분석
 		@GetMapping("/saleanalysis")
-		public String caaSale(Map map, Model model, HttpSession session,JsonParser jsonParser  ) {
-
+		public String caaSale(Map map, Model model, HttpSession session,JsonParser jsonParser, String year ) {
+//			
+//			if(year == null) {
+//				year = "4";
+//			}
+//			log.info("session의 jsonMapList값보기");
+//			log.info(session.getAttribute("jsonMapList"));
+//			
+//			String stringList= (String) session.getAttribute("jsonMapList");
+//			String stringSector = (String) session.getAttribute("sector");
+//			
+//			SalesParamVO vo = new SalesParamVO();
+//			vo.setYear(year);
+//			
+//			List<SalesByIndustryVO> list = service.SalesByIndustryList(vo);
+//			model.addAttribute("result", list);
+			
 			return "caa/caa/SalesAnalysis";
 		}
 

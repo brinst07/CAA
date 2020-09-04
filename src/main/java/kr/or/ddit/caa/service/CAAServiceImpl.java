@@ -17,6 +17,7 @@ import com.google.gson.JsonParser;
 
 import kr.or.ddit.caa.domain.CscodeVO;
 import kr.or.ddit.caa.domain.SalesByIndustryVO;
+import kr.or.ddit.caa.domain.SalesParamVO;
 import kr.or.ddit.caa.domain.SectorParamVO;
 import kr.or.ddit.caa.domain.StoreVO;
 import kr.or.ddit.caa.mapper.CAAMapper;
@@ -44,9 +45,9 @@ public class CAAServiceImpl implements CAAService {
 	}
 
 	@Override
-	public List<SalesByIndustryVO> SalesByIndustryList(Map map) {
-
-		return mapper.SalesByIndustryList(map);
+	public List<SalesByIndustryVO> SalesByIndustryList(SalesParamVO vo) {
+		
+		return mapper.SalesByIndustryList(vo);
 	}
 
 

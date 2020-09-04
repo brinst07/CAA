@@ -7,6 +7,7 @@ import javax.servlet.http.HttpSession;
 
 import kr.or.ddit.caa.domain.CscodeVO;
 import kr.or.ddit.caa.domain.SalesByIndustryVO;
+import kr.or.ddit.caa.domain.SalesParamVO;
 import kr.or.ddit.caa.domain.SectorParamVO;
 import kr.or.ddit.caa.domain.StoreVO;
 
@@ -17,7 +18,7 @@ public interface CAAService {
 
 	public List<CscodeVO> otherCscodeList(String keyword);
 	
-	public List<SalesByIndustryVO> SalesByIndustryList(Map map);
+	public List<SalesByIndustryVO> SalesByIndustryList(SalesParamVO vo);
 
 	/* 영현 ↓ */
 	

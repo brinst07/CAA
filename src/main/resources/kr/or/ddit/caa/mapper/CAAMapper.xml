@@ -53,7 +53,87 @@
 	
 <!-- 	동적 쿼리, 파라미터  수정해야함-->
 	<select id="SalesByIndustryList" resultType="kr.or.ddit.caa.domain.SalesByIndustryVO">
-select * from SALES_TEMP where SALES_SER_NAME like '%'||#{serName}||'%' and SALES_BD_NAME like '%'||#{storeName}||'%' and SALES_YEAR ='2019'
+		select SALES_SER_NAME AS upjongName
+				,ROUND(AVG(SALES_MNT_PRICE), 0) AS avgPrice 
+				,ROUND(AVG(SALES_MNT_COUNT), 0) AS avgCount
+				,ROUND(SUM(SALES_STORE_COUNT), 0) AS sumStore
+				,ROUND(AVG(SALES_WK_RATI), 0) AS avgWKrati 
+				,ROUND(AVG(SALES_WD_RATI), 0) AS avgWDrati
+				,ROUND(AVG(SALES_MON_Rati), 0) as avgMonRati
+				,ROUND(AVG(SALES_MON_PRICE), 0) as avgMonPrice
+				,ROUND(AVG(SALES_MON_Count), 0) as avgMonCount
+				,ROUND(AVG(SALES_TUE_Rati), 0)as avgTueRati
+				,ROUND(AVG(SALES_TUE_PRICE), 0) as avgTuePrice
+				,ROUND(AVG(SALES_TUE_Count), 0) as avgTueCount
+				,ROUND(AVG(SALES_WED_Rati), 0) as avgWedRati
+				,ROUND(AVG(SALES_WED_PRICE), 0) as avgWedPrice
+				,ROUND(AVG(SALES_WED_Count), 0) as avgWedCount
+				,ROUND(AVG(SALES_THU_PRICE), 0) as avgThuPrice
+				,ROUND(AVG(SALES_THU_Rati), 0) as avgThuRati
+				,ROUND(AVG(SALES_THU_Count), 0) as avgThuCount
+				,ROUND(AVG(SALES_FRI_PRICE), 0) as avgFriPrice
+				,ROUND(AVG(SALES_FRI_Rati), 0) as avgFriRati
+				,ROUND(AVG(SALES_FRI_Count), 0) as avgFriCount
+				,ROUND(AVG(SALES_SAT_PRICE), 0) as avgSatPrice
+				,ROUND(AVG(SALES_SAT_Rati), 0) as avgSatRati
+				,ROUND(AVG(SALES_SAT_Count), 0) as avgSatCount
+				,ROUND(AVG(SALES_SUN_PRICE), 0) as avgSunPrice
+				,ROUND(AVG(SALES_SUN_RATI), 0) as avgSunRati 
+				,ROUND(AVG(SALES_SUN_Count), 0) as avgSunCount
+				,ROUND(AVG(SALES_0006_PRICE), 0)as avg0006Price
+				,ROUND(AVG(SALES_0611_PRICE), 0)as avg0611Price
+				,ROUND(AVG(SALES_1114_PRICE), 0)as avg1114Price
+				,ROUND(AVG(SALES_1417_PRICE), 0)as avg1417Price
+				,ROUND(AVG(SALES_1721_PRICE), 0)as avg1721Price
+				,ROUND(AVG(SALES_2124_PRICE), 0)as avg2124Price
+				,ROUND(AVG(SALES_0006_Count), 0)as avg0006Count
+				,ROUND(AVG(SALES_0611_Count), 0)as avg0611Count
+				,ROUND(AVG(SALES_1114_Count), 0)as avg1114Count
+				,ROUND(AVG(SALES_1417_Count), 0)as avg1417Count
+				,ROUND(AVG(SALES_1721_Count), 0)as avg1721Count
+				,ROUND(AVG(SALES_2124_Count), 0)as avg2124Count
+				,ROUND(AVG(SALES_0006_RATI), 0)as avg0006Rati
+				,ROUND(AVG(SALES_0611_RATI), 0)as avg0611Rati
+				,ROUND(AVG(SALES_1114_RATI), 0)as avg1114Rati
+				,ROUND(AVG(SALES_1417_RATI), 0)as avg1417Rati
+				,ROUND(AVG(SALES_1721_RATI), 0)as avg1721Rati
+				,ROUND(AVG(SALES_2124_RATI), 0)as avg2124Rati
+				,ROUND(AVG(SALES_AGE_10_PRICE), 0) as avg10Price
+				,ROUND(AVG(SALES_AGE_20_PRICE), 0) as avg20Price
+				,ROUND(AVG(SALES_AGE_30_PRICE), 0) as avg30Price
+				,ROUND(AVG(SALES_AGE_40_PRICE), 0) as avg40Price
+				,ROUND(AVG(SALES_AGE_50_PRICE), 0) as avg50Price
+				,ROUND(AVG(SALES_AGE_60_PRICE), 0) as avg60Price
+				,ROUND(AVG(SALES_AGE_10_Count), 0) as avg10Count
+				,ROUND(AVG(SALES_AGE_20_Count), 0) as avg20Count
+				,ROUND(AVG(SALES_AGE_30_Count), 0) as avg30Count
+				,ROUND(AVG(SALES_AGE_40_Count), 0) as avg40Count
+				,ROUND(AVG(SALES_AGE_50_Count), 0) as avg50Count
+				,ROUND(AVG(SALES_AGE_60_Count), 0) as avg60Count
+				,ROUND(AVG(SALES_AGE_10_RATI), 0) as avg10Rati
+				,ROUND(AVG(SALES_AGE_20_RATI), 0) as avg20Rati
+				,ROUND(AVG(SALES_AGE_30_RATI), 0) as avg30Rati
+				,ROUND(AVG(SALES_AGE_40_RATI), 0) as avg40Rati
+				,ROUND(AVG(SALES_AGE_50_RATI), 0) as avg50Rati
+				,ROUND(AVG(SALES_AGE_60_RATI), 0) as avg60Rati
+				,ROUND(AVG(SALES_MEN_PRICE), 0) as avgMenPrice
+				,ROUND(AVG(SALES_WOM_PRICE), 0) as avgWomPrice
+				,ROUND(AVG(SALES_MEN_RATI), 0) as avgMenRati
+				,ROUND(AVG(SALES_WOM_Count), 0) as avgWomCount
+				,ROUND(AVG(SALES_MEN_Count), 0) as avgMenCount
+				,ROUND(AVG(SALES_WOM_RATI), 0) as avgWomRati
+		from sales_temp
+		where 
+		<foreach collection="store_cs_code_name" item="sector" index="index" open="(" close=") and" separator="or">
+			SALES_BD_NAME = #{sector}
+		</foreach>
+	
+		<foreach collection="storeList" item="item" index="index" open="(" close=")" separator="or" >
+			SALES_SER_NAME LIKE '%'||#{item.middle}||'%'
+		</foreach>
+		AND SALES_YEAR ='2019' AND SALES_BUNGI_CODE = #{bungi}
+		 GROUP BY  SALES_SER_NAME
 	</select>
+
 	
 </mapper>

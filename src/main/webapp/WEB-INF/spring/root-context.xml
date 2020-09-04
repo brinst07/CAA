@@ -8,9 +8,10 @@
 
 	<bean id="hikariConfig" class="com.zaxxer.hikari.HikariConfig">
 		<property name="driverClassName" value="net.sf.log4jdbc.sql.jdbcapi.DriverSpy"></property>
-		<property name="jdbcUrl" value="jdbc:log4jdbc:oracle:thin:@localhost:1521:XE"></property>
-		<property name="username" value="localcaa"></property>
+		<property name="jdbcUrl" value="jdbc:log4jdbc:oracle:thin:@112.220.114.130:1521:XE"></property>
+		<property name="username" value="THINKPEOPLE"></property>
 		<property name="password" value="java"></property>
+		<property name="maximumPoolSize" value="5" ></property>
 	</bean>
 
 	<bean id="dataSource" class="com.zaxxer.hikari.HikariDataSource" destroy-method="close">
