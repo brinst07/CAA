@@ -1,9 +1,8 @@
 package kr.or.ddit.bs.mapper;
 
-import java.util.List;
-
-
 import kr.or.ddit.caa.domain.CscodeVO;
+
+import java.util.List;
 
 public interface BusinessStatusMapper {
 	

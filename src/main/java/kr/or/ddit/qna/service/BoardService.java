@@ -1,10 +1,10 @@
 package kr.or.ddit.qna.service;
 
-import java.util.List;
-
 import kr.or.ddit.caa.domain.Criteria;
 import kr.or.ddit.qna.domain.BoardAttachVO;
 import kr.or.ddit.qna.domain.BoardVO;
+
+import java.util.List;
 
 public interface BoardService {
 
@@ -20,24 +20,14 @@ public interface BoardService {
 
 	public int getTotal(Criteria cri);
 
-	public List<BoardAttachVO> getAttachList(Long bno);
-
-//	public void register(BoardVO board);
-//	
-//	public BoardVO get(String board_id);
-//	
-//	public boolean modify(BoardVO board);
-//	
-////	public boolean remove(String board_id);
-//	
-//	public int remove(String board_id);
-//	
-////	public List<BoardVO> getList();
-//	
-//	public List<BoardVO> getList(Criteria cri);
-//	
-//	public int getTotal(Criteria cri);
-//	
-//	public List<BoardAttachVO> getAttachList(Long bno);
-
+	public List<BoardAttachVO> getAttachList(String board_id);
+	
 }
+	
+	
+	
+	
+
+	
+	
+	

@@ -10,6 +10,12 @@
 <link rel="icon" href="/resources/assets/img/icon.ico"
 	type="image/x-icon" />
 <meta charset="UTF-8" />
+<style type="text/css">        
+   
+        #registerForm { width: 600px; }
+        #registerForm label.error { margin-left: 10px; color:red; }
+        
+    </style>
 <!-- Fonts and icons -->
 <script src="/resources/assets/js/plugin/webfont/webfont.min.js"></script>
 <script src="/resources/assets/js/validation.js"></script>
@@ -96,7 +102,7 @@
 				</div>
 				<div class="page-inner">
 					<div class="page-header">
-						<h4 class="page-title">회원가입 입력창</h4>
+						<h4 class="page-title">회원가입</h4>
 						<ul class="breadcrumbs">
 							<li class="nav-home"><a href="#"> <i
 									class="flaticon-home"></i>
@@ -111,18 +117,30 @@
 						<div class="col-md-12">
 							<div class="card">
 
-								<form action="" id="exampleValidation" novalidate="novalidate">
+								<form role="form" action="/member/insertMember" method="post" action="" id="exampleValidation" novalidate="novalidate">
 									<div class="card-body">
+									
+									
 										<div class="form-group form-show-validation row">
-											<label for="name"
-												class="col-lg-3 col-md-3 col-sm-4 mt-sm-2 text-right">아이디
+											<label for="member_id"
+												   class="col-lg-3 col-md-3 col-sm-4 mt-sm-2 text-right">아이디
 												<span class="required-label">*</span>
 											</label>
 											<div class="col-lg-4 col-md-9 col-sm-8">
-												<input type="text" class="form-control" id="id"
+												<input type="text" class="form-control" id="member_id"
 													name="member_id" placeholder="Enter Username" required="">
+													<div class="check_font" id="id_check"></div>
 											</div>
+											
+<!-- 											<div class="form-group"> -->
+<!-- 												<label for="member_id">아이디</label> <input type="text" -->
+<!-- 													class="form-control" id=""member_id"" name="member_id" -->
+<!-- 													placeholder="ID" required> -->
+<!-- 												<div class="check_font" id="id_check"></div> -->
+<!-- 											</div> -->
 										</div>
+										
+										
 										<div class="form-group form-show-validation row">
 											<label for="username"
 												class="col-lg-3 col-md-3 col-sm-4 mt-sm-2 text-right">이름
@@ -140,6 +158,8 @@
 												</div>
 											</div>
 										</div>
+										
+										
 										<div class="form-group form-show-validation row">
 											<label for="email"
 												class="col-lg-3 col-md-3 col-sm-4 mt-sm-2 text-right">이메일
@@ -148,14 +168,16 @@
 											<div class="col-lg-4 col-md-9 col-sm-8" style="float: left:">
 												<input type="email" class="form-control" id="email"
 													placeholder="Enter Email" name="member_email" required="">
+													<div class="check_font" id="email_check"></div>
 											</div>
+											
+											
 											<button class="btn btn-primary btn-round btn-lg"
 												type="button" onclick="emailCheck()" style="float: right;">인증번호</button>
 										</div>
 										<div class="form-group form-show-validation row">
 											<label for="confirmpassword"
-												class="col-lg-3 col-md-3 col-sm-4 mt-sm-2 text-right">인증번호
-												확인 <span class="required-label">*</span>
+												class="col-lg-3 col-md-3 col-sm-4 mt-sm-2 text-right">인증번호 확인 <span class="required-label">*</span>
 											</label>
 											<div class="col-lg-4 col-md-9 col-sm-8">
 												<input type="hidden" class="form-control" id="hiddenpassword"
@@ -165,6 +187,8 @@
 													required="">
 											</div>
 										</div>
+										
+										
 										<div class="form-group form-show-validation row">
 											<label for="password"
 												class="col-lg-3 col-md-3 col-sm-4 mt-sm-2 text-right">비밀번호
@@ -176,10 +200,11 @@
 													required="">
 											</div>
 										</div>
+										
+										
 										<div class="form-group form-show-validation row">
 											<label for="confirmpassword"
-												class="col-lg-3 col-md-3 col-sm-4 mt-sm-2 text-right">비밀번호
-												확인 <span class="required-label">*</span>
+												class="col-lg-3 col-md-3 col-sm-4 mt-sm-2 text-right">비밀번호 확인 <span class="required-label">*</span>
 											</label>
 											<div class="col-lg-4 col-md-9 col-sm-8">
 												<input type="password" class="form-control"
@@ -188,6 +213,7 @@
 											</div>
 										</div>
 										<div class="separator-solid"></div>
+
 
 										<div class="form-group form-show-validation row">
 											<label for="birth"
@@ -207,10 +233,10 @@
 											</div>
 										</div>
 
+
 										<div class="separator-solid"></div>
 										<div class="form-group form-show-validation row">
-											<label class="col-lg-3 col-md-3 col-sm-4 mt-sm-2 text-right">프로필
-												이미지<span class="required-label">*</span>
+											<label class="col-lg-3 col-md-3 col-sm-4 mt-sm-2 text-right">프로필 이미지<span class="required-label">*</span>
 											</label>
 											<div class="col-lg-4 col-md-9 col-sm-8">
 												<div class="input-file input-file-image">
@@ -244,7 +270,7 @@
 									<div class="card-action">
 										<div class="row">
 											<div class="col-md-12">
-												<input class="btn btn-success" type="submit" value="가입하기">
+												<input data-oper='register' class="btn btn-success" type="submit" value="가입하기">
 												<button class="btn btn-danger" type="reset">취소</button>
 											</div>
 										</div>
@@ -335,7 +361,7 @@
 		src="/resources/assets/js/plugin/summernote/summernote-bs4.min.js"></script>
 
 	<!-- Select2 -->
-	<script src="/resources/assets/js/plugin/select2/select2.full.min.js"></script>
+	<script src="/resources/assets/js/plugin/select2/select2.full.min.js"></script>                                                            
 
 	<!-- Sweet Alert -->
 	<script src="/resources/assets/js/plugin/sweetalert/sweetalert.min.js"></script>
@@ -431,5 +457,190 @@
 					},
 				});
 	</script>
+	
+	<script>
+// 아이디 유효성 검사(1 = 중복 / 0 != 중복)
+	$("#member_id").keyup(function() {
+		// id = "id_reg" / name = "userId"
+		var member_id = $('#member_id').val();
+		
+		
+		
+// 		var re = /^[a-zA-Z0-9]{4,12}$/ // 아이디와 패스워드가 적합한지 검사할 정규식
+// 		var re2 = /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i;// 이메일이 적합한지 검사할 정규식
+		
+
+// 	    var id = document.getElementById("member_id");
+// 	    var pw1 = document.getElementById("password");
+// 	    var pw2 = document.getElementById("confirmpassword");
+// 	    var email = document.getElementById("email");
+	    
+// 	    if(!id_check(re,id,"아이디는 4~12자의 영문 대소문자와 숫자로만 입력")) {
+// 	           return false;
+// 	       }
+
+// 	    if(!check(re,pw1,"패스워드는 4~12자의 영문 대소문자와 숫자로만 입력")) {
+// 	           return false;
+// 	       }
+// 	    if(!check(re,pw2,"패스워드는 4~12자의 영문 대소문자와 숫자로만 입력")) {
+// 	           return false;
+// 	       }
+
+// 	    if(!check(re2, email, "적합하지 않은 이메일 형식입니다.")) {
+// 	           return false;
+// 	       }   
+	       
+	       
+	       
+		$.ajax({
+			url : '/member/rest/idCheck?member_id='+ member_id,
+			type : 'get',
+			success : function(data) {
+				var over = data.over;
+				console.log(over);
+				if (over == 1) {
+						// 1 : 아이디가 중복되는 문구
+						$("#id_check").text("사용중인 아이디입니다 ");
+						$("#id_check").css("color", "red");
+						$("#id_check").css("font-size", "11px");
+						$("#reg_submit").attr("disabled", true);
+					} else {
+						
+						if(member_id == 0){
+							// 0 : 아이디 길이 / 문자열 검사
+							$("#id_check").text("");
+							$("#reg_submit").attr("disabled", false);
+				
+						} else if(member_id == ""){
+							
+							$('#id_check').text('아이디를 입력해주세요 )');
+							$('#id_check').css('color', 'red');
+							$("#id_check").css("font-size", "11px");
+							$("#reg_submit").attr("disabled", true);				
+							
+						}
+						
+						else if(!member_id.validationID()){
+							
+							$('#id_check').text("아이디는 소문자와 숫자 4~12자리만 가능합니다");
+							$('#id_check').css('color', 'red');
+							$("#id_check").css("font-size", "11px");
+							$("#reg_submit").attr("disabled", true);
+						}
+						else if(member_id.validationID()){
+							
+							$('#id_check').text("사용 가능한 아이디 입니다.");
+							$('#id_check').css('color', 'blue');
+							$("#id_check").css("font-size", "11px");
+							$("#reg_submit").attr("disabled", true);
+						}
+					}
+				
+				}
+				 ,error : function(){
+						console.log("실패");
+				}
+			});
+			
+			
+		});
+</script>
+
+
+<script>
+// 이메일 유효성 검사(1 = 중복 / 0 != 중복)
+	$("#email").keyup(function() {
+		var member_email = $('#email').val();
+		
+// 	    if(!check(re2, email, "적합하지 않은 이메일 형식입니다.")) {
+// 	           return false;
+// 	       }   
+	       
+	       
+		$.ajax({
+			url : '/member/rest/checkmail?member_email='+ member_email,
+			type : 'get',
+			success : function(data) {
+				var eover = data.eover;
+				console.log(eover);
+				if (eover == 1) {
+						// 1 : 아이디가 중복되는 문구
+						$("#email_check").text("사용중인 이메일입니다 ");
+						$("#email_check").css("color", "red");
+						$("#email_check").css("font-size", "11px");
+						$("#email_check").attr("disabled", true);
+					} else {
+						
+						if(member_email == 0){
+							// 0 : 아이디 길이 / 문자열 검사
+							$("#email_check").text("");
+							$("#reg_submit").attr("disabled", false);
+				
+						} else if(member_email == ""){
+							
+							$('#email_check').text('이메일을 입력해주세요 )');
+							$('#email_check').css('color', 'red');
+							$("#email_check").css("font-size", "11px");
+							$("#reg_submit").attr("disabled", true);				
+							
+						} else if(member_email.validationMAIL()){
+							
+							$('#email_check').text("사용 가능한 이메일입니다.");
+							$('#email_check').css('color', 'blue');
+							$("#email_check").css("font-size", "11px");
+							$("#reg_submit").attr("disabled", true);
+						} else if(!member_email.validationMAIL()){
+							
+							$('#email_check').text("");
+							$('#email_check').css('color', 'red');
+							$("#email_check").css("font-size", "11px");
+							$("#reg_submit").attr("disabled", true);
+						}
+						
+					}
+				
+				}
+				 ,error : function(){
+						console.log("실패");
+				}
+			});
+			
+			
+		});
+</script>
+
+ <script type="text/javascript">
+	$(document).ready(function() {
+
+			var operForm = $("#exampleValidation");
+
+
+				$("button[data-oper='register']").on("click",function(e) {
+
+					// 추가한거
+					e.preventDefault();
+
+					console.log("Submit clicked");
+
+					var str = "";
+
+					$(".uploadResult ul li").each(function(i, obj) {
+
+						var jobj = $(obj);
+
+						console.dir(jobj);
+
+						str += "<input type='hidden' name='attachList["+ i+ "].member_id'value='"+ jobj.data("member_id")+ "'>";
+						str += "<input type='hidden' name='attachList["+ i+ "].member_username'value='"+ jobj.data("member_username")+ "'>";
+						str += "<input type='hidden' name='attachList["+ i+ "].member_email'value='"+ jobj.data("member_email")+ "'>";
+						str += "<input type='hidden' name='attachList["+ i+ "].member_enabled'value='"+ jobj.data("member_enabled")+ "'>";
+						str += "<input type='hidden' name='attachList["+ i+ "].member_password'value='"+ jobj.data("member_password")+ "'>";
+
+						});
+
+						operForm.append(str).attr("action","/member/insertMember").submit();
+						});
+					});
+</script>
 </body>
 </html>

@@ -1,11 +1,9 @@
 package kr.or.ddit.qna.mapper;
 
-import java.util.List;
-
+import kr.or.ddit.qna.domain.BoardVO;
 import org.apache.ibatis.annotations.Param;
 
-import kr.or.ddit.caa.domain.Criteria;
-import kr.or.ddit.qna.domain.BoardVO;
+import java.util.List;
 
 public interface BoardMapper {
 
@@ -19,11 +17,13 @@ public interface BoardMapper {
 
 	public void insert(BoardVO board);
 	
+	public String selectKey();
+	
 	public void insertSelectKey(BoardVO board);
 	
 	public BoardVO read(Long board_id);
 	
-	public int delete(Long bno);	
+	public int delete(String board_id);	
 	
 	public int update(BoardVO board);
 	

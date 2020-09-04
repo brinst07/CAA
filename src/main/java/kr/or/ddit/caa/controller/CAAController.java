@@ -28,9 +28,16 @@ import kr.or.ddit.bs.service.BSService;
 import kr.or.ddit.caa.domain.CscodeVO;
 import kr.or.ddit.caa.domain.SalesByIndustryVO;
 import kr.or.ddit.caa.domain.SalesParamVO;
+import kr.or.ddit.caa.domain.SubwayPopVO;
 import kr.or.ddit.caa.service.CAAService;
 import lombok.Setter;
 import lombok.extern.log4j.Log4j;
+import org.springframework.http.MediaType;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
 @RequestMapping("/caa/*")
@@ -208,108 +215,92 @@ public class CAAController {
 	public String PopAnalysis(Model model, HttpSession session) {
 //		List<Map<String, String>> popListMap = service.getSubwayPop();
 //		model.addAttribute("popListMap", popListMap);
-		
-		String jsonMapList = (String) session.getAttribute("jsonMapList");
-		
-		JsonParser jsonParser = new JsonParser();
-		
-		// 원 안에 포함된 기차 역의 위치를 여러개 가져온다. 
-		// 1. 지하철역 이름
-		// 2. 경도, 위도 좌표
-		// 3. 월 별 유동 인구 수
-		List<Map<String, String>> FigureMapList = service.getFigureSubway(jsonMapList);
-		
-		System.out.println(FigureMapList);
-		
-		model.addAttribute("circleMapList", FigureMapList);
-		
 
-		
+        String jsonMapList = (String) session.getAttribute("jsonMapList");
+
+        // 원 안에 포함된 기차 역의 위치를 여러개 가져온다.
+        // 1. 지하철역 이름
+        // 2. 경도, 위도 좌표
+        // 3. 월 별 유동 인구 수
+        List<SubwayPopVO> FigureMapList = service.getFigureSubway(jsonMapList);
+
+        Gson gson = new Gson();
+        String jsonFigure = gson.toJson(FigureMapList);
+        System.out.println(jsonFigure);
 
 
-	
-		
-		
-		return "caa/caa/popAnalysis";
-	}
-	/* 전영현 ↑ */
-	
+        model.addAttribute("jsonFigure", jsonFigure);
 
+
+        return "caa/caa/popAnalysis";
+    }
+    /* 전영현 ↑ */
 
 
 //	창수
-	
-	@GetMapping("/JoinMember")
-	public String JoinMember() {
-		return "caa/member/JoinMember";
-	}
-	
-	@GetMapping("/modifyMember")
-	public String modifyMember() {
-		return "caa/member/modifyMember";
-	}
-	
 
-	@GetMapping("/noticeList")
-	public String noticeList() {
-		return "caa/notice/noticeList";
-	}
-	
-	@GetMapping("/noticeView")
-	public String noticeView() {
-		return "caa/notice/noticeView";
-	}
-	
-	@GetMapping("/modifyNotice")
-	public String modifyNotice() {
-		return "caa/notice/modifyNotice";
-	}
-	
-	@GetMapping("/notificationService")
-	public String notificationService() {
-		return "caa/notificationInformation/notificationService";
-	}
+    @GetMapping("/JoinMember")
+    public String JoinMember() {
+        return "caa/member/JoinMember";
+    }
 
-	
-	/* ↓ sns */
-	@GetMapping("snsAnalysis")
-	public String snsAnalysis() {
-		return "caa/sns/snsAnalysisFirst";
-	}
-	/* ↑ sns */
-	
-	
-
-	//차완호
-	@GetMapping("/searchMember")
-	public String searchMember() {
-		
-		return "caa/member/SearchIDMember";
-	}
-	
-	@GetMapping("/searchID")
-	public String searchID() {
-		
-		
-		
-		return "caa/member/SearchIDMember";
-	}
-	
+    @GetMapping("/modifyMember")
+    public String modifyMember() {
+        return "caa/member/modifyMember";
+    }
 
 
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
+    @GetMapping("/noticeList")
+    public String noticeList() {
+        return "caa/notice/noticeList";
+    }
+
+    @GetMapping("/noticeView")
+    public String noticeView() {
+        return "caa/notice/noticeView";
+    }
+
+    @GetMapping("/modifyNotice")
+    public String modifyNotice() {
+        return "caa/notice/modifyNotice";
+    }
+
+    @GetMapping("/notificationService")
+    public String notificationService() {
+        return "caa/notificationInformation/notificationService";
+    }
+
+
+    /* ↓ sns */
+    @GetMapping("snsAnalysis")
+    public String snsAnalysis() {
+        return "caa/sns/snsAnalysisFirst";
+    }
+    /* ↑ sns */
+
+
+    //차완호
+    @GetMapping("/searchMember")
+    public String searchMember() {
+
+        return "caa/member/SearchIDMember";
+    }
+
+    @GetMapping("/searchID")
+    public String searchID() {
+        return "caa/member/SearchIDMember";
+    }
+
+    @GetMapping("/main")
+    public String mainPage() {
+        return "caa/mainPage/main";
+    }
+
+
+    @GetMapping("/survive")
+    public String survivePage() {
+        return "caa/caa/survive";
+    }
+
+
 }

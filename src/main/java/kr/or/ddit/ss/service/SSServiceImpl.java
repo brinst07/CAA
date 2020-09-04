@@ -1,14 +1,13 @@
 package kr.or.ddit.ss.service;
 
-import java.util.List;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-
 import kr.or.ddit.caa.domain.CscodeVO;
 import kr.or.ddit.ss.mapper.SSMapper;
 import lombok.Setter;
 import lombok.extern.log4j.Log4j;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 @Log4j

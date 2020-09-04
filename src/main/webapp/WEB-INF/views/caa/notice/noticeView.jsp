@@ -205,47 +205,78 @@
    <script src="../assets/js/atlantis.min.js"></script>
    <!-- Atlantis DEMO methods, don't include it in your project! -->
    <script src="../assets	/js/setting-demo.js"></script>
-   <script>
+   <!-- <script>
       $('#editor').summernote({
          fontNames: ['Arial', 'Arial Black', 'Comic Sans MS', 'Courier New'],
          tabsize: 2,
          height: 300
       });
+   </script> -->
+   
+ 
+   
+   <script type="text/javascript">
+   $(document).ready(function(){
+	 
+	   var operForm = $("#operForm");
+	   
+// 	   $("button[data-oper='modify']").on("click", function(e){
+		   
+// 		   operForm.attr("action", "/qna/modify").submit();
+// 	   });
+	   
+	   $("button[data-oper='list']").on("click", function(e){
+		 
+		   operForm.find("#board_id").remove();
+		   operForm.attr("action", "/notice/noticeList")
+		   operForm.submit();
+	   });
+	   
+   });
+   
    </script>
    
-   <script >
-      $(document).ready(function() {
-         $('#basic-datatables').DataTable({
-         });
-
-         $('#multi-filter-select').DataTable( {
-            "pageLength": 5,
-            initComplete: function () {
-               this.api().columns().every( function () {
-                  var column = this;
-                  var select = $('<select class="form-control"><option value=""></option></select>')
-                  .appendTo( $(column.footer()).empty() )
-                  .on( 'change', function () {
-                     var val = $.fn.dataTable.util.escapeRegex(
-                        $(this).val()
-                        );
-
-                     column
-                     .search( val ? '^'+val+'$' : '', true, false )
-                     .draw();
-                  } );
-
-                  column.data().unique().sort().each( function ( d, j ) {
-                     select.append( '<option value="'+d+'">'+d+'</option>' )
-                  } );
-               } );
-            }
-         });
-
-      });
+    <script>
+   
+   $(document).ready(function(){
+	   (function(){
+	
+		   var board_id = '<c:out value="${board.board_id}"/>';
+		   
+		   $.getJSON("/notice/getAttachList", {board_id: board_id}, function(arr){
+		        	
+		       console.log(arr);
+		       
+		       var str = "";
+		       
+		       $(arr).each(function(i, attach){
+		       
+		         //image type
+		         if(attach.fileType){
+		           var fileCallPath =  encodeURIComponent( attach.uploadPath+ "/s_"+attach.uuid +"_"+attach.fileName);
+		           
+		           str += "<li data-path='"+attach.uploadPath+"' data-uuid='"+attach.uuid+"' data-filename='"+attach.fileName+"' data-type='"+attach.fileType+"' ><div>";
+		           str += "<img src='/notice/display?fileName="+fileCallPath+"'>";
+		           str += "</div>";
+		           str +"</li>";
+		         }else{
+		             
+		           str += "<li data-path='"+attach.uploadPath+"' data-uuid='"+attach.uuid+"' data-filename='"+attach.fileName+"' data-type='"+attach.fileType+"' ><div>";
+		           str += "<span> "+ attach.fileName+"</span><br/>";
+		           str += "<img src='/resources/img/attach.png'></a>";
+		           str += "</div>";
+		           str +"</li>";
+		         }
+		       });
+		       
+		       $(".uploadResult ul").html(str);
+		       
+		       
+		     });//end getjson
+		     
+	   })(); // end function
+   });
    </script>
-   
-   
 
 </body>
 </html>

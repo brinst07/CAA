@@ -24,7 +24,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.fasterxml.jackson.core.type.TypeReference;
@@ -32,6 +31,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 import kr.or.ddit.bs.service.BSService;
 import kr.or.ddit.caa.domain.CscodeVO;
+import kr.or.ddit.caa.domain.IndiVO;
 import kr.or.ddit.caa.domain.SalesByIndustryVO;
 import kr.or.ddit.caa.domain.SalesJsonVO;
 import kr.or.ddit.caa.domain.SalesParamVO;
@@ -378,4 +378,12 @@ public class CAARestController {
 				return new ResponseEntity<Map<String, Object>>(totalMap, HttpStatus.OK);
 	}
 
+
+   @GetMapping(value = "/main/{var}", produces = { MediaType.APPLICATION_JSON_UTF8_VALUE })
+   public ResponseEntity<List<IndiVO>> indiList(@PathVariable("var")String var){
+
+      List<IndiVO> list = service.getIndiList(var);
+
+      return new ResponseEntity<List<IndiVO>>(list,HttpStatus.OK);
+   }
 }

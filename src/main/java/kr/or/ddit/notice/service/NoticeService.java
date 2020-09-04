@@ -1,10 +1,10 @@
 package kr.or.ddit.notice.service;
 
-import java.util.List;
-
 import kr.or.ddit.caa.domain.Criteria;
 import kr.or.ddit.domain.BoardAttachVO;
 import kr.or.ddit.domain.BoardVO;
+
+import java.util.List;
 
 
 public interface NoticeService {
@@ -21,6 +21,6 @@ public interface NoticeService {
 	
 	public int getTotal(Criteria cri);
 
-	public List<BoardAttachVO> getAttachList(Long bno);
+	public List<BoardAttachVO> getAttachList(String board_id);
 	
 }

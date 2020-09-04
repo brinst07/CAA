@@ -17,16 +17,45 @@
 	</select>
 
 	
-	<select id="getCircleSubway" resultType="java.util.HashMap">
-	select SP.SUBWAY_YEAR year,SP.SUBWAY_MONTH month, SUM(SP.SUBWAY_RIDE) ride,  SUM(SP.SUBWAY_QUIT) quit, SS.SUBWAY_STATION_LATITUDE LATITUDE, SS.SUBWAY_STATION_LONGITUDE LONGITUDE, SS.SUBWAY_STATION_NAME
-	from SUBWAY_PASSENGER SP
-	         inner join SUBWAY_STATION SS
-	                    on SP.SUBWAY_STATION_ID = SS.SUBWAY_STATION_ID
-	                           and SUBSTR(to_char(SUBWAY_DATE),1,6) >= to_char(add_months(sysdate,-12),'yyyymm')
-	
-	
-	group by SP.SUBWAY_YEAR, SP.SUBWAY_MONTH, SS.SUBWAY_STATION_LATITUDE , SS.SUBWAY_STATION_LONGITUDE, SS.SUBWAY_STATION_NAME
-	order by SP.SUBWAY_YEAR, SP.SUBWAY_MONTH
+	<select id="getCircleSubway" parameterType="hashMap" resultType="kr.or.ddit.caa.domain.SubwayPopVO">
+select SUBWAY_YEAR year,
+       SUBWAY_MONTH month,
+
+
+       SUM(SUBWAY_RIDE) ride,
+       SUM(SUBWAY_QUIT) quit,
+       #{selectName} selectName
+
+from SUBWAY_PASSENGER
+where SUBSTR(to_char(SUBWAY_DATE), 1, 6) >= to_char(add_months(sysdate, -12), 'yyyymm')
+  and SUBWAY_STATION_ID in (
+    select SUBWAY_STATION_ID
+    from (
+             select SUBWAY_STATION_ID,
+                    SUBWAY_STATION_NAME,
+                    SUBWAY_STATION_LATITUDE,
+                    SUBWAY_STATION_LONGITUDE,
+                    SQRT(
+                                    (SUBWAY_STATION_LATITUDE - #{LatitudeCenter}) *
+                                    (SUBWAY_STATION_LATITUDE - #{LatitudeCenter}) +
+                                    (SUBWAY_STATION_LONGITUDE - #{LongitudeCenter}) *
+                                    (SUBWAY_STATION_LONGITUDE - #{LongitudeCenter})
+                        ) radius
+             from SUBWAY_STATION
+         ) a
+         <![CDATA[
+    where a.radius < (SQRT(
+                                      (#{LatitudeEndBoundary} - #{LatitudeStartBoundary}) *
+                                      (#{LatitudeEndBoundary} - #{LatitudeStartBoundary}) +
+                                      (#{LongitudeEndBoundary} - #{LongitudeStartBoundary}) *
+                                      (#{LongitudeEndBoundary} - #{LongitudeStartBoundary})
+                          ) / (2 * SQRT(2))) * 1
+                          ]]>
+)
+group by SUBWAY_YEAR,
+         SUBWAY_MONTH
+order by SUBWAY_YEAR,
+         SUBWAY_MONTH
 	</select>
 
 	<select id="getStoreList" resultType="kr.or.ddit.caa.domain.StoreVO">
@@ -135,5 +164,8 @@
 		 GROUP BY  SALES_SER_NAME
 	</select>
 
-	
+
+	<select id="getIndiList" resultType="kr.or.ddit.caa.domain.IndiVO">
+		select * from INDICATOR where INDI_SIGUNGU_NAME = #{indi_sigungu_name}
+	</select>
 </mapper>

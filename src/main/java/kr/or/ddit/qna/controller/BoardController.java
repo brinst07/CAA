@@ -1,5 +1,25 @@
 package kr.or.ddit.qna.controller;
 
+import kr.or.ddit.domain.AttachFileDTO;
+import kr.or.ddit.qna.domain.BoardAttachVO;
+import kr.or.ddit.qna.domain.BoardVO;
+import kr.or.ddit.qna.service.BoardService;
+import lombok.AllArgsConstructor;
+import lombok.extern.log4j.Log4j;
+import net.coobird.thumbnailator.Thumbnailator;
+import org.springframework.core.io.FileSystemResource;
+import org.springframework.core.io.Resource;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.util.FileCopyUtils;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.UnsupportedEncodingException;
@@ -11,35 +31,6 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.UUID;
-
-import org.springframework.core.io.FileSystemResource;
-import org.springframework.core.io.Resource;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
-import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.util.FileCopyUtils;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestHeader;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
-
-import kr.or.ddit.caa.domain.Criteria;
-import kr.or.ddit.qna.domain.AttachFileDTO;
-import kr.or.ddit.qna.domain.BoardAttachVO;
-import kr.or.ddit.qna.domain.BoardVO;
-import kr.or.ddit.qna.service.BoardService;
-import lombok.AllArgsConstructor;
-import lombok.extern.log4j.Log4j;
-import net.coobird.thumbnailator.Thumbnailator;
 
 @Controller
 @Log4j
@@ -110,6 +101,8 @@ public class BoardController {
 
 		return "caa/qna/register";
 	}
+	
+	
 
 	@PostMapping("/register")
 	public String register(BoardVO board, RedirectAttributes rttr) {
@@ -126,9 +119,9 @@ public class BoardController {
 		log.info("===============================");
 
 		
-		// service.register(board);
+		 service.register(board);
 
-		// rttr.addFlashAttribute("result", board.getBoard_id());
+		 rttr.addFlashAttribute("result", board.getBoard_id());
 
 		return "redirect:/qna/list";
 	}
@@ -325,170 +318,20 @@ public class BoardController {
 	}
 	
 	
-
-	/*
-	 * //등록
-	 * 
-	 * @PostMapping("/register") public String register(BoardVO board,
-	 * RedirectAttributes rttr) { log.info("register : " + board_id);
-	 * 
-	 * if(board.getAttachList() != null) { board.getAttachList().forEach(attach ->
-	 * log.info(attach)); }
-	 * 
-	 * service.register(board_id); rttr.addFlashAttribute("result", board.getBno());
-	 * 
-	 * return "redirect:/board/list"; }
-	 * 
-	 * @GetMapping("/register") public void register() {
-	 * 
-	 * }
-	 */
-
-//	@GetMapping("/list")
-//	public String list(Criteria cri, Model model) {
-//		log.info("list");
-//
-//		model.addAttribute("list", service.getList(cri));
-////		model.addAttribute("pageMaker", new PageDTO(cri, 123));
-//		/*
-//		 * model.addAttribute("pageMaker", new PageDTO(cri, service.getTotal(cri)));
-//		 */
-//		return "caa/qna/list";
-//
-//	}
-//
-//	@PostMapping("/register")
-//	public String register(BoardVO board, RedirectAttributes rttr) {
-//		log.info("register : " + board);
-//
-//		/*
-//		 * if (board.getAttachList() != null) { board.getAttachList().forEach(attach ->
-//		 * log.info(attach)); }
-//		 */
-//
-//		/*
-//		 * service.register(board); rttr.addFlashAttribute("result", board.getBno());
-//		 */
-//
-//		return "redirect:/board/list";
-//	}
-//
-//	@GetMapping("/register")
-//	public void register() {
-//
-//	}
-//
-//	/*
-//	 * @GetMapping({"/get","/modify"}) // RequestParam -> bno의 값을 좀 더 명시적으로 처리하기 위해
-//	 * 사용 // Model -> 화면쪽으로 해당 번호의 게시물을 전달해야 하기 때문에 Model을 파라미터로 지정
-//	 * // @ModelAttribute는 자동으로 Model에 데이터를 지정한 이름으로 담아준다. public void
-//	 * get(@RequestParam("bno") Long bno, @ModelAttribute("cri") Criteria cri, Model
-//	 * model) { log.info("/get or /modify"); model.addAttribute("board",
-//	 * service.get(bno)); }
-//	 */
-//
-//	
-//	  @GetMapping("/get") 
-//	  // RequestParam -> bno의 값을 좀 더 명시적으로 처리하기 위해 사용 
-//	  // Model-> 화면쪽으로 해당 번호의 게시물을 전달해야 하기 때문에 Model을 파라미터로 지정 
-//	  // @ModelAttribute는 자동으로 Model에 데이터를 지정한 이름으로 담아준다. 
-//	  public String get(@RequestParam("board_id") String board_id, Model model) { 
-//		  log.info("/get"); model.addAttribute("board", service.get(board_id));
-//	  
-//	  return "caa/qna/get"; }
-//	 
-//
-//	/*
-//	 * @GetMapping({"/get", "/modify"}) // RequestParam -> bno의 값을 좀 더 명시적으로 처리하기 위해
-//	 * 사용 // Model -> 화면쪽으로 해당 번호의 게시물을 전달해야 하기 때문에 Model을 파라미터로 지정
-//	 * // @ModelAttribute는 자동으로 Model에 데이터를 지정한 이름으로 담아준다. public String
-//	 * get(@RequestParam("board_id") Long board_id, @ModelAttribute("cri") Criteria
-//	 * cri, Model model) { log.info("/get or /modify"); model.addAttribute("board",
-//	 * service.get(board_id));
-//	 * 
-//	 * return "caa/qna/get"; }
-//	 */
-//	
-//	
-//	  @GetMapping("/modify") 
-//	  public String modify(@RequestParam("board_id") String board_id, Model model) { 
-//		  log.info("/modify"); 
-//		  model.addAttribute("board", service.get(board_id));
-//		  
-//	  
-//	  return "caa/qna/modify"; }
-//	 
-//	 
-//	/*
-//	 * @GetMapping({"/get", "/modify"}) public void get(@RequestParam("board_id")
-//	 * Long board_id, @ModelAttribute("cri") Criteria cri, Model model) {
-//	 * log.info("/get or /modify"); model.addAttribute("board",
-//	 * service.get(board_id));
-//	 * 
-//	 * 
-//	 * }
-//	 */
-//	  
-//	  
-//	  
-//	  
-//	  @PostMapping("/modify")
-//	  public String modify(BoardVO board, RedirectAttributes rttr) {
-//		  log.info("modify:" + board);
-//		  
-//		  if (service.modify(board)) {
-//			  rttr.addFlashAttribute("result", "success");
-//		  }
-//		  return "redirect:caa/qna/list";
-//	  }
-//
-//	
-//	
-//	
-//		/*
-//		 * @PostMapping("/modify") //@RequestMapping(value="/modify", method =
-//		 * {RequestMethod.GET, RequestMethod.POST}) public String modity(BoardVO
-//		 * board, @ModelAttribute("cri") Criteria cri, RedirectAttributes rttr) {
-//		 * log.info("modify : " + board); if (service.modify(board)) {
-//		 * rttr.addFlashAttribute("result", "success");
-//		 * 
-//		 * }
-//		 * 
-//		 * rttr.addAttribute("pageNum", cri.getPageNum()); rttr.addAttribute("amount",
-//		 * cri.getAmount()); rttr.addAttribute("type", cri.getType());
-//		 * rttr.addAttribute("keyword", cri.getKeyword()); return
-//		 * "redirect:caa/qna/list"; }
-//		 */
-//
-//	  
-//	  
-//		/*
-//		 * @PostMapping("/remove") public String remove(@RequestParam("board_id") String
-//		 * board_id, @ModelAttribute("cri") Criteria cri, RedirectAttributes rttr) {
-//		 * log.info("remove.." + board_id); if (service.remove(board_id)) {
-//		 * rttr.addFlashAttribute("result", "success"); }
-//		 * 
-//		 * rttr.addAttribute("pageNum", cri.getPageNum()); rttr.addAttribute("amount",
-//		 * cri.getAmount()); rttr.addAttribute("type", cri.getType());
-//		 * rttr.addAttribute("keyword", cri.getKeyword());
-//		 * 
-//		 * return "redirect:caa/qna/list"; }
-//		 */
-//
-//	
-//	@PostMapping("/remove")
-//    public String remove(@RequestParam("board_id") String board_id, RedirectAttributes rttr) {
-//       log.info("remove.." + board_id);
-//       service.remove(board_id);
-//       return "redirect:/qna/list";
-//    }
-//	
-//	
-//	
-//	@GetMapping(value = "/getAttachList", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
-//	@ResponseBody
-//	public ResponseEntity<List<BoardAttachVO>> getAttachList(Long bno) {
-//		log.info("getAttachList : " + bno);
-//		return new ResponseEntity<>(service.getAttachList(bno), HttpStatus.OK);
-//	}
+	
+		@GetMapping(value = "/getAttachList",
+			produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+		@ResponseBody
+		public ResponseEntity<List<BoardAttachVO>> getAttachList(String board_id) {
+		
+		log.info("getAttachList " + board_id);
+		
+		return new ResponseEntity<>(service.getAttachList(board_id), HttpStatus.OK);
+		
+	}
 }
+
+	
+	
+	
+	

@@ -199,6 +199,9 @@
    <!-- Atlantis DEMO methods, don't include it in your project! -->
    <script src="../assets	/js/setting-demo.js"></script>
    <script>
+  	  $('#editor').summernote('code', '${board.board_content}');
+  	  
+	  $('#editor').val("${board.board_content}");
       $('#editor').summernote({
          fontNames: ['Arial', 'Arial Black', 'Comic Sans MS', 'Courier New'],
          tabsize: 2,
@@ -206,7 +209,7 @@
       });
    </script>
    
-   <script >
+   <!-- <script >
       $(document).ready(function() {
          $('#basic-datatables').DataTable({
          });
@@ -236,24 +239,173 @@
          });
 
       });
-   </script>
-   <script type="text/javascript">
-      $(document).ready(function() {
+   </script> -->
+  <script type="text/javascript">
+	$(document).ready(function() {
 
-         var operForm = $("#operForm");
-         
-         var textareaVal = $("textarea[name=board_content]").text();
+			var operForm = $("#operForm");
 
-         console.log("내용로그 "+textareaVal);
+			var textareaVal = $("textarea[name=board_content]").text();
 
-         $("button[data-oper='register']").on("click", function(e) {
-         
-            operForm.attr("action", "/notice/register").submit();
-         });
+			console.log(textareaVal);
 
-         
-      });
-      </script>
+				$("button[data-oper='register']").on("click",function(e) {
+
+					// 추가한거
+					e.preventDefault();
+
+					console.log("Submit clicked");
+
+					var str = "";
+
+					$(".uploadResult ul li").each(function(i, obj) {
+
+						var jobj = $(obj);
+
+						console.dir(jobj);
+
+						str += "<input type='hidden' name='attachList["+ i+ "].fileName'value='"+ jobj.data("filename")+ "'>";
+						str += "<input type='hidden' name='attachList["+ i+ "].uuid'value='"+ jobj.data("uuid")+ "'>";
+						str += "<input type='hidden' name='attachList["+ i+ "].uploadPath'value='"+ jobj.data("path")+ "'>";
+						str += "<input type='hidden' name='attachList["+ i+ "].fileType'value='"+ jobj.data("type")+ "'>";
+
+						});
+
+						operForm.append(str).attr("action","/notice/register").submit();
+						});
+
+						var regex = new RegExp("(.*?)\.(exe|sh|zip|alz)$");
+						var maxSize = 5242880; //5MB
+
+						function checkExtension(fileName, fileSize) {
+
+							if (fileSize >= maxSize) {
+								alert("파일 사이즈 초과");
+								return false;
+							}
+
+							if (regex.test(fileName)) {
+								alert("해당 종류의 파일은 업로드할 수 없습니다.");
+								return false;
+							}
+							return true;
+						}
+
+						$("input[type='file']")
+								.change(
+										function(e) {
+
+											var formData = new FormData();
+
+											var inputFile = $("input[name='uploadFile']");
+
+											var files = inputFile[0].files;
+
+											for (var i = 0; i < files.length; i++) {
+
+												if (!checkExtension(
+														files[i].name,
+														files[i].size)) {
+													return false;
+												}
+												formData.append("uploadFile",
+														files[i]);
+
+											}
+
+											$.ajax({
+												url : '/notice/uploadAjaxAction',
+												processData : false,
+												contentType : false,
+												data : formData,
+												type : 'POST',
+												success : function(result) {
+													console.log(result);
+													showUploadResult(result); //업로드 결과 처리 함수 
+												}
+											}); //$.ajax
+
+										});
+
+						function showUploadResult(uploadResultArr) {
+
+							if (!uploadResultArr || uploadResultArr.length == 0) {
+								return;
+							}
+
+							var uploadUL = $(".uploadResult ul");
+
+							var str = "";
+
+							$(uploadResultArr).each(function(i, obj) {
+
+								//image type
+
+								if (obj.image) {
+									var fileCallPath = encodeURIComponent(obj.uploadPath + "/s_" + obj.uuid + "_" + obj.fileName);
+										str += "<li data-path='"+obj.uploadPath+"'";
+			         					str +=" data-uuid='"+obj.uuid+"' data-filename='"+obj.fileName+"' data-type='"+obj.image+"'"
+			         					str +" ><div>";
+										str += "<span> " + obj.fileName + "</span>";
+										str += "<button type='button' data-file=\'"+fileCallPath+"\' "
+			         					str += "data-type='image' class='btn btn-warning btn-circle'><i class='fa fa-times'></i></button><br>";
+										str += "<img src='/notice/display?fileName=" + fileCallPath + "'>";
+										str += "</div>";
+										str + "</li>";
+										} else {
+											var fileCallPath = encodeURIComponent(obj.uploadPath +"/"+ obj.uuid+"_"+ obj.fileName);
+											var fileLink = fileCallPath.replace(new RegExp(/\\/g),"/");
+
+										str += "<li "
+			        					str += "data-path='"+obj.uploadPath+"' data-uuid='"+obj.uuid+"' data-filename='"+obj.fileName+"' data-type='"+obj.image+"' ><div>";
+										str += "<span> "+ obj.fileName+ "</span>";
+										str += "<button type='button' data-file=\'"+fileCallPath+"\' data-type='file' " 
+			         					str += "class='btn btn-warning btn-circle'><i class='fa fa-times'></i></button><br>";
+										str += "<img src='/resources/img/attach.png'></a>";
+										str += "</div>";
+										str + "</li>";
+												}
+
+											});
+
+							uploadUL.append(str);
+						}
+
+						$(".uploadResult").on("click", "button", function(e) {
+
+							console.log("delete file");
+
+							var targetFile = $(this).data("file");
+							var type = $(this).data("type");
+							console.log(targetFile);
+
+							var targetLi = $(this).closest("li");
+
+							$.ajax({
+								url : '/notice/deleteFile',
+								data : {
+									fileName : targetFile,
+									type : type
+								},
+								dataType : 'text',
+								type : 'POST',
+								success : function(result) {
+									alert(result);
+									targetLi.remove();
+								}
+							}); //$.ajax
+
+						});
+
+						/* $("button[data-oper='list']").on("click", function(e) {
+
+							openForm.find("#board_id").remove();
+							openForm.attr("action", "/qna/list")
+							openForm.submit();
+						}); */
+
+					});
+</script>
       
       
 </body>

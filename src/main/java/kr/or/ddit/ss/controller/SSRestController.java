@@ -1,7 +1,9 @@
 package kr.or.ddit.ss.controller;
 
-import java.util.List;
-
+import kr.or.ddit.caa.domain.CscodeVO;
+import kr.or.ddit.ss.service.SSService;
+import lombok.AllArgsConstructor;
+import lombok.extern.log4j.Log4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -10,10 +12,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import kr.or.ddit.caa.domain.CscodeVO;
-import kr.or.ddit.ss.service.SSService;
-import lombok.AllArgsConstructor;
-import lombok.extern.log4j.Log4j;
+import java.util.List;
 
 @RestController
 @RequestMapping("/ss/rest")

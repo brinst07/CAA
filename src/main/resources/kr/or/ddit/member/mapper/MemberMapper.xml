@@ -5,9 +5,37 @@
 <mapper namespace="kr.or.ddit.member.mapper.MemberMapper">
 
 
-	<insert id="insertMember"  >
-		    INSERT INTO member  VALUES(#{member_id}, #{member_password},#{member_email},#{member_enabled},#{member_username}) 
+<!-- 	회원가입 -->
+	<insert id="insertMember"  parameterType="kr.or.ddit.member.domain.MemberVO">
+		    INSERT INTO member  VALUES(#{member_id},#{member_password},#{member_email},'Y',#{member_username}) 
 	</insert>
+	
+<!-- 	회원정보 수정 완벽한거 아님 -->
+	<update id="modifyMember">
+		update member  
+		set 
+		member_id = '2',
+		member_password = #{member_password ,jdbcType=VARCHAR},
+		member_email = #{member_email,jdbcType=VARCHAR},
+		member_username = #{member_username,jdbcType=VARCHAR},
+		where member_id = #{member_id,jdbcType=VARCHAR}
+	</update>
+	
+<!-- 	아이디중복검사 -->
+	<select id="idCheck" resultType="Integer">
+      select count(*) 
+      from member
+      where member_id = #{member_id}
+	</select>
+	
+<!-- 	이메일중복검사 -->
+	<select id="checkmail" resultType="Integer">
+      select count(*) 
+      from member
+      where member_email = #{member_email}
+	</select>
+	
+
 
 	<!-- <select id="getListWithPaging"
 		resultType="kr.or.ddit.caa.domain.BoardVO">
