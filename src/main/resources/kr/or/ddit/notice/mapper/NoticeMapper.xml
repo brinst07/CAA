@@ -5,8 +5,10 @@
 <mapper namespace="kr.or.ddit.notice.mapper.NoticeMapper">
    
    <!-- 리스트 출력 -->
-   <select id="getList" resultType="kr.or.ddit.domain.BoardVO">
-     select * from BOARD where BOARD_CATEGORY_ID = 'notice'
+   <select id="getList" parameterType="kr.or.ddit.domain.BoardVO" resultType="kr.or.ddit.domain.BoardVO">
+     select * from BOARD where board_category_id = #{board_category_id}
+     and BOARD_STATUS = 'y'
+     
     </select>
     
     <!-- 상세글 출력 -->
@@ -29,11 +31,11 @@
 
 	
 	<!-- 게시글 삭제 -->
-	
-	<delete id="remove">
-		delete from board
+	<update id="remove">
+		update board
+		set BOARD_STATUS = 'n'
 		where board_id = #{board_id}
-	</delete>
+	</update>
 	
 	<!-- 게시글 등록  -->
    <insert id="insert">

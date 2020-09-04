@@ -84,11 +84,15 @@ public class NoticeServiceImpl implements NoticeService{
 	}
 
 	@Override
-	public List<BoardVO> getList() {
-		List<BoardVO> list = mapper.getList();
-		list.forEach(e -> log.info(e));
+	public List<BoardVO> getList(BoardVO boardVO) {
+		List<BoardVO> list = mapper.getList(boardVO);
+		log.info("-----------------getList--------------");
+		log.info(list.size());
+		
 		return list;
 	}
+	
+	
 	
 	@Override
 	public int getTotal(Criteria cri) {

@@ -10,7 +10,7 @@ import java.util.List;
 
 public interface NoticeMapper {
 
-	public List<BoardVO> getList();
+	public List<BoardVO> getList(BoardVO boardVO);
 	
 	public BoardVO read(String board_id);
 	

@@ -17,7 +17,7 @@ public interface NoticeService {
 	
 	public int remove(String board_id);
 	
-	public List<BoardVO> getList();
+	public List<BoardVO> getList(BoardVO boardVO);
 	
 	public int getTotal(Criteria cri);
 

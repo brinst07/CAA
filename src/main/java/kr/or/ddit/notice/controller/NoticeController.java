@@ -4,6 +4,7 @@ import kr.or.ddit.domain.AttachFileDTO;
 import kr.or.ddit.domain.BoardVO;
 import kr.or.ddit.notice.service.NoticeService;
 import lombok.AllArgsConstructor;
+import lombok.Setter;
 import lombok.extern.log4j.Log4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -26,6 +27,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.UUID;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.FileSystemResource;
 import org.springframework.core.io.Resource;
 import org.springframework.http.HttpHeaders;
@@ -56,16 +58,30 @@ import net.coobird.thumbnailator.Thumbnailator;
 @Log4j
 @RequestMapping("/notice")
 @AllArgsConstructor
-public class NoticeController<Criteria> {
+public class NoticeController {
 
 	private NoticeService service;
+	
+	
+	
 
 	// 목록 출력
 	@GetMapping("/noticeList")
-	public String list(Model model) {
+	public String list(Model model, BoardVO boardVO) {
 		log.info("list");
+		
+		
 
-		model.addAttribute("list", service.getList());
+		boardVO.setBoard_category_id("notice");
+		
+		
+		List<BoardVO> boardList =  service.getList(boardVO);
+		
+		model.addAttribute("list" , boardList);
+		
+		
+
+		
 		return "caa/notice/noticeList";
 	}
 
