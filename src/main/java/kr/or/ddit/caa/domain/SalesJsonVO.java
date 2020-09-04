@@ -9,6 +9,8 @@ public class SalesJsonVO {
 	private List<Map<String,String>> jsonMapList;
 	private List<Map<String,String>> sectors;
 	private String bungi;
-
+    
+	
+	
 	
 }

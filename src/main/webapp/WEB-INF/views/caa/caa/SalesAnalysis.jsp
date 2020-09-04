@@ -373,22 +373,21 @@
 				 
 				let html1 =  '';
 				
-				for(var i=0; i<totalStore.length ; i++){
 				html1 +='<br>';	
-				html1 +=' 								<div style="text-align:center;"><h4>'+jsonMapList[i].name+'구역</h4></div> ';					
-				html1 +=' 								<div class="chart-container"> ';
-				html1 +=' 									<div class="chartjs-size-monitor" style="position: absolute; left: 0px; top: 0px; right: 0px; bottom: 0px; overflow: hidden; pointer-events: none; visibility: hidden; z-index: -1;"> ';
+				html1 +=' 								<div style="text-align:center;"><h4><구역별 평균 매출 비교 그래프></h4></div> ';					
+				html1 +=' 									<div class="chart-container"> ';
+				html1 +=' 										<div class="chartjs-size-monitor" style="position: absolute; left: 0px; top: 0px; right: 0px; bottom: 0px; overflow: hidden; pointer-events: none; visibility: hidden; z-index: -1;"> ';
 				html1 +=' 												<div class="chartjs-size-monitor-expand" style="position: absolute; left: 0; top: 0; right: 0; bottom: 0; overflow: hidden; pointer-events: none; visibility: hidden; z-index: -1;"> ';
 				html1 +=' 													<div style="position: absolute; width: 1000000px; height: 1000000px; left: 0; top: 0"></div> ';
+				html1 +=' 												</div> ';
+				html1 +=' 												<div class="chartjs-size-monitor-shrink" style="position: absolute; left: 0; top: 0; right: 0; bottom: 0; overflow: hidden; pointer-events: none; visibility: hidden; z-index: -1;"> ';
+				html1 +=' 													<div style="position: absolute; width: 200%; height: 200%; left: 0; top: 0"></div> ';
+				html1 +=' 												</div> ';
+				html1 +=' 										</div> ';
+				html1 +=' 											<canvas id="multipleLineChart1'+i+'" width="306" height="300" class="chartjs-render-monitor" style="display: block; width: 306px; height: 300px;"></canvas> ';
 				html1 +=' 									</div> ';
-				html1 +=' 									<div class="chartjs-size-monitor-shrink" style="position: absolute; left: 0; top: 0; right: 0; bottom: 0; overflow: hidden; pointer-events: none; visibility: hidden; z-index: -1;"> ';
-				html1 +=' 									<div style="position: absolute; width: 200%; height: 200%; left: 0; top: 0"></div> ';
-				html1 +=' 								</div> ';
-				html1 +=' 							</div> ';
-				html1 +=' 								<canvas id="multipleLineChart1'+i+'" width="306" height="300" class="chartjs-render-monitor" style="display: block; width: 306px; height: 300px;"></canvas> ';
-				html1 +=' 							</div> ';
-				html1 +='<br>';
-				html1 += '</div>';
+				html1 += '								</div>';
+				for(var i=0; i<totalStore.length ; i++){
 				html1 += '<div id="table1">';
 				html1 += '<div style="width:100%;  overflow:auto">';
 				html1 += '<table class="table table-bordered">';
@@ -812,7 +811,42 @@
 				
 				
                 let color = ["#1d7af3","#f02e2e","#ff9900"];
-
+				
+//                 [ "당월 매출 금액 " ]
+                
+                
+                var myMultipleLineChart1 = new Chart(multipleLineChart, {
+					type : 'bar',
+					data : {
+						labels :,
+						datasets : datasets1
+					},
+					options : {
+						responsive : true,
+						maintainAspectRatio : false,
+						legend : {
+							position : 'top',
+						},
+						tooltips : {
+							bodySpacing : 4,
+							mode : "nearest",
+							intersect : 0,
+							position : "nearest",
+							xPadding : 10,
+							yPadding : 10,
+							caretPadding : 10
+						},
+						layout : {
+							padding : {
+								left : 15,
+								right : 15,
+								top : 15,
+								bottom : 15
+							}
+						}
+					}
+				});
+                
 				for(var i = 0; i<totalStore.length; i++){
 					
 					let datasets1 = [];
@@ -840,38 +874,7 @@
 	
 	
 	
-					var multipleLineChart ="multipleLineChart1"+i ;
-					var myMultipleLineChart1 = new Chart(multipleLineChart, {
-						type : 'bar',
-						data : {
-							labels : [ "당월 매출 금액 "],
-							datasets : datasets1
-						},
-						options : {
-							responsive : true,
-							maintainAspectRatio : false,
-							legend : {
-								position : 'top',
-							},
-							tooltips : {
-								bodySpacing : 4,
-								mode : "nearest",
-								intersect : 0,
-								position : "nearest",
-								xPadding : 10,
-								yPadding : 10,
-								caretPadding : 10
-							},
-							layout : {
-								padding : {
-									left : 15,
-									right : 15,
-									top : 15,
-									bottom : 15
-								}
-							}
-						}
-					});
+					
 					
 					let datasets2 = [];
 	                if(totalStore[i] != null){
