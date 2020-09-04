@@ -55,6 +55,8 @@
                   </div>
                </div>                           
             </div>
+            
+            <form role="form" action="/member/modifyMember" id="modifyMember" method="post">
             <div class="page-inner">
                <!-- 이름 /이메일 /아이디 입력란 -->
                <div class="form-group" align="center" >
@@ -94,10 +96,12 @@
                <div class="card-action" align="right"><br>
                   <button class="btn btn-primary">확인</button>&nbsp;&nbsp;&nbsp;&nbsp;
                   <button class="btn btn-black">취소</button>
+
                </div>
+               </form>
             </div>
+            
          </div>
-        
       </div>
 
    
@@ -218,6 +222,35 @@
          lineColor : '#ffa534',
          fillColor : 'rgba(255, 165, 52, .14)'
       });
+   </script>
+   
+   <script type="text/javascript">
+   
+   
+ 
+  $(document).ready(function() {
+//     var formObj = $("form");
+		var formObj = $("#modifyMember");
+
+    $('button').on("click", function(e) {
+
+       e.preventDefault();
+
+	   var operation = $(this).data("oper");
+		
+
+       console.log(operation);
+
+       if (operation === 'modifyMember') {
+          formObj.attr("action", "/member/modifyMember");
+       } else if (operation === 'test') {
+          // move to list
+          self.location = "caa/mainPage/test";
+          return;
+       }
+       formObj.submit();
+    }); 
+ });
    </script>
 </body>
 </html>

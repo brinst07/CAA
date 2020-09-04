@@ -40,7 +40,7 @@
 					</div>
 				</div>
 			</div>
-			<div class="page-inner">
+			<div class="page-inner" id="PageIn">
 
 				<!-- ↓ 그래프 -->
 
@@ -63,9 +63,9 @@
 
 				<!-- ----------------------------------- -->
 
-				<div class="col-md-12">
+				<div class="col-md-12" id="poptable">
 					<div class="card">
-						<div class="card-body" id="poptable">
+						<div class="card-body">
 
 							<table class="table">
 								<thead>
@@ -250,6 +250,64 @@
 <script src="/resources/assets/js/atlantis.min.js"></script>
 
 <script type="text/javascript">
+var popData = ${jsonFigure};
+
+
+/////////////////////////////////////////// 중복 값 제거
+var popDataYear = [];
+var popDataMonth = [];
+var popDataYearMonth = [];
+var popDataSelect = [];
+for (var i = 0; i < popData.length; i++) {
+	popDataYear.push(popData[i].year);
+	popDataMonth.push(popData[i].month);
+	popDataSelect.push(popData[i].selectName);
+	popDataYearMonth.push(popData[i].year+"-"+popData[i].month)
+}
+
+
+popDataYear = popDataYear.reduce(function(a,b){if(a.indexOf(b)<0)a.push(b);return a;},[]);
+popDataMonth = popDataMonth.reduce(function(a,b){if(a.indexOf(b)<0)a.push(b);return a;},[]);
+popDataSelect = popDataSelect.reduce(function(a,b){if(a.indexOf(b)<0)a.push(b);return a;},[]);
+popDataYearMonth = popDataYearMonth.reduce(function(a,b){if(a.indexOf(b)<0)a.push(b);return a;},[]);
+
+// 이차원 배열 만들기
+var arrayPopRideData =  [];
+var arrayPopQuitData =  [];
+
+
+///////////////////////////////////////// 맵 형태로 만들기
+const mapPopDataRide = new Map();
+const mapPopDataQuit = new Map(); 
+for (var i = 0; i < popDataSelect.length; i++) {
+		let tempArrayRide = [];		
+		let tempArrayQuit = [];		
+	for (var j = 0; j < popData.length; j++) {
+		if(popDataSelect[i] == popData[j].selectName){
+			tempArrayRide.push((popData[j].ride));
+			tempArrayQuit.push((popData[j].quit));
+		}
+	} 
+	// 배열
+	arrayPopRideData.push(tempArrayRide); 
+	arrayPopQuitData.push(tempArrayQuit);
+	// 맵 안에 List
+	mapPopDataRide.set((popDataSelect[i]).replace(/\"/gi, "").toString(), tempArrayRide);
+	mapPopDataQuit.set((popDataSelect[i]).replace(/\"/gi, "").toString(), tempArrayQuit);
+	
+}
+
+var arrayArrayPopRideData =  [];
+var arrayArrayPopQuitData =  [];
+
+arrayArrayPopRideData.push(arrayPopRideData);
+arrayArrayPopQuitData.push(arrayPopQuitData);
+
+
+
+//////////////////////////////////////////// 차트에 값 넣기
+$(function(){
+	
 	const color = [];
 	var colorObj = new Object();
 	colorObj.borderColor = "#1d7af3";
@@ -266,158 +324,62 @@
 	colorObj.pointBorderColor = "#FFF";
 	colorObj.pointBorderColor = "#F25961";
 	color.push(colorObj);
+
 	
 	
-	$(function(){
-		$(document).ajaxStop(function(){
-			alert('아작스 끝');
-		});
+	
+	myMultipleLineChart.data.labels = popDataYearMonth;
+	for (var i = 0; i < popDataSelect.length; i++) {
 		
 		
-	var json = ${jsonFigure};
+		
+			
+			myMultipleLineChart.data.datasets.push({
+				label : "탑승 승객 수",
+				borderColor : color[i].borderColor,
+				pointBorderColor : color[i].pointBorderColor,
+				pointBackGroundColor : color[i].pointBackGroundColor,
+				pointBorderWidth : 2,
+				pointHoverRadius : 4,
+				pointHoverBorderWidth : 1,
+				pointRadius : 4,
+				backgroundColor : 'transparent',
+				fill : true,
+				borderWidth : 2,
+				data :  arrayArrayPopRideData[i]
+		
+				
+			});	
+		
+		
+		
+			myMultipleLineChart.data.datasets.push({
+				label : "하차 승객 수",
+				borderColor : color[i].borderColor,
+				pointBorderColor : color[i].pointBorderColor,
+				pointBackGroundColor : color[i].pointBackGroundColor,
+				pointBorderWidth : 2,
+				pointHoverRadius : 4,
+				pointHoverBorderWidth : 1,
+				pointRadius : 4,
+				backgroundColor : 'transparent',
+				fill : true,
+				borderWidth : 2,
+				data :  arrayArrayPopQuitData[i]
+		
+				
+			});
+			
+			myMultipleLineChart.update();
 	
-	var jsonTempMonthData = [];
-	var jsonTempRideData= [];
-	
-	var jsonMonthData = [];
-	var jsonRideData = [];
-	
-	for (var i = 0; i < json.length; i++) {
-		jsonTempMonthData.push(json[i].month);
-		jsonTempRideData.push(json[i].ride);
 	}
 	
-	jsonMonthData.push(jsonTempMonthData);
-	jsonRideData.push(jsonTempRideData);
-		
-		
-	myMultipleLineChart.data.labels = jsonMonthData[0];
-	myMultipleLineChart.data.datasets.push({
-		label : "탑승 승객 수",
-		borderColor : "#1d7af3",
-		pointBorderColor : "#FFF",
-		pointBackgroundColor : "#1d7af3",
-		pointBorderWidth : 2,
-		pointHoverRadius : 4,
-		pointHoverBorderWidth : 1,
-		pointRadius : 4,
-		backgroundColor : 'transparent',
-		fill : true,
-		borderWidth : 2,
-		data :  jsonRideData[0]
-
-		
-	});		
 	
-	myMultipleLineChart.update();
-	
-	
-	// 테이블 만들기
-	var cell = document.getElementById("poptable"); 
-	while ( cell.hasChildNodes() ) { 
-		cell.removeChild( cell.firstChild );
-	}
-	
-	
-	let htmltags =' 	<table class="table table-bordered">     ';
-	htmltags +='<thead>                        ';
-	htmltags +=' 	<tr>                      ';
-	htmltags +=' 		<td>지역</td>         ';
-	for (var i = 0; i < json.length; i++) {
-	htmltags +=' 		<td class="text-center">'+json[i].month+' 월</td>            ';
-	}
-	htmltags +=' 	</tr>                     ';
-    htmltags +='                               ';
-	htmltags +=' </thead>                      ';
-	htmltags +=' <tbody>                       ';
-	
-		
-	
-	htmltags +=' 	<tr>                      ';
-	htmltags +=' 		<td>선택 영역</td>    ';
-	for (var i = 0; i < json.length; i++) {
-	htmltags +=' 		<td class="text-center" >'+json[i].ride+' 명</td>            ';
-	}
-	htmltags +=' 	</tr>                     ';
-	
-	htmltags +=' 	<tr>                      ';
-	htmltags +=' 		<td>증감율</td>    ';
-	for (var i = 0; i < json.length; i++) {
-		if(i==0){
-			htmltags +=' 		<td class="text-center" ></td>            ';
-		}else{
-	htmltags +=' 		<td class="text-center" height="0" >'+Math.ceil((((json[i].ride - json[i-1].ride) / json[i-1].ride) * 100)) +'<div style="height:3%" ><img src="/resources/assets/img/decrease.png" height="100%"></div></td>            ';
-		}
-	}
-	htmltags +=' 	</tr>                     ';
-	
-	
-	htmltags +=' 	</tbody>                  ';
-	htmltags +=' 	</table>                  ';
-	
-	$('#poptable').append(htmltags);
-	
-		
-		
-		
-		
-	})
-	
-	
-
-	
-	
-	
-	/////////////////////////////////////////////
-	
-// 	var data = {
-// 			json : json
-// 	};
-	
-// 	var dataMonthList = [];
-// 	var dataRideList = [];
-	
-	
-// 	for (var i = 0; i < json.length; i++) {
-// 		dataMonthList[0][i].push(json[i].month);
-// 		dataRideList[0][i].push(json[i].ride);
-// 	}
-	
-	
-	
-	
-
-
-
-
-//////////////////////////////////////////////////////////////////////////
-
-
-
-
-
-	
-</script>
-
-
-<!-- 테이블 동적으로 만들기 -->
-<script type="text/javascript">
-$(function(){
-
 })
-	
-	
-	
-	
 
-</script>
-
-
-<script type="text/javascript">
-
-/* 멀티 차트 */
-var multipleLineChart = document.getElementById('multipleLineChart')
-		.getContext('2d');
+	var multipleLineChart = document.getElementById('multipleLineChart')
+	.getContext('2d');
+// multipleLineChart.destroy();
 
 var myMultipleLineChart = new Chart(
 		multipleLineChart, {
@@ -451,59 +413,462 @@ var myMultipleLineChart = new Chart(
 				}
 			}
 		});
+		
+
+
+
+
+/////
+
+
+	
+	
+	
+
+	
+////////////////////////////////////// 동적으로 만들기 위한 사전 작업 (제거하기)	
+	
+	
+	
+	var cell = document.getElementById("PageIn"); 
+	while ( cell.hasChildNodes() ) { 
+		cell.removeChild( cell.firstChild );
+	}
+	
+	/////////////////////////////////////	↓ 그래프 	/////////////////////////////////////
+
+	tableTags = ' 				<div class="col-md-12"> ';
+	tableTags += ' 					<div class="card"> ';
+	tableTags += ' 						<div class="card-header"> ';
+	tableTags += ' 							<div class="card-title">유동인구 월별 그래프</div> ';
+	tableTags += ' 						</div> ';
+	tableTags += ' 						<div class="card-body"> ';
+	tableTags += ' 							<div class="chart-container"> ';
+	tableTags += ' 								<canvas id="multipleLineChart"></canvas> ';
+	tableTags += ' 							</div> ';
+	tableTags += ' 						</div> ';
+	tableTags += ' 					</div> ';
+	tableTags += ' 				</div> ';
+
+	///////////////////////////////////// 	↑ 그래프	/////////////////////////////////////
+	
+	///////////////////////////////////// 동적으로 테이블 생성  ↓ ////////////////////////////////
+	
+	tableTags += ' 				<div class="col-md-12" id="poptable"> ';
+	tableTags += ' 					<div class="card"> ';
+	tableTags += ' 						<div class="card-body"> ';
+
+	tableTags += ' 							<table class="table table-bordered"> ';
+	
+	tableTags += ' 								<thead> ';
+	tableTags += ' 									<tr> ';
+	tableTags += ' 										<td>지역</td> ';
+
+
+// 	년 월
+	for (var i = 0; i < popDataMonth.length; i++) {
+		
+	tableTags += ' 										<td>'+popDataMonth[i]+'</td> ';
+	}			
+	
+
+	tableTags += ' 									</tr> ';
+	tableTags += ' 								</thead> ';
+	
+	tableTags += ' 								<tbody> ';
+	
+	// 지역 이름을 위한 2중 포문
+	for (var i = 0; i < popDataSelect.length; i++) {
+	tableTags += ' 									<tr> ';
+	// 지역 이름
+	
+	tableTags += ' 										<td rowspan="4">'+(popDataSelect[i]).replace(/\"/gi, "")+'</td> ';
+		
+
+	for (var j = 0; j < popData.length; j++) {
+		if((popDataSelect[i]).replace(/\"/gi, "") == popData[j].selectName.replace(/\"/gi, "")){
+	tableTags += ' 										<td>'+popData[j].ride+'</td> ';
+		}
+	}
+	
+	// 승차 증감율
+	tableTags += ' <tr>';
+	for (const [key, value] of mapPopDataRide) {
+		
+		for (let k = 0; k < mapPopDataRide.get(key).length; k++) {
+			console.log("사이즈 : "+mapPopDataRide.get(key).length);
+			console.log("키값을 넣었을때 값 : "+mapPopDataRide.get(key));
+			if (k===0) {
+				tableTags += '<td></td>';
+				console.log(mapPopDataRide.get(key)[k]);
+				console.log(key);
+			}
+			else if((popDataSelect[i]).replace(/\"/gi, "") == key.replace(/\"/gi, "")){
+				let tableValue = Math.ceil((((mapPopDataRide.get(key)[k] - mapPopDataRide.get(key)[k-1]) / mapPopDataRide.get(key)[k-1]) * 100));
+				if (tableValue > 0) {
+				tableTags += ' 										<td>'+tableValue+'% <div style="color:blue; display:inline">▲</div></td> ';			
+				}else {
+				tableTags += ' 										<td>'+tableValue+'% <div style="color:red; display:inline">▼</div></td> ';			
+				}
+				
+			}
+		}
+	}
+
+	tableTags += ' </tr>';
+
+	tableTags += ' <tr>';
+	for (var j = 0; j < popData.length; j++) {
+		if((popDataSelect[i]).replace(/\"/gi, "") == popData[j].selectName.replace(/\"/gi, "")){
+	tableTags += ' 										<td>'+popData[j].quit+'</td> ';
+		}
+	}
+	tableTags += ' </tr>';
+	
+	// 하차 증감율
+	tableTags += ' <tr>';
+	for (const [key, value] of mapPopDataQuit) {
+		
+		for (let k = 0; k < mapPopDataQuit.get(key).length; k++) {
+			console.log("사이즈 : "+mapPopDataQuit.get(key).length);
+			console.log("키값을 넣었을때 값 : "+mapPopDataQuit.get(key));
+			if (k===0) {
+				tableTags += '<td></td>';
+				console.log(mapPopDataQuit.get(key)[k]);
+				console.log(key);
+			}
+			else if((popDataSelect[i]).replace(/\"/gi, "") == key.replace(/\"/gi, "")){
+				let tableValue = Math.ceil((((mapPopDataQuit.get(key)[k] - mapPopDataQuit.get(key)[k-1]) / mapPopDataQuit.get(key)[k-1]) * 100));
+				if (tableValue > 0) {
+				tableTags += ' 										<td>'+tableValue+'% <div style="color:blue; display:inline">▲</div></td> ';			
+				}else {
+				tableTags += ' 										<td>'+tableValue+'% <div style="color:red; display:inline">▼</div></td> ';			
+				}
+				
+			}
+		}
+	}
+	tableTags += ' </tr>';
+	
+	} // 지역 이름을 위해 2중 포문 사용
+	tableTags += ' </tr>';
+
+	
+	
+	
+	tableTags += ' 								</tbody> ';
+	
+	tableTags += ' 							</table> ';
+
+
+
+
+	tableTags += ' 						</div> ';
+	tableTags += ' 					</div> ';
+	tableTags += ' 				</div> ';
+	
+	$('#PageIn').append(tableTags);
+	
+	
+	
+	
+	
+	
+	///////////////////////////////////// 동적으로 테이블 생성  ↑ ////////////////////////////////
+	
+	
+	
+
+
+
+
+
+
+	
+</script>
+<script type="text/javascript">
+	
+</script>
+
+
+<script type="text/javascript">
+	$(function(){
+
+		
+	
+	
+// 	var json = ${jsonFigure};
+// 	var jsonTempMap = ${jsonMap};
+// 	var jsonMap = JSON.parse(jsonTempMap);
+// 	console.log(jsonMap);
+	
+// 	jsonRideQuitData = [];
+	
+	
+	
+// 	var jsonTempMonthData = [];
+// 	var jsonTempRideData= [];
+// 	var jsonTempQuitData= [];
+	
+	
+// 	var jsonMonthData = [];
+// 	var jsonRideData = [];
+// 	var jsonQuitData = [];
+	
+// 	for (var i = 0; i < json.length; i++) {
+// 		jsonTempMonthData.push(json[i].month);
+// 		jsonTempRideData.push(json[i].ride);
+// 		jsonTempQuitData.push(json[i].quit);
+// 	}
+	
+// 	jsonMonthData.push(jsonTempMonthData);
+// 	jsonRideData.push(jsonTempRideData);
+// 	jsonQuitData.push(jsonTempQuitData);
+		
+
+///////////////////////// 그래프 /////////////////////////////////
+	
+
+// 	myMultipleLineChart.data.labels = jsonMonthData[0];
+// 	myMultipleLineChart.data.datasets.push({
+// 		label : "탑승 승객 수",
+// 		borderColor : color[0].borderColor,
+// 		pointBorderColor : color[0].pointBorderColor,
+// 		pointBackGroundColor : color[0].pointBackGroundColor,
+// 		pointBorderWidth : 2,
+// 		pointHoverRadius : 4,
+// 		pointHoverBorderWidth : 1,
+// 		pointRadius : 4,
+// 		backgroundColor : 'transparent',
+// 		fill : true,
+// 		borderWidth : 2,
+// 		data :  jsonRideData[0]
+
+		
+// 	});	
+	
+// 	myMultipleLineChart.data.datasets.push({
+// 		label : "하차 승객 수",
+// 		borderColor : color[1].borderColor,
+// 		pointBorderColor : color[1].pointBorderColor,
+// 		pointBackGroundColor : color[1].pointBackGroundColor,
+// 		pointBorderWidth : 2,
+// 		pointHoverRadius : 4,
+// 		pointHoverBorderWidth : 1,
+// 		pointRadius : 4,
+// 		backgroundColor : 'transparent',
+// 		fill : true,
+// 		borderWidth : 2,
+// 		data :  jsonQuitData[0]
+
+		
+// 	});	
+
+
+
+	
+// 	myMultipleLineChart.update();
+	
+	
+	/* 멀티 차트 */
+// 	for (var i = 0; i < json.length; i++) {
+		
+// 	 	myMultipleLineChart.data.datasets.push({
+// 		label : "탑승 승객 수",
+// 		borderColor : color[0].borderColor,
+// 		pointBorderColor : color[0].pointBorderColor,
+// 		pointBackGroundColor : color[0].pointBackGroundColor,
+// 		pointBorderWidth : 2,
+// 		pointHoverRadius : 4,
+// 		pointHoverBorderWidth : 1,
+// 		pointRadius : 4,
+// 		backgroundColor : 'transparent',
+// 		fill : true,
+// 		borderWidth : 2,
+// 		data :  jsonRideData[0]
+
+		
+// 	});	
+	 	
+	 	
+// 	 	var multipleLineChart = document.getElementById('multipleLineChart')
+// 		.getContext('2d');
+
+// 		var myMultipleLineChart = new Chart(
+// 			multipleLineChart, {
+// 				type : 'line',
+// 				data : {
+// 					labels : [],
+// 					datasets : []
+// 				},
+// 				options : {
+// 					responsive : true,
+// 					maintainAspectRatio : false,
+// 					legend : {
+// 						position : 'top',
+// 					},
+// 					tooltips : {
+// 						bodySpacing : 4,
+// 						mode : "nearest",
+// 						intersect : 0,
+// 						position : "nearest",
+// 						xPadding : 10,
+// 						yPadding : 10,
+// 						caretPadding : 10
+// 					},
+// 					layout : {
+// 						padding : {
+// 							left : 15,
+// 							right : 15,
+// 							top : 15,
+// 							bottom : 15
+// 						}
+// 					}
+// 				}
+// 			});
+	 	
+	 	
+	 	
+// 	}
+// 	var multipleLineChart = document.getElementById('multipleLineChart')
+// 			.getContext('2d');
+
+// 	var myMultipleLineChart = new Chart(
+// 			multipleLineChart, {
+// 				type : 'line',
+// 				data : {
+// 					labels : [],
+// 					datasets : []
+// 				},
+// 				options : {
+// 					responsive : true,
+// 					maintainAspectRatio : false,
+// 					legend : {
+// 						position : 'top',
+// 					},
+// 					tooltips : {
+// 						bodySpacing : 4,
+// 						mode : "nearest",
+// 						intersect : 0,
+// 						position : "nearest",
+// 						xPadding : 10,
+// 						yPadding : 10,
+// 						caretPadding : 10
+// 					},
+// 					layout : {
+// 						padding : {
+// 							left : 15,
+// 							right : 15,
+// 							top : 15,
+// 							bottom : 15
+// 						}
+// 					}
+// 				}
+// 			});
+	
+	
+	
+	
+
+		
+		
+	})
+</script>
+
+
+
+
+<script type="text/javascript">
+
+/* 멀티 차트 */
+// var multipleLineChart = document.getElementById('multipleLineChart')
+// 		.getContext('2d');
+
+// var myMultipleLineChart = new Chart(
+// 		multipleLineChart, {
+// 			type : 'line',
+// 			data : {
+// 				labels : [],
+// 				datasets : []
+// 			},
+// 			options : {
+// 				responsive : true,
+// 				maintainAspectRatio : false,
+// 				legend : {
+// 					position : 'top',
+// 				},
+// 				tooltips : {
+// 					bodySpacing : 4,
+// 					mode : "nearest",
+// 					intersect : 0,
+// 					position : "nearest",
+// 					xPadding : 10,
+// 					yPadding : 10,
+// 					caretPadding : 10
+// 				},
+// 				layout : {
+// 					padding : {
+// 						left : 15,
+// 						right : 15,
+// 						top : 15,
+// 						bottom : 15
+// 					}
+// 				}
+// 			}
+// 		});
 
 
 /* 도넛 차트 */
-var myDoughnutChart = new Chart(doughnutChart, {
-	type : 'doughnut',
-	data : {
-		datasets : [ {
-			data : [ 10, 20, 30 ],
-			backgroundColor : [ '#f3545d', '#fdaf4b', '#1d7af3' ]
-		} ],
+// var myDoughnutChart = new Chart(doughnutChart, {
+// 	type : 'doughnut',
+// 	data : {
+// 		datasets : [ {
+// 			data : [ 10, 20, 30 ],
+// 			backgroundColor : [ '#f3545d', '#fdaf4b', '#1d7af3' ]
+// 		} ],
 
-		labels : [ 'Red', 'Yellow', 'Blue' ]
-	},
-	options : {
-		responsive : true,
-		maintainAspectRatio : false,
-		legend : {
-			position : 'bottom'
-		},
-		layout : {
-			padding : {
-				left : 20,
-				right : 20,
-				top : 20,
-				bottom : 20
-			}
-		}
-	}
-});
-var myDoughnutChart = new Chart(GenderdoughnutChart, {
-	type : 'doughnut',
-	data : {
-		datasets : [ {
-			data : [ 10, 30 ],
-			backgroundColor : [ '#f3545d', '#fdaf4b', '#1d7af3' ]
-		} ],
+// 		labels : [ 'Red', 'Yellow', 'Blue' ]
+// 	},
+// 	options : {
+// 		responsive : true,
+// 		maintainAspectRatio : false,
+// 		legend : {
+// 			position : 'bottom'
+// 		},
+// 		layout : {
+// 			padding : {
+// 				left : 20,
+// 				right : 20,
+// 				top : 20,
+// 				bottom : 20
+// 			}
+// 		}
+// 	}
+// });
+// var myDoughnutChart = new Chart(GenderdoughnutChart, {
+// 	type : 'doughnut',
+// 	data : {
+// 		datasets : [ {
+// 			data : [ 10, 30 ],
+// 			backgroundColor : [ '#f3545d', '#fdaf4b', '#1d7af3' ]
+// 		} ],
 
-		labels : [ 'Red', 'Blue' ]
-	},
-	options : {
-		responsive : true,
-		maintainAspectRatio : false,
-		legend : {
-			position : 'bottom'
-		},
-		layout : {
-			padding : {
-				left : 20,
-				right : 20,
-				top : 20,
-				bottom : 20
-			}
-		}
-	}
-});
+// 		labels : [ 'Red', 'Blue' ]
+// 	},
+// 	options : {
+// 		responsive : true,
+// 		maintainAspectRatio : false,
+// 		legend : {
+// 			position : 'bottom'
+// 		},
+// 		layout : {
+// 			padding : {
+// 				left : 20,
+// 				right : 20,
+// 				top : 20,
+// 				bottom : 20
+// 			}
+// 		}
+// 	}
+// });
 </script>

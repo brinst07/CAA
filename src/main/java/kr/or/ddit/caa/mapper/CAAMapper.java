@@ -1,11 +1,10 @@
 package kr.or.ddit.caa.mapper;
 
-import kr.or.ddit.caa.domain.*;
-
 import java.util.List;
 import java.util.Map;
 
 import kr.or.ddit.caa.domain.CscodeVO;
+import kr.or.ddit.caa.domain.IndiVO;
 import kr.or.ddit.caa.domain.SalesByIndustryVO;
 import kr.or.ddit.caa.domain.SectorParamVO;
 import kr.or.ddit.caa.domain.StoreVO;

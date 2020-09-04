@@ -39,8 +39,18 @@
    <insert id="insert">
       insert into board (board_id, member_id, board_title, board_content, board_datetime,
                      board_reply_count, board_status, board_category_id, board_temp_save, board_hit)
-      values (seq_board.nextval, '1', #{board_title}, #{board_content}, sysdate, '3', 'y', 'notice','y', '1')
+      values (seq_board.nextval, 'admin', #{board_title}, #{board_content}, sysdate, '3', 'y', 'notice','y', '1')
    </insert>
+   
+   <select id="selectKey" resultType="string">
+		SELECT seq_board.nextval board_id
+			FROM DUAL
+	</select>
+	
+	<insert id="insertSelectKey"  parameterType="kr.or.ddit.domain.BoardVO">
+		insert into board(board_id,board_title,board_content,member_id, board_datetime, board_category_id)
+		values(#{board_id}, #{board_title},#{board_content},#{member_id}, sysdate, #{board_category_id})
+	</insert>
    
 
 	

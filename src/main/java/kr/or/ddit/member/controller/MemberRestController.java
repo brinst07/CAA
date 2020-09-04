@@ -101,4 +101,19 @@ public class MemberRestController {
 		map.put("over", chk);
 		return new ResponseEntity<Map<String,Object>>(map, HttpStatus.OK);
 	}
+	
+	// 이메일 중복 체크 컨트롤러
+		@RequestMapping(value = "/checkmail", produces = { MediaType.APPLICATION_JSON_UTF8_VALUE})
+		public ResponseEntity<Map<String,Object>> emailCheck(@RequestParam("member_email") String member_email) {
+			log.info("ajaxController");
+
+			// service, mapper에서 member_id를 변수로한 중복확인 메서드를 만들고 값이 있을경우 chk = 1, 없을 경우 0를
+			// 대입해준다.
+			int echk;
+
+			echk = service.checkmail(member_email);
+			Map<String,Object> map = new HashedMap();
+			map.put("eover", echk);
+			return new ResponseEntity<Map<String,Object>>(map, HttpStatus.OK);
+		}
 }

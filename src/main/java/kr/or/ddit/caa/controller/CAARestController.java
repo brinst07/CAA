@@ -1,12 +1,13 @@
 package kr.or.ddit.caa.controller;
 
-import com.fasterxml.jackson.core.type.TypeReference;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import kr.or.ddit.bs.service.BSService;
-import kr.or.ddit.caa.domain.*;
-import kr.or.ddit.caa.service.CAAService;
-import lombok.AllArgsConstructor;
-import lombok.extern.log4j.Log4j;
+import java.net.URI;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import javax.mail.internet.MimeMessage;
+
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.ResponseHandler;
 import org.apache.http.client.methods.HttpGet;
@@ -18,14 +19,25 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.mail.javamail.JavaMailSenderImpl;
 import org.springframework.mail.javamail.MimeMessageHelper;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
-import javax.mail.internet.MimeMessage;
-import java.net.URI;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.ObjectMapper;
+
+import kr.or.ddit.bs.service.BSService;
+import kr.or.ddit.caa.domain.CscodeVO;
+import kr.or.ddit.caa.domain.IndiVO;
+import kr.or.ddit.caa.domain.SectorJsonVo;
+import kr.or.ddit.caa.domain.SectorParamVO;
+import kr.or.ddit.caa.domain.StoreVO;
+import kr.or.ddit.caa.service.CAAService;
+import lombok.AllArgsConstructor;
+import lombok.extern.log4j.Log4j;
 
 @RestController
 @RequestMapping("/caa/rest/*")
