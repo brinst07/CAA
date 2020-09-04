@@ -14,7 +14,7 @@
                     <div class="email-compose-fields">
                         <form>
                             <div class="form-group row">
-                                <label for="to" class="col-form-label col-md-1">제목 </label>
+                                <label for="title" class="col-form-label col-md-1">제목 </label>
                                 <div class="col-md-11">
                                     <input type="text" class="form-control" id="title" name="title"
                                            value='<c:out value="${board.board_title }"/>' readonly="readonly">
@@ -32,7 +32,7 @@
                                 <div class="card-body">
 
                                     <div class="form-group row">
-                                        <label for="to" class="col-form-label col-md-1">내용 </label>
+                                        <label for="content" class="col-form-label col-md-1">내용 </label>
                                         <div class="col-md-11">
                                             <%-- <input type="text" class="form-control" id="title" name="title"
                                  value='<c:out value="${board.board_content }"/>' readonly="readonly"> --%>
@@ -104,21 +104,6 @@
                         </div>
                     </div>
                 </div>
-            </div>
-        </div>
-    </div>
-    <div class="quick-sidebar">
-        <a href="#" class="close-quick-sidebar"> <i class="flaticon-cross"></i>
-        </a>
-
-
-        <div class="messages-form">
-            <div class="messages-form-control">
-                <input type="text" placeholder="Type here" class="form-control input-pill input-solid message-input">
-            </div>
-            <div class="messages-form-tool">
-                <a href="#" class="attachment"> <i class="flaticon-file"></i>
-                </a>
             </div>
         </div>
     </div>
@@ -208,6 +193,3 @@
                 })(); // end function
             });
 </script>
-
-</body>
-</html>

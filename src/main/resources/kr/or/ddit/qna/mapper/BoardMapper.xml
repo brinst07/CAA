@@ -33,13 +33,6 @@
       where board_id = #{board_id}
    </delete>
 
-	<!-- 등록 -->
-	<!-- 
-	<insert id="insert">
-		insert into board (board_id, member_id, board_title, board_content, board_datetime,
-							board_reply_count, board_status, board_category_id, board_temp_save, board_hit)
-		values (seq_board.nextval, #{member_id}, #{board_title}, #{board_content}, sysdate, #{board_reply_count}, #{board_status}, #{board_category_id}, #{board_temp_save}, board_hit+1)
-	</insert> -->
 
 	<!-- 등록 -->
 	<insert id="insert">
@@ -50,23 +43,17 @@
 							board_title, 
 							board_content, 
 							board_datetime,
-							board_reply_count, 
-							board_status, 
-							board_category_id, 
-							board_temp_save, 
-							board_hit
+							board_status,
+							board_category_id
 							)
 		values (
 				seq_board.nextval, 
-				'admin', 
+				#{member_id},
 				#{board_title}, 
 				#{board_content}, 
 				sysdate, 
-				'3', 
-				'y', 
-				'test',
-				'y', 
-				'1'
+				'y',
+				#{board_category_id}
 				)
 	</insert>
 	
@@ -79,243 +66,4 @@
 		insert into board(board_id,board_title,board_content,member_id, board_datetime, board_category_id)
 		values(#{board_id}, #{board_title},#{board_content},#{member_id}, sysdate, #{board_category_id})
 	</insert>
-	
-	
-	
-	<!-- board_id로 return 받아서 boardAttachMapper.xml에서 board_id 값을 바꿔주기 -->
-	<!-- <select id="updateBoardIdSeq" resultType="Integer">
-		insert board_file set board_id = #{board_id}
-		RETURNING seq_board;
-	
-	</select> -->
-	
-	
-	<!-- 게시글 등록 쿼리 -->
-	<!-- <insert id="insert" parameterType="kr.or.ddit.">
-	
-		<selectKey resultType="int" keyProperty="board_re_ref" order="BEFORE">
-	
-			SELECT IFNULL(MAX(BOARD_RE_REF), 0) + 1
-			FROM board
-			
-		</selectKey>
-		
-			insert into board (
-								board_re_ref,
-								board_re_lev
-								board_re_seq,			
-								board_id, 
-								member_id, 
-								board_title, 
-								board_content, 
-								board_datetime,
-								board_reply_count, 
-								board_status, 
-								board_category_id, 
-								board_temp_save, 
-								board_hit
-								)
-			values (
-					#{board_re_ref},
-					0,
-					0,
-					seq_board.nextval, 
-					'10', 
-					#{board_title}, 
-					#{board_content}, 
-					sysdate, 
-					'3', 
-					'y', 
-					'test',
-					'y', 
-					'1'
-					)
-		</insert> -->
-	
-		<!-- 게시글 답글 정보 조회 쿼리 추가 -->
-		<!-- <select id="getBoardReplyInfo" parameterType="" resultType="">
-		
-			SELECT BOARD_SEQ,
-					BOARD_RE_REF,
-					BOARD_RE_LEV,
-					BOARD_RE_SEQ
-				FROM BOARD
-				WHERE BOARD_SEQ = #{board_id}
-		</select> -->
-	
-		<!-- 게시글 답글 순서 수정 쿼리 추가 -->
-		<!-- <delete id="updateBoardReSeq" parameterType="">
-		
-			UPDATE BOARD
-				SET BOARD_RE_SEQ = BOARD_RE_SEQ + 1,
-					UPD_USER_ID = 'NONMEMBER',
-					UPD_DATE = NOW()
-				WHERE BOARD_RE_REF = #{board_re_ref}
-				AND BOARD_RE_SEQ > #{board_re_seq}
-					
-		</delete> -->
-		
-		
-		<!-- 게시글 답글 등록 쿼리 추가 -->
-		<!-- <insert id="InsertBoardReply" parameterType="">
-		
-			INSERT
-			INTO BOARD.BOARD
-			(
-				BOARD_RE_REF,
-				BOARD_RE_LEV,
-				BOARD_RE_SEQ,
-				BOARD_WRITER,
-				BOARD_SUBJECT,
-				BOARD_CONTENT,
-				INS_USER_ID,
-				INS_DATE,
-				UPD_USER_ID,
-				UPD_DATE
-			)
-			VALUES
-			(
-				#{board_re_ref},
-				#{board_re_lev} + 1,
-				#{board_re_seq} + 1,
-				#{board_writer},
-				#{board_subject},
-				#{board_content},
-				'NONMEMBER',
-				NOW(),
-				'NONMEMBER',
-				NOW()
-			)
-		
-		</insert>
-	
-	
-		<select id="getBoardList" parameterType="" resultType=""></select>
-	
-			SELECT *
-			FROM ( SELECT BOARD_SEQ,
-							BOARD_RE_REF,
-							BOARD_RE_LEV,
-							BOARD_RE_SEQ,
-							BOARD_WRITER,
-							BOARD_SUBJECT,
-							BOARD_CONTENT,
-							BOARD_HITS,
-							DEL_YN,
-							INS_uSER_ID,
-							CAST( DATE_FORMAT( INS_DATE, '%Y-%m-%d %H:%i:%s' ) AS CHAR(19) AS INS_DATE,
-							UPD_USER_ID,
-							CAST( DATE_FORMAT( UPD_DATE, '%Y-%m-%d %H:%i:%s' ) AS CHAR(19) ) AS UPD_DATE
-					FROM BOARD.BOARD
-					ORDER BY BOARD_RE_REF DESC, BOARD_RE_SEQ ASC 
-			) -->
-
-	<!-- <sql id="condition">
-		<trim prefix="(" suffix=") AND " prefixOverrides="OR">
-			<foreach item='type' collection="typeArr">
-				<trim prefix="OR">
-					<choose>
-						<when test="type == 'T'.toString()">
-							title like '%'||#{keyword}||'%'
-						</when>
-						<when test="type == 'C'.toString()">
-							content like '%'||#{keyword}||'%'
-						</when>
-						<when test="type == 'W'.toString()">
-							writer like '%'||#{keyword}||'%'
-						</when>
-					</choose>
-				</trim>
-			</foreach>
-		</trim>
-	</sql>
-
-	<select id="getList" resultType="kr.or.ddit.qna.domain.BoardVO">
-      <![CDATA[
-         select * from board
-      ]]>
-	</select>
-
-	<select id="read" resultType="kr.or.ddit.qna.domain.BoardVO">
-		select * from board where board_id = #{board_id}	
-	</select>
-
-	주석
-	<select id="getListWithPaging"
-		resultType="kr.or.ddit.caa.domain.BoardVO">
-      <![CDATA[
-         select
-            board_id,board_title,board_content,board_id,board_datetime,board_datetime, board_reply_count
-         from
-            (
-               select /*INDEX_DESC(tbl_board pk_board)*/
-                  rownum rn, bno, title, content, writer, regdate, updatedate, replycnt
-               from
-                  tbl_board
-               where 
-      ]]>
-      <include refid="condition"></include>	
-      <![CDATA[
-            rownum <= #{pageNum} * #{amount}
-               )
-         where rn > (#{pageNum} -1) * #{amount}
-      ]]>
-	</select>
-	
-	<select id="updateReplyCnt">
-		update tbl_board
-		set replycnt = replycnt + #{amount}
-		where bno = #{bno}
-	</select>
-
-	<select id="getTotalCount" resultType="int">
-		select count(*)
-		from tbl_board
-		where
-		<include refid="condition"></include>
-		bno > 0
-	</select>
-
-	<insert id="insert">
-		insert into tbl_board(bno,title,content,writer)
-		values(seq_board.nextval, #{title},#{content},#{writer})
-	</insert>
-	
-	<insert id="insertSelectKey">
-		<selectKey keyProperty="bno" order="BEFORE"
-			resultType="long">
-			select seq_board.nextval from dual
-		</selectKey>
-		insert into tbl_board(bno,title,content,writer)
-		values(#{bno}, #{title},#{content},#{writer})
-	</insert>
-	
-
-	주석
-	<select id="read" resultType="kr.or.ddit.qna.domain.BoardVO">
-		select * from board where board_id = #{board_id}
-	</select>
-
-	<delete id="remove">
-		delete from board where board_id = #{board_id}
-	</delete>
-
-
-
-	<update id="update" >
-		update board
-		set board_id = #{board_id, jdbcType=VARCHAR},
-		member_id = #{member_id, jdbcType=VARCHAR},
-		board_title = #{board_title, jdbcType=VARCHAR},
-		board_content = #{board_content, jdbcType=VARCHAR},
-		board_datetime = 'sysdate',
-		board_reply_count = #{board_reply_count, jdbcType=VARCHAR},
-		board_status = #{board_status, jdbcType=VARCHAR},
-		board_category_id = #{board_category_id, jdbcType=VARCHAR},
-		board_temp_save = #{board_temp_save, jdbcType=VARCHAR},
-		board_hit = board_hit+1,
-		where board_id = #{board_id}
-	</update> -->
-	
-	
 </mapper>
