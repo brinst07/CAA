@@ -253,21 +253,30 @@
 var popData = ${jsonFigure};
 
 
-// 중복 값 제거
+/////////////////////////////////////////// 중복 값 제거
+var popDataYear = [];
 var popDataMonth = [];
+var popDataYearMonth = [];
 var popDataSelect = [];
 for (var i = 0; i < popData.length; i++) {
+	popDataYear.push(popData[i].year);
 	popDataMonth.push(popData[i].month);
-}
-for (var i = 0; i < popData.length; i++) {
 	popDataSelect.push(popData[i].selectName);
+	popDataYearMonth.push(popData[i].year+"-"+popData[i].month)
 }
 
 
+popDataYear = popDataYear.reduce(function(a,b){if(a.indexOf(b)<0)a.push(b);return a;},[]);
 popDataMonth = popDataMonth.reduce(function(a,b){if(a.indexOf(b)<0)a.push(b);return a;},[]);
 popDataSelect = popDataSelect.reduce(function(a,b){if(a.indexOf(b)<0)a.push(b);return a;},[]);
+popDataYearMonth = popDataYearMonth.reduce(function(a,b){if(a.indexOf(b)<0)a.push(b);return a;},[]);
+
+// 이차원 배열 만들기
+var arrayPopRideData =  [];
+var arrayPopQuitData =  [];
 
 
+///////////////////////////////////////// 맵 형태로 만들기
 const mapPopDataRide = new Map();
 const mapPopDataQuit = new Map(); 
 for (var i = 0; i < popDataSelect.length; i++) {
@@ -279,38 +288,26 @@ for (var i = 0; i < popDataSelect.length; i++) {
 			tempArrayQuit.push((popData[j].quit));
 		}
 	} 
+	// 배열
+	arrayPopRideData.push(tempArrayRide); 
+	arrayPopQuitData.push(tempArrayQuit);
+	// 맵 안에 List
 	mapPopDataRide.set((popDataSelect[i]).replace(/\"/gi, "").toString(), tempArrayRide);
 	mapPopDataQuit.set((popDataSelect[i]).replace(/\"/gi, "").toString(), tempArrayQuit);
 	
 }
 
+var arrayArrayPopRideData =  [];
+var arrayArrayPopQuitData =  [];
+
+arrayArrayPopRideData.push(arrayPopRideData);
+arrayArrayPopQuitData.push(arrayPopQuitData);
+
+
+
+//////////////////////////////////////////// 차트에 값 넣기
 $(function(){
-	var key2 = mapPopDataRide.keys();
-	for (var i = 0; i < mapPopDataRide.size; i++) {
-		console.log(mapPopDataRide.get(key2[i]));
-	}
 	
-	const mapIterator = mapPopDataRide.entries();
-	 
-	while ( !mapIterator.next().done ) {
-	  const [key, value] = mapIterator.next().value;
-	  console.log(key +' , ' +value);  
-	}
-	
-	for (const [key, value] of mapPopDataRide) {
-		  console.log(mapPopDataRide.get(key))
-		  console.log(key)
-		}
-
-
-
-})
-
-
-
-/////
-
-
 	const color = [];
 	var colorObj = new Object();
 	colorObj.borderColor = "#1d7af3";
@@ -327,40 +324,306 @@ $(function(){
 	colorObj.pointBorderColor = "#FFF";
 	colorObj.pointBorderColor = "#F25961";
 	color.push(colorObj);
+
 	
 	
+	
+	myMultipleLineChart.data.labels = popDataYearMonth;
+	for (var i = 0; i < popDataSelect.length; i++) {
+		
+		
+		
+			
+			myMultipleLineChart.data.datasets.push({
+				label : "탑승 승객 수",
+				borderColor : color[i].borderColor,
+				pointBorderColor : color[i].pointBorderColor,
+				pointBackGroundColor : color[i].pointBackGroundColor,
+				pointBorderWidth : 2,
+				pointHoverRadius : 4,
+				pointHoverBorderWidth : 1,
+				pointRadius : 4,
+				backgroundColor : 'transparent',
+				fill : true,
+				borderWidth : 2,
+				data :  arrayArrayPopRideData[i]
+		
+				
+			});	
+		
+		
+		
+			myMultipleLineChart.data.datasets.push({
+				label : "하차 승객 수",
+				borderColor : color[i].borderColor,
+				pointBorderColor : color[i].pointBorderColor,
+				pointBackGroundColor : color[i].pointBackGroundColor,
+				pointBorderWidth : 2,
+				pointHoverRadius : 4,
+				pointHoverBorderWidth : 1,
+				pointRadius : 4,
+				backgroundColor : 'transparent',
+				fill : true,
+				borderWidth : 2,
+				data :  arrayArrayPopQuitData[i]
+		
+				
+			});
+			
+			myMultipleLineChart.update();
+	
+	}
+	
+	
+})
+
+	var multipleLineChart = document.getElementById('multipleLineChart')
+	.getContext('2d');
+// multipleLineChart.destroy();
+
+var myMultipleLineChart = new Chart(
+		multipleLineChart, {
+			type : 'line',
+			data : {
+				labels : [],
+				datasets : []
+			},
+			options : {
+				responsive : true,
+				maintainAspectRatio : false,
+				legend : {
+					position : 'top',
+				},
+				tooltips : {
+					bodySpacing : 4,
+					mode : "nearest",
+					intersect : 0,
+					position : "nearest",
+					xPadding : 10,
+					yPadding : 10,
+					caretPadding : 10
+				},
+				layout : {
+					padding : {
+						left : 15,
+						right : 15,
+						top : 15,
+						bottom : 15
+					}
+				}
+			}
+		});
+		
+
+
+
+
+/////
+
+
+	
+	
+	
+
+	
+////////////////////////////////////// 동적으로 만들기 위한 사전 작업 (제거하기)	
+	
+	
+	
+	var cell = document.getElementById("PageIn"); 
+	while ( cell.hasChildNodes() ) { 
+		cell.removeChild( cell.firstChild );
+	}
+	
+	/////////////////////////////////////	↓ 그래프 	/////////////////////////////////////
+
+	tableTags = ' 				<div class="col-md-12"> ';
+	tableTags += ' 					<div class="card"> ';
+	tableTags += ' 						<div class="card-header"> ';
+	tableTags += ' 							<div class="card-title">유동인구 월별 그래프</div> ';
+	tableTags += ' 						</div> ';
+	tableTags += ' 						<div class="card-body"> ';
+	tableTags += ' 							<div class="chart-container"> ';
+	tableTags += ' 								<canvas id="multipleLineChart"></canvas> ';
+	tableTags += ' 							</div> ';
+	tableTags += ' 						</div> ';
+	tableTags += ' 					</div> ';
+	tableTags += ' 				</div> ';
+
+	///////////////////////////////////// 	↑ 그래프	/////////////////////////////////////
+	
+	///////////////////////////////////// 동적으로 테이블 생성  ↓ ////////////////////////////////
+	
+	tableTags += ' 				<div class="col-md-12" id="poptable"> ';
+	tableTags += ' 					<div class="card"> ';
+	tableTags += ' 						<div class="card-body"> ';
+
+	tableTags += ' 							<table class="table table-bordered"> ';
+	
+	tableTags += ' 								<thead> ';
+	tableTags += ' 									<tr> ';
+	tableTags += ' 										<td>지역</td> ';
+
+
+// 	년 월
+	for (var i = 0; i < popDataMonth.length; i++) {
+		
+	tableTags += ' 										<td>'+popDataMonth[i]+'</td> ';
+	}			
+	
+
+	tableTags += ' 									</tr> ';
+	tableTags += ' 								</thead> ';
+	
+	tableTags += ' 								<tbody> ';
+	
+	// 지역 이름을 위한 2중 포문
+	for (var i = 0; i < popDataSelect.length; i++) {
+	tableTags += ' 									<tr> ';
+	// 지역 이름
+	
+	tableTags += ' 										<td rowspan="4">'+(popDataSelect[i]).replace(/\"/gi, "")+'</td> ';
+		
+
+	for (var j = 0; j < popData.length; j++) {
+		if((popDataSelect[i]).replace(/\"/gi, "") == popData[j].selectName.replace(/\"/gi, "")){
+	tableTags += ' 										<td>'+popData[j].ride+'</td> ';
+		}
+	}
+	
+	// 승차 증감율
+	tableTags += ' <tr>';
+	for (const [key, value] of mapPopDataRide) {
+		
+		for (let k = 0; k < mapPopDataRide.get(key).length; k++) {
+			console.log("사이즈 : "+mapPopDataRide.get(key).length);
+			console.log("키값을 넣었을때 값 : "+mapPopDataRide.get(key));
+			if (k===0) {
+				tableTags += '<td></td>';
+				console.log(mapPopDataRide.get(key)[k]);
+				console.log(key);
+			}
+			else if((popDataSelect[i]).replace(/\"/gi, "") == key.replace(/\"/gi, "")){
+				let tableValue = Math.ceil((((mapPopDataRide.get(key)[k] - mapPopDataRide.get(key)[k-1]) / mapPopDataRide.get(key)[k-1]) * 100));
+				if (tableValue > 0) {
+				tableTags += ' 										<td>'+tableValue+'% <div style="color:blue; display:inline">▲</div></td> ';			
+				}else {
+				tableTags += ' 										<td>'+tableValue+'% <div style="color:red; display:inline">▼</div></td> ';			
+				}
+				
+			}
+		}
+	}
+
+	tableTags += ' </tr>';
+
+	tableTags += ' <tr>';
+	for (var j = 0; j < popData.length; j++) {
+		if((popDataSelect[i]).replace(/\"/gi, "") == popData[j].selectName.replace(/\"/gi, "")){
+	tableTags += ' 										<td>'+popData[j].quit+'</td> ';
+		}
+	}
+	tableTags += ' </tr>';
+	
+	// 하차 증감율
+	tableTags += ' <tr>';
+	for (const [key, value] of mapPopDataQuit) {
+		
+		for (let k = 0; k < mapPopDataQuit.get(key).length; k++) {
+			console.log("사이즈 : "+mapPopDataQuit.get(key).length);
+			console.log("키값을 넣었을때 값 : "+mapPopDataQuit.get(key));
+			if (k===0) {
+				tableTags += '<td></td>';
+				console.log(mapPopDataQuit.get(key)[k]);
+				console.log(key);
+			}
+			else if((popDataSelect[i]).replace(/\"/gi, "") == key.replace(/\"/gi, "")){
+				let tableValue = Math.ceil((((mapPopDataQuit.get(key)[k] - mapPopDataQuit.get(key)[k-1]) / mapPopDataQuit.get(key)[k-1]) * 100));
+				if (tableValue > 0) {
+				tableTags += ' 										<td>'+tableValue+'% <div style="color:blue; display:inline">▲</div></td> ';			
+				}else {
+				tableTags += ' 										<td>'+tableValue+'% <div style="color:red; display:inline">▼</div></td> ';			
+				}
+				
+			}
+		}
+	}
+	tableTags += ' </tr>';
+	
+	} // 지역 이름을 위해 2중 포문 사용
+	tableTags += ' </tr>';
+
+	
+	
+	
+	tableTags += ' 								</tbody> ';
+	
+	tableTags += ' 							</table> ';
+
+
+
+
+	tableTags += ' 						</div> ';
+	tableTags += ' 					</div> ';
+	tableTags += ' 				</div> ';
+	
+	$('#PageIn').append(tableTags);
+	
+	
+	
+	
+	
+	
+	///////////////////////////////////// 동적으로 테이블 생성  ↑ ////////////////////////////////
+	
+	
+	
+
+
+
+
+
+
+	
+</script>
+<script type="text/javascript">
+	
+</script>
+
+
+<script type="text/javascript">
 	$(function(){
 
 		
 	
 	
-	var json = ${jsonFigure};
-	var jsonTempMap = ${jsonMap};
-	var jsonMap = JSON.parse(jsonTempMap);
-	console.log(jsonMap);
+// 	var json = ${jsonFigure};
+// 	var jsonTempMap = ${jsonMap};
+// 	var jsonMap = JSON.parse(jsonTempMap);
+// 	console.log(jsonMap);
 	
-	jsonRideQuitData = [];
-	
-	
-	
-	var jsonTempMonthData = [];
-	var jsonTempRideData= [];
-	var jsonTempQuitData= [];
+// 	jsonRideQuitData = [];
 	
 	
-	var jsonMonthData = [];
-	var jsonRideData = [];
-	var jsonQuitData = [];
 	
-	for (var i = 0; i < json.length; i++) {
-		jsonTempMonthData.push(json[i].month);
-		jsonTempRideData.push(json[i].ride);
-		jsonTempQuitData.push(json[i].quit);
-	}
+// 	var jsonTempMonthData = [];
+// 	var jsonTempRideData= [];
+// 	var jsonTempQuitData= [];
 	
-	jsonMonthData.push(jsonTempMonthData);
-	jsonRideData.push(jsonTempRideData);
-	jsonQuitData.push(jsonTempQuitData);
+	
+// 	var jsonMonthData = [];
+// 	var jsonRideData = [];
+// 	var jsonQuitData = [];
+	
+// 	for (var i = 0; i < json.length; i++) {
+// 		jsonTempMonthData.push(json[i].month);
+// 		jsonTempRideData.push(json[i].ride);
+// 		jsonTempQuitData.push(json[i].quit);
+// 	}
+	
+// 	jsonMonthData.push(jsonTempMonthData);
+// 	jsonRideData.push(jsonTempRideData);
+// 	jsonQuitData.push(jsonTempQuitData);
 		
 
 ///////////////////////// 그래프 /////////////////////////////////
@@ -506,247 +769,11 @@ $(function(){
 	
 	
 	
-	////////////////////
-	
-	
-	
-	// 테이블 만들기
-// 	var cell = document.getElementById("poptable"); 
-// 	while ( cell.hasChildNodes() ) { 
-// 		cell.removeChild( cell.firstChild );
-// 	}
 
-/*
-	let htmltags = '<div class="card">';
-	htmltags += '<div class="card-body">';
-	htmltags +=' 	<table class="table table-bordered">     ';
-	htmltags +='<thead>                        ';
-	htmltags +=' 	<tr>                      ';
-	htmltags +=' 		<td>지역</td>         ';
-	for (var i = 0; i < json.length/jsonMap.length; i++) {
-	htmltags +=' 		<td class="text-center">'+json[i].month+' 월</td>            ';
-	}
-	htmltags +=' 	</tr>                     ';
-    htmltags +='                               ';
-	htmltags +=' </thead>                      ';
-	htmltags +=' <tbody>                       ';
-	
-		
-	
-	for (var j = 0; j < jsonMap.length; j++) {
-	htmltags +=' 	<tr>                      ';
-	
-		
-		
-	
-	htmltags +=' 		<td rowspan="4">"'+jsonMap[j].name+'""</td>    ';
-	for (var i = 0; i < json.length; i++) {
-	htmltags +=' 		<td class="text-center" >'+json[i].ride+' 명</td>            ';
-	} // 몇멍
-	htmltags +=' 	</tr>                     ';
-	
-	
-	
-	htmltags +=' 	<tr>                      ';
-// 	htmltags +=' 		<td>증감율</td>    ';
-	for (var i = 0; i < json.length; i++) {
-		if(i==0){
-			htmltags +=' 		<td class="text-center" ></td>            ';
-		}else if(Math.ceil((((json[i].ride - json[i-1].ride) / json[i-1].ride) * 100)) < 0){
-	htmltags +=' 		<td class="text-center" ">'+Math.ceil((((json[i].ride - json[i-1].ride) / json[i-1].ride) * 100)) +'% <div style="color:red; display:inline">▼</div></td>            ';
-		}else{
-		htmltags +=' 		<td class="text-center" ">'+Math.ceil((((json[i].ride - json[i-1].ride) / json[i-1].ride) * 100)) +'% <div style="color:blue; display:inline">▲</div></td>            ';
-		}
-	}// 증감율
-	htmltags +=' 	<tr>                      ';
-	for (var i = 0; i < json.length; i++) {
-		htmltags +=' 		<td class="text-center" >'+json[i].quit+' 명</td>            ';
-		
-	}	
-		htmltags +=' 	</tr>                     ';
-		
-	for (var i = 0; i < json.length; i++) {
-		if(i==0){
-			htmltags +=' 		<td class="text-center" ></td>            ';
-		}else if(Math.ceil((((json[i].ride - json[i-1].ride) / json[i-1].ride) * 100)) < 0){
-	htmltags +=' 		<td class="text-center" ">'+Math.ceil((((json[i].ride - json[i-1].ride) / json[i-1].ride) * 100)) +'% <div style="color:red; display:inline">▼</div></td>            ';
-		}else{
-		htmltags +=' 		<td class="text-center" ">'+Math.ceil((((json[i].ride - json[i-1].ride) / json[i-1].ride) * 100)) +'% <div style="color:blue; display:inline">▲</div></td>            ';
-		}
-	}// 증감율
-
-	
-	htmltags +=' 	</tr>                     ';
-	}// for j
-	
-	htmltags +=' 	</tbody>                  ';
-	htmltags +=' 	</table>                  ';
-	htmltags +=' 	</div>                  ';
-	htmltags +=' 	</div>                  ';
-	
-	$('#poptable').append(htmltags);
-	
-		
-	*/	
 		
 		
 	})
-	
-	
-	
-	
-	
-	var cell = document.getElementById("PageIn"); 
-	while ( cell.hasChildNodes() ) { 
-		cell.removeChild( cell.firstChild );
-	}
-	
-	///////////////////////////////////// 동적으로 테이블 생성  ↓ ////////////////////////////////
-	
-	tableTags = ' 				<div class="col-md-12" id="poptable"> ';
-	tableTags += ' 					<div class="card"> ';
-	tableTags += ' 						<div class="card-body"> ';
-
-	tableTags += ' 							<table class="table table-bordered"> ';
-	
-	tableTags += ' 								<thead> ';
-	tableTags += ' 									<tr> ';
-	tableTags += ' 										<td>지역</td> ';
-
-
-// 	년 월
-	for (var i = 0; i < popDataMonth.length; i++) {
-		
-	tableTags += ' 										<td>'+popDataMonth[i]+'</td> ';
-	}			
-	
-
-	tableTags += ' 									</tr> ';
-	tableTags += ' 								</thead> ';
-	
-	tableTags += ' 								<tbody> ';
-	
-	// 지역 이름을 위한 2중 포문
-	for (var i = 0; i < popDataSelect.length; i++) {
-	tableTags += ' 									<tr> ';
-	// 지역 이름
-	
-	tableTags += ' 										<td rowspan="4">'+(popDataSelect[i]).replace(/\"/gi, "")+'</td> ';
-		
-
-	for (var j = 0; j < popData.length; j++) {
-		if((popDataSelect[i]).replace(/\"/gi, "") == popData[j].selectName.replace(/\"/gi, "")){
-	tableTags += ' 										<td>'+popData[j].ride+'</td> ';
-		}
-	}
-	
-	// 승차 증감율
-	tableTags += ' <tr>';
-	for (const [key, value] of mapPopDataRide) {
-		
-		for (var j = 0; j < mapPopDataRide.get(key).length; j++) {
-			
-			if (j==0) {
-				tableTags += '<td></td>';
-				console.log(mapPopDataRide.get(key));
-			}
-			else if((popDataSelect[i]).replace(/\"/gi, "") == key.replace(/\"/gi, "")){
-				tableTags += ' 										<td>'+Math.ceil((((popData[j].ride - popData[j-1].ride) / popData[j-1].ride) * 100)) +'% <div style="color:blue; display:inline">▲</div></td> ';			
-			}
-		}
-	}
-
-// 	for (var j = 0; j < popData.length; j++) {
-// 		if (j==0 || popData[j].selectName.replace(/\"/gi, "") != popData[(j+1 > popData.length) ? j+1 : j].selectName.replace(/\"/gi, "") ) {
-// 			tableTags += '<td></td>';
-			
-// 		}
-// 		else if((popDataSelect[i]).replace(/\"/gi, "") == popData[j].selectName.replace(/\"/gi, "")){
-// 	tableTags += ' 										<td>'+Math.ceil((((popData[j].ride - popData[j-1].ride) / popData[j-1].ride) * 100)) +'% <div style="color:blue; display:inline">▲</div></td> ';
-// 		}
-// 	}
-	tableTags += ' </tr>';
-
-	tableTags += ' <tr>';
-	for (var j = 0; j < popData.length; j++) {
-		if((popDataSelect[i]).replace(/\"/gi, "") == popData[j].selectName.replace(/\"/gi, "")){
-	tableTags += ' 										<td>'+popData[j].quit+'</td> ';
-		}
-	}
-	tableTags += ' </tr>';
-	
-	// 하차 증감율
-	tableTags += ' <tr>';
-// 	for (var j = 0; j < popData.length; j++) {
-// 		if(j==0 || popData[j].selectName.replace(/\"/gi, "") != popData[(j+1 > popData.length) ? j+1 : j].selectName.replace(/\"/gi, "")){
-// 			tableTags += '<td></td>';
-// 		}
-// 		else if((popDataSelect[i]).replace(/\"/gi, "") == popData[j].selectName.replace(/\"/gi, "")){
-// 	tableTags += ' 										<td>'+Math.ceil((((popData[j].quit - popData[j-1].quit) / popData[j-1].quit) * 100)) +'% <div style="color:blue; display:inline">▲</div></td> ';
-// 		}
-// 	}
-	tableTags += ' </tr>';
-	
-	} // 지역 이름을 위해 2중 포문 사용
-	tableTags += ' 									</tr> ';
-	
-
-	
-	
-	
-	tableTags += ' 								</tbody> ';
-	
-	tableTags += ' 							</table> ';
-
-
-
-
-	tableTags += ' 						</div> ';
-	tableTags += ' 					</div> ';
-	tableTags += ' 				</div> ';
-	
-	$('#PageIn').append(tableTags);
-	
-	
-	
-	
-	
-	
-	///////////////////////////////////// 동적으로 테이블 생성  ↑ ////////////////////////////////
-	
-	
-	
-	/////////////////////////////////////////////
-	
-// 	var data = {
-// 			json : json
-// 	};
-	
-// 	var dataMonthList = [];
-// 	var dataRideList = [];
-	
-	
-// 	for (var i = 0; i < json.length; i++) {
-// 		dataMonthList[0][i].push(json[i].month);
-// 		dataRideList[0][i].push(json[i].ride);
-// 	}
-	
-	
-	
-	
-
-
-
-
-//////////////////////////////////////////////////////////////////////////
-
-
-
-
-
-	
 </script>
-
 
 
 
