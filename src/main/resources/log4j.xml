@@ -16,15 +16,15 @@
 	</logger>
 	
 	<logger name="jdbc.audit">
-		<level value="debug" />
+		<level value="warn" />
 	</logger>
 	
 	<logger name="jdbc.resultset">
-		<level value="debug" />
+		<level value="info" />
 	</logger>
 	
 	<logger name="jdbc.connection">
-		<level value="debug" />
+		<level value="warn" />
 	</logger>
 	
 	<!-- 3rdparty Loggers -->

@@ -1,13 +1,13 @@
 package kr.or.ddit.qna.mapper;
 
-import kr.or.ddit.qna.domain.BoardVO;
+import kr.or.ddit.domain.BoardVO;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
-public interface BoardMapper {
+public interface QNAMapper {
 
-	public List<BoardVO> getList();
+	public List<BoardVO> getList(BoardVO vo);
 
 	public BoardVO read(String board_id);
 
@@ -28,4 +28,6 @@ public interface BoardMapper {
 	public int update(BoardVO board);
 	
 	public void updateReplyCnt(@Param("bno") Long bno, @Param("amount") int amount);
+
+	public void updateHit(String board_id);
 }
