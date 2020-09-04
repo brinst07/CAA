@@ -82,6 +82,7 @@
                 </a></li>
                 <li class="nav-section"><span class="sidebar-mini-icon"> <i class="fa fa-ellipsis-h"></i>
 					</span>
+						
                     <h4 class="text-section">게시판 메뉴</h4></li>
                 <li class="nav-item" id="notice"><a data-toggle="collapse"> <i class="fas fa-clipboard-list"></i>
                     <p>공지사항</p> <span class="caret"></span>
@@ -97,7 +98,12 @@
                         </ul>
                     </div>
                 </li>
-                <li class="nav-item" id="qna"><a data-toggle="collapse"> <i class="fas fa-question-circle"></i>
+                
+                <li class="nav-item" id="qna"><a href="/qna/list"> <i class="fas fa-question-circle"></i>
+                    <p>Q&A게시판</p>
+                </a></li>
+                
+                <!-- <li class="nav-item" id="qna"><a data-toggle="collapse"> <i class="fas fa-question-circle"></i>
                     <p>Q&A게시판</p> <span class="caret"></span>
                 </a>
                     <div class="collapse" id="messages-app-nav">
@@ -108,7 +114,7 @@
                             </a></li>
                         </ul>
                     </div>
-                </li>
+                </li> -->
             </ul>
         </div>
     </div>
