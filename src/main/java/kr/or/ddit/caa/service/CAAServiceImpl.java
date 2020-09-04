@@ -109,10 +109,4 @@ public class CAAServiceImpl implements CAAService {
 
 	}
 
-	@Override
-	public List<IndiVO> getIndiList(String var) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
 }
