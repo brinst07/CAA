@@ -3,7 +3,140 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 
-<style type="text/css">
+
+
+
+<body>
+
+							
+
+	<div class="main-panel full-height">
+		<div class="container">
+			<div class="page-inner">
+				<div class="row justify-content-center">
+					<div class="col-12 col-lg-10 col-xl-9">
+						<div class="row align-items-center">
+							<div class="col">
+								<h4 class="page-title">QnA</h4>
+								<h6 class="page-pretitle">Questions and Answers</h6>
+							</div>
+							
+							
+							<form id="qnaModify" role="form" action="/qna/modify" method="post">
+							
+							<div class="col-auto">
+								<button data-oper='register' type="button" class="btn btn-light btn-border">등록</button>
+								<a href="/qna/list" class="btn btn-primary ml-2"> 취소 </a>
+							</div>
+						</div>
+						<div class="page-divider"></div>
+						<div class="row">
+							<div class="col-md-12">
+								<div class="card card-invoice">
+									<div class="card-header">
+										<h5 class="sub">제목</h5>
+											<div class="invoice-header">
+											
+												<input type="text" class="form-control" id="board_title" name="board_title">
+					
+											</div>
+									</div>
+									<div class="card-body">
+										<div class="separator-solid"></div>
+										<div class="row">
+											
+											<div class="col-md-8 info-invoice">
+												<h5 class="sub">작성자</h5>
+												<p>
+													<c:out value="${board.member_id }"></c:out>
+												</p>
+											</div>
+
+										</div>
+
+										<div class="separator-solid"></div>
+										<h5 class="sub">내용</h5>
+										<div style="height: 300px;">
+										
+											<textarea id="editor" name="board_content"></textarea>
+										
+												</div>
+										
+										
+										</div>
+									</div>
+								</div>
+								
+								</form>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+
+
+
+
+
+</body>
+
+
+<script>
+		$('#editor').summernote('code', '${board.board_content}');
+		
+		$('#editor').val("${board.board_content}");
+		$('#editor').summernote({
+			fontNames : [ 'Arial', 'Arial Black', 'Comic Sans MS', 'Courier New' ],
+			tabsize : 2,
+			height : 600,
+			callbacks : {
+				onImageUpload : function(files, editor, welEditable) {
+					for (var i = files.length - 1; i >= 0; i--) {
+						sendFile(files[i], this);
+					}
+				}
+			}
+		});
+	</script>
+	
+	
+<script type="text/javascript">
+	$(document).ready(function() {
+
+			var operForm = $("#operForm");
+
+			var textareaVal = $("textarea[name=board_content]").text();
+
+			console.log(textareaVal);
+
+				$("button[data-oper='register']").on("click",function(e) {
+
+
+					console.log("Submit clicked");
+
+					
+						operForm.attr("action","/qna/register").submit();
+						
+						console.log("ggggg");
+
+						});
+
+							
+					});
+
+						
+</script>
+
+
+
+
+
+
+
+
+<!-- <style type="text/css">
 .uploadResult ul li {
 	display: inline-block;
 	margin: 10px;
@@ -11,7 +144,7 @@
 </style>
 
 <div class="wrapper sidebar_minimize fullheight-side">
-	<!-- Logo Header -->
+	Logo Header
 	<div class="logo-header position-fixed" data-background-color="blue">
 
 		<a href="index.html" class="logo"> <img
@@ -33,7 +166,7 @@
 			</button>
 		</div>
 	</div>
-	<!-- End Logo Header -->
+	End Logo Header
 
 
 	<div class="main-panel full-height">
@@ -60,7 +193,7 @@
 									
 									
 								
-								<!-- <div class="form-group row"> -->
+								<div class="form-group row">
 									<br> <br>
 									<div class="card-body">
 
@@ -68,38 +201,14 @@
 										<div class="form-group row">
 											<label  for="to" class="col-form-label col-md-1">&nbsp;&nbsp;내용 </label>
 
-
-
-
-
-
-
-											<!-- <textarea id="editor" name="board_content"></textarea> -->
 										</div>
-										
-										
-
-
-										<!-- --------------- -->
-<!-- 										<form role="form" actions="/qna/register" method="post"> -->
-
-
-<!-- 												<input typfe="hidden" id="board_id" name="board_id" value='10'>  -->
-<!-- 												<input type="hidden" id="member_id" name="member_id" value='admin'>  -->
-<!-- 												<input type="hidden" id="board_datetime" name="board_datetime" value='2020/08/23'>  -->
-<!-- 												<input type="hidden" id="board_status" name="board_status" value='y'>  -->
-<!-- 												<input type="hidden" id="board_category_id" name="board_category_id" value='1'>  -->
-<!-- 												<input type="hidden" id="board_temp_save" name="board_temp_save" value='y'>  -->
-<!-- 												<input type="hidden" id="board_hit" name="board_hit" value='10'> -->
-<!-- 											</form> -->
-						
-						
+	
 						<div class="row">
 											<div class="col-lg-12">
 												<div class="panel panel-default">
 													<label for="cc" class="col-form-label col-md-1">첨부파일 </label>
-													<!-- <div class="panel-heading">File Attach</div> -->
-													<!-- /.panel-heading -->
+													<div class="panel-heading">File Attach</div>
+													/.panel-heading
 													<div class="panel-body">
 														<div class="form-group uploadDiv">
 														
@@ -110,13 +219,13 @@
 															</ul>
 														</div>
 													</div>
-													<!--  end panel-body -->
+													 end panel-body
 												</div>
-												<!--  end panel-body -->
+												 end panel-body
 											</div>
-											<!-- end panel -->
+											end panel
 										</div>
-										<!-- /.row -->
+										/.row
 
 
 
@@ -127,102 +236,24 @@
 							<button data-oper='register' type="button" class="btn btn-primary">확인</button>
 							<button type="reset" class="btn btn-black" onclick="location.href='/qna/list'">취소</button>
 
-							<%-- <form id='operform' action="/qna/modify" method="get">
-                           	<input type='hidden' id='board_id' name='board_id' value='<c:out value="${board.board_id }"/>'>
-                           </form> --%>
-
 						</div>
 					</div>
 				</div>
 </div>
-
-
-
-
-
-										<!-- 원래 여기 File Attach -->
-										
-										
-										
-										<!-- <button data-oper='register' type="button"
-											class="btn btn-primary">확인</button>
-
-										<button class="btn btn-black">삭제</button>
-										<button type="reset" class="btn btn-black"
-											onclick="location.href='/qna/list'">취소</button> -->
-											
-									
-							
-							
-							<!-- <div class="email-editor">
-						<div id="editor"></div>
-						<div class="email-action"> -->
-							<!-- <button data-oper='register' type="button" class="btn btn-primary">확인</button> -->
-							<!-- 							<button class="btn btn-black">삭제</button> -->
-							<!-- 							<button type="reset" class="btn btn-black" -->
-							<!-- 								onclick="location.href='/qna/list'">취소</button> -->
-
-							<%-- <form id='operform' action="/qna/modify" method="get">
-                           	<input type='hidden' id='board_id' name='board_id' value='<c:out value="${board.board_id }"/>'>
-                           </form> --%>
-
-						<!-- </div>
-					</div>
-
-					여기다 폼끝나는거
-				</div> -->
-											
-											
-											
-											
-											
-											
+			
 							</form>
-
-
-						<!-- 요깅 -->
-						
-
-
-
-
-
-<!-- 							<form action="/qna/uploadFormAction" enctype="multipart/form" -->
-<!-- 								method="post" enctype=class="dropzone"> -->
-
-<!-- 								<div class="dz-message" data-dz-message> -->
-
-<!-- 									<label for="cc" class="col-form-label col-md-1">첨부파일 </label> -->
-<!-- 									<h4 class="message">첨부파일</h4> -->
-<!-- 								</div> -->
-<!-- 								<div class="fallback"> -->
-<!-- 									<input name="file" type="file" multiple /> -->
-<!-- 								</div> -->
-<!-- 							</form> -->
+	
 						</div>
 					</div>
-
 
 					<div class="email-editor">
 						<div id="editor"></div>
 						<div class="email-action">
-							<!-- 							<button data-oper='register' type="button" -->
-							<!-- 								class="btn btn-primary">확인</button> -->
-
-
-
-							<!-- 							<button class="btn btn-black">삭제</button> -->
-							<!-- 							<button type="reset" class="btn btn-black" -->
-							<!-- 								onclick="location.href='/qna/list'">취소</button> -->
-
-							<%-- <form id='operform' action="/qna/modify" method="get">
-                           	<input type='hidden' id='board_id' name='board_id' value='<c:out value="${board.board_id }"/>'>
-                           </form> --%>
+							
 
 						</div>
 					</div>
 
-					<!-- 여기다 폼끝나는거 -->
 				</div>
 
 
@@ -263,8 +294,7 @@
 		fontNames : [ 'Arial', 'Arial Black', 'Comic Sans MS', 'Courier New' ],
 		tabsize : 2,
 		height : 300,
-// 	    minHeight: 1000,      // 최소 높이값(null은 제한 없음)
-// 	    maxHeight: null,      // 최대 높이값(null은 제한 없음)
+
 		callbacks : {
 			onImageUpload : function(files, editor, welEditable) {
 				for (var i = files.length - 1; i >= 0; i--) {
@@ -433,43 +463,13 @@
 
 						});
 
-						/* $("button[data-oper='list']").on("click", function(e) {
 
-							openForm.find("#board_id").remove();
-							openForm.attr("action", "/qna/list")
-							openForm.submit();
-						}); */
 
 					});
-</script>
+</script> 
+</body> -->
 
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-</body>
 </html>
