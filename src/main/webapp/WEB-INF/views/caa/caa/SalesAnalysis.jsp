@@ -374,17 +374,16 @@
 				let html1 =  '';
 				
 				html1 +='<br>';	
-				html1 +=' 								<div style="text-align:center;"><h4><구역별 평균 매출 비교 그래프></h4></div> ';					
 				html1 +=' 									<div class="chart-container"> ';
 				html1 +=' 										<div class="chartjs-size-monitor" style="position: absolute; left: 0px; top: 0px; right: 0px; bottom: 0px; overflow: hidden; pointer-events: none; visibility: hidden; z-index: -1;"> ';
 				html1 +=' 												<div class="chartjs-size-monitor-expand" style="position: absolute; left: 0; top: 0; right: 0; bottom: 0; overflow: hidden; pointer-events: none; visibility: hidden; z-index: -1;"> ';
-				html1 +=' 													<div style="position: absolute; width: 1000000px; height: 1000000px; left: 0; top: 0"></div> ';
+				html1 +=' 													<div style="position: absolute; width: 50000px; height: 1000000px; left: 0; top: 0"></div> ';
 				html1 +=' 												</div> ';
 				html1 +=' 												<div class="chartjs-size-monitor-shrink" style="position: absolute; left: 0; top: 0; right: 0; bottom: 0; overflow: hidden; pointer-events: none; visibility: hidden; z-index: -1;"> ';
-				html1 +=' 													<div style="position: absolute; width: 200%; height: 200%; left: 0; top: 0"></div> ';
+				html1 +=' 													<div style="position: absolute; width: 50%; height: 200%; left: 0; top: 0"></div> ';
 				html1 +=' 												</div> ';
 				html1 +=' 										</div> ';
-				html1 +=' 											<canvas id="multipleLineChart1'+i+'" width="306" height="300" class="chartjs-render-monitor" style="display: block; width: 306px; height: 300px;"></canvas> ';
+				html1 +=' 											<canvas id="multipleLineChart1" width="500" height="300" class="chartjs-render-monitor" style="display: block; width: 306px; height: 300px;"></canvas> ';
 				html1 +=' 									</div> ';
 				html1 += '								</div>';
 				for(var i=0; i<totalStore.length ; i++){
@@ -436,9 +435,6 @@
 				
 				
 				let html2 = '';
-				for(var i=0; i<totalStore.length ; i++){
-					html2 +='<br>'
-					html2 +=' 								<div style="text-align:center;"><h4>'+jsonMapList[i].name+'구역</h4></div> ';
 					html2+=' 								<div class="chart-container"> ';
 					html2 +=' 									<div class="chartjs-size-monitor" style="position: absolute; left: 0px; top: 0px; right: 0px; bottom: 0px; overflow: hidden; pointer-events: none; visibility: hidden; z-index: -1;"> ';
 					html2 +=' 												<div class="chartjs-size-monitor-expand" style="position: absolute; left: 0; top: 0; right: 0; bottom: 0; overflow: hidden; pointer-events: none; visibility: hidden; z-index: -1;"> ';
@@ -448,11 +444,12 @@
 					html2 +=' 									<div style="position: absolute; width: 200%; height: 200%; left: 0; top: 0"></div> ';
 					html2 +=' 								</div> ';
 					html2 +=' 							</div> ';
-					html2 +=' 								<canvas id="multipleLineChart2'+i+'" width="306" height="300" class="chartjs-render-monitor" style="display: block; width: 306px; height: 300px;"></canvas> ';
+					html2 +=' 								<canvas id="multipleLineChart2" width="306" height="300" class="chartjs-render-monitor" style="display: block; width: 306px; height: 300px;"></canvas> ';
 					html2 +=' 							</div> ';
 					html2 +='<br>';
 					html2 += '</div>';	
-					html2 +='<br>';
+				for(var i=0; i<totalStore.length ; i++){
+					html2 +='<br>'
 					html2 += '<div style="width:100%;  overflow:auto">';
 					html2 +='<table  class="table table-bordered">';
 				html2 += '							<thead>';
@@ -541,9 +538,6 @@
 				$('#test2').append(html2);
 				html2 = '';
 				let html3 = '';
-				for(var i=0; i<totalStore.length ; i++){
-					html3 +='<br>'
-					html3 +=' 								<div style="text-align:center;"><h4>'+jsonMapList[i].name+'구역</h4></div> ';
 					html3 +=' 								<div class="chart-container"> ';
 					html3 +=' 									<div class="chartjs-size-monitor" style="position: absolute; left: 0px; top: 0px; right: 0px; bottom: 0px; overflow: hidden; pointer-events: none; visibility: hidden; z-index: -1;"> ';
 					html3 +=' 												<div class="chartjs-size-monitor-expand" style="position: absolute; left: 0; top: 0; right: 0; bottom: 0; overflow: hidden; pointer-events: none; visibility: hidden; z-index: -1;"> ';
@@ -553,11 +547,12 @@
 					html3 +=' 									<div style="position: absolute; width: 200%; height: 200%; left: 0; top: 0"></div> ';
 					html3 +=' 								</div> ';
 					html3 +=' 							</div> ';
-					html3 +=' 								<canvas id="multipleLineChart3'+i+'" width="306" height="300" class="chartjs-render-monitor" style="display: block; width: 306px; height: 300px;"></canvas> ';
+					html3 +=' 								<canvas id="multipleLineChart3" width="306" height="300" class="chartjs-render-monitor" style="display: block; width: 306px; height: 300px;"></canvas> ';
 					html3 +=' 							</div> ';
 					html3 +='<br>';
 					html3 += '</div>';	
-					html3+='<br>';
+				for(var i=0; i<totalStore.length ; i++){
+					html3 +='<br>'
 					html3 += '<div style="width:100%;  overflow:auto">';
 					html3 +='<table id="table3" class="table table-bordered">';
 				html3 += '									<thead>';
@@ -637,9 +632,6 @@
 				html3 = '';
 
 				let html4 = '';
-				for(var i=0; i<totalStore.length ; i++){
-					html4 +='<br>'
-					html4 +=' 								<div style="text-align:center;"><h4>'+jsonMapList[i].name+'구역</h4></div> ';
 					html4 +=' 								<div class="chart-container"> ';
 					html4 +=' 									<div class="chartjs-size-monitor" style="position: absolute; left: 0px; top: 0px; right: 0px; bottom: 0px; overflow: hidden; pointer-events: none; visibility: hidden; z-index: -1;"> ';
 					html4 +=' 												<div class="chartjs-size-monitor-expand" style="position: absolute; left: 0; top: 0; right: 0; bottom: 0; overflow: hidden; pointer-events: none; visibility: hidden; z-index: -1;"> ';
@@ -649,11 +641,12 @@
 					html4 +=' 									<div style="position: absolute; width: 200%; height: 200%; left: 0; top: 0"></div> ';
 					html4 +=' 								</div> ';
 					html4 +=' 							</div> ';
-					html4 +=' 								<canvas id="multipleLineChart4'+i+'" width="306" height="300" class="chartjs-render-monitor" style="display: block; width: 306px; height: 300px;"></canvas> ';
+					html4 +=' 								<canvas id="multipleLineChart4" width="306" height="300" class="chartjs-render-monitor" style="display: block; width: 306px; height: 300px;"></canvas> ';
 					html4 +=' 							</div> ';
 					html4 +='<br>';
 					html4 += '</div>';	
-					html4+='<br>';
+				for(var i=0; i<totalStore.length ; i++){
+					html4 +='<br>'
 				html4 += '<div style="width:100%;  overflow:auto">';
 				html4 += '								<table class="table table-bordered">';
 				html4 += '									<thead>';
@@ -732,18 +725,16 @@
 				$('#test4').append(html4);
 				html4 = '';
 
-				html5='';
-				for(var i=0; i<totalStore.length ; i++){
+				html5 = '';
 				html5 +='<div  style="display: flex;">';
-					if (totalStore[i] != null){
-						
-						for(var j=0; j<totalStore[i].length ; j++){	
+				for(var i=0; i<totalStore.length ; i++){
+	
 					html5 +='<br>'
-					html5 +=' 								<div style="text-align:center;"><h4>'+totalStore[i][j].upjongName+'</h4></div> ';
+					html5 +=' 								<div style="text-align:center;"><h4>'+jsonMapList[i].name+'</h4></div> ';
 					html5 +=' 						<div class="chart-container item"  > ';
 					html5 +=' 								<div class="chartjs-size-monitor" ';
 					html5 +=' 										style="position: absolute; left: 0px; top: 0px; right: 0px; bottom: 0px; overflow: hidden; pointer-events: none; visibility: hidden; z-index: -1;"> ';
-				html5 +=' 										<div class="chartjs-size-monitor-expand" ';
+					html5 +=' 										<div class="chartjs-size-monitor-expand" ';
 					html5 +=' 										style="position: absolute; left: 0; top: 0; right: 0; bottom: 0; overflow: hidden; pointer-events: none; visibility: hidden; z-index: -1;"> ';
 					html5 +=' 										<div ';
 					html5 +=' 											style="position: absolute; width: 1000000px; height: 1000000px; left: 0; top: 0"></div> ';
@@ -754,11 +745,13 @@
 					html5 +=' 											style="position: absolute; width: 200%; height: 200%; left: 0; top: 0"></div> ';
 					html5 +=' 									</div> ';
 					html5 +=' 								</div> ';
-					html5 +=' 							<canvas id="doughnutChart2'+i+''+j+'"style="width: 438px; height: 300px; display: block; width="438" align:"center" height="300" class="chartjs-render-monitor"></canvas> ';
-				html5 +=' 							</div> ';
-						}
-					}
-				html5 +='</div>';
+// 					html5 +=' 							<canvas id="multipleBarChart"style="width: 438px; height: 300px; display: block; width="438" align:"center" height="300" class="chartjs-render-monitor"></canvas> ';
+					html5 +=' 							<canvas id="doughnutChart2'+i+'"style="width: 438px; height: 300px; display: block; width="438" align:"center" height="300" class="chartjs-render-monitor"></canvas> ';
+					html5 +=' 							</div> ';
+				}
+				html5 +='</div>';//flex
+				for(var i=0; i<totalStore.length ; i++){
+
 				html5 += '<div style="width:100%;  overflow:auto">';
 				html5 += '								<table class="table table-bordered">';
 				html5 += '									<thead>';
@@ -811,273 +804,288 @@
 				
 				
                 let color = ["#1d7af3","#f02e2e","#ff9900"];
-				
-//                 [ "당월 매출 금액 " ]
+
                 
-                
-                var myMultipleLineChart1 = new Chart(multipleLineChart, {
-					type : 'bar',
-					data : {
-						labels :,
-						datasets : datasets1
-					},
-					options : {
-						responsive : true,
-						maintainAspectRatio : false,
-						legend : {
-							position : 'top',
-						},
-						tooltips : {
-							bodySpacing : 4,
-							mode : "nearest",
-							intersect : 0,
-							position : "nearest",
-							xPadding : 10,
-							yPadding : 10,
-							caretPadding : 10
-						},
-						layout : {
-							padding : {
-								left : 15,
-								right : 15,
-								top : 15,
-								bottom : 15
+           		var labelData1 = [];
+				let datasets1 = [];
+            	
+            	for(var i = 0; i<totalStore.length; i++){
+           			labelData1.push(jsonMapList[i].name);
+           			if(totalStore[i] != null){
+	           			for(var j=0; j<totalStore[i].length; j++){
+	           				
+	           				
+	           			datasets1.push(totalStore[i][j].avgPrice)
+	           			}
+	           			
+           			}
+           			else{datasets1.push(null)}
+					
+            	}
+						
+						
+						var myBarChart = new Chart(multipleLineChart1, {
+							type: 'bar',
+							data: {
+								labels: labelData1,
+								datasets : [{
+									label: "평균 매출",
+									backgroundColor: 'rgb(23, 125, 255)',
+									borderColor: 'rgb(23, 125, 255)',
+									data: datasets1,
+								}],
+							},
+							options:
+								{
+								title: {
+								display: true,
+								text: '매출 그래프'
+								},
+								legend : {
+	 								position : 'bottom'
+	 							},
+								responsive: true, 
+								maintainAspectRatio: false,
+								scales: {
+									 xAxes: [{
+								            barPercentage: 0.3
+								        }],
+									yAxes: [{
+										ticks: {
+											beginAtZero:true
+										}
+									}]
+								},
 							}
-						}
-					}
-				});
-                
+						});
+
+
+			let datasets2 = [];
 				for(var i = 0; i<totalStore.length; i++){
-					
-					let datasets1 = [];
-	                if(totalStore[i] != null){
-	                for(var j = 0; j<totalStore[i].length; j++){
-	                   var data ={
-	                         label : totalStore[i][j].upjongName,
-	                         borderColor : color[j],
-	                         pointBorderColor : "#FFF",
-	                         pointBackgroundColor : color[j],
-	                         pointBorderWidth : 2,
-	                         pointHoverRadius : 4,
-	                         pointHoverBorderWidth : 1,
-	                         pointRadius : 4,
-	                         backgroundColor : color[j],
-	                         fill : true,
-	                         borderWidth : 2,
-	                         data : [ totalStore[i][j].avgPrice]
-	                        
-	                   }         
-	                   datasets1.push(data);
-	                }
-	                }
-	
-	
-	
-	
-					
-					
-					let datasets2 = [];
-	                if(totalStore[i] != null){
-	                for(var j = 0; j<totalStore[i].length; j++){
-	                   var data ={
-	                         label : totalStore[i][j].upjongName,
-	                         borderColor : color[j],
-	                         pointBorderColor : "#FFF",
-	                         pointBackgroundColor : color[j],
-	                         pointBorderWidth : 2,
-	                         pointHoverRadius : 4,
-	                         pointHoverBorderWidth : 1,
-	                         pointRadius : 4,
-	                         backgroundColor : 'transparent',
-	                         fill : true,
-	                         borderWidth : 2,
-	                         data : [ totalStore[i][j].avgMonPrice, totalStore[i][j].avgTuePrice, totalStore[i][j].avgWedPrice, totalStore[i][j].avgThuPrice, totalStore[i][j].avgFriPrice, totalStore[i][j].avgSatPrice, totalStore[i][j].avgSunPrice]
-	                        
-	                   }         
-	                   datasets2.push(data);
-	                }
-	                }
-					
-					var multipleLineChart2 ="multipleLineChart2"+i ;
-					var myMultipleLineChart1 = new Chart(multipleLineChart2, {
-						type : 'line',
-						data : {
-							labels : [ "월", "화", "수", "목","금","토","일" ],
-							datasets : datasets2
-						},
-						options : {
-							responsive : true,
-							maintainAspectRatio : false,
-							legend : {
-								position : 'top',
-							},
-							tooltips : {
-								bodySpacing : 4,
-								mode : "nearest",
-								intersect : 0,
-								position : "nearest",
-								xPadding : 10,
-								yPadding : 10,
-								caretPadding : 10
-							},
-							layout : {
-								padding : {
-									left : 15,
-									right : 15,
-									top : 15,
-									bottom : 15
-								}
-							}
-						}
-					});
-					
-					let datasets3 = [];
-	                if(totalStore[i] != null){
-	                for(var j = 0; j<totalStore[i].length; j++){
-	                   var data ={
-	                         label : totalStore[i][j].upjongName,
-	                         borderColor : color[j],
-	                         pointBorderColor : "#FFF",
-	                         pointBackgroundColor : color[j],
-	                         pointBorderWidth : 2,
-	                         pointHoverRadius : 4,
-	                         pointHoverBorderWidth : 1,
-	                         pointRadius : 4,
-	                         backgroundColor : 'transparent',
-	                         fill : true,
-	                         borderWidth : 2,
-	                         data : [ totalStore[i][j].avg0006Price, totalStore[i][j].avg0611Price, totalStore[i][j].avg1114Price, totalStore[i][j].avg1417Price, totalStore[i][j].avg1721Price, totalStore[i][j].avg2124Price]
-	                        
-	                   }         
-	                   datasets3.push(data);
-	                }
-	                }
-	              
-					var multipleLineChart3 ="multipleLineChart3"+i ;
-					var myMultipleLineChart1 = new Chart(multipleLineChart3, {
-						type : 'line',
-						data : {
-							labels : [ "00~06", "06~11", "11~14", "14~17","17~21","21~24" ],
-							datasets : datasets3
-						},
-						options : {
-							responsive : true,
-							maintainAspectRatio : false,
-							legend : {
-								position : 'top',
-							},
-							tooltips : {
-								bodySpacing : 4,
-								mode : "nearest",
-								intersect : 0,
-								position : "nearest",
-								xPadding : 10,
-								yPadding : 10,
-								caretPadding : 10
-							},
-							layout : {
-								padding : {
-									left : 15,
-									right : 15,
-									top : 15,
-									bottom : 15
-								}
-							}
-						}
-					});
-					
-					
-					  let datasets4 = [];
-		                if(totalStore[i] != null){
-		                for(var j = 0; j<totalStore[i].length; j++){
-		                   var data ={
-		                         label : totalStore[i][j].upjongName,
-		                         borderColor : color[j],
-		                         pointBorderColor : "#FFF",
-		                         pointBackgroundColor : color[j],
-		                         pointBorderWidth : 2,
-		                         pointHoverRadius : 4,
-		                         pointHoverBorderWidth : 1,
-		                         pointRadius : 4,
-		                         backgroundColor : 'transparent',
-		                         fill : true,
-		                         borderWidth : 2,
+ 	                if(totalStore[i] != null){
+	 	                for(var j = 0; j<totalStore[i].length; j++){
+	 	                   var data ={
+	 	                         label : labelData1[i],
+	 	                         borderColor : color[i],
+	 	                         pointBorderColor : "#FFF",
+	 	                         pointBackgroundColor : color[i],
+	 	                         pointBorderWidth : 2,
+	 	                         pointHoverRadius : 4,
+	 	                         pointHoverBorderWidth : 1,
+	 	                         pointRadius : 4,
+	 	                         backgroundColor : 'transparent',
+	 	                         fill : true,
+	 	                         borderWidth : 2,
+	 	                         data : [ totalStore[i][j].avgMonPrice, totalStore[i][j].avgTuePrice, totalStore[i][j].avgWedPrice, totalStore[i][j].avgThuPrice, totalStore[i][j].avgFriPrice, totalStore[i][j].avgSatPrice, totalStore[i][j].avgSunPrice]
+		                        
+ 	                  		 }         
+	 	                   datasets2.push(data);
+ 	               	 	}
+                	}
+				}
+						
+	 					var multipleLineChart2 ="multipleLineChart2" ;
+	 					var myMultipleLineChart1 = new Chart(multipleLineChart2, {
+	 						type : 'line',
+	 						data : {
+	 							labels : [ "월", "화", "수", "목","금","토","일" ],
+	 							datasets : datasets2
+	 						},
+	 						options : 	
+	 							{
+	 							title: {
+	 							display: true,
+	 							text: '요일별 매출 그래프'
+	 							},
+	 							responsive : true,
+	 							maintainAspectRatio : false,
+	 							legend : {
+	 								position : 'bottom',
+	 							},
+	 							tooltips : {
+	 								bodySpacing : 4,
+	 								mode : "nearest",
+	 								intersect : 0,
+	 								position : "nearest",
+	 								xPadding : 10,
+	 								yPadding : 10,
+	 								caretPadding : 10
+	 							},
+	 							layout : {
+	 								padding : {
+	 									left : 15,
+	 									right : 15,
+	 									top : 15,
+	 									bottom : 15
+	 								}
+	 							}
+	 						}
+	 					});
+	 					
+	 					// 밑
+	 					
+			let datasets3 = [];
+				for(var i = 0; i<totalStore.length; i++){
+ 	                if(totalStore[i] != null){
+	 	                for(var j = 0; j<totalStore[i].length; j++){
+	 	                   var data ={
+	 	                         label : labelData1[i],
+	 	                         borderColor : color[i],
+	 	                         pointBorderColor : "#FFF",
+	 	                         pointBackgroundColor : color[i],
+	 	                         pointBorderWidth : 2,
+	 	                         pointHoverRadius : 4,
+	 	                         pointHoverBorderWidth : 1,
+	 	                         pointRadius : 4,
+	 	                         backgroundColor : 'transparent',
+	 	                         fill : true,
+	 	                         borderWidth : 2,
+	 	                        data : [ totalStore[i][j].avg0006Price, totalStore[i][j].avg0611Price, totalStore[i][j].avg1114Price, totalStore[i][j].avg1417Price, totalStore[i][j].avg1721Price, totalStore[i][j].avg2124Price]
+		                        
+ 	                  		 }         
+	 	                   datasets3.push(data);
+ 	               	 	}
+                	}
+				}
+						
+	 					var myMultipleLineChart1 = new Chart(multipleLineChart3, {
+	 						type : 'line',
+	 						data : {
+	 							labels : [ "00~06", "06~11", "11~14", "14~17","17~21","21~24" ],
+	 							datasets : datasets3
+	 						},
+	 						options :
+	 							{
+	 							title: {
+	 							display: true,
+	 							text: '시간별 매출 그래프'
+	 							},
+	 							responsive : true,
+	 							maintainAspectRatio : false,
+	 							legend : {
+	 								position : 'bottom',
+	 							},
+	 							tooltips : {
+	 								bodySpacing : 4,
+	 								mode : "nearest",
+	 								intersect : 0,
+	 								position : "nearest",
+	 								xPadding : 10,
+	 								yPadding : 10,
+	 								caretPadding : 10
+	 							},
+	 							layout : {
+	 								padding : {
+	 									left : 15,
+	 									right : 15,
+	 									top : 15,
+	 									bottom : 15
+	 								}
+	 							}
+	 						}
+	 					});
+			let datasets4 = [];
+				for(var i = 0; i<totalStore.length; i++){
+ 	                if(totalStore[i] != null){
+	 	                for(var j = 0; j<totalStore[i].length; j++){
+	 	                   var data ={
+	 	                         label : labelData1[i],
+	 	                         borderColor : color[i],
+	 	                         pointBorderColor : "#FFF",
+	 	                         pointBackgroundColor : color[i],
+	 	                         pointBorderWidth : 2,
+	 	                         pointHoverRadius : 4,
+	 	                         pointHoverBorderWidth : 1,
+	 	                         pointRadius : 4,
+	 	                         backgroundColor : 'transparent',
+	 	                         fill : true,
+	 	                         borderWidth : 2,
 		                         data : [ totalStore[i][j].avg10Price, totalStore[i][j].avg20Price, totalStore[i][j].avg30Price, totalStore[i][j].avg40Price, totalStore[i][j].avg50Price, totalStore[i][j].avg60Price]
 		                        
-		                   }         
-		                   datasets4.push(data);
-		                }
-		                }
-		                
-					var multipleLineChart4 ="multipleLineChart4"+i ;
-					var myMultipleLineChart1 = new Chart(multipleLineChart4, {
-						type : 'line',
-						data : {
-							labels : [ "10대", "20대", "30대", "40대","50대","60대" ],
-							datasets :datasets4
-						},
-						options : {
-							responsive : true,
-							maintainAspectRatio : false,
-							legend : {
-								position : 'top',
-							},
-							tooltips : {
-								bodySpacing : 4,
-								mode : "nearest",
-								intersect : 0,
-								position : "nearest",
-								xPadding : 10,
-								yPadding : 10,
-								caretPadding : 10
-							},
-							layout : {
-								padding : {
-									left : 15,
-									right : 15,
-									top : 15,
-									bottom : 15
-								}
-							}
-						}
-					});
-					if(totalStore[i] != null){
-						for(var j =0; j<totalStore[i].length;j++){
-							var test = i+''+j;
-			               
-			                
-			                   var dataset =[{
-			                         data : [ totalStore[i][j].avgMenRati,totalStore[i][j].avgWomRati ],
-			                         backgroundColor : ['#f3545d', '#1d7af3']
-			                }]
-							
-							var doughnutChart2 ="doughnutChart2"+i+''+j ;
-							var myDoughnutChart = new Chart(doughnutChart2, {
-								type : 'doughnut',
-								data : {
-									datasets :dataset,
-		
-									labels : [ '남', '여' ]
-								},
-								options : {
-									responsive : true,
-									maintainAspectRatio : false,
-									legend : {
-										position : 'bottom'
-									},
-									layout : {
-										padding : {
-											left : 20,
-											right : 20,
-											top : 20,
-											bottom : 20
-										}
-									}
-								}
-							});
-						}
-					}
-					} //for문
+ 	                  		 }         
+	 	                   datasets4.push(data);
+ 	               	 	}
+                	}
+				}
+						
+	 					var myMultipleLineChart1 = new Chart(multipleLineChart4, {
+	 						type : 'line',
+	 						data : {
+	 							labels : [ "10대", "20대", "30대", "40대","50대","60대" ],
+	 							datasets : datasets3
+	 						},
+	 						options :
+	 							{
+	 							title: {
+	 							display: true,
+	 							text: '연령별 매출 그래프'
+	 							},
+	 							responsive : true,
+	 							maintainAspectRatio : false,
+	 							legend : {
+	 								position : 'bottom',
+	 							},
+	 							tooltips : {
+	 								bodySpacing : 4,
+	 								mode : "nearest",
+	 								intersect : 0,
+	 								position : "nearest",
+	 								xPadding : 10,
+	 								yPadding : 10,
+	 								caretPadding : 10
+	 							},
+	 							layout : {
+	 								padding : {
+	 									left : 15,
+	 									right : 15,
+	 									top : 15,
+	 									bottom : 15
+	 								}
+	 							}
+	 						}
+	 					});
+            			
+			///////////마지막 크래프
+                  for(var i =0; i<totalStore.length;i++){
+	 					 if(totalStore[i] != null){
+	 		                  for(var j =0; j<totalStore[i].length;j++){
+	 		                     var test = i+''+j;
+	 		                        
+	 		                         
+	 		                            var dataset =[{
+	 		                                  data : [ totalStore[i][j].avgMenRati,totalStore[i][j].avgWomRati ],
+	 		                                  backgroundColor : ['#f3545d', '#1d7af3']
+	 		                         }]
+	 		                     
+	 		                  }
+	 		               }
+	 		                     var doughnutChart2 ="doughnutChart2"+i;
+	 		                     var myDoughnutChart = new Chart(doughnutChart2, {
+	 		                        type : 'doughnut',
+	 		                        data : {
+	 		                           datasets :dataset,
+	 		      
+	 		                           labels : [ '남', '여' ]
+	 		                        },
+	 		                        options : {
+	 		                           responsive : true,
+	 		                           maintainAspectRatio : false,
+	 		                           legend : {
+	 		                              position : 'bottom'
+	 		                           },
+	 		                           layout : {
+	 		                              padding : {
+	 		                                 left : 20,
+	 		                                 right : 20,
+	 		                                 top : 20,
+	 		                                 bottom : 20
+	 		                              }
+	 		                           }
+	 		                        }
+	 		                     });
+	 		               } //for문
+	 					
+
 			}).fail(function(xhr, status) {
 				alert(xhr);
 			});
