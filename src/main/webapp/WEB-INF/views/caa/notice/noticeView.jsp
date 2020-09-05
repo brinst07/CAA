@@ -3,7 +3,6 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 
-
 <div class="main-panel full-height">
 	<div class="container">
 		<div class="page-inner">
@@ -15,7 +14,7 @@
 							<h6 class="page-pretitle">Notice</h6>
 						</div>
 						<div class="col-auto">
-							<a href="/notice/modify?board="${board.board_id }" class="btn btn-light btn-border"> 수정 </a> <a
+							<a href="/notice/modify?board=${board.board_id }" class="btn btn-light btn-border"> 수정 </a> <a
 								href="/notice/noticeList" class="btn btn-primary ml-2"> 목록 </a>
 						</div>
 					</div>
