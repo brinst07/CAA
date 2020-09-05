@@ -75,25 +75,25 @@
     </div>
 </div>
 
-    <script>
-        $('#editor').summernote('code', '${board.board_content}');
+<script>
+    $('#editor').summernote('code', '${board.board_content}');
 
-        $('#editor').val("${board.board_content}");
-        $('#editor').summernote(
-            {
-                fontNames: ['Arial', 'Arial Black', 'Comic Sans MS',
-                    'Courier New'],
-                tabsize: 2,
-                height: 300,
-                callbacks: {
-                    onImageUpload: function (files, editor, welEditable) {
-                        for (var i = files.length - 1; i >= 0; i--) {
-                            sendFile(files[i], this);
-                        }
+    $('#editor').val("${board.board_content}");
+    $('#editor').summernote(
+        {
+            fontNames: ['Arial', 'Arial Black', 'Comic Sans MS',
+                'Courier New'],
+            tabsize: 2,
+            height: 300,
+            callbacks: {
+                onImageUpload: function (files, editor, welEditable) {
+                    for (var i = files.length - 1; i >= 0; i--) {
+                        sendFile(files[i], this);
                     }
                 }
-            });
-    </script>
+            }
+        });
+</script>
 
 
 
