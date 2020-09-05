@@ -829,11 +829,16 @@
 							data: {
 								labels: labelData1,
 								datasets : [{
-									label: "평균 매출",
-									backgroundColor: 'rgb(23, 125, 255)',
-									borderColor: 'rgb(23, 125, 255)',
+// 									label: ["1","2"],
+// 									label: ["1","2"],
+// 									label: ["1","2"],
+									backgroundColor: color,
+									borderColor: color,
 									data: datasets1,
-								}],
+								}
+								]
+						
+						,
 							},
 							options:
 								{
@@ -842,7 +847,7 @@
 								text: '매출 그래프'
 								},
 								legend : {
-	 								position : 'bottom'
+	 								position : 'hidden'
 	 							},
 								responsive: true, 
 								maintainAspectRatio: false,
@@ -1057,8 +1062,6 @@
 	 		                                  backgroundColor : ['#f3545d', '#1d7af3']
 	 		                         }]
 	 		                     
-	 		                  }
-	 		               }
 	 		                     var doughnutChart2 ="doughnutChart2"+i;
 	 		                     var myDoughnutChart = new Chart(doughnutChart2, {
 	 		                        type : 'doughnut',
@@ -1083,6 +1086,8 @@
 	 		                           }
 	 		                        }
 	 		                     });
+	 		                  }
+	 		               }
 	 		               } //for문
 	 					
 
