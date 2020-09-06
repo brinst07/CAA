@@ -11,5 +11,6 @@ public class MemberVO {
 	private String member_enabled;
 	private String member_username;
 	private String member_thumnail;
+	private String member_auth;
 
 }

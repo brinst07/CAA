@@ -40,11 +40,13 @@ public class MemberController {
 	public String insertMember(MemberVO vo, HttpSession session) {
 
 		log.warn("insertMember를 위한 메소드");
-		
+
+
+
          service.insertMember(vo);
          session.setAttribute("member",vo);
 
-		return "caa/mainPage/test";
+		return "caa/mainPage/main";
 	}
 	
 	@RequestMapping("/modifyMember")
@@ -75,33 +77,15 @@ public class MemberController {
 
 		return new ResponseEntity<MemberVO>(member, HttpStatus.OK);
 	}
-	
-	
-	
-//	//게시판 수정 참고
-//
-//		@GetMapping("/modify")
-//		public String modify(@RequestParam("board") String board, Model model) {
-//			log.info("/modify");
-//			model.addAttribute("board", service.get(board));
-//
-//			return "caa/notice/modify";
-//		}
-//
-//		@PostMapping("/modify")
-//		public String modify(BoardVO board, RedirectAttributes rttr) {
-//
-//			log.info("modify:" + board);
-//			System.out.println("공지사항 수정 컨트롤러 ");
-//
-//			System.out.println(board.getBoard_id());
-//			System.out.println(board.getBoard_title());
-//			System.out.println(board.getBoard_content());
-//
-//			if (service.modify(board)) {
-//				rttr.addFlashAttribute("result", "success");
-//			}
-//			return "redirect:/notice/noticeList";
-//		}
-	
+
+	@RequestMapping("/logout")
+	public ResponseEntity<String> logout(HttpSession session){
+		MemberVO vo = (MemberVO) session.getAttribute("member");
+		String id = vo.getMember_username();
+		session.removeAttribute("member");
+
+		return new ResponseEntity<String>(id, HttpStatus.OK);
+	};
+
+
 }

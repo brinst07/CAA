@@ -22,6 +22,7 @@
     <script src="/resources/assets/js/plugin/jquery.validate/jquery.validate.min.js"></script>
     <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Lato:300,400,700,900" media="all">
     <link rel="stylesheet" href="/resources/assets/css/fonts.min.css" media="all">
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
     <script>
         WebFont.load({
             google: {"families": ["Lato:300,400,700,900"]},
@@ -35,8 +36,8 @@
         });
 
         function emailCheck() {
-            var client_email = $('#email').val();
-            var passwordKey = null;
+            var client_email = $('#member_email').val();
+            var passwordKey = null;``
             if (client_email.validationMAIL()) {
 
                 $.ajax({
@@ -50,6 +51,7 @@
                         $('#hiddenpassword').val(result);
                         passwordKey = result;
                         $('#hiddenpassword').val(passwordKey);
+                        swal("발송되었습니다", "이메일을 확인해주세요", "success");
                     }, error: function (e) {
                         alert('street404 we can send email please check your email')
                     }
@@ -146,7 +148,7 @@
 
             // 이메일 유효성 검사(1 = 중복 / 0 != 중복)
             $("#email").keyup(function () {
-                var member_email = $('#email').val();
+                var member_email = $('#member_email').val();
 
                 $.ajax({
                     url: '/member/rest/checkmail?member_email=' + member_email,

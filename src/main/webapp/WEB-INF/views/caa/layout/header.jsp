@@ -3,22 +3,7 @@
 <!-- Fonts and icons -->
 <script src="/resources/assets/js/plugin/webfont/webfont.min.js"></script>
 <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
-<script>
-    WebFont.load({
-        google: {
-            "families": ["Lato:300,400,700,900"]
-        },
-        custom: {
-            "families": ["Flaticon", "Font Awesome 5 Solid",
-                "Font Awesome 5 Regular", "Font Awesome 5 Brands",
-                "simple-line-icons"],
-            urls: ['/resources/assets/css/fonts.min.css']
-        },
-        active: function () {
-            sessionStorage.fonts = true;
-        }
-    });
-</script>
+
 <!-- Core JS Files -->
 <script src="http://code.jquery.com/jquery-latest.min.js"></script>
 <script src="/resources/assets/js/core/popper.min.js"></script>
@@ -102,7 +87,38 @@
 <!-- CSS Files -->
 <link rel="stylesheet" href="/resources/assets/css/bootstrap.min.css">
 <link rel="stylesheet" href="/resources/assets/css/atlantis.css">
+<script>
+    WebFont.load({
+        google: {
+            "families": ["Lato:300,400,700,900"]
+        },
+        custom: {
+            "families": ["Flaticon", "Font Awesome 5 Solid",
+                "Font Awesome 5 Regular", "Font Awesome 5 Brands",
+                "simple-line-icons"],
+            urls: ['/resources/assets/css/fonts.min.css']
+        },
+        active: function () {
+            sessionStorage.fonts = true;
+        }
+    });
 
+    $(function () {
+        $('#logout').on('click', function () {
+            $.ajax({
+                url: '/member/logout',
+                success:function(data){
+                    swal("Logout!!", data + "님 로그아웃 완료되었습니다.", "success");
+                    //TODO location.href 말고 다른 방법이 있는지 알아볼것.....
+                },fail:function (xhr,status){
+                    console.log(xhr,status);
+                }
+
+
+            });
+        });
+    });
+</script>
 <div class="wrapper fullheight-side sidebar_minimize">
     <!-- Logo Header -->
     <div class="logo-header position-fixed" data-background-color="blue">
@@ -132,6 +148,7 @@
             </div>
             <ul class="navbar-nav topbar-nav ml-md-auto align-items-center">
                 <c:if test="${member ne null}">
+                    <c:out value="${member.member_id}"></c:out>
                     <!-- 알림 -->
                     <li class="nav-item dropdown hidden-caret"><a class="nav-link dropdown-toggle" id="notifDropdown"
                                                                   role="button" data-toggle="dropdown"
@@ -190,7 +207,7 @@
                     <li class="nav-item dropdown hidden-caret">
                         <a class="dropdown-toggle profile-pic" data-toggle="dropdown" aria-expanded="false">
                             <div class="avatar-sm">
-                                <img src="/resources/assets/img/profile.jpg" alt="..."
+                                <img src="<c:out value="${member.member_thumnail}"/>" alt="..."
                                      class="avatar-img rounded-circle">
                             </div>
                         </a>
@@ -199,12 +216,12 @@
                                 <li>
                                     <div class="user-box">
                                         <div class="avatar-lg">
-                                            <img src="/resources/assets/img/profile.jpg" alt="image profile"
+                                            <img src="<c:out value="${member.member_thumnail}"/>" alt="image profile"
                                                  class="avatar-img rounded">
                                         </div>
                                         <div class="u-text">
-                                            <h4>Hizrian</h4>
-                                            <p class="text-muted">hello@example.com</p>
+                                            <h4><c:out value="${member.member_id}"/></h4>
+                                            <p class="text-muted"><c:out value="${member.member_email}"/></p>
                                             <a href="profile.html" class="btn btn-xs btn-secondary btn-sm">View
                                                 Profile</a>
                                         </div>
@@ -213,20 +230,16 @@
                                 <li>
                                     <div class="dropdown-divider"></div>
                                     <a class="dropdown-item">My Profile</a> <a class="dropdown-item">My Balance</a>
-                                    <a class="dropdown-item">Inbox</a>
-                                    <div class="dropdown-divider"></div>
-                                    <a class="dropdown-item">Account Setting</a>
-                                    <div class="dropdown-divider"></div>
-                                    <a class="dropdown-item">Logout</a>
+                                    <a class="dropdown-item" id="logout">Logout</a>
                                 </li>
                             </div>
                         </ul>
                     </li>
                 </c:if>
                 <c:if test="${member eq null}">
-                <button class="btn btn-primary btn-border btn-round" onclick="location.href='/login'">
-                    <span class="btn-label"><i class="flaticon-user"></i></span>Login/SignUp
-                </button>
+                    <button class="btn btn-primary btn-border btn-round" onclick="location.href='/login'">
+                        <span class="btn-label"><i class="flaticon-user"></i></span>Login/SignUp
+                    </button>
                 </c:if>
             </ul>
         </div>
