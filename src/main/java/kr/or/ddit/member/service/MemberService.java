@@ -15,5 +15,9 @@ public interface MemberService {
 	
 	//이메일 중복 검사
 	public int checkmail(String member_email);
-	
+
+	//로그인 로직
+	public MemberVO loginCheck(MemberVO vo);
+
+    public void insertSocialMember(MemberVO memVo);
 }

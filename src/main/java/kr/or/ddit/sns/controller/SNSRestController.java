@@ -3,7 +3,7 @@ package kr.or.ddit.sns.controller;
 import com.twitter.penguin.korean.TwitterKoreanProcessorJava;
 import com.twitter.penguin.korean.tokenizer.KoreanTokenizer;
 import kr.or.ddit.sns.domain.WordVO;
-import lombok.Setter;
+import lombok.AllArgsConstructor;
 import lombok.extern.log4j.Log4j;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
@@ -26,12 +26,12 @@ import java.util.*;
 @RestController
 @RequestMapping("/sns/rest/*")
 @Log4j
+@AllArgsConstructor
 public class SNSRestController {
 	
-	@Setter(onMethod_ = @Autowired)
+	@Autowired
 	private DataLab datalab;
-	
-	@Setter(onMethod_ = @Autowired)
+	@Autowired
 	private TextAnalysis text;
 	
 	@PostMapping("/wordCloud")

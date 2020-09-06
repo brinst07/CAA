@@ -18,7 +18,6 @@
         })
     })
 </script>
-<script src="/resources/assets/js/caa/main.js"></script>
 <div class="main-panel full-height">
     <div class="container">
         <div class="panel-header">

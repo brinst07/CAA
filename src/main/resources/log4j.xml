@@ -12,36 +12,36 @@
 	
 	<!-- Application Loggers -->
 	<logger name="kr.or.ddit">
-		<level value="debug" />
+		<level value="warn" />
 	</logger>
 	
 	<logger name="jdbc.audit">
-		<level value="warn" />
+		<level value="debug" />
 	</logger>
 	
 	<logger name="jdbc.resultset">
-		<level value="info" />
+		<level value="debug" />
 	</logger>
 	
 	<logger name="jdbc.connection">
-		<level value="warn" />
+		<level value="debug" />
 	</logger>
 	
 	<!-- 3rdparty Loggers -->
 	<logger name="org.springframework.core">
-		<level value="debug" />
+		<level value="warn" />
 	</logger>
 	
 	<logger name="org.springframework.beans">
-		<level value="debug" />
+		<level value="warn" />
 	</logger>
 	
 	<logger name="org.springframework.context">
-		<level value="debug" />
+		<level value="info" />
 	</logger>
 
 	<logger name="org.springframework.web">
-		<level value="debug" />
+		<level value="info" />
 	</logger>
 	
 	<!-- Root Logger -->

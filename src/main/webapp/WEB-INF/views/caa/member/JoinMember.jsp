@@ -35,42 +35,7 @@
 		}
 	});
 
-	function emailCheck() {
-		var client_email = $('#email').val();
-		var passwordKey = null;			
-		if( client_email.validationMAIL()){
-			
-			$.ajax({
-				type:"POST",
-				url:"/member/rest/checkmail", 
- 				  data: 'client_email='+client_email,
-// 				data : client_email,
-				dataType : "text",
-				//contentType : "application/json; charset=utf-8",
-				success : function(result){
-					console.log("ajax success : " + result);
-					alert("메일 발송 완료")
-					$('#hiddenpassword').val(result);
-					passwordKey = result;
-					$('#hiddenpassword').val(passwordKey);
-				}, error : function(e){
-					alert('street404 we can send email please check your email')
-				}
-			});
-			
-			
-		}
-		else {
-			alert("이메일을 확인해주세요.")
-			return false;
-		}
-	}
-	
 
-
-
-
-</script>
 
 <!-- CSS Files -->
 <link rel="stylesheet" href="/resources/assets/css/bootstrap.min.css">
@@ -131,7 +96,7 @@
 													name="member_id" placeholder="Enter Username" required="">
 													<div class="check_font" id="id_check"></div>
 											</div>
-											
+
 <!-- 											<div class="form-group"> -->
 <!-- 												<label for="member_id">아이디</label> <input type="text" -->
 <!-- 													class="form-control" id=""member_id"" name="member_id" -->
@@ -548,65 +513,7 @@
 
 
 <script>
-// 이메일 유효성 검사(1 = 중복 / 0 != 중복)
-	$("#email").keyup(function() {
-		var member_email = $('#email').val();
-		
-// 	    if(!check(re2, email, "적합하지 않은 이메일 형식입니다.")) {
-// 	           return false;
-// 	       }   
-	       
-	       
-		$.ajax({
-			url : '/member/rest/checkmail?member_email='+ member_email,
-			type : 'get',
-			success : function(data) {
-				var eover = data.eover;
-				console.log(eover);
-				if (eover == 1) {
-						// 1 : 아이디가 중복되는 문구
-						$("#email_check").text("사용중인 이메일입니다 ");
-						$("#email_check").css("color", "red");
-						$("#email_check").css("font-size", "11px");
-						$("#email_check").attr("disabled", true);
-					} else {
-						
-						if(member_email == 0){
-							// 0 : 아이디 길이 / 문자열 검사
-							$("#email_check").text("");
-							$("#reg_submit").attr("disabled", false);
-				
-						} else if(member_email == ""){
-							
-							$('#email_check').text('이메일을 입력해주세요 )');
-							$('#email_check').css('color', 'red');
-							$("#email_check").css("font-size", "11px");
-							$("#reg_submit").attr("disabled", true);				
-							
-						} else if(member_email.validationMAIL()){
-							
-							$('#email_check').text("사용 가능한 이메일입니다.");
-							$('#email_check').css('color', 'blue');
-							$("#email_check").css("font-size", "11px");
-							$("#reg_submit").attr("disabled", true);
-						} else if(!member_email.validationMAIL()){
-							
-							$('#email_check').text("");
-							$('#email_check').css('color', 'red');
-							$("#email_check").css("font-size", "11px");
-							$("#reg_submit").attr("disabled", true);
-						}
-						
-					}
-				
-				}
-				 ,error : function(){
-						console.log("실패");
-				}
-			});
-			
-			
-		});
+
 </script>
 
  <script type="text/javascript">

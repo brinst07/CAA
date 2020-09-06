@@ -3,7 +3,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <div class="wrapper fullheight-side sidebar_minimize">
-
     <div class="main-panel full-height">
         <div class="container">
             <div class="panel-header">
@@ -79,8 +78,8 @@
                                                             <%-- <td><a href='/qna/get?board_id=<c:out value="${board.board_id }"/>'>
                                                             <c:out value="${board.board_title }" /></a></td> --%>
                                                         <td><a class="move"
-                                                               href='/qna/get?board_id=<c:out value="${board.board_id }"></c:out>'>
-                                                            <c:out value="${board.board_title }"></c:out></a></td>
+                                                               href='/qna/getDetail?board_id=<c:out value="${board.board_id }"/>'>
+                                                            <c:out value="${board.board_title }"/></a></td>
                                                         <td><c:out value="${board.member_id }"/></td>
                                                         <td><fmt:formatDate pattern="yyyy-MM-dd"
                                                                             value="${board.board_datetime }"/></td>
@@ -111,73 +110,8 @@
                         </div>
                     </div>
                 </div>
-
             </div>
         </div>
-
     </div>
-
 </div>
 
-<script>
-    $(document)
-        .ready(
-            function () {
-                $('#basic-datatables').DataTable({});
-
-                $('#multi-filter-select')
-                    .DataTable(
-                        {
-                            "pageLength": 5,
-                            initComplete: function () {
-                                this
-                                    .api()
-                                    .columns()
-                                    .every(
-                                        function () {
-                                            var column = this;
-                                            var select = $(
-                                                '<select class="form-control"><option value=""></option></select>')
-                                                .appendTo(
-                                                    $(
-                                                        column
-                                                            .footer())
-                                                        .empty())
-                                                .on(
-                                                    'change',
-                                                    function () {
-                                                        var val = $.fn.dataTable.util
-                                                            .escapeRegex($(
-                                                                this)
-                                                                .val());
-
-                                                        column
-                                                            .search(
-                                                                val ? '^'
-                                                                    + val
-                                                                    + '$'
-                                                                    : '',
-                                                                true,
-                                                                false)
-                                                            .draw();
-                                                    });
-
-                                            column
-                                                .data()
-                                                .unique()
-                                                .sort()
-                                                .each(
-                                                    function (
-                                                        d,
-                                                        j) {
-                                                        select
-                                                            .append('<option value="' + d + '">'
-                                                                + d
-                                                                + '</option>')
-                                                    });
-                                        });
-                            }
-                        });
-
-            });
-</script>

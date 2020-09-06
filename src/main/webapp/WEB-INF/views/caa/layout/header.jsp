@@ -20,7 +20,7 @@
     });
 </script>
 <!-- Core JS Files -->
-<script src="/resources/assets/js/core/jquery.3.2.1.min.js"></script>
+<script src="http://code.jquery.com/jquery-latest.min.js"></script>
 <script src="/resources/assets/js/core/popper.min.js"></script>
 <script src="/resources/assets/js/core/bootstrap.min.js"></script>
 <script src="/resources/assets/js/jquery.xml2json.js"></script>
@@ -131,7 +131,7 @@
                                          style="width: 100px; height: auto"></a>
             </div>
             <ul class="navbar-nav topbar-nav ml-md-auto align-items-center">
-                <c:if test="${null ne user}">
+                <c:if test="${member ne null}">
                     <!-- 알림 -->
                     <li class="nav-item dropdown hidden-caret"><a class="nav-link dropdown-toggle" id="notifDropdown"
                                                                   role="button" data-toggle="dropdown"
@@ -223,9 +223,11 @@
                         </ul>
                     </li>
                 </c:if>
-                <button class="btn btn-primary btn-border btn-round" onclick="location.href='/user/login'">
+                <c:if test="${member eq null}">
+                <button class="btn btn-primary btn-border btn-round" onclick="location.href='/login'">
                     <span class="btn-label"><i class="flaticon-user"></i></span>Login/SignUp
                 </button>
+                </c:if>
             </ul>
         </div>
     </nav>

@@ -17,7 +17,7 @@
 		member_id = '2',
 		member_password = #{member_password ,jdbcType=VARCHAR},
 		member_email = #{member_email,jdbcType=VARCHAR},
-		member_username = #{member_username,jdbcType=VARCHAR},
+		member_username = #{member_username,jdbcType=VARCHAR}
 		where member_id = #{member_id,jdbcType=VARCHAR}
 	</update>
 	
@@ -35,71 +35,23 @@
       where member_email = #{member_email}
 	</select>
 	
-
-
-	<!-- <select id="getListWithPaging"
-		resultType="kr.or.ddit.caa.domain.BoardVO">
-      <![CDATA[
-         select
-            board_id,board_title,board_content,board_id,board_datetime,board_datetime, board_reply_count
-         from
-            (
-               select /*INDEX_DESC(tbl_board pk_board)*/
-                  rownum rn, bno, title, content, writer, regdate, updatedate, replycnt
-               from
-                  tbl_board
-               where 
-      ]]>
-      <include refid="condition"></include>	
-      <![CDATA[
-            rownum <= #{pageNum} * #{amount}
-               )
-         where rn > (#{pageNum} -1) * #{amount}
-      ]]>
-	</select>
-	
-	<select id="updateReplyCnt">
-		update tbl_board
-		set replycnt = replycnt + #{amount}
-		where bno = #{bno}
+<!-- 로그인체크 -->
+	<select id="loginCheck" resultType="kr.or.ddit.member.domain.MemberVO" parameterType="kr.or.ddit.member.domain.MemberVO">
+		select *
+		from MEMBER
+		where MEMBER_ID = #{member_id} and MEMBER_PASSWORD = #{member_password}
 	</select>
 
-	<select id="getTotalCount" resultType="int">
-		select count(*)
-		from tbl_board
-		where
-		<include refid="condition"></include>
-		bno > 0
-	</select>
-
-	<insert id="insert">
-		insert into tbl_board(bno,title,content,writer)
-		values(seq_board.nextval, #{title},#{content},#{writer})
+<!-- 소셜로그인	-->
+	<insert id="insertSocialMember" parameterType="kr.or.ddit.member.domain.MemberVO">
+		merge into MEMBER
+			using DUAL
+			on ( MEMBER_ID = #{member_id} )
+		when matched then
+			update set MEMBER_USERNAME = #{member_username}, MEMBER_EMAIL = #{member_email}, MEMBER_THUMNAIL = #{member_thumnail} where MEMBER_ID = #{member_id}
+		when not matched then
+			insert (member_id, member_password, member_email, member_username) values (#{member_id},#{member_password},#{member_email},#{member_username})
 	</insert>
 
-	<insert id="insertSelectKey">
-		<selectKey keyProperty="bno" order="BEFORE"
-			resultType="long">
-			select seq_board.nextval from dual
-		</selectKey>
-		insert into tbl_board(bno,title,content,writer)
-		values(#{bno}, #{title},#{content},#{writer})
-	</insert>
-
-	<select id="read" resultType="kr.or.ddit.caa.domain.BoardVO">
-		select * from tbl_board where bno = #{bno}
-	</select>
-
-	<delete id="delete">
-		delete from tbl_board where bno = #{bno}
-	</delete>
-
-	<update id="update">
-		update tbl_board
-		set title = #{title},
-		content = #{content},
-		writer = #{writer},
-		updateDate = sysdate
-		where bno = #{bno}
-	</update> -->
+<!-- -->
 </mapper>

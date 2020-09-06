@@ -15,8 +15,9 @@ public interface MemberMapper {
 	
 	//이메일 중복 검사
 	public int checkmail(String member_email);
-	
-	
-	
-	
+
+
+    public MemberVO loginCheck(MemberVO vo);
+
+    public void insertSocialMember(MemberVO memVo);
 }
