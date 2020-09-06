@@ -1,23 +1,23 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper
-  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
-  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="kr.or.ddit.caa.mapper.CAAMapper">
-	<select id="getCscodeList" resultType="kr.or.ddit.caa.domain.CscodeVO">
+    <select id="getCscodeList" resultType="kr.or.ddit.caa.domain.CscodeVO">
 		select *
 		from cs_code
 		where cs_code_depth = #{cs_code_depth}
 	</select>
 
-	<select id="otherCscodeList" resultType="kr.or.ddit.caa.domain.CscodeVO">
+    <select id="otherCscodeList" resultType="kr.or.ddit.caa.domain.CscodeVO">
 		select *
 		from cs_code
 		where cs_code2 = #{keyword}
 		
 	</select>
 
-	
-	<select id="getCircleSubway" parameterType="hashMap" resultType="kr.or.ddit.caa.domain.SubwayPopVO">
+
+    <select id="getCircleSubway" parameterType="hashMap" resultType="kr.or.ddit.caa.domain.SubwayPopVO">
 select SUBWAY_YEAR year,
        SUBWAY_MONTH month,
 
@@ -58,114 +58,149 @@ order by SUBWAY_YEAR,
          SUBWAY_MONTH
 	</select>
 
-	<select id="getStoreList" resultType="kr.or.ddit.caa.domain.StoreVO">
-		select STORE_YEAR,STORE_BUNGI,STORE_SER_CODE_NAME,sum(STORE_SM_COUNT) as STORE_SM_COUNT
-		from store
-		where 
-		<foreach collection="store_cs_code_name" item="sector" index="index" open="(" close=") and" separator="or">
-			STORE_CS_CODE_NAME = #{sector}
-		</foreach>
-		
-		<foreach collection="storeList" item="item" index="index" open="(" close=")" separator="or" >
-			STORE_SER_CODE_NAME LIKE '%'||#{item.middle}||'%'
-		</foreach>
-		group by STORE_YEAR, STORE_BUNGI,STORE_SER_CODE_NAME
-		order by store_year desc, STORE_BUNGI asc
+    <select id="getRectancleSubway" parameterType="hashMap" resultType="kr.or.ddit.caa.domain.SubwayPopVO">
+		select SUBWAY_YEAR      year,
+		SUBWAY_MONTH     month,
+
+
+		SUM(SUBWAY_RIDE) ride,
+		SUM(SUBWAY_QUIT) quit,
+		#{selectName} selectName
+
+
+		from SUBWAY_PASSENGER
+		where SUBSTR(to_char(SUBWAY_DATE), 1, 6) >= to_char(add_months(sysdate, -12), 'yyyymm')
+		and SUBWAY_STATION_ID in (
+		select SUBWAY_STATION_ID
+		from (
+		select SUBWAY_STATION_ID,
+		SUBWAY_STATION_NAME,
+		SUBWAY_STATION_LATITUDE,
+		SUBWAY_STATION_LONGITUDE
+		from SUBWAY_STATION
+		<![CDATA[
+		where SUBWAY_STATION_LATITUDE < 37.56143307904759
+		and SUBWAY_STATION_LONGITUDE < 126.98818941527973
+		and SUBWAY_STATION_LATITUDE > 37.56012614051091
+		and SUBWAY_STATION_LONGITUDE > 126.98400194549914
+		]]>
+		)
+		)
+		group by SUBWAY_YEAR,
+		SUBWAY_MONTH
+		order by SUBWAY_YEAR,
+		SUBWAY_MONTH
+
 	</select>
 
-	<select id="getSectorCode" resultType="string">
+    <select id="getStoreList" resultType="kr.or.ddit.caa.domain.StoreVO">
+        select STORE_YEAR,STORE_BUNGI,STORE_SER_CODE_NAME,sum(STORE_SM_COUNT) as STORE_SM_COUNT
+        from store
+        where
+        <foreach collection="store_cs_code_name" item="sector" index="index" open="(" close=") and" separator="or">
+            STORE_CS_CODE_NAME = #{sector}
+        </foreach>
+
+        <foreach collection="storeList" item="item" index="index" open="(" close=")" separator="or">
+            STORE_SER_CODE_NAME LIKE '%'||#{item.middle}||'%'
+        </foreach>
+        group by STORE_YEAR, STORE_BUNGI,STORE_SER_CODE_NAME
+        order by store_year desc, STORE_BUNGI asc
+    </select>
+
+    <select id="getSectorCode" resultType="string">
 		select cs_code
 		from cs_code
 		where cs_code_name = #{cs_code_name}
 	</select>
-	
-	
-<!-- 	동적 쿼리, 파라미터  수정해야함-->
-	<select id="SalesByIndustryList" resultType="kr.or.ddit.caa.domain.SalesByIndustryVO">
-		select SALES_SER_NAME AS upjongName
-				,ROUND(AVG(SALES_MNT_PRICE), 0) AS avgPrice 
-				,ROUND(AVG(SALES_MNT_COUNT), 0) AS avgCount
-				,ROUND(SUM(SALES_STORE_COUNT), 0) AS sumStore
-				,ROUND(AVG(SALES_WK_RATI), 0) AS avgWKrati 
-				,ROUND(AVG(SALES_WD_RATI), 0) AS avgWDrati
-				,ROUND(AVG(SALES_MON_Rati), 0) as avgMonRati
-				,ROUND(AVG(SALES_MON_PRICE), 0) as avgMonPrice
-				,ROUND(AVG(SALES_MON_Count), 0) as avgMonCount
-				,ROUND(AVG(SALES_TUE_Rati), 0)as avgTueRati
-				,ROUND(AVG(SALES_TUE_PRICE), 0) as avgTuePrice
-				,ROUND(AVG(SALES_TUE_Count), 0) as avgTueCount
-				,ROUND(AVG(SALES_WED_Rati), 0) as avgWedRati
-				,ROUND(AVG(SALES_WED_PRICE), 0) as avgWedPrice
-				,ROUND(AVG(SALES_WED_Count), 0) as avgWedCount
-				,ROUND(AVG(SALES_THU_PRICE), 0) as avgThuPrice
-				,ROUND(AVG(SALES_THU_Rati), 0) as avgThuRati
-				,ROUND(AVG(SALES_THU_Count), 0) as avgThuCount
-				,ROUND(AVG(SALES_FRI_PRICE), 0) as avgFriPrice
-				,ROUND(AVG(SALES_FRI_Rati), 0) as avgFriRati
-				,ROUND(AVG(SALES_FRI_Count), 0) as avgFriCount
-				,ROUND(AVG(SALES_SAT_PRICE), 0) as avgSatPrice
-				,ROUND(AVG(SALES_SAT_Rati), 0) as avgSatRati
-				,ROUND(AVG(SALES_SAT_Count), 0) as avgSatCount
-				,ROUND(AVG(SALES_SUN_PRICE), 0) as avgSunPrice
-				,ROUND(AVG(SALES_SUN_RATI), 0) as avgSunRati 
-				,ROUND(AVG(SALES_SUN_Count), 0) as avgSunCount
-				,ROUND(AVG(SALES_0006_PRICE), 0)as avg0006Price
-				,ROUND(AVG(SALES_0611_PRICE), 0)as avg0611Price
-				,ROUND(AVG(SALES_1114_PRICE), 0)as avg1114Price
-				,ROUND(AVG(SALES_1417_PRICE), 0)as avg1417Price
-				,ROUND(AVG(SALES_1721_PRICE), 0)as avg1721Price
-				,ROUND(AVG(SALES_2124_PRICE), 0)as avg2124Price
-				,ROUND(AVG(SALES_0006_Count), 0)as avg0006Count
-				,ROUND(AVG(SALES_0611_Count), 0)as avg0611Count
-				,ROUND(AVG(SALES_1114_Count), 0)as avg1114Count
-				,ROUND(AVG(SALES_1417_Count), 0)as avg1417Count
-				,ROUND(AVG(SALES_1721_Count), 0)as avg1721Count
-				,ROUND(AVG(SALES_2124_Count), 0)as avg2124Count
-				,ROUND(AVG(SALES_0006_RATI), 0)as avg0006Rati
-				,ROUND(AVG(SALES_0611_RATI), 0)as avg0611Rati
-				,ROUND(AVG(SALES_1114_RATI), 0)as avg1114Rati
-				,ROUND(AVG(SALES_1417_RATI), 0)as avg1417Rati
-				,ROUND(AVG(SALES_1721_RATI), 0)as avg1721Rati
-				,ROUND(AVG(SALES_2124_RATI), 0)as avg2124Rati
-				,ROUND(AVG(SALES_AGE_10_PRICE), 0) as avg10Price
-				,ROUND(AVG(SALES_AGE_20_PRICE), 0) as avg20Price
-				,ROUND(AVG(SALES_AGE_30_PRICE), 0) as avg30Price
-				,ROUND(AVG(SALES_AGE_40_PRICE), 0) as avg40Price
-				,ROUND(AVG(SALES_AGE_50_PRICE), 0) as avg50Price
-				,ROUND(AVG(SALES_AGE_60_PRICE), 0) as avg60Price
-				,ROUND(AVG(SALES_AGE_10_Count), 0) as avg10Count
-				,ROUND(AVG(SALES_AGE_20_Count), 0) as avg20Count
-				,ROUND(AVG(SALES_AGE_30_Count), 0) as avg30Count
-				,ROUND(AVG(SALES_AGE_40_Count), 0) as avg40Count
-				,ROUND(AVG(SALES_AGE_50_Count), 0) as avg50Count
-				,ROUND(AVG(SALES_AGE_60_Count), 0) as avg60Count
-				,ROUND(AVG(SALES_AGE_10_RATI), 0) as avg10Rati
-				,ROUND(AVG(SALES_AGE_20_RATI), 0) as avg20Rati
-				,ROUND(AVG(SALES_AGE_30_RATI), 0) as avg30Rati
-				,ROUND(AVG(SALES_AGE_40_RATI), 0) as avg40Rati
-				,ROUND(AVG(SALES_AGE_50_RATI), 0) as avg50Rati
-				,ROUND(AVG(SALES_AGE_60_RATI), 0) as avg60Rati
-				,ROUND(AVG(SALES_MEN_PRICE), 0) as avgMenPrice
-				,ROUND(AVG(SALES_WOM_PRICE), 0) as avgWomPrice
-				,ROUND(AVG(SALES_MEN_RATI), 0) as avgMenRati
-				,ROUND(AVG(SALES_WOM_Count), 0) as avgWomCount
-				,ROUND(AVG(SALES_MEN_Count), 0) as avgMenCount
-				,ROUND(AVG(SALES_WOM_RATI), 0) as avgWomRati
-		from sales_temp
-		where 
-		<foreach collection="store_cs_code_name" item="sector" index="index" open="(" close=") and" separator="or">
-			SALES_BD_NAME = #{sector}
-		</foreach>
-	
-		<foreach collection="storeList" item="item" index="index" open="(" close=")" separator="or" >
-			SALES_SER_NAME LIKE '%'||#{item.middle}||'%'
-		</foreach>
-		AND SALES_YEAR ='2019' AND SALES_BUNGI_CODE = #{bungi}
-		 GROUP BY  SALES_SER_NAME
-	</select>
 
 
-	<select id="getIndiList" resultType="kr.or.ddit.caa.domain.IndiVO">
+    <!-- 	동적 쿼리, 파라미터  수정해야함-->
+    <select id="SalesByIndustryList" resultType="kr.or.ddit.caa.domain.SalesByIndustryVO">
+        select SALES_SER_NAME AS upjongName
+        ,ROUND(AVG(SALES_MNT_PRICE), 0) AS avgPrice
+        ,ROUND(AVG(SALES_MNT_COUNT), 0) AS avgCount
+        ,ROUND(SUM(SALES_STORE_COUNT), 0) AS sumStore
+        ,ROUND(AVG(SALES_WK_RATI), 0) AS avgWKrati
+        ,ROUND(AVG(SALES_WD_RATI), 0) AS avgWDrati
+        ,ROUND(AVG(SALES_MON_Rati), 0) as avgMonRati
+        ,ROUND(AVG(SALES_MON_PRICE), 0) as avgMonPrice
+        ,ROUND(AVG(SALES_MON_Count), 0) as avgMonCount
+        ,ROUND(AVG(SALES_TUE_Rati), 0)as avgTueRati
+        ,ROUND(AVG(SALES_TUE_PRICE), 0) as avgTuePrice
+        ,ROUND(AVG(SALES_TUE_Count), 0) as avgTueCount
+        ,ROUND(AVG(SALES_WED_Rati), 0) as avgWedRati
+        ,ROUND(AVG(SALES_WED_PRICE), 0) as avgWedPrice
+        ,ROUND(AVG(SALES_WED_Count), 0) as avgWedCount
+        ,ROUND(AVG(SALES_THU_PRICE), 0) as avgThuPrice
+        ,ROUND(AVG(SALES_THU_Rati), 0) as avgThuRati
+        ,ROUND(AVG(SALES_THU_Count), 0) as avgThuCount
+        ,ROUND(AVG(SALES_FRI_PRICE), 0) as avgFriPrice
+        ,ROUND(AVG(SALES_FRI_Rati), 0) as avgFriRati
+        ,ROUND(AVG(SALES_FRI_Count), 0) as avgFriCount
+        ,ROUND(AVG(SALES_SAT_PRICE), 0) as avgSatPrice
+        ,ROUND(AVG(SALES_SAT_Rati), 0) as avgSatRati
+        ,ROUND(AVG(SALES_SAT_Count), 0) as avgSatCount
+        ,ROUND(AVG(SALES_SUN_PRICE), 0) as avgSunPrice
+        ,ROUND(AVG(SALES_SUN_RATI), 0) as avgSunRati
+        ,ROUND(AVG(SALES_SUN_Count), 0) as avgSunCount
+        ,ROUND(AVG(SALES_0006_PRICE), 0)as avg0006Price
+        ,ROUND(AVG(SALES_0611_PRICE), 0)as avg0611Price
+        ,ROUND(AVG(SALES_1114_PRICE), 0)as avg1114Price
+        ,ROUND(AVG(SALES_1417_PRICE), 0)as avg1417Price
+        ,ROUND(AVG(SALES_1721_PRICE), 0)as avg1721Price
+        ,ROUND(AVG(SALES_2124_PRICE), 0)as avg2124Price
+        ,ROUND(AVG(SALES_0006_Count), 0)as avg0006Count
+        ,ROUND(AVG(SALES_0611_Count), 0)as avg0611Count
+        ,ROUND(AVG(SALES_1114_Count), 0)as avg1114Count
+        ,ROUND(AVG(SALES_1417_Count), 0)as avg1417Count
+        ,ROUND(AVG(SALES_1721_Count), 0)as avg1721Count
+        ,ROUND(AVG(SALES_2124_Count), 0)as avg2124Count
+        ,ROUND(AVG(SALES_0006_RATI), 0)as avg0006Rati
+        ,ROUND(AVG(SALES_0611_RATI), 0)as avg0611Rati
+        ,ROUND(AVG(SALES_1114_RATI), 0)as avg1114Rati
+        ,ROUND(AVG(SALES_1417_RATI), 0)as avg1417Rati
+        ,ROUND(AVG(SALES_1721_RATI), 0)as avg1721Rati
+        ,ROUND(AVG(SALES_2124_RATI), 0)as avg2124Rati
+        ,ROUND(AVG(SALES_AGE_10_PRICE), 0) as avg10Price
+        ,ROUND(AVG(SALES_AGE_20_PRICE), 0) as avg20Price
+        ,ROUND(AVG(SALES_AGE_30_PRICE), 0) as avg30Price
+        ,ROUND(AVG(SALES_AGE_40_PRICE), 0) as avg40Price
+        ,ROUND(AVG(SALES_AGE_50_PRICE), 0) as avg50Price
+        ,ROUND(AVG(SALES_AGE_60_PRICE), 0) as avg60Price
+        ,ROUND(AVG(SALES_AGE_10_Count), 0) as avg10Count
+        ,ROUND(AVG(SALES_AGE_20_Count), 0) as avg20Count
+        ,ROUND(AVG(SALES_AGE_30_Count), 0) as avg30Count
+        ,ROUND(AVG(SALES_AGE_40_Count), 0) as avg40Count
+        ,ROUND(AVG(SALES_AGE_50_Count), 0) as avg50Count
+        ,ROUND(AVG(SALES_AGE_60_Count), 0) as avg60Count
+        ,ROUND(AVG(SALES_AGE_10_RATI), 0) as avg10Rati
+        ,ROUND(AVG(SALES_AGE_20_RATI), 0) as avg20Rati
+        ,ROUND(AVG(SALES_AGE_30_RATI), 0) as avg30Rati
+        ,ROUND(AVG(SALES_AGE_40_RATI), 0) as avg40Rati
+        ,ROUND(AVG(SALES_AGE_50_RATI), 0) as avg50Rati
+        ,ROUND(AVG(SALES_AGE_60_RATI), 0) as avg60Rati
+        ,ROUND(AVG(SALES_MEN_PRICE), 0) as avgMenPrice
+        ,ROUND(AVG(SALES_WOM_PRICE), 0) as avgWomPrice
+        ,ROUND(AVG(SALES_MEN_RATI), 0) as avgMenRati
+        ,ROUND(AVG(SALES_WOM_Count), 0) as avgWomCount
+        ,ROUND(AVG(SALES_MEN_Count), 0) as avgMenCount
+        ,ROUND(AVG(SALES_WOM_RATI), 0) as avgWomRati
+        from sales_temp
+        where
+        <foreach collection="store_cs_code_name" item="sector" index="index" open="(" close=") and" separator="or">
+            SALES_BD_NAME = #{sector}
+        </foreach>
+
+        <foreach collection="storeList" item="item" index="index" open="(" close=")" separator="or">
+            SALES_SER_NAME LIKE '%'||#{item.middle}||'%'
+        </foreach>
+        AND SALES_YEAR ='2019' AND SALES_BUNGI_CODE = #{bungi}
+        GROUP BY SALES_SER_NAME
+    </select>
+
+
+    <select id="getIndiList" resultType="kr.or.ddit.caa.domain.IndiVO">
 		select * from INDICATOR where INDI_SIGUNGU_NAME = #{indi_sigungu_name}
 	</select>
 </mapper>
