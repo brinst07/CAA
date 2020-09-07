@@ -82,7 +82,7 @@
 <script src="/resources/assets/js/atlantis.min.js"></script>
 
 <!-- -->
-<script src="/resources/assets/js/core/jquery.ajax-cross-origin.min.js"></script>
+<%--<script src="/resources/assets/js/core/jquery.ajax-cross-origin.min.js"></script>--%>
 
 <!-- CSS Files -->
 <link rel="stylesheet" href="/resources/assets/css/bootstrap.min.css">
@@ -108,8 +108,7 @@
             $.ajax({
                 url: '/member/logout',
                 success:function(data){
-                    swal("Logout!!", data + "님 로그아웃 완료되었습니다.", "success");
-                    //TODO location.href 말고 다른 방법이 있는지 알아볼것.....
+                    location.href="/caa/main";
                 },fail:function (xhr,status){
                     console.log(xhr,status);
                 }

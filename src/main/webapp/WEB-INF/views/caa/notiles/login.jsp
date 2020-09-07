@@ -270,7 +270,8 @@
                 </div>
                 <div class="login-account">
                     <a href="https://kauth.kakao.com/oauth/authorize?client_id=4c12c1d51d4e0fe19ee7a9427689835a&redirect_uri=http://localhost:8080/auth/kakao/callback&response_type=code">
-                        <img src="${pageContext.request.contextPath}/resources/assets/img/kakao_login_medium_wide.png"></a>
+                        <img src="${pageContext.request.contextPath}/resources/assets/img/kakao_login_medium_wide.png">
+                    </a>
                 </div>
                 <div class="login-account">
                     <span class="msg">CAA에 가입하시겠습니까?</span>

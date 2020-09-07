@@ -43,7 +43,7 @@ public class MemberController {
 
 
 
-         service.insertMember(vo);
+         service.insertSocialMember(vo);
          session.setAttribute("member",vo);
 
 		return "caa/mainPage/main";

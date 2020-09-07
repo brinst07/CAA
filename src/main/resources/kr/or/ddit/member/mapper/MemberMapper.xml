@@ -52,12 +52,11 @@
         when matched then
             update
             set MEMBER_USERNAME = #{member_username},
-                MEMBER_EMAIL    = #{member_email},
                 MEMBER_THUMNAIL = #{member_thumnail}
             where MEMBER_ID = #{member_id}
         when not matched then
-            insert (member_id, member_password, member_email, member_username)
-            values (#{member_id}, #{member_password}, #{member_email}, #{member_username})
+            insert (member_id, member_password, member_username)
+            values (#{member_id}, #{member_password}, #{member_username})
     </insert>
 
     <!-- -->
