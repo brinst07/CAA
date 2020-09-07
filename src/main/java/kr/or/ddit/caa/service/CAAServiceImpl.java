@@ -31,7 +31,6 @@ import lombok.extern.log4j.Log4j;
 @AllArgsConstructor
 public class CAAServiceImpl implements CAAService {
 
-
 	private CAAMapper mapper;
 
 	@Override
@@ -49,7 +48,7 @@ public class CAAServiceImpl implements CAAService {
 
 	@Override
 	public List<SalesByIndustryVO> SalesByIndustryList(SalesParamVO vo) {
-		
+
 		return mapper.SalesByIndustryList(vo);
 	}
 
@@ -93,18 +92,34 @@ public class CAAServiceImpl implements CAAService {
 
 		for (int i = 0; i < jsonArray.size(); i++) {
 			JsonObject jsonObject = (JsonObject) jsonArray.get(i);
-			jsonMap.put("LatitudeCenter", jsonObject.get("cy").toString());
-			jsonMap.put("LongitudeCenter", jsonObject.get("cx").toString());
-			jsonMap.put("LatitudeEndBoundary", jsonObject.get("ey").toString());
-			jsonMap.put("LongitudeEndBoundary", jsonObject.get("ex").toString());
-			jsonMap.put("LatitudeStartBoundary", jsonObject.get("sy").toString());
-			jsonMap.put("LongitudeStartBoundary", jsonObject.get("sx").toString());
-			jsonMap.put("selectName", jsonObject.get("name").toString());
-			System.out.println(jsonMap);
-			subwayPopTempList = mapper.getCircleSubway(jsonMap);
 
-			for (SubwayPopVO subwayPopVO : subwayPopTempList) {
-				subwayPopList.add(subwayPopVO);
+			if ("circle".equals(jsonObject.get("type").toString().replace("\"", ""))) {
+				jsonMap.put("LatitudeCenter", jsonObject.get("cy").toString());
+				jsonMap.put("LongitudeCenter", jsonObject.get("cx").toString());
+				jsonMap.put("LatitudeEndBoundary", jsonObject.get("ey").toString());
+				jsonMap.put("LongitudeEndBoundary", jsonObject.get("ex").toString());
+				jsonMap.put("LatitudeStartBoundary", jsonObject.get("sy").toString());
+				jsonMap.put("LongitudeStartBoundary", jsonObject.get("sx").toString());
+				jsonMap.put("selectName", jsonObject.get("name").toString());
+				
+				subwayPopTempList = mapper.getCircleSubway(jsonMap);
+
+				for (SubwayPopVO subwayPopVO : subwayPopTempList) {
+					subwayPopList.add(subwayPopVO);
+				}
+			}
+			else if ("rectangle".equals(jsonObject.get("type").toString().replace("\"", ""))) {
+				jsonMap.put("LatitudeMinY", jsonObject.get("miny").toString());
+				jsonMap.put("LongitudeMinX", jsonObject.get("minx").toString());
+				jsonMap.put("LatitudeMaxY", jsonObject.get("maxy").toString());
+				jsonMap.put("LongitudeMaxY", jsonObject.get("maxx").toString());
+				jsonMap.put("selectName", jsonObject.get("name").toString());
+				
+				subwayPopTempList = mapper.getRectangleSubway(jsonMap);
+				
+				for (SubwayPopVO subwayPopVO : subwayPopTempList) {
+					subwayPopList.add(subwayPopVO);
+				}
 			}
 		}
 
@@ -113,6 +128,5 @@ public class CAAServiceImpl implements CAAService {
 		return subwayPopList;
 
 	}
-
 
 }

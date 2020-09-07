@@ -353,7 +353,7 @@ $(function(){
 		
 			
 			myMultipleLineChart.data.datasets.push({
-				label : "탑승 승객 수",
+				label : popDataSelect[i] + "탑승 승객 수",
 				borderColor : color[i].borderColor,
 				pointBorderColor : color[i].pointBorderColor,
 				pointBackGroundColor : color[i].pointBackGroundColor,
@@ -371,7 +371,7 @@ $(function(){
 		
 		
 			myMultipleLineChart.data.datasets.push({
-				label : "하차 승객 수",
+				label : popDataSelect[i] + "하차 승객 수",
 				borderColor : color[i+3].borderColor,
 				pointBorderColor : color[i+3].pointBorderColor,
 				pointBackGroundColor : color[i+3].pointBackGroundColor,

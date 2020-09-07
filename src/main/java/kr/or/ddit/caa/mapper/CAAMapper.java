@@ -24,8 +24,7 @@ public interface CAAMapper {
 	List<SubwayPopVO> getCircleSubway(Map<String, String> point);
 
 	// 사각형에 포함된 지하철을 달별로 가져온다.
-	List<SubwayPopVO> getRectancleSubway(Map<String, String> point);
-
+	public List<SubwayPopVO> getRectangleSubway(Map<String, String> point);
 	/* 영현 ↑ */
 
 	public List<StoreVO> getStoreList(SectorParamVO vo);
@@ -34,6 +33,7 @@ public interface CAAMapper {
 	
 
     public List<IndiVO> getIndiList(String var);
+
 }
 
 
