@@ -3,44 +3,49 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <style>
-.filebox input[type="file"] { 
-				position: absolute; 
-				width: 1px; 
-				height: 1px; 
-				padding: 0; 
-				margin: -1px; 
-				overflow: hidden; 
-				clip:rect(0,0,0,0); 
-				border: 0; } 
-.filebox label { 
-				display: inline-block; 
-				padding: .5em .75em; 
-				color: #999; 
-				font-size: inherit; 
-				line-height: normal; 
-				vertical-align: middle; 
-				background-color: #fdfdfd; 
-				cursor: pointer; 
-				border: 1px solid #ebebeb; 
-				border-bottom-color: #e2e2e2; 
-				border-radius: .25em; } 
-/* named upload */ 
-.filebox .upload-name { 
-				display: inline-block; 
-				padding: .5em .75em; 
-/* label의 패딩값과 일치 */ 
-				font-size: inherit; 
-				font-family: inherit; 
-				line-height: normal; 
-				vertical-align: middle; 
-				background-color: #f5f5f5;
-				 border: 1px solid #ebebeb; 
-				 border-bottom-color: #e2e2e2; 
-				 border-radius: .25em; 
-				 -webkit-appearance: none; 
-				 /* 네이티브 외형 감추기 */ 
-				 -moz-appearance: none; 
-				 appearance: none; }
+    .filebox input[type="file"] {
+        position: absolute;
+        width: 1px;
+        height: 1px;
+        padding: 0;
+        margin: -1px;
+        overflow: hidden;
+        clip: rect(0, 0, 0, 0);
+        border: 0;
+    }
+
+    .filebox label {
+        display: inline-block;
+        padding: .5em .75em;
+        color: #999;
+        font-size: inherit;
+        line-height: normal;
+        vertical-align: middle;
+        background-color: #fdfdfd;
+        cursor: pointer;
+        border: 1px solid #ebebeb;
+        border-bottom-color: #e2e2e2;
+        border-radius: .25em;
+    }
+
+    /* named upload */
+    .filebox .upload-name {
+        display: inline-block;
+        padding: .5em .75em;
+        /* label의 패딩값과 일치 */
+        font-size: inherit;
+        font-family: inherit;
+        line-height: normal;
+        vertical-align: middle;
+        background-color: #f5f5f5;
+        border: 1px solid #ebebeb;
+        border-bottom-color: #e2e2e2;
+        border-radius: .25em;
+        -webkit-appearance: none;
+        /* 네이티브 외형 감추기 */
+        -moz-appearance: none;
+        appearance: none;
+    }
 
     .filebox label {
         display: inline-block;
@@ -160,7 +165,6 @@
                                         <div class="separator-solid"></div>
                                         <h5 class="sub">내용</h5>
                                         <div id="summernote">
-                                            <%--                                        <textarea class="form-control" rows="4" id="board_content" name="board_content" ></textarea>--%>
                                         </div>
 
 
@@ -191,6 +195,7 @@
                                 <div class="card-body">
 
 
+
                                     <div class="separator-solid"></div>
 
 
@@ -209,6 +214,12 @@
 
                                     <button id="uploadBtn">uplaod</button>
                                     <div style="padding-bottom: 50px"></div>
+
+
+                                    <div class="exImage">
+
+
+                                    </div>
 
                                 </div>
 
@@ -238,12 +249,26 @@
         });
 
 
-        $('#registerButton').on('click', function () {
+
+        $('#registerButton').on('click', function (e) {
+
+            e.preventDefault();
+
+            var operForm = $("#operForm");
 
             const bo_content = $('#summernote').summernote('code');
 
+            const board_content = $("<input type='hidden' name='board_content' value='" + bo_content + "'/>");
+
+            operForm.append(board_content);
+
+            operForm.attr("action", "/notice/register").submit();
 
         })
+
+
+
+
 
         // $('.register').ready(function () {
         //
@@ -325,7 +350,8 @@
 
         })
 
-            var uploadResult = $('.uploadResult ul');
+        var uploadResult = $('.uploadResult ul');
+
         function showUploadFile(uploadResultArr) {
 
 
@@ -337,8 +363,6 @@
 
             uploadResult.append(str);
         }
-
-
 
 
     })// ready
