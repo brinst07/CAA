@@ -216,7 +216,7 @@
                                     <div style="padding-bottom: 50px"></div>
 
 
-                                    <div class="exImage">
+                                    <div class="exImage" id="summernote2">
 
 
                                     </div>
@@ -247,6 +247,14 @@
             tabsize: 2,
             height: 300
         });
+        
+        
+        $('#summernote2').summernote({
+            placeholder: 'Atlantis',
+            fontNames: ['Arial', 'Arial Black', 'Comic Sans MS', 'Courier New'],
+            tabsize: 2,
+            height: 300
+        });
 
 
 
@@ -257,6 +265,10 @@
             var operForm = $("#operForm");
 
             const bo_content = $('#summernote').summernote('code');
+            
+//             const transfer = $('#summernote2').summernote('code', bo_content);
+            
+//             $('#summernote2').append(bo_content);
 
             const board_content = $("<input type='hidden' name='board_content' value='" + bo_content + "'/>");
 

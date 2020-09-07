@@ -50,8 +50,7 @@
 
 									<div class="separator-solid"></div>
 									<h5 class="sub">내용</h5>
-										<div id="summernote">
-										</div>
+										<div id="summernote">${board.board_content}</div>
 								</div>
 							</div>
 						</div>
@@ -73,7 +72,7 @@
 			height: 300
 		});
 
-		$('#summernote').summernote('code', '${board.board_content}');
+// 		$('#summernote').summernote('insertText', '${board.board_content}');
 
 
 
