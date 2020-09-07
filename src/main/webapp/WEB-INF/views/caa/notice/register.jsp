@@ -3,30 +3,78 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <style>
-.filebox input[type="file"] { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip:rect(0,0,0,0); border: 0; } .filebox label { display: inline-block; padding: .5em .75em; color: #999; font-size: inherit; line-height: normal; vertical-align: middle; background-color: #fdfdfd; cursor: pointer; border: 1px solid #ebebeb; border-bottom-color: #e2e2e2; border-radius: .25em; } /* named upload */ .filebox .upload-name { display: inline-block; padding: .5em .75em; /* label의 패딩값과 일치 */ font-size: inherit; font-family: inherit; line-height: normal; vertical-align: middle; background-color: #f5f5f5; border: 1px solid #ebebeb; border-bottom-color: #e2e2e2; border-radius: .25em; -webkit-appearance: none; /* 네이티브 외형 감추기 */ -moz-appearance: none; appearance: none; }
+    .filebox input[type="file"] {
+        position: absolute;
+        width: 1px;
+        height: 1px;
+        padding: 0;
+        margin: -1px;
+        overflow: hidden;
+        clip: rect(0, 0, 0, 0);
+        border: 0;
+    }
+
+    .filebox label {
+        display: inline-block;
+        padding: .5em .75em;
+        color: #999;
+        font-size: inherit;
+        line-height: normal;
+        vertical-align: middle;
+        background-color: #fdfdfd;
+        cursor: pointer;
+        border: 1px solid #ebebeb;
+        border-bottom-color: #e2e2e2;
+        border-radius: .25em;
+    }
+
+    /* named upload */
+    .filebox .upload-name {
+        display: inline-block;
+        padding: .5em .75em; /* label의 패딩값과 일치 */
+        font-size: inherit;
+        font-family: inherit;
+        line-height: normal;
+        vertical-align: middle;
+        background-color: #f5f5f5;
+        border: 1px solid #ebebeb;
+        border-bottom-color: #e2e2e2;
+        border-radius: .25em;
+        -webkit-appearance: none; /* 네이티브 외형 감추기 */
+        -moz-appearance: none;
+        appearance: none;
+    }
 
 
-/* imaged preview */ 
-.filebox .upload-display { /* 이미지가 표시될 지역 */ 
-		margin-bottom: 5px; } 
-@media(min-width: 768px) { 
-	.filebox .upload-display { 
-		display: inline-block; 
-		margin-right: 5px; 
-		margin-bottom: 0; } } 
-.filebox .upload-thumb-wrap { /* 추가될 이미지를 감싸는 요소 */ 
-		 display: inline-block; 
-		 width: 54px;
-		 padding: 2px;
-		 vertical-align: middle; 
-		 border: 1px solid #ddd; 
-		 border-radius: 5px; 
-		 background-color: #fff; } 
-.filebox .upload-display img { /* 추가될 이미지 */ 
-		 display: block;
-		 max-width: 100%; 
-		 width: 100% \9; 
-		 height: auto; }
+    /* imaged preview */
+    .filebox .upload-display { /* 이미지가 표시될 지역 */
+        margin-bottom: 5px;
+    }
+
+    @media (min-width: 768px) {
+        .filebox .upload-display {
+            display: inline-block;
+            margin-right: 5px;
+            margin-bottom: 0;
+        }
+    }
+
+    .filebox .upload-thumb-wrap { /* 추가될 이미지를 감싸는 요소 */
+        display: inline-block;
+        width: 54px;
+        padding: 2px;
+        vertical-align: middle;
+        border: 1px solid #ddd;
+        border-radius: 5px;
+        background-color: #fff;
+    }
+
+    .filebox .upload-display img { /* 추가될 이미지 */
+        display: block;
+        max-width: 100%;
+        width: 100% \9;
+        height: auto;
+    }
 
 </style>
 
@@ -49,7 +97,9 @@
                                 <!--                                         class="btn btn-light btn-border">등록 -->
                                 <!--                                 </button> -->
                                 <!--                                 <a href="/notice/noticeList" class="btn btn-primary ml-2"> 취소 </a> -->
-                                <button id="registerButton" data-oper='register' type="button" class="btn btn-default">등록</button>
+                                <button id="registerButton" data-oper='register' type="button" class="btn btn-default">
+                                    등록
+                                </button>
                                 <button class="btn btn-info" onclick="location.href='/notice/noticeList'">목록</button>
                             </div>
                         </div>
@@ -114,21 +164,16 @@
 
 
                                     <div class="separator-solid"></div>
-                                    <%--                                    <h5 class="sub">파일</h5>--%>
-<!--                                     <div class="uploadDiv"> -->
-<!--                                         <input type="file" name="uploadFile" multiple> -->
-
-<!--                                     </div> -->
-<!--                                     <button id="uploadBtn">uplaod</button> -->
-									<div class="filebox preview-image"> 
-									<input class="upload-name" value="파일선택" disabled="disabled" > 
-									<label for="input-file">업로드</label> 
-									<input type="file" id="input-file" class="upload-hidden"> 
-									</div>
 
 
+                                    <div class="filebox preview-image">
+<%--                                        <input class="upload-name" value="파일선택" multiple>--%>
+                                        <label for="input-file">업로드</label>
+                                        <input type="file" id="input-file" class="upload-hidden" name="uploadFile" multiple>
+                                    </div>
 
 
+                                    <button id="uploadBtn">uplaod</button>
                                     <div style="padding-bottom: 50px"></div>
 
                                 </div>
@@ -157,19 +202,11 @@
             tabsize: 2,
             height: 300
         });
-    
-
-
 
 
         $('#registerButton').on('click', function () {
 
             const bo_content = $('#summernote').summernote('code');
-
-
-
-
-
 
 
         })
@@ -196,7 +233,6 @@
 </script>
 
 
-
 <script type="text/javascript">
     var regex = new RegExp("(.*?)\.(exe|sh|zip|alz)");
     var maxSize = 5242880; // 5MB
@@ -219,9 +255,9 @@
         $("#uploadBtn").on("click", function (e) {
             var formData = new FormData();
 
-//             var inputFile = $("input[name='uploadFile']");
+            var inputFile = $("input[name='uploadFile']");
 
-//             var files = inputFile[0].files;
+            var files = inputFile[0].files;
 
 //             // file 상태 확인
 //             console.log(files);
@@ -246,18 +282,18 @@
                     console.log(result);
                 }
 
-             }) // ajax File
+            }) // ajax File
 
-         })
-     })// ready
-    
-  //preview image 
-  var imgTarget = $('.preview-image .upload-hidden'); 
-  imgTarget.on('change', function(){ 
-	  var parent = $(this).parent(); parent.children('.upload-display').remove(); 
-	  if(window.FileReader){ //image 파일만 if (!$(this)[0].files[0].type.match(/image\//)) return;
-	  var reader = new FileReader(); 
-	  reader.onload = function(e){ var src = e.target.result; parent.prepend('<div class="upload-display"><div class="upload-thumb-wrap"><img src="'+src+'" class="upload-thumb"></div></div>'); } 
-	  reader.readAsDataURL($(this)[0].files[0]); } else { $(this)[0].select(); $(this)[0].blur(); var imgSrc = document.selection.createRange().text; parent.prepend('<div class="upload-display"><div class="upload-thumb-wrap"><img class="upload-thumb"></div></div>'); 
-	  var img = $(this).siblings('.upload-display').find('img'); img[0].style.filter = "progid:DXImageTransform.Microsoft.AlphaImageLoader(enable='true',sizingMethod='scale',src=\""+imgSrc+"\")"; } });
+        })
+    })// ready
+
+    //preview image
+    var imgTarget = $('.preview-image .upload-hidden');
+    imgTarget.on('change', function(){
+        var parent = $(this).parent(); parent.children('.upload-display').remove();
+        if(window.FileReader){ //image 파일만 if (!$(this)[0].files[0].type.match(/image\//)) return;
+        var reader = new FileReader();
+        reader.onload = function(e){ var src = e.target.result; parent.prepend('<div class="upload-display"><div class="upload-thumb-wrap"><img src="'+src+'" class="upload-thumb"></div></div>'); }
+        reader.readAsDataURL($(this)[0].files[0]); } else { $(this)[0].select(); $(this)[0].blur(); var imgSrc = document.selection.createRange().text; parent.prepend('<div class="upload-display"><div class="upload-thumb-wrap"><img class="upload-thumb"></div></div>');
+        var img = $(this).siblings('.upload-display').find('img'); img[0].style.filter = "progid:DXImageTransform.Microsoft.AlphaImageLoader(enable='true',sizingMethod='scale',src=\""+imgSrc+"\")"; } });
 </script>
