@@ -2,7 +2,30 @@
          pageEncoding="UTF-8" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
+<style>
+/* imaged preview */ 
+.filebox .upload-display { /* 이미지가 표시될 지역 */ 
+		margin-bottom: 5px; } 
+@media(min-width: 768px) { 
+	.filebox .upload-display { 
+		display: inline-block; 
+		margin-right: 5px; 
+		margin-bottom: 0; } } 
+.filebox .upload-thumb-wrap { /* 추가될 이미지를 감싸는 요소 */ 
+		 display: inline-block; 
+		 width: 54px;
+		 padding: 2px;
+		 vertical-align: middle; 
+		 border: 1px solid #ddd; 
+		 border-radius: 5px; 
+		 background-color: #fff; } 
+.filebox .upload-display img { /* 추가될 이미지 */ 
+		 display: block;
+		 max-width: 100%; 
+		 width: 100% \9; 
+		 height: auto; }
 
+</style>
 
 <div class="main-panel full-height">
     <div class="container">
@@ -36,7 +59,7 @@
                                         <div class="invoice-header">
 
                                             <input type="text" class="form-control" id="board_title" name="board_title"
-                                                   placeholder="제목을 입력해주세요!" required>
+                                                   placeholder="제목을 입력해주세요" required>
 
                                         </div>
                                     </div>
@@ -89,11 +112,19 @@
 
                                     <div class="separator-solid"></div>
                                     <%--                                    <h5 class="sub">파일</h5>--%>
-                                    <div class="uploadDiv">
-                                        <input type="file" name="uploadFile" multiple>
+<!--                                     <div class="uploadDiv"> -->
+<!--                                         <input type="file" name="uploadFile" multiple> -->
 
-                                    </div>
-                                    <button id="uploadBtn">uplaod</button>
+<!--                                     </div> -->
+<!--                                     <button id="uploadBtn">uplaod</button> -->
+									<div class="filebox preview-image"> 
+									<input class="upload-name" value="파일선택" disabled="disabled" > 
+									<label for="input-file">업로드</label> 
+									<input type="file" id="input-file" class="upload-hidden"> 
+									</div>
+
+
+
 
                                     <div style="padding-bottom: 50px"></div>
 
@@ -123,6 +154,8 @@
             tabsize: 2,
             height: 300
         });
+    
+     }
 
 
 
@@ -159,8 +192,7 @@
 
 </script>
 
-<script integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
-        crossorigin="anonymous"></script>
+
 
 <script type="text/javascript">
     var regex = new RegExp("(.*?)\.(exe|sh|zip|alz)");
@@ -184,12 +216,12 @@
         $("#uploadBtn").on("click", function (e) {
             var formData = new FormData();
 
-            var inputFile = $("input[name='uploadFile']");
+//             var inputFile = $("input[name='uploadFile']");
 
-            var files = inputFile[0].files;
+//             var files = inputFile[0].files;
 
-            // file 상태 확인
-            console.log(files);
+//             // file 상태 확인
+//             console.log(files);
 
             //add filedata to formdata
             for (var i = 0; i < files.length; i++) {
@@ -211,10 +243,18 @@
                     console.log(result);
                 }
 
-            }) // ajax File
+//             }) // ajax File
 
-        })
-    })// ready
-
-
+//         })
+//     })// ready
+    
+  //preview image 
+  var imgTarget = $('.preview-image .upload-hidden'); 
+  imgTarget.on('change', function(){ 
+	  var parent = $(this).parent(); parent.children('.upload-display').remove(); 
+	  if(window.FileReader){ //image 파일만 if (!$(this)[0].files[0].type.match(/image\//)) return;
+	  var reader = new FileReader(); 
+	  reader.onload = function(e){ var src = e.target.result; parent.prepend('<div class="upload-display"><div class="upload-thumb-wrap"><img src="'+src+'" class="upload-thumb"></div></div>'); } 
+	  reader.readAsDataURL($(this)[0].files[0]); } else { $(this)[0].select(); $(this)[0].blur(); var imgSrc = document.selection.createRange().text; parent.prepend('<div class="upload-display"><div class="upload-thumb-wrap"><img class="upload-thumb"></div></div>'); 
+	  var img = $(this).siblings('.upload-display').find('img'); img[0].style.filter = "progid:DXImageTransform.Microsoft.AlphaImageLoader(enable='true',sizingMethod='scale',src=\""+imgSrc+"\")"; } });
 </script>
