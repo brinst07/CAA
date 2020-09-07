@@ -112,12 +112,7 @@ public class QNAController {
 
 	@PostMapping("/register")
 	public String register(BoardVO board, RedirectAttributes rttr) {
-		log.info("register: " + board);
-//		System.out.println(board.getBoard_title());
-//		System.out.println(board.getBoard_content());
-		
-		log.info("===============================");
-		
+
 		if (board.getAttachList() != null) {
 			board.getAttachList().forEach(attach -> log.info(attach));
 		}

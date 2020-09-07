@@ -5,8 +5,8 @@ import kr.or.ddit.member.domain.KaKaoProfile;
 import kr.or.ddit.member.domain.MemberVO;
 import kr.or.ddit.member.domain.OAuthToken;
 import kr.or.ddit.member.service.MemberService;
+import kr.or.ddit.member.util.Sha256;
 import lombok.AllArgsConstructor;
-import lombok.Setter;
 import lombok.extern.log4j.Log4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpEntity;
@@ -28,9 +28,11 @@ import java.util.UUID;
 @AllArgsConstructor
 public class MembersController {
 
-    @Setter
     @Autowired
     private MemberService service;
+
+    @Autowired
+    private Sha256 sha256;
 
     @GetMapping("/login")
     public String login() {
@@ -115,13 +117,16 @@ public class MembersController {
         MemberVO memVo = new MemberVO();
         memVo.setMember_id(Integer.toString(kakaoProfile.getId()));
         memVo.setMember_email(kakaoProfile.getKakao_account().getEmail());
-        memVo.setMember_password(uuid.toString());
+        //sha256으로 암호화처리
+        memVo.setMember_password(sha256.encrypt(uuid.toString()));
         memVo.setMember_username(kakaoProfile.getProperties().nickname);
         memVo.setMember_thumnail(kakaoProfile.kakao_account.getProfile().thumbnail_image_url);
 
         log.warn(memVo);
         service.insertSocialMember(memVo);
-        session.setAttribute("member",memVo);
-        return "caa/mainPage/main";
+        MemberVO vo = service.selectMember(memVo.getMember_id());
+        log.warn(vo);
+        session.setAttribute("member",vo);
+        return "redirect:/caa/main";
     }
 }

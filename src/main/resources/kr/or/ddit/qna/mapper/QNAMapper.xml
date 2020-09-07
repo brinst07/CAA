@@ -7,69 +7,74 @@
 
     <!-- 리스트 출력 -->
     <select id="getList" resultType="kr.or.ddit.domain.BoardVO">
-    	select rownum boardnum , board.*
-		from BOARD
-		where BOARD_CATEGORY_ID = #{board_category_id} and BOARD_STATUS = 'y'
+        select ROWNUM boardnum, board.*
+        from (
+                 select *
+                 from BOARD
+                 where BOARD_CATEGORY_ID = #{board_category_id}
+                   and BOARD_STATUS = 'y'
+                 order by BOARD_ID desc) board
     </select>
 
     <!-- 상세글 출력 -->
     <select id="read" resultType="kr.or.ddit.domain.BoardVO">
-      select * from BOARD where board_id = #{board_id}
-   </select>
+        select *
+        from BOARD
+        where board_id = #{board_id}
+    </select>
 
     <!--글 수정 -->
 
     <update id="modify">
-      update board 
-      set member_id = '5',
-      board_title = #{board_title, jdbcType=VARCHAR},
-      board_content = #{board_content, jdbcType=VARCHAR},
-      board_datetime = sysdate
-      where board_id = #{board_id, jdbcType=VARCHAR}
-   </update>
+        update board
+        set member_id      = '5',
+            board_title    = #{board_title, jdbcType=VARCHAR},
+            board_content  = #{board_content, jdbcType=VARCHAR},
+            board_datetime = sysdate
+        where board_id = #{board_id, jdbcType=VARCHAR}
+    </update>
 
     <!-- 게시글 삭제 -->
 
     <delete id="remove">
-      delete from board
-      where board_id = #{board_id}
-   </delete>
+        delete
+        from board
+        where board_id = #{board_id}
+    </delete>
 
 
     <!-- 등록 -->
     <insert id="insert">
-		
-		insert into board (
-							board_id, 
-							member_id, 
-							board_title, 
-							board_content, 
-							board_datetime,
-							board_status,
-							board_category_id
-							)
-		values (
-				seq_board.nextval, 
-				#{member_id},
-				#{board_title}, 
-				#{board_content}, 
-				sysdate, 
-				'y',
-				#{board_category_id}
-				)
-	</insert>
+
+        insert into board (board_id,
+                           member_id,
+                           board_title,
+                           board_content,
+                           board_datetime,
+                           board_status,
+                           board_category_id
+                           )
+        values (seq_board.nextval,
+                #{member_id},
+                #{board_title},
+                #{board_content},
+                sysdate,
+                'y')
+    </insert>
 
     <select id="selectKey" resultType="string">
-		SELECT seq_board.nextval board_id
-			FROM DUAL
-	</select>
+        SELECT seq_board.nextval board_id
+        FROM DUAL
+    </select>
 
     <insert id="insertSelectKey" parameterType="kr.or.ddit.domain.BoardVO">
-		insert into board(board_id,board_title,board_content,member_id, board_datetime, board_category_id)
-		values(#{board_id}, #{board_title},#{board_content},#{member_id}, sysdate, #{board_category_id})
-	</insert>
+        insert into board(board_id, board_title, board_content, member_id, board_datetime, board_category_id)
+        values (#{board_id}, #{board_title}, #{board_content}, #{member_id}, sysdate, #{board_category_id})
+    </insert>
 
-	<update id="updateHit">
-		update BOARD set BOARD_HIT = BOARD_HIT+1 where BOARD_ID = #{board_id}
-	</update>
+    <update id="updateHit">
+        update BOARD
+        set BOARD_HIT = BOARD_HIT + 1
+        where BOARD_ID = #{board_id}
+    </update>
 </mapper>

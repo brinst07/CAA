@@ -59,5 +59,9 @@
             values (#{member_id}, #{member_password}, #{member_username})
     </insert>
 
-    <!-- -->
+    <select id="selectMember" resultType="kr.or.ddit.member.domain.MemberVO">
+        select *
+        from MEMBER
+        where MEMBER_ID = #{member_id}
+    </select>
 </mapper>

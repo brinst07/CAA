@@ -20,4 +20,6 @@ public interface MemberMapper {
     public MemberVO loginCheck(MemberVO vo);
 
     public void insertSocialMember(MemberVO memVo);
+
+    public MemberVO selectMember(String id);
 }

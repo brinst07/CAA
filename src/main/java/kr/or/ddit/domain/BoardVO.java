@@ -1,11 +1,9 @@
 package kr.or.ddit.domain;
 
-import java.util.Date;
-import java.util.List;
-
 import lombok.Data;
 
 import java.util.Date;
+import java.util.List;
 
 @Data
 public class BoardVO {
@@ -21,11 +19,4 @@ public class BoardVO {
 	private String board_temp_save;
 	private String board_hit;
 	private List<BoardAttachVO> attachList;
-
-	
-	
-	
-	
-	
-
 }

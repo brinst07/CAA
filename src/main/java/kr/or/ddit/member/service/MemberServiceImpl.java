@@ -43,6 +43,11 @@ public class MemberServiceImpl implements MemberService {
     }
 
     @Override
+    public MemberVO selectMember(String id) {
+        return mapper.selectMember(id);
+    }
+
+    @Override
     public void modifyMember(MemberVO vo) {
         mapper.modifyMember(vo);
     }
