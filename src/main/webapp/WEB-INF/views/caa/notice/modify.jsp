@@ -18,9 +18,12 @@
 
 
                             <div class="col-auto">
-                                <a href="/notice/modify" class="btn btn-light btn-border"> 확인 </a>
-                                <a href="/notice/remove" class="btn btn-light btn-border"> 삭제 </a>
-                                <a href="/notice/noticeList" class="btn btn-primary ml-2"> 취소 </a>
+<!--                                 <a data-oper='modify' type="submit" class="btn btn-light btn-border"> 확인 </a> -->
+<!--                                 <a data-oper='remove' type="submit" class="btn btn-light btn-border"> 삭제 </a> -->
+<!--                                 <a href="/notice/noticeList" class="btn btn-primary ml-2"> 취소 </a> -->
+                                <button  data-oper='modify' type="submit" class="btn btn-light btn-border">확인</button>
+                         		<button  data-oper='remove' type="submit" class="btn btn-light btn-border">삭제</button>
+                       			<button  data-oper='list' class="btn btn-primary ml-2" onclick="location.href='/notice/noticeList'">목록</button>
                             </div>
                             <div class="page-divider"></div>
                             <div class="row">
@@ -33,6 +36,7 @@
                                                 <input type="text" class="form-control" id="board_title"
                                                        name="board_title"
                                                        value='<c:out value="${board.board_title }"/>'>
+                                                <input type="hidden" id="board_id" name="board_id" value='<c:out value="${board.board_id}"/>'>
 
                                             </div>
                                         </div>
@@ -93,6 +97,54 @@
                 }
             }
         });
+    
+    $(document).ready(function() {
+
+        var formObj = $("form");
+
+        $('button').on("click", function(e) {
+
+           e.preventDefault();
+
+           var operation = $(this).data("oper");
+
+           console.log(operation);
+
+           if (operation === 'remove') {
+              formObj.attr("action", "/notice/remove");
+           } else if (operation === 'list') {
+              // move to list
+              self.location = "/notice/noticeList";
+              return;
+           }
+           formObj.submit();
+        });
+     });
+    
+    $(document).ready(function() {
+
+//         var formObj = $("form");
+			var formObj = $("#modify");
+
+        $('button').on("click", function(e) {
+
+           e.preventDefault();
+
+		   var operation = $(this).data("oper");
+			
+
+           console.log(operation);
+
+           if (operation === 'modify') {
+              formObj.attr("action", "/notice/modify");
+           } else if (operation === 'list') {
+              // move to list
+              self.location = "/notice/noticeList";
+              return;
+           }
+           formObj.submit();
+        });
+     });
 </script>
 
 
