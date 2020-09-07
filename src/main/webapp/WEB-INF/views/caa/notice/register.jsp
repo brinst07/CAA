@@ -155,7 +155,7 @@
             height: 300
         });
     
-     }
+
 
 
 
@@ -243,10 +243,10 @@
                     console.log(result);
                 }
 
-//             }) // ajax File
+             }) // ajax File
 
-//         })
-//     })// ready
+         })
+     })// ready
     
   //preview image 
   var imgTarget = $('.preview-image .upload-hidden'); 
