@@ -19,12 +19,12 @@
 
 
                             <div class="col-auto">
-<!--                                 <button data-oper='register' type="button" id="registerButton" -->
-<!--                                         class="btn btn-light btn-border">등록 -->
-<!--                                 </button> -->
-<!--                                 <a href="/notice/noticeList" class="btn btn-primary ml-2"> 취소 </a> -->
-                                <button data-oper='register' type="submit" class="btn btn-default">등록</button>
-                           		<button class="btn btn-info" onclick="location.href='/notice/noticeList'">목록</button>
+                                <!--                                 <button data-oper='register' type="button" id="registerButton" -->
+                                <!--                                         class="btn btn-light btn-border">등록 -->
+                                <!--                                 </button> -->
+                                <!--                                 <a href="/notice/noticeList" class="btn btn-primary ml-2"> 취소 </a> -->
+                                <button id="registerButton" data-oper='register' type="button" class="btn btn-default">등록</button>
+                                <button class="btn btn-info" onclick="location.href='/notice/noticeList'">목록</button>
                             </div>
                         </div>
                         <div class="page-divider"></div>
@@ -55,8 +55,8 @@
 
                                         <div class="separator-solid"></div>
                                         <h5 class="sub">내용</h5>
-                                        <div id="summernote" name="board_content"> 
-                                        <textarea class="form-control" rows="4" id="board_content" name="board_content" ></textarea>
+                                        <div id="summernote">
+                                            <%--                                        <textarea class="form-control" rows="4" id="board_content" name="board_content" ></textarea>--%>
                                         </div>
 
 
@@ -124,35 +124,38 @@
             height: 300
         });
 
-//         $('#registerButton').on('click', function () {
-
-//             const summerNoteTransfer = $('#summernote').summernote('code', $("div[name=board_content]").text());
-
-//             const summ = document.getElementsByName('board_content')[1].textContent;
-//             const asdf = document.getElementsByName('board_content');
 
 
-//         })
+        $('#registerButton').on('click', function () {
 
-              $('.register').ready(function() {
+            const bo_content = $('#summernote').summernote('code');
 
-         var operForm = $("#operForm");
-         
-         var textareaVal = $("textarea[name=board_content]").text();
 
-         console.log("내용로그 "+textareaVal);
 
-         $("button[data-oper='register']").on("click", function(e) {
-        	 
-        	 e.preventDefault();
-			
-			console.log("Submit clicked");
-         
-            operForm.attr("action", "/notice/register").submit();
-         });
 
+
+
+
+        })
+
+        // $('.register').ready(function () {
+        //
+        //     var operForm = $("#operForm");
+        //
+        //     var textareaVal = $("textarea[name=board_content]").text();
+        //
+        //     console.log("내용로그 " + textareaVal);
+        //
+        //     $("button[data-oper='register']").on("click", function (e) {
+        //
+        //         e.preventDefault();
+        //
+        //         console.log("Submit clicked");
+        //
+        //         operForm.attr("action", "/notice/register").submit();
+        //     });
+        // });
     });
-
 
 </script>
 
@@ -160,6 +163,22 @@
         crossorigin="anonymous"></script>
 
 <script type="text/javascript">
+    var regex = new RegExp("(.*?)\.(exe|sh|zip|alz)");
+    var maxSize = 5242880; // 5MB
+
+    function checkExtension(fileName, fileSize) {
+        if (fileSize >= maxSize) {
+            alert("파일 사이즈 초과");
+            return false;
+        }
+
+        if (regex.test(fileName)) {
+            alert("해당 종류의 파일은 업로드 할 수 없습니다.");
+            return false;
+        }
+        return true;
+    }
+
     // Ajax File Upload
     $(document).ready(function () {
         $("#uploadBtn").on("click", function (e) {
@@ -174,12 +193,16 @@
 
             //add filedata to formdata
             for (var i = 0; i < files.length; i++) {
+                if (!checkExtension(files[i].name, files[i].size)) {
+                    return false;
+                }
+
                 formData.append("uploadFile", files[i]);
             }
 
 
             $.ajax({
-                url: '/uploadAjaxAction',
+                url: 'rest/uploadAjaxAction',
                 processData: false,
                 contentType: false,
                 data: formData,
