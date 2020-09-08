@@ -35,14 +35,11 @@ public class ApiExamCaptchaNkeyTests {
 		
 		log.info("temp : " + temp);
 		
-		String[] keyDivArray = temp.split("\"");
-		for (int i = 0; i < keyDivArray.length; i++) {
-			log.info("keyIndex => " + i +" : " + keyDivArray[i]);
-		}
-		
+		String keyDivArray = temp.replaceAll("\"", "");
+			log.info("keyIndex => " + keyDivArray);
 		
 		log.info("이미지 발급");
-		log.info("이미지 발급 : " + captChaApiImage.reception(keyDivArray[3]));
+		log.warn("이미지 발급 : " + captChaApiImage.reception(keyDivArray));
 		
 	}
 }
