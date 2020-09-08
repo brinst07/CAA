@@ -1,25 +1,25 @@
-package kr.or.ddit.ss.service;
+package kr.or.ddit.sales.service;
 
 import kr.or.ddit.caa.domain.CscodeVO;
-import kr.or.ddit.ss.mapper.SSMapper;
+import kr.or.ddit.sales.domain.SectorsVO;
+import kr.or.ddit.sales.mapper.SalesMapper;
 import lombok.Setter;
 import lombok.extern.log4j.Log4j;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
 @Log4j
-public class SSServiceImpl implements SSService{
+public class SalesServiceImpl implements SalesService {
 	
-	@Setter(onMethod_ = @Autowired)
-	private SSMapper mapper;
+	@Setter
+	private SalesMapper mapper;
 
 	@Override
 	public List<CscodeVO> getCscodeList(String depth) {
 		
-		log.info("업종 선택 쿼리문");
+
 		return mapper.getCscodeList(depth);
 	}
 
@@ -27,11 +27,11 @@ public class SSServiceImpl implements SSService{
 	public List<CscodeVO> otherCscodeList(String keyword) {
 		return mapper.otherCscodeList(keyword);
 	}
-	
-	
-	
 
-	
-	
+	@Override
+	public List<SectorsVO> sectorsList() {
+		return mapper.sectorsList();
+	}
+
 
 }

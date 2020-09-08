@@ -6,8 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-import kr.or.ddit.caa.mapper.CAAMapper;
-import kr.or.ddit.ss.mapper.SSMapper;
+import kr.or.ddit.sales.mapper.SalesMapper;
 import lombok.Setter;
 import lombok.extern.log4j.Log4j;
 
@@ -16,11 +15,11 @@ import lombok.extern.log4j.Log4j;
 @Log4j
 public class CAAMapperTests {
 	
-	@Setter(onMethod_ = @Autowired)
+	@Setter
 	private CAAMapper mapper;
 	
-	@Setter(onMethod_ = @Autowired)
-	private SSMapper ssmapper;
+	@Setter
+	private SalesMapper ssmapper;
 	
 	@Test
 	public void testGet() {

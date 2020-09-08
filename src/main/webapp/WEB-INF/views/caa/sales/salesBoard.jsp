@@ -6,7 +6,7 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <style type="text/css">
-#selectStatus {
+.selectStatus {
 	margin-right: 15px;
 }
 </style>
@@ -55,26 +55,30 @@
 								<div class="form-group">
 									<div class="selectgroup w-100">
 										<label class="selectgroup-item"> <input type="radio" name="transportation" value="asdasd" class="selectgroup-input"> <span class="selectgroup-button selectgroup-button-icon"><i class="icon-screen-smartphone">행정구역</i></span>
-										</label> <label id="selectStatus" class="selectgroup-item"> <input type="radio" name="transportation" value="1" class="selectgroup-input"> <span class="selectgroup-button selectgroup-button-icon"> <i class="icon-screen-tablet"> 주요상권</i></span>
+										</label> <label class="selectStatus" class="selectgroup-item"> <input type="radio" name="transportation" value="1" class="selectgroup-input"> <span class="selectgroup-button selectgroup-button-icon"> <i class="icon-screen-tablet"> 주요상권</i></span>
 										</label> <select id="sel1" name="sel1" class="form-control form-control-sm">
 
-										</select> <select name="sel2" id="sel2" style="display: none" class="form-control form-control-sm" id="selectStatus">
+										</select> <select name="sel2" id="sel2" style="display: none" class="form-control form-control-sm selectStatus">
 
 											<!-- 상권 업종 ↓ -->
-										</select> <label id="selectStatus" class="selectgroup-item" style="padding-left: 10px"> <input type="radio" name="value" value="50" class="selectgroup-input" checked="checked"> <span class="selectgroup-button">상권업종</span>
+										</select> <label class="selectStatus selectgroup-item" style="padding-left: 10px"> <input type="radio" name="value" value="50" class="selectgroup-input" checked="checked"> <span class="selectgroup-button">상권업종</span>
 										</label>
-										 <select class="form-control form-control-sm"  name="large" onchange="selectedLarge();">
-											<c:forEach items="${thirdComboBoxList }" var="thirdComboBoxList">
-												<option value="${thirdComboBoxList.cs_code }">${thirdComboBoxList.cs_code_name }</option>
-											</c:forEach>
-										</select>
-										<select class="form-control form-control-sm"  name="middle" style="display: none;">
-											
+<%--										 <select class="form-control form-control-sm"  name="large" onchange="selectedLarge();">--%>
+<%--											<c:forEach items="${thirdComboBoxList }" var="thirdComboBoxList">--%>
+<%--												<option value="${thirdComboBoxList.cs_code }">${thirdComboBoxList.cs_code_name }</option>--%>
+<%--											</c:forEach>--%>
+<%--										</select>--%>
+<%--										<select class="form-control form-control-sm"  name="middle" style="display: none;">--%>
+<%--											--%>
+<%--										</select>--%>
+
+										<select class="form-control form-control-sm"  name="sectors" onchange="selectSectors()">
+
 										</select>
 
 										<!-- 상권 업종 ↑ -->
 
-										<button class="btn btn-primary btn-s" id="selectStatus" style="margin-left: 10px">현황보기</button>
+										<button class="btn btn-primary btn-s selectStatus" style="margin-left: 10px">현황보기</button>
 									</div>
 								</div>
 							</div>
@@ -609,34 +613,60 @@
 </script>
 
 <script type="text/javascript">
-	function selectedLarge() {
-		  var selectid =$("select[name=large]").val();
-		  $('select[name=middle]').show();
-		  $('select[name=middle]').children('option').remove();
+	// function selectedDiv() {
+	// 	  var selectid =$("select[name=large]").val();
+	// 	  // $('select[name=middle]').show();
+	// 	  // $('select[name=middle]').children('option').remove();
+	//
+	//
+	//          $.ajax({
+	//             type : 'get',
+	//             url : '/ss/rest/div/'+selectid,
+	//             contentType : "application/json; charset=utf-8",
+	//             success : function(result, status, xhr){
+	//
+	//                   console.log("Ajax 성공 : " + result);
+	//
+	//                   for(var i = 0; i<result.length; i++){
+	//                      console.log(result[i]);
+	//                      $('select[name=middle]').append('<option value='+result[i].cs_code+'>'+result[i].cs_code_name+'</option>');
+	//                   }
+	//
+	//             },
+	//             error : function(xhr,status, er){
+	//                console.log("아작쓰 실패")
+	//                if(error){
+	//                   error(re);
+	//                }
+	//             }
+	//          })
+	//
+	// }
+	
+	function selectSeparate(){
 
-	      
-	         $.ajax({
-	            type : 'get',
-	            url : '/ss/rest/div/'+selectid,
-	            contentType : "application/json; charset=utf-8",
-	            success : function(result, status, xhr){
-	               
-	                  console.log("Ajax 성공 : " + result);
-	                  
-	                  for(var i = 0; i<result.length; i++){
-	                     console.log(result[i]);
-	                     $('select[name=middle]').append('<option value='+result[i].cs_code+'>'+result[i].cs_code_name+'</option>');
-	                  }
-	                  
-	            },
-	            error : function(xhr,status, er){
-	               console.log("아작쓰 실패")
-	               if(error){
-	                  error(re);
-	               }
-	            }
-	         })
+		$.ajax({
+			type : 'get',
+			url : '/ss/rest/div/',
+			contentType : "application/json; charset=utf-8",
+			success : function(result, status, xhr){
 
+				console.log("Ajax 성공 : " + result);
+
+				for(var i = 0; i<result.length; i++){
+					console.log(result[i]);
+					$('select[name=sectors]').append('<option value='+result[i].SALES_SER_NAME+'>result[i].SALES_SER_NAME</option>');
+				}
+
+			},
+			error : function(xhr,status, er){
+				console.log("아작쓰 실패")
+				if(error){
+					error(re);
+				}
+			}
+		})
+		
 	}
 </script>
 
