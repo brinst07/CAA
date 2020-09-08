@@ -13,9 +13,11 @@
 							<h4 class="page-title">공지사항</h4>
 							<h6 class="page-pretitle">Notice</h6>
 						</div>
+						
+						
 						<div class="col-auto">
-							<a href="/notice/modify?board=${board.board_id }" class="btn btn-light btn-border"> 수정 </a> <a
-								href="/notice/noticeList" class="btn btn-primary ml-2"> 목록 </a>
+							<a href="/notice/modify?board=${board.board_id }" class="btn btn-light btn-border">수정 </a> 
+							<a href="/notice/noticeList" class="btn btn-primary ml-2"> 목록 </a>
 						</div>
 					</div>
 					<div class="page-divider"></div>
@@ -66,17 +68,13 @@
 
 	$(function () {
 		$('#summernote').summernote({
-			placeholder: 'Atlantis',
+			placeholder: '',
 			fontNames: ['Arial', 'Arial Black', 'Comic Sans MS', 'Courier New'],
 			tabsize: 2,
 			height: 300
 		});
 
 // 		$('#summernote').summernote('insertText', '${board.board_content}');
-
-
-
-
 
 
 	});
