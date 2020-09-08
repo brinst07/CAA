@@ -99,7 +99,7 @@ $('#summernote').summernote({
 
          var formObj = $("form");
 
-         $('.remove').on("click", function(e) {
+         $('#remove').on("click", function(e) {
 
             e.preventDefault();
 
