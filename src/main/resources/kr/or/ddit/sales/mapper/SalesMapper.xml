@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="kr.or.ddit.sales.mapper.SalesMapper">
+    <select id="getCscodeList" resultType="kr.or.ddit.caa.domain.CscodeVO">
+		select *
+		from cs_code
+		where cs_code_depth = #{cs_code_depth}
+	</select>
+
+    <select id="otherCscodeList" resultType="kr.or.ddit.caa.domain.CscodeVO">
+		select *
+		from cs_code
+		where cs_code2 = #{keyword}
+	</select>
+
+    <select id="sectorsList" resultType="kr.or.ddit.sales.domain.SectorsVO">
+		select SALES_SER_NAME
+		from SALES_TEMP
+		group by sales_ser_name
+		order by SALES_SER_NAME
+	</select>
+</mapper>

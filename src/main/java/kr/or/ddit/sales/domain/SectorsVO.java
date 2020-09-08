@@ -5,6 +5,6 @@ import lombok.Data;
 @Data
 public class SectorsVO {
 
-    private String SALES_SER_NAME;
+    private String sales_ser_name;
 
 }

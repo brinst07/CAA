@@ -20,14 +20,14 @@ public class SalesController {
 	/* 영현  */
 
 	/* ↓ 매출 통계  영현 */
-	@GetMapping("/sales")
-	public String sS(Model model) {
+	@GetMapping("/salesBoard")
+	public String salesList(Model model) {
 		
-		List<CscodeVO> thirdComboBoxList = service.getCscodeList("2");
+//		List<CscodeVO> thirdComboBoxList = service.getCscodeList("2");
 		
-		model.addAttribute("thirdComboBoxList", thirdComboBoxList);
+//		model.addAttribute("thirdComboBoxList", thirdComboBoxList);
 		
-		return "sales/";
+		return "caa/sales/salesBoard";
 	}
 	/* ↑ 매출 통계 */
 	
