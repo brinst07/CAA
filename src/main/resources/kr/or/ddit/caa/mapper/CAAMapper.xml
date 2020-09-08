@@ -4,94 +4,94 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="kr.or.ddit.caa.mapper.CAAMapper">
     <select id="getCscodeList" resultType="kr.or.ddit.caa.domain.CscodeVO">
-		select *
-		from cs_code
-		where cs_code_depth = #{cs_code_depth}
-	</select>
+        select *
+        from cs_code
+        where cs_code_depth = #{cs_code_depth}
+    </select>
 
     <select id="otherCscodeList" resultType="kr.or.ddit.caa.domain.CscodeVO">
-		select *
-		from cs_code
-		where cs_code2 = #{keyword}
-		
-	</select>
+        select *
+        from cs_code
+        where cs_code2 = #{keyword}
+
+    </select>
 
 
     <select id="getCircleSubway" parameterType="hashMap" resultType="kr.or.ddit.caa.domain.SubwayPopVO">
-select SUBWAY_YEAR year,
-       SUBWAY_MONTH month,
+        select SUBWAY_YEAR      year,
+               SUBWAY_MONTH     month,
 
 
-       SUM(SUBWAY_RIDE) ride,
-       SUM(SUBWAY_QUIT) quit,
-       #{selectName} selectName
+               SUM(SUBWAY_RIDE) ride,
+               SUM(SUBWAY_QUIT) quit,
+               #{selectName}    selectName
 
-from SUBWAY_PASSENGER
-where SUBSTR(to_char(SUBWAY_DATE), 1, 6) >= to_char(add_months(sysdate, -12), 'yyyymm')
-  and SUBWAY_STATION_ID in (
-    select SUBWAY_STATION_ID
-    from (
-             select SUBWAY_STATION_ID,
-                    SUBWAY_STATION_NAME,
-                    SUBWAY_STATION_LATITUDE,
-                    SUBWAY_STATION_LONGITUDE,
-                    SQRT(
-                                    (SUBWAY_STATION_LATITUDE - #{LatitudeCenter}) *
-                                    (SUBWAY_STATION_LATITUDE - #{LatitudeCenter}) +
-                                    (SUBWAY_STATION_LONGITUDE - #{LongitudeCenter}) *
-                                    (SUBWAY_STATION_LONGITUDE - #{LongitudeCenter})
-                        ) radius
-             from SUBWAY_STATION
-         ) a
+        from SUBWAY_PASSENGER
+        where SUBSTR(to_char(SUBWAY_DATE), 1, 6) >= to_char(add_months(sysdate, -12), 'yyyymm')
+          and SUBWAY_STATION_ID in (
+            select SUBWAY_STATION_ID
+            from (
+                     select SUBWAY_STATION_ID,
+                            SUBWAY_STATION_NAME,
+                            SUBWAY_STATION_LATITUDE,
+                            SUBWAY_STATION_LONGITUDE,
+                            SQRT(
+                                            (SUBWAY_STATION_LATITUDE - #{LatitudeCenter}) *
+                                            (SUBWAY_STATION_LATITUDE - #{LatitudeCenter}) +
+                                            (SUBWAY_STATION_LONGITUDE - #{LongitudeCenter}) *
+                                            (SUBWAY_STATION_LONGITUDE - #{LongitudeCenter})
+                                ) radius
+                     from SUBWAY_STATION
+                 ) a
          <![CDATA[
-    where a.radius < (SQRT(
-                                      (#{LatitudeEndBoundary} - #{LatitudeStartBoundary}) *
-                                      (#{LatitudeEndBoundary} - #{LatitudeStartBoundary}) +
-                                      (#{LongitudeEndBoundary} - #{LongitudeStartBoundary}) *
-                                      (#{LongitudeEndBoundary} - #{LongitudeStartBoundary})
-                          ) / (2 * SQRT(2))) * 1
+            where a.radius < (SQRT(
+                                              (#{LatitudeEndBoundary} - #{LatitudeStartBoundary}) *
+                                              (#{LatitudeEndBoundary} - #{LatitudeStartBoundary}) +
+                                              (#{LongitudeEndBoundary} - #{LongitudeStartBoundary}) *
+                                              (#{LongitudeEndBoundary} - #{LongitudeStartBoundary})
+                                  ) / (2 * SQRT(2))) * 1
                           ]]>
 )
-group by SUBWAY_YEAR,
-         SUBWAY_MONTH
-order by SUBWAY_YEAR,
-         SUBWAY_MONTH
-	</select>
+        group by SUBWAY_YEAR,
+                 SUBWAY_MONTH
+        order by SUBWAY_YEAR,
+                 SUBWAY_MONTH
+    </select>
 
     <select id="getRectangleSubway" parameterType="hashMap" resultType="kr.or.ddit.caa.domain.SubwayPopVO">
-		select SUBWAY_YEAR      year,
-		SUBWAY_MONTH     month,
+        select SUBWAY_YEAR      year,
+               SUBWAY_MONTH     month,
 
 
-		SUM(SUBWAY_RIDE) ride,
-		SUM(SUBWAY_QUIT) quit,
-		#{selectName} selectName
+               SUM(SUBWAY_RIDE) ride,
+               SUM(SUBWAY_QUIT) quit,
+               #{selectName}    selectName
 
 
-		from SUBWAY_PASSENGER
-		where SUBSTR(to_char(SUBWAY_DATE), 1, 6) >= to_char(add_months(sysdate, -12), 'yyyymm')
-		and SUBWAY_STATION_ID in (
-		select SUBWAY_STATION_ID
-		from (
-		select SUBWAY_STATION_ID,
-		SUBWAY_STATION_NAME,
-		SUBWAY_STATION_LATITUDE,
-		SUBWAY_STATION_LONGITUDE
-		from SUBWAY_STATION
+        from SUBWAY_PASSENGER
+        where SUBSTR(to_char(SUBWAY_DATE), 1, 6) >= to_char(add_months(sysdate, -12), 'yyyymm')
+          and SUBWAY_STATION_ID in (
+            select SUBWAY_STATION_ID
+            from (
+                     select SUBWAY_STATION_ID,
+                            SUBWAY_STATION_NAME,
+                            SUBWAY_STATION_LATITUDE,
+                            SUBWAY_STATION_LONGITUDE
+                     from SUBWAY_STATION
 		<![CDATA[
-		where SUBWAY_STATION_LATITUDE < #{LatitudeMaxY}
-		and SUBWAY_STATION_LONGITUDE < #{LongitudeMaxY}
-		and SUBWAY_STATION_LATITUDE > #{LatitudeMinY}
-		and SUBWAY_STATION_LONGITUDE > #{LongitudeMinX}
+                     where SUBWAY_STATION_LATITUDE < #{LatitudeMaxY}
+                       and SUBWAY_STATION_LONGITUDE < #{LongitudeMaxY}
+                       and SUBWAY_STATION_LATITUDE > #{LatitudeMinY}
+                       and SUBWAY_STATION_LONGITUDE > #{LongitudeMinX}
 		]]>
 		)
-		)
-		group by SUBWAY_YEAR,
-		SUBWAY_MONTH
-		order by SUBWAY_YEAR,
-		SUBWAY_MONTH
+        )
+        group by SUBWAY_YEAR,
+                 SUBWAY_MONTH
+        order by SUBWAY_YEAR,
+                 SUBWAY_MONTH
 
-	</select>
+    </select>
 
     <select id="getStoreList" resultType="kr.or.ddit.caa.domain.StoreVO">
         select STORE_YEAR,STORE_BUNGI,STORE_SER_CODE_NAME,sum(STORE_SM_COUNT) as STORE_SM_COUNT
@@ -109,10 +109,10 @@ order by SUBWAY_YEAR,
     </select>
 
     <select id="getSectorCode" resultType="string">
-		select cs_code
-		from cs_code
-		where cs_code_name = #{cs_code_name}
-	</select>
+        select cs_code
+        from cs_code
+        where cs_code_name = #{cs_code_name}
+    </select>
 
 
     <!-- 	동적 쿼리, 파라미터  수정해야함-->
@@ -201,6 +201,25 @@ order by SUBWAY_YEAR,
 
 
     <select id="getIndiList" resultType="kr.or.ddit.caa.domain.IndiVO">
-		select * from INDICATOR where INDI_SIGUNGU_NAME = #{indi_sigungu_name}
-	</select>
+        select *
+        from INDICATOR
+        where INDI_SIGUNGU_NAME = #{indi_sigungu_name}
+    </select>
+
+    <select id="getStoreCount" resultType="kr.or.ddit.caa.domain.StoreCountInfoVO"
+            parameterType="kr.or.ddit.caa.domain.StoreCountVO">
+        select STORE_YEAR,STORE_BUNGI,STORE_SER_CODE_NAME,sum(STORE_COUNT) STORE_COUNT,sum(STORE_SM_COUNT)
+        STORE_SM_COUNT,sum(STORE_OPEN_COUNT) STORE_OPEN_COUNT,sum(STORE_CLOSE_COUNT) STORE_CLOSE_COUNT,sum(STORE_FRAN)
+        STORE_FRAN
+        from STORE
+        where
+        STORE_SER_CODE_NAME = #{sector}
+        <foreach collection="trarNm" item="item" index="index" open="and (" close=")" separator="or">
+            STORE_CS_CODE_NAME = #{item}
+        </foreach>
+        group by STORE_YEAR,STORE_BUNGI,STORE_SER_CODE_NAME
+        order by STORE_YEAR desc, STORE_BUNGI desc
+    </select>
+
+
 </mapper>

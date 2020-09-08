@@ -5,13 +5,6 @@ import kr.or.ddit.caa.domain.*;
 import java.util.List;
 import java.util.Map;
 
-import kr.or.ddit.caa.domain.CscodeVO;
-import kr.or.ddit.caa.domain.SalesByIndustryVO;
-import kr.or.ddit.caa.domain.SalesParamVO;
-import kr.or.ddit.caa.domain.SectorParamVO;
-import kr.or.ddit.caa.domain.StoreVO;
-import kr.or.ddit.caa.domain.SubwayPopVO;
-
 public interface CAAService {
 	
 	public List<CscodeVO> getCscodeList(String depth);
@@ -39,4 +32,6 @@ public interface CAAService {
 
 
     public List<IndiVO> getIndiList(String var);
+
+    public List<StoreCountInfoVO> getStoreCount(StoreCountVO storeCountVO);
 }

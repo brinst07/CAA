@@ -220,8 +220,14 @@
                                 <li>
                                     <div class="user-box">
                                         <div class="avatar-lg">
-                                            <img src="<c:out value="${member.member_thumnail}"/>" alt="image profile"
-                                                 class="avatar-img rounded">
+                                            <c:if test="${member.member_thumnail ne null}">
+                                                <img src="<c:out value="${member.member_thumnail}"/>" alt="..."
+                                                     class="avatar-img rounded-circle">
+                                            </c:if>
+                                            <c:if test="${member.member_thumnail eq null}">
+                                                <img src="/resources/assets/img/user.png"
+                                                     class="avatar-img rounded-circle">
+                                            </c:if>
                                         </div>
                                         <div class="u-text">
                                             <h4><c:out value="${member.member_id}"/></h4>

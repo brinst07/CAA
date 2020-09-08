@@ -1,36 +1,26 @@
 package kr.or.ddit.caa.service;
 
+import com.google.gson.JsonArray;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
+import kr.or.ddit.caa.domain.*;
+import kr.or.ddit.caa.mapper.CAAMapper;
+import lombok.AllArgsConstructor;
+import lombok.Setter;
+import lombok.extern.log4j.Log4j;
+import org.apache.commons.collections.map.HashedMap;
+import org.springframework.stereotype.Service;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import javax.servlet.http.HttpSession;
-
-import kr.or.ddit.caa.domain.*;
-import lombok.AllArgsConstructor;
-import org.apache.commons.collections.map.HashedMap;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-
-import com.google.gson.JsonArray;
-import com.google.gson.JsonObject;
-import com.google.gson.JsonParser;
-
-import kr.or.ddit.caa.domain.CscodeVO;
-import kr.or.ddit.caa.domain.SalesByIndustryVO;
-import kr.or.ddit.caa.domain.SalesParamVO;
-import kr.or.ddit.caa.domain.SectorParamVO;
-import kr.or.ddit.caa.domain.StoreVO;
-import kr.or.ddit.caa.mapper.CAAMapper;
-import lombok.Setter;
-import lombok.extern.log4j.Log4j;
-
 @Service
 @Log4j
 @AllArgsConstructor
 public class CAAServiceImpl implements CAAService {
-
+	@Setter
 	@Setter
 	private CAAMapper mapper;
 
@@ -76,6 +66,11 @@ public class CAAServiceImpl implements CAAService {
 	@Override
 	public List<IndiVO> getIndiList(String var) {
 		return mapper.getIndiList(var);
+	}
+
+	@Override
+	public List<StoreCountInfoVO> getStoreCount(StoreCountVO storeCountVO) {
+		return mapper.getStoreCount(storeCountVO);
 	}
 
 	@Override
