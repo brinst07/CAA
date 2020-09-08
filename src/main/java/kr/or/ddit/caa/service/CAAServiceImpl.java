@@ -31,6 +31,7 @@ import lombok.extern.log4j.Log4j;
 @AllArgsConstructor
 public class CAAServiceImpl implements CAAService {
 
+	@Setter
 	private CAAMapper mapper;
 
 	@Override

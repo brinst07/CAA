@@ -8,17 +8,36 @@
 		from cs_code
 		where cs_code_depth = #{cs_code_depth}
 	</select>
-
-    <select id="otherCscodeList" resultType="kr.or.ddit.caa.domain.CscodeVO">
+	
+	<select id="getCscodeList2" resultType="kr.or.ddit.caa.domain.CscodeVO">
 		select *
 		from cs_code
-		where cs_code2 = #{keyword}
+		where cs_code2 = #{cs_code}
 	</select>
-
-    <select id="sectorsList" resultType="kr.or.ddit.sales.domain.SectorsVO">
-		select SALES_SER_NAME
+	
+	<select id="getSidoList" resultType="kr.or.ddit.sales.domain.SidoVO">
+		select SIDO_CODE, SIDO_NAME
+		from SIDO
+		order by SIDO_CODE asc
+	</select>
+	
+	<select id="getSigunguList" resultType="kr.or.ddit.sales.domain.SigunguVO">
+		select SIGUNGU_CODE, SIDO_CODE, SIGUNGU_NAME
+		from SIGUNGU
+		where SIDO_CODE = #{sido_code}
+		order by SIDO_CODE asc
+	</select>
+	
+	<select id="getSales" resultType="kr.or.ddit.caa.domain.CscodeVO">
+		select *
 		from SALES_TEMP
-		group by sales_ser_name
-		order by SALES_SER_NAME
+		where SALES_BD_NAME = #{sales_bd_name}
+		  and SALES_SER_NAME = #{sales_ser_name}
+		  and to_char(SALES_YEAR) >= to_char(add_months(sysdate, -12), 'yyyy')
+		order by SALES_BUNGI_CODE asc
 	</select>
+	
+	
+
+    
 </mapper>
