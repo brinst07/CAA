@@ -52,7 +52,7 @@
 
 									<div class="separator-solid"></div>
 									<h5 class="sub">내용</h5>
-										<div id="summernote">${board.board_content}</div>
+									<div>${board.board_content}</div> 
 								</div>
 							</div>
 						</div>
@@ -64,24 +64,7 @@
 
 </div>
 
-<script type="text/javascript">
 
-	$(function () {
-		$('#summernote').summernote({
-			placeholder: '',
-			fontNames: ['Arial', 'Arial Black', 'Comic Sans MS', 'Courier New'],
-			tabsize: 2,
-			height: 300
-		});
-
-// 		$('#summernote').summernote('insertText', '${board.board_content}');
-
-
-	});
-
-
-
-</script>
 
 
 
