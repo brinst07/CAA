@@ -4,6 +4,8 @@ import kr.or.ddit.example.service.ApiExamCaptchaImageService;
 import lombok.Data;
 import org.springframework.stereotype.Component;
 
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.request;
+
 import java.io.*;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
@@ -13,7 +15,6 @@ import java.util.HashMap;
 import java.util.Map;
 
 @Component
-@Data
 public class ApiExamCaptchaImageComponent implements ApiExamCaptchaImageService {
 
 	private static String get(String apiUrl, Map<String, String> requestHeaders) {
@@ -53,7 +54,7 @@ public class ApiExamCaptchaImageComponent implements ApiExamCaptchaImageService 
 		byte[] bytes = new byte[1024];
 		// 랜덤한 이름으로 파일 생성
 		String filename = Long.valueOf(new Date().getTime()).toString();
-		File f = new File("src/main/webapp/resources/capchaImage/" + filename + ".jpg");
+		File f = new File("src/main/resources/kr/or/ddit/example" + filename + ".jpg");
 		try (OutputStream outputStream = new FileOutputStream(f)) {
 			f.createNewFile();
 			while ((read = is.read(bytes)) != -1) {
@@ -95,7 +96,8 @@ public class ApiExamCaptchaImageComponent implements ApiExamCaptchaImageService 
 		requestHeaders.put("X-Naver-Client-Secret", clientSecret);
 		String responseBody = get(apiURL, requestHeaders);
 
-		System.out.println(responseBody);
+		System.out.println("responseBody : " + responseBody);
+		
 		return responseBody;
 	}
 
