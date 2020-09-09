@@ -54,7 +54,7 @@ public class ApiExamCaptchaImageComponent implements ApiExamCaptchaImageService 
 		byte[] bytes = new byte[1024];
 		// 랜덤한 이름으로 파일 생성
 		String filename = Long.valueOf(new Date().getTime()).toString();
-		File f = new File("src/main/resources/kr/or/ddit/example" + filename + ".jpg");
+		File f = new File(filename + ".jpg");
 		try (OutputStream outputStream = new FileOutputStream(f)) {
 			f.createNewFile();
 			while ((read = is.read(bytes)) != -1) {
@@ -84,7 +84,7 @@ public class ApiExamCaptchaImageComponent implements ApiExamCaptchaImageService 
 	}
 
 	@Override
-	public String reception(String Nkey) {
+	public Map<String, String> reception(String Nkey) {
 		String clientId = "RPzwgbUeu1oC1YzmZgDo"; // 애플리케이션 클라이언트 아이디값";
 		String clientSecret = "D12602uLu1"; // 애플리케이션 클라이언트 시크릿값";
 
@@ -98,7 +98,12 @@ public class ApiExamCaptchaImageComponent implements ApiExamCaptchaImageService 
 
 		System.out.println("responseBody : " + responseBody);
 		
-		return responseBody;
+		Map<String, String> param = new HashMap<String, String>();
+		param.put("apiURL", apiURL); // 이미지 정보
+		param.put("Nkey", Nkey);
+		
+		
+		return param;
 	}
 
 }
