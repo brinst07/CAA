@@ -1,4 +1,4 @@
-package kr.or.ddit.ir.controller;
+package kr.or.ddit.industryRecommendation.controller;
 
 import lombok.extern.log4j.Log4j;
 import org.springframework.stereotype.Controller;
