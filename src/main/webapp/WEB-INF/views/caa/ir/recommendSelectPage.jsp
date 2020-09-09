@@ -28,39 +28,6 @@
                         </div>
                     </div>
                 </div>
-                <!-- Modal -->
-                <div class="modal fade bd-example-modal-lg" id="exampleModalCenter" tabindex="-1" role="dialog"
-                     aria-labelledby="myLargeModalLabel" aria-hidden="true">
-                    <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <h5 class="modal-title" id="exampleModalLongTitle">Modal title</h5>
-                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                    <span aria-hidden="true">&times;</span>
-                                </button>
-                            </div>
-                            <div class="modal-body">
-                                <div class="form-group form-group-default">
-                                    <label></label> <select class="form-control" name="large">
-                                    <option></option>
-                                    <c:forEach items="${firstDiv }" var="first">
-                                        <option value="${first.cs_code}">${first.cs_code_name }</option>
-                                    </c:forEach>
-                                </select>
-                                </div>
-                                <div class="form-group form-group-default">
-                                    <label>중분류</label> <select class="form-control" name="middle">
-                                    <option></option>
-                                </select>
-                                </div>
-                            </div>
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-secondary reset" data-dismiss="modal">닫기</button>
-                                <button type="button" class="btn btn-primary" onclick="selectSector()">선택하기</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
                 <div class="col-md-4">
                     <div class="card-body">
                         <ul class="list-group list-group-bordered">
