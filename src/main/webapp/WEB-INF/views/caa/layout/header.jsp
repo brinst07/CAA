@@ -107,10 +107,10 @@
         $('#logout').on('click', function () {
             $.ajax({
                 url: '/member/logout',
-                success:function(data){
-                    location.href="/caa/main";
-                },fail:function (xhr,status){
-                    console.log(xhr,status);
+                success: function (data) {
+                    location.href = "/caa/main";
+                }, fail: function (xhr, status) {
+                    console.log(xhr, status);
                 }
 
 
@@ -206,8 +206,13 @@
                     <li class="nav-item dropdown hidden-caret">
                         <a class="dropdown-toggle profile-pic" data-toggle="dropdown" aria-expanded="false">
                             <div class="avatar-sm">
-                                <img src="<c:out value="${member.member_thumnail}"/>" alt="..."
-                                     class="avatar-img rounded-circle">
+                                <c:if test="${member.member_thumnail ne null}">
+                                    <img src="<c:out value="${member.member_thumnail}"/>" alt="..."
+                                         class="avatar-img rounded-circle">
+                                </c:if>
+                                <c:if test="${member.member_thumnail eq null}">
+                                    <img src="/resources/assets/img/user.png" class="avatar-img rounded-circle">
+                                </c:if>
                             </div>
                         </a>
                         <ul class="dropdown-menu dropdown-user animated fadeIn">
@@ -215,8 +220,14 @@
                                 <li>
                                     <div class="user-box">
                                         <div class="avatar-lg">
-                                            <img src="<c:out value="${member.member_thumnail}"/>" alt="image profile"
-                                                 class="avatar-img rounded">
+                                            <c:if test="${member.member_thumnail ne null}">
+                                                <img src="<c:out value="${member.member_thumnail}"/>" alt="..."
+                                                     class="avatar-img rounded-circle">
+                                            </c:if>
+                                            <c:if test="${member.member_thumnail eq null}">
+                                                <img src="/resources/assets/img/user.png"
+                                                     class="avatar-img rounded-circle">
+                                            </c:if>
                                         </div>
                                         <div class="u-text">
                                             <h4><c:out value="${member.member_id}"/></h4>

@@ -1,37 +1,27 @@
 package kr.or.ddit.caa.service;
 
+import com.google.gson.JsonArray;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
+import kr.or.ddit.caa.domain.*;
+import kr.or.ddit.caa.mapper.CAAMapper;
+import lombok.AllArgsConstructor;
+import lombok.Setter;
+import lombok.extern.log4j.Log4j;
+import org.apache.commons.collections.map.HashedMap;
+import org.springframework.stereotype.Service;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import javax.servlet.http.HttpSession;
-
-import kr.or.ddit.caa.domain.*;
-import lombok.AllArgsConstructor;
-import org.apache.commons.collections.map.HashedMap;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-
-import com.google.gson.JsonArray;
-import com.google.gson.JsonObject;
-import com.google.gson.JsonParser;
-
-import kr.or.ddit.caa.domain.CscodeVO;
-import kr.or.ddit.caa.domain.SalesByIndustryVO;
-import kr.or.ddit.caa.domain.SalesParamVO;
-import kr.or.ddit.caa.domain.SectorParamVO;
-import kr.or.ddit.caa.domain.StoreVO;
-import kr.or.ddit.caa.mapper.CAAMapper;
-import lombok.Setter;
-import lombok.extern.log4j.Log4j;
-
 @Service
 @Log4j
 @AllArgsConstructor
 public class CAAServiceImpl implements CAAService {
-
-
+	
+	@Setter
 	private CAAMapper mapper;
 
 	@Override
@@ -49,7 +39,7 @@ public class CAAServiceImpl implements CAAService {
 
 	@Override
 	public List<SalesByIndustryVO> SalesByIndustryList(SalesParamVO vo) {
-		
+
 		return mapper.SalesByIndustryList(vo);
 	}
 
@@ -79,6 +69,11 @@ public class CAAServiceImpl implements CAAService {
 	}
 
 	@Override
+	public List<StoreCountInfoVO> getStoreCount(StoreCountVO storeCountVO) {
+		return mapper.getStoreCount(storeCountVO);
+	}
+
+	@Override
 	public List<SubwayPopVO> getFigureSubway(String jsonMapList) {
 
 		JsonParser jsonParser = new JsonParser();
@@ -93,18 +88,34 @@ public class CAAServiceImpl implements CAAService {
 
 		for (int i = 0; i < jsonArray.size(); i++) {
 			JsonObject jsonObject = (JsonObject) jsonArray.get(i);
-			jsonMap.put("LatitudeCenter", jsonObject.get("cy").toString());
-			jsonMap.put("LongitudeCenter", jsonObject.get("cx").toString());
-			jsonMap.put("LatitudeEndBoundary", jsonObject.get("ey").toString());
-			jsonMap.put("LongitudeEndBoundary", jsonObject.get("ex").toString());
-			jsonMap.put("LatitudeStartBoundary", jsonObject.get("sy").toString());
-			jsonMap.put("LongitudeStartBoundary", jsonObject.get("sx").toString());
-			jsonMap.put("selectName", jsonObject.get("name").toString());
-			System.out.println(jsonMap);
-			subwayPopTempList = mapper.getCircleSubway(jsonMap);
 
-			for (SubwayPopVO subwayPopVO : subwayPopTempList) {
-				subwayPopList.add(subwayPopVO);
+			if ("circle".equals(jsonObject.get("type").toString().replace("\"", ""))) {
+				jsonMap.put("LatitudeCenter", jsonObject.get("cy").toString());
+				jsonMap.put("LongitudeCenter", jsonObject.get("cx").toString());
+				jsonMap.put("LatitudeEndBoundary", jsonObject.get("ey").toString());
+				jsonMap.put("LongitudeEndBoundary", jsonObject.get("ex").toString());
+				jsonMap.put("LatitudeStartBoundary", jsonObject.get("sy").toString());
+				jsonMap.put("LongitudeStartBoundary", jsonObject.get("sx").toString());
+				jsonMap.put("selectName", jsonObject.get("name").toString());
+				
+				subwayPopTempList = mapper.getCircleSubway(jsonMap);
+
+				for (SubwayPopVO subwayPopVO : subwayPopTempList) {
+					subwayPopList.add(subwayPopVO);
+				}
+			}
+			else if ("rectangle".equals(jsonObject.get("type").toString().replace("\"", ""))) {
+				jsonMap.put("LatitudeMinY", jsonObject.get("miny").toString());
+				jsonMap.put("LongitudeMinX", jsonObject.get("minx").toString());
+				jsonMap.put("LatitudeMaxY", jsonObject.get("maxy").toString());
+				jsonMap.put("LongitudeMaxY", jsonObject.get("maxx").toString());
+				jsonMap.put("selectName", jsonObject.get("name").toString());
+				
+				subwayPopTempList = mapper.getRectangleSubway(jsonMap);
+				
+				for (SubwayPopVO subwayPopVO : subwayPopTempList) {
+					subwayPopList.add(subwayPopVO);
+				}
 			}
 		}
 
@@ -113,6 +124,5 @@ public class CAAServiceImpl implements CAAService {
 		return subwayPopList;
 
 	}
-
 
 }

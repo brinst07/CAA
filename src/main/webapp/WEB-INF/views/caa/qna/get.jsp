@@ -15,14 +15,14 @@
                         <div class="col-auto">
 
                             <button data-oper='modify' class="btn btn-light btn-border"
-                                    onclick="location.href='/qna/modify?board=<c:out
+                                    onclick="location.href='/qna/modify?board_id=<c:out
                                             value="${board.board_id }"/>&board_title=<c:out value="${board_title}"/>'">
                                 수정
                             </button>
                             <a href="/qna/list" class="btn btn-primary ml-2"> 목록 </a>
                             <c:if test="${member.member_auth eq 'ROLE_ADMIN'}">
                                 <button data-oper='modify' class="btn btn-light btn-border"
-                                        onclick="location.href='/qna/register?board=<c:out
+                                        onclick="location.href='/qna/register?board_id=<c:out
                                                 value="${board.board_id }"/>&board_title=<c:out
                                                 value="${board_title}"/>'">
                                     답글

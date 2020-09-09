@@ -50,7 +50,7 @@ $(function(){
 								</div>
 								<div class="modal-body">
 									<div class="form-group form-group-default">
-										<label>대분류</label> <select class="form-control" name="large">
+										<label></label> <select class="form-control" name="large">
 											<option></option>
 											<c:forEach items="${firstDiv }" var="first">
 												<option value="${first.cs_code}">${first.cs_code_name }</option>
@@ -59,11 +59,6 @@ $(function(){
 									</div>
 									<div class="form-group form-group-default">
 										<label>중분류</label> <select class="form-control" name="middle">
-											<option></option>
-										</select>
-									</div>
-									<div class="form-group form-group-default">
-										<label>소분류</label> <select class="form-control" name="small">
 											<option></option>
 										</select>
 									</div>

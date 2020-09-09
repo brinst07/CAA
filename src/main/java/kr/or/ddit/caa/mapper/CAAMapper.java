@@ -1,15 +1,9 @@
 package kr.or.ddit.caa.mapper;
 
+import kr.or.ddit.caa.domain.*;
+
 import java.util.List;
 import java.util.Map;
-
-import kr.or.ddit.caa.domain.CscodeVO;
-import kr.or.ddit.caa.domain.IndiVO;
-import kr.or.ddit.caa.domain.SalesByIndustryVO;
-import kr.or.ddit.caa.domain.SalesParamVO;
-import kr.or.ddit.caa.domain.SectorParamVO;
-import kr.or.ddit.caa.domain.StoreVO;
-import kr.or.ddit.caa.domain.SubwayPopVO;
 
 public interface CAAMapper {
 	
@@ -24,8 +18,7 @@ public interface CAAMapper {
 	List<SubwayPopVO> getCircleSubway(Map<String, String> point);
 
 	// 사각형에 포함된 지하철을 달별로 가져온다.
-	List<SubwayPopVO> getRectancleSubway(Map<String, String> point);
-
+	public List<SubwayPopVO> getRectangleSubway(Map<String, String> point);
 	/* 영현 ↑ */
 
 	public List<StoreVO> getStoreList(SectorParamVO vo);
@@ -34,6 +27,8 @@ public interface CAAMapper {
 	
 
     public List<IndiVO> getIndiList(String var);
+
+    public List<StoreCountInfoVO> getStoreCount(StoreCountVO storeCountVO);
 }
 
 

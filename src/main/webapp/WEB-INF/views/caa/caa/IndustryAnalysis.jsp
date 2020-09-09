@@ -45,146 +45,112 @@
             })
             .done(
                 function (data) {
+                    //Map에 key가 선택영역의 이름이고 value의 List이다.
+                    //선택영역으로 for문을 도는 부분
+                    for (var key in data) {
+                        //선택영역의 이름
+                        const csName = key;
 
-                    //JAVA단에서 받아온 데이터로 차트 출력한다.
-                    const totalStore = data.totalStore;
-                    const ubsoList = data.ubsoList;
-                    console.log(data);
+                        //DB에서 추출해낸 데이터
+                        const csList = data[csName];
 
-                    // 차트에 값을 넣기 위한 작업을 한다.
+                        //차트를 동적으로 생성해주기 위해 필요한 태그들을 삽입해준다.
+                        //차트마다 이름이 달라야하기 때문에 숫자를 삽입해서 관리한다.
 
-                    var datasetsList = [];
+                        var lineChartName = "multipleLineChart" + csName;
 
-                    for (let i = totalStore[0].length - 1; i > 0; i--) {
-                        // 역순으로 2018-1 이런식으로 label을 동적으로 생성해서 넣어준다.
-                        myMultipleLineChart.data.labels
-                            .push(totalStore[0][i].store_year + "-"
-                                + totalStore[0][i].store_bungi);
+                        let chartTags = '<div class="card-body">\n' +
+                            '                        <div class="chart-container">\n' +
+                            '                            <div class="chartjs-size-monitor"\n' +
+                            '                                 style="position: absolute; left: 0px; top: 0px; right: 0px; bottom: 0px; overflow: hidden; pointer-events: none; visibility: hidden; z-index: -1;">\n' +
+                            '                                <div class="chartjs-size-monitor-expand"\n' +
+                            '                                     style="position: absolute; left: 0; top: 0; right: 0; bottom: 0; overflow: hidden; pointer-events: none; visibility: hidden; z-index: -1;">\n' +
+                            '                                    <div style="position: absolute; width: 1000000px; height: 1000000px; left: 0; top: 0"></div>\n' +
+                            '                                </div>\n' +
+                            '                                <div class="chartjs-size-monitor-shrink"\n' +
+                            '                                     style="position: absolute; left: 0; top: 0; right: 0; bottom: 0; overflow: hidden; pointer-events: none; visibility: hidden; z-index: -1;">\n' +
+                            '                                    <div style="position: absolute; width: 200%; height: 200%; left: 0; top: 0"></div>\n' +
+                            '                                </div>\n' +
+                            '                            </div>\n' +
+                            '                            <canvas id="' + lineChartName + '" width="306" height="300" class="chartjs-render-monitor"\n' +
+                            '                                    style="display: block; width: 306px; height: 300px;"></canvas>\n' +
+                            '                        </div>\n' +
+                            '                    </div>';
 
-                    };
-
-                    for (let j = 0; j < totalStore.length; j++) {
-                        let datasets = [];
-                        let htmltags = '<div class="col-md-12">';
-                        htmltags += '<div class="card">';
-                        htmltags += '\t<div class="card-header">\n' +
-                            '\t\t\t\t\t\t<div class="card-title">' + jsonMapList[j].name + '의 업소 분석 결과</div>\n' +
-                            '\t\t\t\t\t</div>'
-                        htmltags += '<div class="card-body">';
-                        htmltags += '<table class="table table-hover">';
-                        htmltags += '<thead>';
-                        htmltags += '<tr>';
-                        htmltags += '<th scope="col">년도</th>';
-                        htmltags += '<th scope="col">분기</th>';
-                        htmltags += '<th scope="col">분류</th>';
-                        htmltags += '<th scope="col">업소개수</th>';
-                        htmltags += '</tr>';
-                        htmltags += '</thead>';
-                        htmltags += '<tbody>';
-
-                        let douTags = "";
-                        if (ubsoList.length == 1) {
-                            douTags = "<div class='col-md-12'>";
-                        } else if (ubsoList.length == 2) {
-                            douTags = "<div class='col-md-6'>";
-                        } else if (ubsoList.length == 3) {
-                            douTags = "<div class='col-md-4'>";
-                        }
-
-                        douTags += "<div class='card'>";
-                        douTags += "<div class='card-title'>" + jsonMapList[j].name + "</div>";
-                        douTags += "</div>";
-                        douTags += '<div class="card-body">\n' +
-                            '\t\t\t\t\t\t\t<div class="chart-container">\n' +
-                            '\t\t\t\t\t\t\t\t<div class="chartjs-size-monitor" style="position: absolute; left: 0px; top: 0px; right: 0px; bottom: 0px; overflow: hidden; pointer-events: none; visibility: hidden; z-index: -1;">\n' +
-                            '\t\t\t\t\t\t\t\t\t<div class="chartjs-size-monitor-expand" style="position: absolute; left: 0; top: 0; right: 0; bottom: 0; overflow: hidden; pointer-events: none; visibility: hidden; z-index: -1;">\n' +
-                            '\t\t\t\t\t\t\t\t\t\t<div style="position: absolute; width: 1000000px; height: 1000000px; left: 0; top: 0"></div>\n' +
-                            '\t\t\t\t\t\t\t\t\t</div>\n' +
-                            '\t\t\t\t\t\t\t\t\t<div class="chartjs-size-monitor-shrink" style="position: absolute; left: 0; top: 0; right: 0; bottom: 0; overflow: hidden; pointer-events: none; visibility: hidden; z-index: -1;">\n' +
-                            '\t\t\t\t\t\t\t\t\t\t<div style="position: absolute; width: 200%; height: 200%; left: 0; top: 0"></div>\n' +
-                            '\t\t\t\t\t\t\t\t\t</div>\n' +
-                            '\t\t\t\t\t\t\t\t</div>\n' +
-                            '\t\t\t\t\t\t\t\t<canvas id="doughnutChart' + j + '" style="width: 306px; height: 300px; display: block;" width="306" height="300" class="chartjs-render-monitor"></canvas>\n' +
-                            '\t\t\t\t\t\t\t</div>\n' +
-                            '\t\t\t\t\t\t</div>\n' +
-                            '\t\t\t\t\t</div>' + '</div>';
-                        $('#douChart').append(douTags);
-                        var douChartName = "doughnutChart" + j;
-
-                        var myDoughnutChart = new Chart(douChartName, {
-                            type: 'doughnut',
-
-                            data: {
-                                datasets: [{
-                                    data: [ubsoList[j].large, ubsoList[j].middle, ubsoList[j].small],
-                                    backgroundColor: ['#f3545d',
-                                        '#fdaf4b']
-                                }],
-
-                                labels: [sectorList[j].large, sectorList[j].middle, sectorList[j].small]
-                            },
-                            options: {
-                                responsive: true,
-                                maintainAspectRatio: false,
-                                legend: {
-                                    position: 'bottom'
+                        var myMultipleLineChart = new Chart(
+                            lineChartName, {
+                                type: 'line',
+                                data: {
+                                    labels: [],
+                                    datasets: []
                                 },
-                                layout: {
-                                    padding: {
-                                        left: 20,
-                                        right: 20,
-                                        top: 20,
-                                        bottom: 20
+                                options: {
+                                    responsive: true,
+                                    maintainAspectRatio: false,
+                                    legend: {
+                                        position: 'top',
+                                    },
+                                    tooltips: {
+                                        bodySpacing: 4,
+                                        mode: "nearest",
+                                        intersect: 0,
+                                        position: "nearest",
+                                        xPadding: 10,
+                                        yPadding: 10,
+                                        caretPadding: 10
+                                    },
+                                    layout: {
+                                        padding: {
+                                            left: 15,
+                                            right: 15,
+                                            top: 15,
+                                            bottom: 15
+                                        }
                                     }
                                 }
-                            }
-                        });
-
-                        myDoughnutChart.update();
+                            });
 
 
-                        for (let l = 0; l < totalStore[j].length; l++) {
-                            datasets.push(totalStore[j][l].store_sm_count);
-                            htmltags += '<tr>';
-                            htmltags += '<td>' + totalStore[j][l].store_year + '</td>';
-                            htmltags += '<td>' + totalStore[j][l].store_bungi + '</td>';
-                            htmltags += '<td>' + totalStore[j][l].store_ser_code_name + '</td>';
-                            htmltags += '<td>' + totalStore[j][l].store_sm_count + '</td>';
-                            htmltags += '</tr>';
+                        //차트 하단에 년도 분기별 데이터를 넣기 위한 작업을 한다.
+                        for (let i = 0; i < csList[0].length; i++) {
+                            myMultipleLineChart.data.labels.push
+                            (csList[0][i].store_YEAR + "-" + csList[0][i].store_BUNGI)
                         }
 
-                        datasetsList.push(datasets);
+                        //본격적으로 차트에 데이터를 삽입한다.
+                        //업종별 개수로 for문을 돈다.
+                        for (let j = 0; j < csList.length; j++) {
 
-                        htmltags += '</tbody>';
-                        htmltags += '</table>';
-                        htmltags += '</div></div></div>';
+                            //차트를 생성하고 차트안에 데이터를 삽입하는 부분이다.
+                            //업종안에 있는 개수만큼 for문을 돈다.
+                            let dataList = [];
+                            for (let k = 0; k < csList[j].length; k++) {
+                                dataList.push(csList[j][k].store_COUNT);
+                            }
 
-                        $('#tablediv').append(htmltags);
+                            //업종명을 추출한다.
+                            const ser_name = csList[j][0].store_SER_CODE_NAME;
+
+                            //chart에 데이터를 삽입한다.
+                            myMultipleLineChart.data.datasets
+                                .push({
+                                    label: ser_name,
+                                    borderColor: color[j].borderColor,
+                                    pointBorderColor: color[j].pointBorderColor,
+                                    pointBackGroundColor: color[j].pointBackGroundColor,
+                                    pointBorderWidth: 2,
+                                    pointHoverRadius: 4,
+                                    pointHoverBorderWidth: 1,
+                                    pointRadius: 4,
+                                    backgroundColor: 'transparent',
+                                    fill: true,
+                                    borderWidth: 2,
+                                    data: dataList
+                                });
+                            // 차트의 데이터를 update해준다.
+                            myMultipleLineChart.update();
+                        }
                     }
-                    ;
-
-                    for (let k = 0; k < totalStore.length; k++) {
-                        myMultipleLineChart.data.datasets
-                            .push({
-                                label: jsonMapList[k].name,
-                                borderColor: color[k].borderColor,
-                                pointBorderColor: color[k].pointBorderColor,
-                                pointBackGroundColor: color[k].pointBackGroundColor,
-                                pointBorderWidth: 2,
-                                pointHoverRadius: 4,
-                                pointHoverBorderWidth: 1,
-                                pointRadius: 4,
-                                backgroundColor: 'transparent',
-                                fill: true,
-                                borderWidth: 2,
-                                data: datasetsList[k]
-                            });
-                    }
-                    ;
-                    //차트를 업데이트 하는 부분
-                    myMultipleLineChart.update();
-
-                    // 위의 차트 데이터를 가지고 표로 만들어 출력하는 부분
 
                 }).fail(function (xhr, status) {
             alert(xhr);
@@ -245,93 +211,9 @@
 
 
         </div>
-        <div class="col-md-12">
-
-            <table class="table table-bordered table-head-bg-info table-bordered-bd-info mt-4">
-                <thead>
-                <tr>
-                    <th scope="col">상권평가지수</th>
-                    <th scope="col">증감률</th>
-                    <th scope="col">안정성</th>
-                    <th scope="col">영업력</th>
-                    <th scope="col">구매력</th>
-                    <th scope="col">집객력</th>
-                    <th scope="col">성장성</th>
-                </tr>
-                </thead>
-                <tbody>
-                <tr>
-                    <td>67</td>
-                    <td>0.75</td>
-                    <td>11.8</td>
-                    <td>10</td>
-                    <td>5</td>
-                    <td>16</td>
-                    <td>14</td>
-                </tr>
-
-                <table class="table table-bordered table-head-bg-info table-bordered-bd-info mt-4">
-                    <thead>
-                    <tr>
-                        <th scope="col">상권평가지수</th>
-                        <th scope="col">증감률</th>
-                        <th scope="col">안정성</th>
-                        <th scope="col">영업력</th>
-                        <th scope="col">구매력</th>
-                        <th scope="col">집객력</th>
-                        <th scope="col">성장성</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <tr>
-                        <td>67</td>
-                        <td>0.75</td>
-                        <td>11.8</td>
-                        <td>10</td>
-                        <td>5</td>
-                        <td>16</td>
-                        <td>14</td>
-                    </tr>
-
-
-                    </tbody>
-                </table>
-        </div>
     </div>
 </div>
 <script type="text/javascript">
 
 
-    var myMultipleLineChart = new Chart(
-        multipleLineChart, {
-            type: 'line',
-            data: {
-                labels: [],
-                datasets: []
-            },
-            options: {
-                responsive: true,
-                maintainAspectRatio: false,
-                legend: {
-                    position: 'top',
-                },
-                tooltips: {
-                    bodySpacing: 4,
-                    mode: "nearest",
-                    intersect: 0,
-                    position: "nearest",
-                    xPadding: 10,
-                    yPadding: 10,
-                    caretPadding: 10
-                },
-                layout: {
-                    padding: {
-                        left: 15,
-                        right: 15,
-                        top: 15,
-                        bottom: 15
-                    }
-                }
-            }
-        });
 </script>

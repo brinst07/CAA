@@ -1,7 +1,6 @@
 package kr.or.ddit.caa.controller;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -22,9 +21,6 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.gson.Gson;
 import com.google.gson.JsonParser;
 
-import kr.or.ddit.bs.domain.BusinessStatusParamVO;
-import kr.or.ddit.bs.domain.BusinessStatusResultVO;
-import kr.or.ddit.bs.domain.BusinessStatusVO;
 import kr.or.ddit.bs.service.BSService;
 import kr.or.ddit.caa.domain.CscodeVO;
 import kr.or.ddit.caa.domain.SubwayPopVO;
@@ -37,6 +33,7 @@ import lombok.extern.log4j.Log4j;
 @Log4j
 @AllArgsConstructor
 public class CAAController {
+	
 
 	private CAAService service;
 	private BSService bsservice;
@@ -170,28 +167,30 @@ public class CAAController {
 
 	/* ↑ 상권 추천 */
 
-	/* ↓ 상권 분석 */
 
+	
+	
+	
+	/* ↓ 상권 분석 */
+	
+
+	
 	@PostMapping(value = "/caaAnalysis")
-	public String CAAAnalysis(String sector, String jsonDATA, Model model, HttpSession session) {
+	public String CAAAnalysis(String sector,String jsonDATA, Model model,HttpSession session) {
 		log.info("상권분석 화면 전환을 위한 메소드 Pot");
 
 		Gson gson = new Gson();
-
+		
 		ObjectMapper objectMapper = new ObjectMapper();
 		try {
-			List<Map<String, Object>> jsonMapList = objectMapper.readValue(jsonDATA,
-					new TypeReference<List<Map<String, Object>>>() {
-					});
+			List<Map<String, Object>> jsonMapList = objectMapper.readValue(jsonDATA, new TypeReference<List<Map<String, Object>>>() {});
 			String json = gson.toJson(jsonMapList);
 //			model.addAttribute("jsonMapList", jsonMapList);
 			session.setAttribute("jsonMapList", json);
 			log.info(json);
 			log.info(sector);
-			List<Map<String, String>> sectorList = objectMapper.readValue(sector,
-					new TypeReference<List<Map<String, String>>>() {
-					});
-			String sectorJson = gson.toJson(sectorList);
+			List<Map<String, String>> sectorList = objectMapper.readValue(sector, new TypeReference<List<Map<String,String>>>() {});
+			String sectorJson = gson.toJson(sectorList); 
 			log.info(sectorJson);
 			session.setAttribute("sector", sectorJson);
 		} catch (JsonParseException e) {
@@ -214,7 +213,8 @@ public class CAAController {
 		log.info("get test");
 
 	}
-
+	
+	
 	/* ↑ 상권 분석 */
 	// 매출분석
 	@GetMapping("/saleanalysis")

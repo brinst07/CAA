@@ -1,4 +1,4 @@
-package kr.or.ddit.ss.mapper;
+package kr.or.ddit.sales.mapper;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -14,11 +14,7 @@ import lombok.extern.log4j.Log4j;
 @Log4j
 public class SSMapperTests {
 
-	@Setter(onMethod_ = @Autowired)
-	private SSMapper mapper;
-	
-	@Test
-	public void testSSGet() {
-		mapper.getCscodeList("2").forEach(e -> log.info(e));
-	}
+	@Setter
+	private SalesMapper mapper;
+
 }

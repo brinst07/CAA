@@ -37,7 +37,8 @@
 
         function emailCheck() {
             var client_email = $('#member_email').val();
-            var passwordKey = null;``
+            var passwordKey = null;
+            ``
             if (client_email.validationMAIL()) {
 
                 $.ajax({
@@ -74,22 +75,27 @@
                 var id = $('#username').val();
                 var password = $('#password').val();
                 var member = new Object();
-                member.id = id;
-                member.password = password;
-                member = JSON.parse(member);
+                member.member_id = id;
+                member.member_password = password;
+                var memberJson = JSON.stringify(member);
                 $.ajax({
                     url: '/member/login',
-                    data: member,
+                    data: memberJson,
                     type: 'POST',
+                    contentType : "application/json",
+                    traditional: true,
                     success: function (data) {
-                        console.log(data);
+                        if(data != ""){
+                            location.href="caa/main";
+                        }else{
+                            swal("error!", "회원정보를 확인해주세요!", "error");
+                        }
                     }, error: function (xhr, status) {
                         console.log(xhr, status);
                     }
 
                 });
             });
-
 
             // 아이디 유효성 검사(1 = 중복 / 0 != 중복)
             $("#member_id").keyup(function () {
@@ -230,6 +236,24 @@
                             'has-error').addClass('has-success');
                     },
                 });
+
+            $('#login').on('click', function () {
+                var member = new Object();
+                member.member_id = $('#username').val();
+                member.member_password = $('#password').val();
+
+                $.ajax({
+                    url: '/member/login',
+                    data : member,
+                    dataType: 'json',
+                    type : 'post',
+                    success : function(data){
+                        console.log(data);
+                    },fail : function(xhr, status){
+                        console.log(xhr,status);
+                    }
+                });
+            });
         });
     </script>
 
@@ -245,15 +269,16 @@
             <h3 class="text-center">로그인해주세요</h3>
 
             <div class="login-form">
+
                 <div class="form-group">
-                    <label for="username" class="placeholder"><b>Username</b></label>
-                    <input id="username" name="username" type="text" class="form-control" required="">
+                    <label for="member_id" class="placeholder"><b>Username</b></label>
+                    <input id="username" name="member_id" type="text" class="form-control" required="">
                 </div>
                 <div class="form-group">
                     <label for="password" class="placeholder"><b>Password</b></label>
                     <a href="#" class="link float-right">비밀번호찾기</a>
                     <div class="position-relative">
-                        <input id="password" name="password" type="password" class="form-control" required="">
+                        <input id="password" name="member_password" type="password" class="form-control" required="">
                         <div class="show-password">
                             <i class="icon-eye"></i>
                         </div>

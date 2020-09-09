@@ -53,7 +53,7 @@ public class ApiExamCaptchaImageComponent implements ApiExamCaptchaImageService 
 		byte[] bytes = new byte[1024];
 		// 랜덤한 이름으로 파일 생성
 		String filename = Long.valueOf(new Date().getTime()).toString();
-		File f = new File(filename + ".jpg");
+		File f = new File("src/main/webapp/resources/capchaImage/" + filename + ".jpg");
 		try (OutputStream outputStream = new FileOutputStream(f)) {
 			f.createNewFile();
 			while ((read = is.read(bytes)) != -1) {

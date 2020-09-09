@@ -13,9 +13,11 @@
 							<h4 class="page-title">공지사항</h4>
 							<h6 class="page-pretitle">Notice</h6>
 						</div>
+						
+						
 						<div class="col-auto">
-							<a href="/notice/modify?board=${board.board_id }" class="btn btn-light btn-border"> 수정 </a> <a
-								href="/notice/noticeList" class="btn btn-primary ml-2"> 목록 </a>
+							<a href="/notice/modify?board=${board.board_id }" class="btn btn-light btn-border">수정 </a> 
+							<a href="/notice/noticeList" class="btn btn-primary ml-2"> 목록 </a>
 						</div>
 					</div>
 					<div class="page-divider"></div>
@@ -50,9 +52,7 @@
 
 									<div class="separator-solid"></div>
 									<h5 class="sub">내용</h5>
-									<div style="height: 300px;">
-										<c:out value="${board.board_content }"></c:out>
-									</div>
+									<div>${board.board_content}</div> 
 								</div>
 							</div>
 						</div>
@@ -63,6 +63,8 @@
 	</div>
 
 </div>
+
+
 
 
 

@@ -110,13 +110,11 @@ function selectSector() {
 		})
 		return;
 	}
-	const smallval = $('select[name="small"]').val();
-	const smalltext = $('select[name="small"] option:selected').text();
 	const middletext = $('select[name="middle"] option:selected').text();
 	const largetext = $('select[name="large"] option:selected').text();
 	
 	for(var i = 0; i<sectorList.length; i++){
-		if(smallval == sectorList[i]){
+		if(middletext == sectorList[i].middle){
 			swal({
 				icon: "error",
 				title: "ERROR",
@@ -126,23 +124,21 @@ function selectSector() {
 		}
 	}
 	
-	if (!smallval) {
+	if (!middletext) {
 		swal({
 			icon: "error",
 			title: "ERROR",
-			text: "소분류를 선택해주세요!"
+			text: "중분류를 선택해주세요!"
 		})
 		return;
 	}
 	var sectorObj = new Object();
-	sectorObj.large = largetext;
 	sectorObj.middle = middletext;
-	sectorObj.small = smalltext;
 	sectorList.push(sectorObj);
-	swal("선택완료!", smalltext + "가 선택되었습니다.");
+	swal("선택완료!", middletext + "가 선택되었습니다.");
 
-	$('#sector3').append("<li class='list-group-item'>" + $.trim(smalltext) +
-					"<i class='flaticon-cross' onclick='deleteSector(\"" + smalltext + "\")'></i></li>");
+	$('#sector3').append("<li class='list-group-item'>" + $.trim(middletext) +
+					"<i class='flaticon-cross' onclick='deleteSector(\"" + middletext + "\")'></i></li>");
 	
 
 }
@@ -150,7 +146,7 @@ function selectSector() {
 
 function deleteSector(name){
 	for(var i = 0; i<sectorList.length; i++){
-		if(name == sectorList[i]){
+		if(name == sectorList[i].middle){
 			$('#sector3 li:contains("' + name + '")').remove();
 			swal("삭제완료!", name + "가 삭제되었습니다.");
 			sectorList.splice(i,1);
@@ -187,7 +183,7 @@ manager.addListener('drawend', function (data) {
 					swal({
 						icon: "error",
 						title: "ERROR",
-						text: "소분류를 선택해주세요!"
+						text: "중분류를 선택해주세요!"
 					})
 					inputName();
 					return false;
@@ -230,16 +226,6 @@ manager.addListener('drawend', function (data) {
 
 
 
-
-
-function test() {
-
-
-}
-
-
-
-
 $(function () {
 
 	$('#circle').attr('class', 'nav-link');
@@ -257,27 +243,12 @@ $(function () {
 
 	$('select[name="large"]').on('change', function () {
 		var middle = $('select[name="middle"]');
-		console.log(this.value);
+
 		$.getJSON("/caa/rest/div/" + this.value,
 			function (data) {
 				middle.children('option').remove();
 				for (var i = 0; i < data.length; i++) {
 					middle.append('<option value=' + data[i].cs_code + '>' + data[i].cs_code_name + '</option>');
-				}
-			}).fail(function (xhr, status, err) {
-				if (error) {
-					error();
-				}
-			});
-	});
-
-	$('select[name="middle"]').on('change', function () {
-		var small = $('select[name="small"]');
-		$.getJSON("/caa/rest/div/" + this.value,
-			function (data) {
-				small.children('option').remove();
-				for (var i = 0; i < data.length; i++) {
-					small.append('<option value=' + data[i].cs_code + '>' + data[i].cs_code_name + '</option>');
 				}
 			}).fail(function (xhr, status, err) {
 				if (error) {
