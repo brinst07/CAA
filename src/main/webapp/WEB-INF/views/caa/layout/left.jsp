@@ -74,8 +74,8 @@
                 <li class="nav-item" id="caaSelect"><a href="/sns/snsAnalysisFirst"> <i class="fab fa-twitter"></i>
                     <p>SNS분석</p>
                 </a></li>
-                <li class="nav-item" id="status"><a href="starter-template.html"> <i class="fas fa-cloud"></i>
-                    <p>상권현황</p>
+                <li class="nav-item" id="status"><a href="/caa/businessstatus"> <i class="fas fa-cloud"></i>
+                    <p>업종현황</p>
                 </a></li>
                 <li class="nav-item" id="sector"><a href="iRecommendation"> <i class="fas fa-chart-bar"></i>
                     <p>업종 추천</p>

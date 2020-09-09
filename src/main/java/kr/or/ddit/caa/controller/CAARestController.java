@@ -63,13 +63,13 @@ public class CAARestController {
 		return new ResponseEntity<List<CscodeVO>>(service.otherCscodeList(keyword), HttpStatus.OK);
 	}
 
-	@GetMapping(value = "/businessstatus/{select}", produces = { MediaType.APPLICATION_JSON_UTF8_VALUE,
+	@GetMapping(value = "/businessstatus", produces = { MediaType.APPLICATION_JSON_UTF8_VALUE,
 			MediaType.APPLICATION_XML_VALUE })
-	public ResponseEntity<List<CscodeVO>> detailCscodeList(@PathVariable("select") String select) {
+	public ResponseEntity<List<String>> detailCscodeList() {
 
 		log.info("ajaxController");
 
-		return new ResponseEntity<List<CscodeVO>>(bsservice.select(select), HttpStatus.OK);
+		return new ResponseEntity<List<String>>(bsservice.select(), HttpStatus.OK);
 
 	}
 
