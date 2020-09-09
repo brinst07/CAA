@@ -44,7 +44,8 @@
                         </ul>
 
                         <div class="container" style="align-content: right">
-                            <button class="btn btn-info" onclick="analysis()" type="button">분석</button>
+                            <button class="btn btn-info"  type="button" id="tempBtn">분석</button>
+                            <button class="btn btn-info" type="button" id="tempBtnEnd">분석End</button>
                         </div>
                     </div>
                 </div>
