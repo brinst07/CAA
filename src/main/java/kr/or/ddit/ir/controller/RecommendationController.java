@@ -16,4 +16,9 @@ public class RecommendationController {
 		
 		return "caa/ir/recommendSelectPage";
 	}
+
+	@GetMapping("/callArea")
+	public void caaArea(String areaName){
+		log.warn(areaName);
+	}
 }

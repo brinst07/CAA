@@ -11,8 +11,28 @@ var map = new kakao.maps.Map(mapContainer, mapOption),
     customOverlay = new kakao.maps.CustomOverlay({}),
     infowindow = new kakao.maps.InfoWindow({removable: true}); // 지도를 생성합니다
 
+function deletePolygon(polygons) {
+    for (var i = 0; i < polygons.length; i++) {
+        polygons[i].setMap(null);
+    }
+}
+
+function callArea(area){
+    location.href = "/ir/callArea?areaName="+area;
+}
+
+polygons = [];
+
+
 //이동 이벤트
 kakao.maps.event.addListener(map, 'dragend', function () {
+
+    if(polygons.length>0){
+        for(var k = 0; k<polygons.length; k++){
+            polygons[k].setMap(null);
+        }
+    }
+    polygons = [];
 
     // 지도 영역정보를 얻어옵니다
     var bounds = map.getBounds();
@@ -28,29 +48,32 @@ kakao.maps.event.addListener(map, 'dragend', function () {
         maxx: ia,
         maxy: ja
     }
-
+    var areas = [];
     $.ajax({
         url: '/ir/rest/boundSelect',
         type: 'POST',
         data: JSON.stringify(squarePoint),
         contentType: 'application/json',
         success: function (data) {
-            let areas = [];
+            areas = [];
             for (var key in data) {
                 //상권의 이름을 추출
                 const csName = key;
                 //상권의 좌표를 추출
-                const polygonPoints = data[csName];
+                var polygonPoints;
+                polygonPoints = data[csName];
 
                 var path = [];
-
+                console.log("======================================================polygonPoints.length:" + polygonPoints.length);
                 //다각형을 구성하는 좌표 배열을 동적으로 삽입한다.
                 for (var i = 0; i < polygonPoints.length; i++) {
-                    path.push(new kakao.maps.LatLng(polygonPoints[i].y,polygonPoints[i].x))
+                    path.push(new kakao.maps.LatLng(polygonPoints[i].y, polygonPoints[i].x));
+
+
                 }
 
 
-                let polygonObj = new Object();
+                var polygonObj = new Object();
                 polygonObj.name = csName;
                 polygonObj.path = path;
                 areas.push(polygonObj);
@@ -66,6 +89,9 @@ kakao.maps.event.addListener(map, 'dragend', function () {
             // 다각형을 생상하고 이벤트를 등록하는 함수입니다
             function displayArea(area) {
 
+                console.log("======================================================================");
+                console.log(area);
+
                 // 다각형을 생성합니다
                 var polygon = new kakao.maps.Polygon({
                     map: map, // 다각형을 표시할 지도 객체
@@ -76,6 +102,8 @@ kakao.maps.event.addListener(map, 'dragend', function () {
                     fillColor: '#fff',
                     fillOpacity: 0.7
                 });
+
+                polygons.push(polygon);
 
                 // 다각형에 mouseover 이벤트를 등록하고 이벤트가 발생하면 폴리곤의 채움색을 변경합니다
                 // 지역명을 표시하는 커스텀오버레이를 지도위에 표시합니다
@@ -104,14 +132,14 @@ kakao.maps.event.addListener(map, 'dragend', function () {
                 // 다각형에 click 이벤트를 등록하고 이벤트가 발생하면 다각형의 이름과 면적을 인포윈도우에 표시합니다
                 kakao.maps.event.addListener(polygon, 'click', function (mouseEvent) {
                     var content = '<div class="info">' +
-                        '   <div class="title">' + area.name + '</div>' +
-                        '   <div class="size">총 면적 : 약 ' + Math.floor(polygon.getArea()) + ' m<sup>2</sup></area>' +
+                        '   <div class="title"><button onclick="callArea(\''+area.name+'\')">' + area.name + '</button></div>' +
                         '</div>';
 
                     infowindow.setContent(content);
                     infowindow.setPosition(mouseEvent.latLng);
                     infowindow.setMap(map);
                 });
+
 
             }
         }, error(xhr, status) {

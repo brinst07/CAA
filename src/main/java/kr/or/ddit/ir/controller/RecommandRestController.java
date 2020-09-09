@@ -27,25 +27,25 @@ import java.util.Map;
 @RequestMapping("/ir/rest/*")
 public class RecommandRestController {
 
-    @PostMapping(value = "/boundSelect",produces = {MediaType.APPLICATION_JSON_VALUE})
+    @PostMapping(value = "/boundSelect", produces = {MediaType.APPLICATION_JSON_VALUE})
     @ResponseBody
-    public ResponseEntity<Map<String,Object>> boundSelect(@RequestBody SquarePoint squarePoint){
+    public ResponseEntity<Map<String, Object>> boundSelect(@RequestBody SquarePoint squarePoint) {
         log.warn(squarePoint);
 
         //ServiceKey
         String serviceKey = "21SOlCjmfqUliASu82VGE2%2FXQ1uFeVzXzPQ7egYRvgT7cKF1cBdfAONRgbHRnpHFgtd3NlHgCOj2kblMeWg6iQ%3D%3D";
 
-        String url = "http://apis.data.go.kr/B553077/api/open/sdsc/storeZoneInRectangle?minx="+squarePoint.getMinx()+"&miny=" + squarePoint.getMiny()
-                + "&maxx=" + squarePoint.getMaxx() + "&maxy=" + squarePoint.getMaxy() + "&ServiceKey="+serviceKey +"&type=json";
+        String url = "http://apis.data.go.kr/B553077/api/open/sdsc/storeZoneInRectangle?minx=" + squarePoint.getMinx() + "&miny=" + squarePoint.getMiny()
+                + "&maxx=" + squarePoint.getMaxx() + "&maxy=" + squarePoint.getMaxy() + "&ServiceKey=" + serviceKey + "&type=json";
 
         HttpClient httpClient = new DefaultHttpClient();
         ResponseHandler<String> responseHandler = new BasicResponseHandler();
         HttpGet httpGet = new HttpGet();
         List<Map<String, Object>> finalList = new ArrayList<>();
-        Map<String,Object> pointsName = new HashMap<>();
+        Map<String, Object> pointsName = new HashMap<>();
         try {
             httpGet.setURI(new URI(url));
-            String responseBody = httpClient.execute(httpGet,responseHandler);
+            String responseBody = httpClient.execute(httpGet, responseHandler);
 
             ObjectMapper objectMapper = new ObjectMapper();
 
@@ -56,9 +56,9 @@ public class RecommandRestController {
             // 선택한 영역의 데이터 전처리 후 필요한 데이터만을 저장하는 list
             finalList = list.get("body").get("items");
 
-            if(finalList.size() != 0){
-                List<Map<String,String>> points = new ArrayList<>();
-                for(int i = 0; i<finalList.size(); i++){
+            if (finalList.size() != 0) {
+                for (int i = 0; i < finalList.size(); i++) {
+                    List<Map<String, String>> points = new ArrayList<>();
                     //상권이름 추출
                     String scName = (String) finalList.get(i).get("mainTrarNm");
 
@@ -66,20 +66,20 @@ public class RecommandRestController {
                     String polygonStr = (String) finalList.get(i).get("coords");
 
                     //데이터 전처리
-                    polygonStr = polygonStr.replace("POLYGON ((","");
-                    polygonStr = polygonStr.replace("))","");
+                    polygonStr = polygonStr.replace("POLYGON ((", "");
+                    polygonStr = polygonStr.replace("))", "");
 
                     String[] polygonlist = polygonStr.split(", ");
 
                     //공백을 기준으로 split을 사용
-                    for(int j = 0; j<polygonlist.length; j++){
-                        Map<String,String> point = new HashMap<>();
+                    for (int j = 0; j < polygonlist.length; j++) {
+                        Map<String, String> point = new HashMap<>();
                         String[] tempList = polygonlist[j].split(" ");
-                        point.put("x",tempList[0]);
-                        point.put("y",tempList[1]);
+                        point.put("x", tempList[0]);
+                        point.put("y", tempList[1]);
                         points.add(point);
                     }
-                    pointsName.put(scName,points);
+                    pointsName.put(scName, points);
                 }
             }
 
@@ -87,7 +87,7 @@ public class RecommandRestController {
             e.printStackTrace();
         }
 
-
-        return new ResponseEntity<Map<String,Object>>(pointsName, HttpStatus.OK);
+        log.warn(pointsName);
+        return new ResponseEntity<Map<String, Object>>(pointsName, HttpStatus.OK);
     }
 }
