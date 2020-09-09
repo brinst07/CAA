@@ -7,6 +7,7 @@
 	<input type="hidden" name="jsonDATA" value="tttt">
 </form>
 
+	<div class="main-panel full-height">
 		<div class="container">
 			<div class="panel-header">
 				<div class="page-inner border-bottom pb-0 mb-3">
@@ -105,3 +106,4 @@
 				</div>
 			</div>
 		</div>
+	</div>
