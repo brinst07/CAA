@@ -1,19 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=1a3acaea52f8fb01b6a85dfd59092f27&libraries=drawing"></script>
-<script type="text/javascript">
-$(function(){
-	$('#analysis').addClass('active');
-	$('#main').removeClass('active');
-});
-</script>
 
 <form id="test" method="post" action="/caa/caaAnalysis">
 	<input type="hidden" name="json" value="test">
 	<input type="hidden" name="jsonDATA" value="tttt">
 </form>
 
-	<div class="main-panel full-height">
 		<div class="container">
 			<div class="panel-header">
 				<div class="page-inner border-bottom pb-0 mb-3">
@@ -112,4 +105,3 @@ $(function(){
 				</div>
 			</div>
 		</div>
-	</div>
