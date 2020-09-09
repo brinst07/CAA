@@ -1,13 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=1a3acaea52f8fb01b6a85dfd59092f27&libraries=drawing"></script>
-</head>
-<body>
+<script type="text/javascript">
+$(function(){
+	$('#analysis').addClass('active');
+	$('#main').removeClass('active');
+});
+</script>
 
 <form id="test" method="post" action="/caa/caaAnalysis">
 	<input type="hidden" name="json" value="test">
@@ -36,7 +35,6 @@
 								<div id="map" style="display: block; widht: 785px; height: 680px;"></div>
 								<!-- 맵과 관련된 js를 따로 관리 -->
 								<script src="/resources/assets/js/kakaomap/map.js"></script>
-								<script src="/resources/assets/js/kakaomap/analysis.js"></script>			
 							</div>
 						</div>
 					</div>
@@ -52,7 +50,7 @@
 								</div>
 								<div class="modal-body">
 									<div class="form-group form-group-default">
-										<label>대분류</label> <select class="form-control" name="large">
+										<label></label> <select class="form-control" name="large">
 											<option></option>
 											<c:forEach items="${firstDiv }" var="first">
 												<option value="${first.cs_code}">${first.cs_code_name }</option>
@@ -61,11 +59,6 @@
 									</div>
 									<div class="form-group form-group-default">
 										<label>중분류</label> <select class="form-control" name="middle">
-											<option></option>
-										</select>
-									</div>
-									<div class="form-group form-group-default">
-										<label>소분류</label> <select class="form-control" name="small">
 											<option></option>
 										</select>
 									</div>
@@ -101,7 +94,7 @@
 
 							</ul>
 							<br>
-							<ul class="list-group list-group-bordered" id="sector">
+							<ul class="list-group list-group-bordered" id="sector3">
 								<li class="list-group-item active">3단계</li>
 								<li class="list-group-item">
 									<!-- Button trigger modal -->
@@ -120,5 +113,3 @@
 			</div>
 		</div>
 	</div>
-</body>
-</html>

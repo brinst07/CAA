@@ -56,7 +56,7 @@
 									<div class="selectgroup w-100">
 										
 										 <label class="selectStatus" class="selectgroup-item"> <input type="radio" name="transportation" value="1" class="selectgroup-input"> <span class="selectgroup-button selectgroup-button-icon"> <i class="icon-screen-tablet"> 주요상권</i></span>
-										</label> <select id="sel1" name="sel1" class="form-control form-control-sm">
+										</label> <select id="sido" name="sido" class="form-control form-control-sm" onchange="selectedSido()">
 <c:forEach items="${SidoList }" var="SidoList">
 												<option value="${SidoList.sido_code }">${SidoList.sido_name }</option>
 											</c:forEach>
@@ -142,6 +142,7 @@
 
 
 <script type="text/javascript">
+/* 분류 코드 Ajax ↓ */
 	function selectedLarge() {
 		var cs_code = $("select[name=large]").val();
 		
@@ -172,6 +173,15 @@
 		})
 
 	}
+	
+	/* 분류 코드 Ajax ↑ */
+	
+	
+	
+	function selectedSido() {
+		var cs_code = $("select[name=large]").val();
+	}
+	
 	
 	$(function(){
 		var sales_ser_name = $("select[name=middle]").val();
