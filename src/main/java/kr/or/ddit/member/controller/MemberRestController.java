@@ -1,11 +1,15 @@
 package kr.or.ddit.member.controller;
 
+import kr.or.ddit.example.service.APiExamCaptchaImageCompareService;
+import kr.or.ddit.example.service.ApiExamCaptchaImageService;
+import kr.or.ddit.example.service.ApiExamCaptchaNkeyService;
 import kr.or.ddit.member.service.MemberService;
 import kr.or.ddit.member.util.GenerateCertCharacter;
 import lombok.AllArgsConstructor;
 import lombok.Setter;
 import lombok.extern.log4j.Log4j;
 import org.apache.commons.collections.map.HashedMap;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -27,6 +31,13 @@ public class MemberRestController {
 	JavaMailSender mailSender;
 	@Setter
 	GenerateCertCharacter password;
+	
+	@Setter
+	ApiExamCaptchaNkeyService captChaApiNkey;
+	@Setter
+	ApiExamCaptchaImageService captChaApiImage;
+	@Setter
+	APiExamCaptchaImageCompareService captChaCompare;
 
 	// 메일 아직 완전안됨
 	@GetMapping(value = "/sendMail/{clientemail}", produces = { MediaType.APPLICATION_JSON_UTF8_VALUE,
@@ -116,4 +127,34 @@ public class MemberRestController {
 			map.put("eover", echk);
 			return new ResponseEntity<Map<String,Object>>(map, HttpStatus.OK);
 		}
+		
+	
+		/* 캡차 영현 ↓ */
+		@GetMapping("/captchaImage")
+		public ResponseEntity<Map<String, String>> capCha() {
+			String temp = captChaApiNkey.captchaNkey();
+
+			String[] keyDivArray = temp.split("\"");
+
+			for (int i = 0; i < keyDivArray.length; i++) {
+				System.out.println("keyDivArray : " + i + " : " + keyDivArray[i]);
+			}
+
+			// 이미지 발급
+			Map<String, String> capCha = captChaApiImage.reception(keyDivArray[3]);
+			
+			return new ResponseEntity<Map<String, String>>(capCha, HttpStatus.OK);
+		}
+		
+		
+//		@GetMapping("/captchaCompare")
+//		public ResponseEntity<Map<String, String>> captchaCompare() {
+//			
+//			
+//			return new ResponseEntity<Map<String, String>>(param, HttpStatus.OK);
+//		}
+		
+		/* 캡차 영현 ↑ */
+		
+		
 }
