@@ -10,18 +10,15 @@
         const color = [];
         var colorObj = new Object();
         colorObj.borderColor = "#1d7af3";
-        colorObj.pointBorderColor = "#FFF";
         colorObj.pointBorderColor = "#1d7af3";
         color.push(colorObj);
         var colorObj = new Object();
-        colorObj.borderColor = "#f3545d";
-        colorObj.pointBorderColor = "#FFF";
-        colorObj.pointBorderColor = "#f3545d";
+        colorObj.borderColor = "#89e32d";
+        colorObj.pointBorderColor = "#89e32d";
         color.push(colorObj);
         var colorObj = new Object();
-        colorObj.borderColor = "#f1f1f1";
-        colorObj.pointBorderColor = "#FFF";
-        colorObj.pointBorderColor = "#F25961";
+        colorObj.borderColor = "#f9320c";
+        colorObj.pointBorderColor = "#f9320c";
         color.push(colorObj);
 
         // 사용자가 선택한 값을 가져오는 코드
@@ -59,7 +56,7 @@
 
                         var lineChartName = "multipleLineChart" + csName;
 
-                        let chartTags = '<div class="card-body">\n' +
+                        let chartTags =
                             '                        <div class="chart-container">\n' +
                             '                            <div class="chartjs-size-monitor"\n' +
                             '                                 style="position: absolute; left: 0px; top: 0px; right: 0px; bottom: 0px; overflow: hidden; pointer-events: none; visibility: hidden; z-index: -1;">\n' +
@@ -74,8 +71,9 @@
                             '                            </div>\n' +
                             '                            <canvas id="' + lineChartName + '" width="306" height="300" class="chartjs-render-monitor"\n' +
                             '                                    style="display: block; width: 306px; height: 300px;"></canvas>\n' +
-                            '                        </div>\n' +
-                            '                    </div>';
+                            '                        </div>\n';
+
+                        $('#chartDiv').append(chartTags);
 
                         var myMultipleLineChart = new Chart(
                             lineChartName, {
@@ -183,22 +181,8 @@
                     <div class="card-header">
                         <div class="card-title">1. 업종별 추이</div>
                     </div>
-                    <div class="card-body">
-                        <div class="chart-container">
-                            <div class="chartjs-size-monitor"
-                                 style="position: absolute; left: 0px; top: 0px; right: 0px; bottom: 0px; overflow: hidden; pointer-events: none; visibility: hidden; z-index: -1;">
-                                <div class="chartjs-size-monitor-expand"
-                                     style="position: absolute; left: 0; top: 0; right: 0; bottom: 0; overflow: hidden; pointer-events: none; visibility: hidden; z-index: -1;">
-                                    <div style="position: absolute; width: 1000000px; height: 1000000px; left: 0; top: 0"></div>
-                                </div>
-                                <div class="chartjs-size-monitor-shrink"
-                                     style="position: absolute; left: 0; top: 0; right: 0; bottom: 0; overflow: hidden; pointer-events: none; visibility: hidden; z-index: -1;">
-                                    <div style="position: absolute; width: 200%; height: 200%; left: 0; top: 0"></div>
-                                </div>
-                            </div>
-                            <canvas id="multipleLineChart" width="306" height="300" class="chartjs-render-monitor"
-                                    style="display: block; width: 306px; height: 300px;"></canvas>
-                        </div>
+                    <div class="card-body" id="chartDiv">
+
                     </div>
                 </div>
             </div>

@@ -24,7 +24,6 @@
 		}
 	});
 </script>
-<div class="wrapper fullheight-side sidebar_minimize">
 
 	<div class="main-panel full-height">
 		<div class="container">
@@ -176,7 +175,6 @@
 
 
 
-</div>
 
 <!-- jQuery UI -->
 <script src="/resources/assets/js/plugin/jquery-ui-1.12.1.custom/jquery-ui.min.js"></script>

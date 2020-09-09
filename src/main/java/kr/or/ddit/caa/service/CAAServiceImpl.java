@@ -53,9 +53,7 @@ public class CAAServiceImpl implements CAAService {
 
 		for (int i = 0; i < sectorFind.size(); i++) {
 			Map<String, String> sectorMap = new HashedMap();
-			sectorMap.put("large", mapper.getSectorCode(sectorFind.get(i).get("large")));
 			sectorMap.put("middle", mapper.getSectorCode(sectorFind.get(i).get("middle")));
-			sectorMap.put("small", mapper.getSectorCode(sectorFind.get(i).get("small")));
 //			sectorMap.put("mainTrarNm", mainTrarNm);
 			getSectorFind.add(sectorMap);
 		}
