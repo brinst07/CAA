@@ -218,7 +218,7 @@
             STORE_CS_CODE_NAME = #{item}
         </foreach>
         group by STORE_YEAR,STORE_BUNGI,STORE_SER_CODE_NAME
-        order by STORE_YEAR desc, STORE_BUNGI desc
+        order by STORE_YEAR, STORE_BUNGI
     </select>
 
 

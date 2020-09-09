@@ -55,8 +55,11 @@
                         //차트마다 이름이 달라야하기 때문에 숫자를 삽입해서 관리한다.
 
                         var lineChartName = "multipleLineChart" + csName;
-
                         let chartTags =
+                            '<div class="card-header">\n' +
+                            '                        <div class="card-title">' + csName + '\n' +
+                            '                    </div>' +
+                            '<div class="card-body" id="'+tableid+'">' +
                             '                        <div class="chart-container">\n' +
                             '                            <div class="chartjs-size-monitor"\n' +
                             '                                 style="position: absolute; left: 0px; top: 0px; right: 0px; bottom: 0px; overflow: hidden; pointer-events: none; visibility: hidden; z-index: -1;">\n' +
@@ -71,7 +74,8 @@
                             '                            </div>\n' +
                             '                            <canvas id="' + lineChartName + '" width="306" height="300" class="chartjs-render-monitor"\n' +
                             '                                    style="display: block; width: 306px; height: 300px;"></canvas>\n' +
-                            '                        </div>\n';
+                            '                        </div>\n' +
+                            '</div>';
 
                         $('#chartDiv').append(chartTags);
 
@@ -119,12 +123,47 @@
                         //업종별 개수로 for문을 돈다.
                         for (let j = 0; j < csList.length; j++) {
 
+                            //표를 동적으로 삽입하기 위해 태그를 작성한다.
+                            let tableTags = '<table class="table table-hover">\n' +
+                                '                            <thead>\n' +
+                                '                                <tr>\n' +
+                                '                                    <th scope="col">년도</th>\n' +
+                                '                                    <th scope="col">분기</th>\n' +
+                                '                                    <th scope="col">업종명</th>\n' +
+                                '                                    <th scope="col">업소수</th>\n' +
+                                '                                    <th scope="col">유사업소수</th>\n' +
+                                '                                    <th scope="col">개업점포수</th>\n' +
+                                '                                    <th scope="col">폐업점포수</th>\n' +
+                                '                                    <th scope="col">프랜차이즈점포수</th>\n' +
+                                '                                </tr>\n' +
+                                '                            </thead><tbody>';
+
                             //차트를 생성하고 차트안에 데이터를 삽입하는 부분이다.
                             //업종안에 있는 개수만큼 for문을 돈다.
                             let dataList = [];
                             for (let k = 0; k < csList[j].length; k++) {
                                 dataList.push(csList[j][k].store_COUNT);
+                                tableTags += ' <tr>\n' +
+                                    '                                <td>' + csList[j][k].store_YEAR + '+</td>\n' +
+                                    '                                <td>' + csList[j][k].store_BUNGI + '</td>\n' +
+                                    '                                <td>' + csList[j][k].store_SER_CODE_NAME + '</td>\n' +
+                                    '                                <td>' + csList[j][k].store_COUNT + '</td>\n' +
+                                    '                                <td>' + csList[j][k].store_SM_COUNT + '</td>\n' +
+                                    '                                <td>' + csList[j][k].store_OPEN_COUNT + '</td>\n' +
+                                    '                                <td>' + csList[j][k].store_CLOSE_COUNT + '</td>\n' +
+                                    '                                <td>' + csList[j][k].store_FRAN + '</td>\n' +
+                                    '                            </tr>';
+
+                                if (k == csList[j].length - 1) {
+                                    tableTags += '</tbody>\n' +
+                                        '                        </table>';
+                                }
+
+
                             }
+
+                            $('#'+tableid).append(tableTags);
+
 
                             //업종명을 추출한다.
                             const ser_name = csList[j][0].store_SER_CODE_NAME;
@@ -182,6 +221,7 @@
                         <div class="card-title">1. 업종별 추이</div>
                     </div>
                     <div class="card-body" id="chartDiv">
+
 
                     </div>
                 </div>
