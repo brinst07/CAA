@@ -37,7 +37,113 @@
 			sessionStorage.fonts = true;
 		}
 	});
+	
+	function selectedSido(){
+		var sido_code = $("select[name=sel1]").val();
+	
+		$('select[name=sel2]').children('option').remove();
+		
+		$.ajax({
+			type : 'get', //get방식을 사용하겠다.
+			url : '/caa/rest/sido/' +sido_code,   //controller주소 로 보내겠다.
+			contentTyple : "application/json; charset=tuf-8",
+			success : function(result,status,xhr){
+				console.log("Ajax 성공 : " + result);
+				for (var i = 0; i < result.length; i++) {
+					console.log(result[i]);
+					if(i==0){
+						$('select[name=sel2]').append(
+								'<option>전체</option>');
+					}
+					$('select[name=sel2]').append(
+							'<option value=' + result[i].sigungu_name + '>'
+									+ result[i].sigungu_name + '</option>');
+				}
+			},
+			error :function(xhr, status, er) {
+				console.log("Ajax 실패")
+				if (er) {
+					error(er);
+				}
+			}
+		})
+	}
 
+	function selectedLarge() {
+		
+		var cs_code = $("select[name=large]").val();
+		
+		$('select[name=middle]').children('option').remove();
+
+		$.ajax({
+			type : 'get',
+			url : '/caa/rest/div/' + cs_code,
+			contentType : "application/json; charset=utf-8",
+			success : function(result, status, xhr) {
+
+				console.log("Ajax 성공 : " + result);
+				for (var i = 0; i < result.length; i++) {
+					console.log(result[i]);
+					if(i==0){
+						$('select[name=middle]').append(
+								'<option value="전체">전체</option>');
+					}
+					$('select[name=middle]').append(
+							'<option value=' + result[i].cs_code_name + '>'
+									+ result[i].cs_code_name + '</option>');
+				}
+
+			},
+			error : function(xhr, status, er) {
+				console.log("Ajax 실패")
+				if (er) {
+					error(er);
+				}
+			}
+		})
+
+	}
+	
+	
+
+
+
+
+	
+	function showMetheTalbe(){
+		var detailupjong= $("select[name=middle]").val();
+		var upjong= $("select[name=large]").val();
+		var sigungu= $("select[name=sel2]").val();
+		var sido= $("select[name=sel1]").val();
+		
+		var params = '?upjong='+upjong;
+		params += '&detailupjong='+detailupjong;
+		params += '&sigungu='+sigungu;
+		alert(params);
+		if(  sido == '' || sido == '전체' || sigungu == '전체' || sido == '1000' || sigungu == '1000' ||  sigungu == ''  ){
+			alert("지역을 선택해주세요.");
+			return false;
+		}
+		if( upjong == '' || upjong == '1000' || upjong == '전체'){
+			alert("업종을 선택해주세요.");
+			return false;
+		}
+		
+		$.ajax({
+			type : 'get',
+			url : '/caa/rest/businessstatus/'+upjong+'/'+detailupjong+'/'+sigungu,
+			contentType : "application/json; charset=utf-8",
+			success : function(result, status, xhr) {
+
+				console.log("Ajax 성공 : " + result);
+
+			},
+			error : function(xhr, status, er) {
+				console.log("Ajax 실패")
+			}
+		})
+	}
+		
 
 	
 	
@@ -79,64 +185,10 @@ CSS Just for demo purpose, don't include it in your project
 	
 	
 </script>
-<script type="text/javascript">
 
 
-
-
-
-
-// 	function selected() {
-// 		//콤보박스에서 선택한 값 꺼내기
-// 		var select =$("select[id=selectStatus]").val();
-// 		$('#detailselectStatus').show();
-// 		$('#detailselectStatus').children('option').remove();
-// 			$.ajax({
-// 				type : 'get',
-// 				url : '/caa/rest/businessstatus/'+select,
-// 				contentType : "application/json; charset=utf-8",
-// 				success : function(result, status, xhr){
-					
-// 						for(var i = 0; i<result.length; i++){
-// 							console.log(result[i]);
-// 							$('#detailselectStatus').append('<option value='+result[i].cs_code_name+'>'+result[i].cs_code_name+'</option>');
-// 						}
-						
-// 						$("#detailselectStatus").show();
-// 				},
-// 				error : function(xhr,status, er){
-// 					console.log("아작쓰 실패")
-// 					if(error){
-// 						error(re);
-// 					}
-// 				}
-// 			})
-			
-// 	}
-
-	function showStatus(){
-		//모든 지역이 선택되었을 경우 진행되야함 
-		var area = $("#sel1 option:selected").val();
-		var area2 = $("#sel2 option:selected").text();
-		var detailselectStatus = $("#detailselectStatus option:selected").val();
-		alert(detailselectStatus);
-		if( area == null || area == undefined || area == '1000' || area2 == '1000' ||  area2 == null || area2 == undefined ){
-			alert("지역을 선택해주세요.");
-			return false;
-		}
-		if( detailselectStatus == null || detailselectStatus == undefined || detailselectStatus == '1000' ){
-			alert("업종을 선택해주세요.");
-			return false;
-		}
-		
-	 	
-		location.href="/caa/getbusinessStatus?area="+area+"&area2="+area2+"&detailselectStatus="+detailselectStatus;
-
-		
-	}
 			
 		
-</script>
 <!-- CSS Files -->
 <link rel="stylesheet" href="/resources/assets/css/bootstrap.min.css">
 <link rel="stylesheet" href="/resources/assets/css/atlantis.css">
@@ -146,7 +198,7 @@ CSS Just for demo purpose, don't include it in your project
 	<div class="wrapper fullheight-side sidebar_minimize">
 
 		<div class="main-panel full-height">
-			<div class="container">
+			<div class="container">  
 				<div class="panel-header">
 					<div class="page-inner border-bottom pb-0 mb-3">
 						<div class="d-flex align-items-left flex-column">
@@ -191,38 +243,49 @@ CSS Just for demo purpose, don't include it in your project
 					</div>
 				</div>
 				<div class="page-inner">
-					<div class="col-md-12">
+				<div class="col-md-12">
 						<div class="card">
-							<div class="card-header">
+							<div class="card-body">
 								<div class="form-group">
 									<div class="selectgroup w-100">
-										 <label id="selectStatus" class="selectgroup-item"> <input
-											type="radio" name="transportation" value="1"
-											class="selectgroup-input"> <span
-											class="selectgroup-button selectgroup-button-icon"> <i
-												class="icon-screen-tablet"> 주요상권</i></span>
-										</label> <select id="sel1" name="sel1"
-											class="form-control form-control-sm">
-
-										</select> <select name="sel2" id="sel2" style="display: none"
-											class="form-control form-control-sm" id="selectStatus">
-
-										</select> <label id="selectStatus" class="selectgroup-item"
-											style="padding-left: 10px"> <input type="radio"
-											name="value" value="50" class="selectgroup-input"
-											checked="checked"> <span class="selectgroup-button">상권업종</span>
-										</label> 
-										<select class="form-control form-control-sm" onchange="selected()" id="detailselectStatus">
-											<c:forEach items="${firstDiv }" var="first">
-												<option value="${first }" >${first}</option>
+										
+										 <label class="selectStatus" class="selectgroup-item"> <input type="radio" name="transportation" value="1" class="selectgroup-input" checked="checked"> <span class="selectgroup-button selectgroup-button-icon"> <i class="icon-screen-tablet"> 주요상권</i></span>
+										</label>
+										 <select id="sel1" name="sel1" class="form-control form-control-sm"  onchange="selectedSido()">
+												<option value="">전체</option>
+													<c:forEach items="${SidoList }" var="SidoList">
+														<option value="${SidoList.sido_code }">${SidoList.sido_name }</option>
+													</c:forEach>
+										</select> 
+										<select name="sel2" id="sel2" class="form-control form-control-sm selectStatus">
+												<option value="">전체</option>
+										</select>
+										<!-- 상권 업종 ↓ -->
+										 <label class="selectStatus selectgroup-item" style="padding-left: 10px"> <input type="radio" name="value" value="50" class="selectgroup-input" checked="checked"> <span class="selectgroup-button">상권업종</span>
+										</label> <select class="form-control form-control-sm" name="large" onchange="selectedLarge()">
+												<option value="">대분류</option>
+											<c:forEach items="${csCodeList }" var="csCodeList">
+											
+												<option value="${csCodeList.cs_code }">${csCodeList.cs_code_name }</option>
 											</c:forEach>
+										</select> 
+										<select class="form-control form-control-sm" name="middle">
+											<option value="">중분류</option>
 										</select>
 
-										<button class="btn btn-primary btn-s" id="selectStatus" onclick="showStatus()">현황보기
-										</button>
+
+
+										<!-- 상권 업종 ↑ -->
+
+										<button id="viewButton" onclick="showMetheTalbe()" class="btn btn-primary btn-s selectStatus" style="margin-left: 10px">현황보기</button>
 									</div>
 								</div>
 							</div>
+						</div>
+					</div>
+				
+					<div class="col-md-12">
+						<div class="card">
 							<div class="card-body">
 								<div class="table-responsive">
 									<div id="basic-datatables_wrapper"

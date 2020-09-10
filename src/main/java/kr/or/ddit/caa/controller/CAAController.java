@@ -25,6 +25,7 @@ import kr.or.ddit.bs.service.BSService;
 import kr.or.ddit.caa.domain.CscodeVO;
 import kr.or.ddit.caa.domain.SubwayPopVO;
 import kr.or.ddit.caa.service.CAAService;
+import kr.or.ddit.sales.service.SalesService;
 import lombok.AllArgsConstructor;
 import lombok.extern.log4j.Log4j;
 
@@ -37,6 +38,8 @@ public class CAAController {
 
 	private CAAService service;
 	private BSService bsservice;
+	private SalesService salesservice;
+
 
 	@GetMapping("/caaSelect")
 	public String caaSelect(Model model) {
@@ -50,77 +53,26 @@ public class CAAController {
 
 	@GetMapping("/businessstatus")
 	public String businessstatus(Model model) {
-
-		List<String> list = bsservice.select();
-		model.addAttribute("firstDiv", list);
-
-		log.warn(list);
-		return "caa/businessStatus/BusinessStatus";
-	}
-
-	@GetMapping("/getbusinessStatus")
-	public String getbusinessStatus(Model model, @RequestParam("detailselectStatus") String detailselectStatus,
-			@RequestParam("area") String area, @RequestParam("area2") String area2) {
-
-		List<String> list = bsservice.select();
-		model.addAttribute("firstDiv", list);
-
-//		BusinessStatusParamVO vo = new BusinessStatusParamVO();
-//		vo.setArea(area);
-//		vo.setArea2(area2);
-//		vo.setDetailselectStatus(detailselectStatus);
-//
-//		List<BusinessStatusVO> bsList = bsservice.getList(vo);
-//		List<BusinessStatusResultVO> resultList = new ArrayList<>();
-//		int first = 0;
-//		int last = 0;
-//		String bungi1 = null;
-//		String bungi3 = null;
-//		BusinessStatusResultVO resultVO = new BusinessStatusResultVO();
-//		for (int i = 0; i < bsList.size(); i++) {
-//			// if(i != 0) {
-//			// if(!bsList.get(i-1).getSales_bd_name().equals(bsList.get(i).getSales_bd_name()))
-//			// {
-//			// BusinessStatusResultVO resultVO = new BusinessStatusResultVO();
-//			// resultVO.setSangun(bsList.get(i).getSales_bd_name());
-//			// resultVO.setUpjong(bsList.get(i).getSales_ser_name());
-//			//
-//			// }
-//			// }
-//			 if(i != 0) {
-//				 if(!bsList.get(i-1).getSales_bd_name().equals(bsList.get(i).getSales_bd_name())) {
-//						BusinessStatusResultVO result2VO = new BusinessStatusResultVO();
-//
-//				 }
-//			 }else {	 
-//		
-//			
-//			
-//			
-//			if (bsList.get(i).getSales_bungi_code().equals("1")) {
-//				bungi1 = bsList.get(i).getSales_store_count();
-//			} else if (bsList.get(i).getSales_bungi_code().equals("2")) {
-//				first = Integer.parseInt(bsList.get(i).getSales_store_count()) - Integer.parseInt(bungi1);
-//
-//			} else if (bsList.get(i).getSales_bungi_code().equals("3")) {
-//				bungi3 = bsList.get(i).getSales_store_count();
-//			} else if (bsList.get(i).getSales_bungi_code().equals("4")) {
-//				last = Integer.parseInt(bsList.get(i).getSales_store_count()) - Integer.parseInt(bungi3);
-//				resultVO.setFirst(Integer.toString(first));
-//				resultVO.setLast(Integer.toString(last));
-//				resultVO.setPercentage(Integer.toString(first - last));
-//				resultVO.setSangun(bsList.get(i).getSales_bd_name());
-//				resultVO.setUpjong(bsList.get(i).getSales_ser_name());
-//
-//				resultList.add(resultVO); 
-//			}
-//			 }
-//
-//		}
-//		model.addAttribute("resultList", resultList);
+		// 지역 선택 코드
+		model.addAttribute("SidoList", salesservice.getSidoList());
+//		model.addAttribute("SigunguList", salesservice.getSigunguList("1111"));
 		
+		// 대분류 코드
+		model.addAttribute("csCodeList", salesservice.getCscodeList("1"));
+//		model.addAttribute("csCodeList2", salesservice.getCscodeList2("a"));
 		return "caa/businessStatus/BusinessStatus";
 	}
+//
+//	@GetMapping("/getbusinessStatus")
+//	public String getbusinessStatus(Model model, @RequestParam("detailselectStatus") String detailselectStatus,
+//			@RequestParam("area") String area, @RequestParam("area2") String area2) {
+//
+//		List<String> list = bsservice.select();
+//		model.addAttribute("firstDiv", list);
+//
+//		
+//		return "caa/businessStatus/BusinessStatus";
+//	}
 
 	@GetMapping(value = "/middle", produces = { MediaType.APPLICATION_JSON_UTF8_VALUE,
 			MediaType.APPLICATION_XML_VALUE })

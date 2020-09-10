@@ -1,11 +1,15 @@
 package kr.or.ddit.caa.mapper;
 
 import kr.or.ddit.caa.domain.*;
+import kr.or.ddit.sales.domain.SidoVO;
+import kr.or.ddit.sales.domain.SigunguVO;
 
 import java.util.List;
 import java.util.Map;
 
 public interface CAAMapper {
+	
+	public List<SigunguVO> getSigunguList(String keyword);
 	
 	public List<CscodeVO> getCscodeList(String depth);
 	

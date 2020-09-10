@@ -15,6 +15,12 @@
         where cs_code2 = #{keyword}
 
     </select>
+    <select id="getSigunguList" resultType="kr.or.ddit.sales.domain.SigunguVO">
+        select *
+        from sigungu
+        where sido_code = #{keyword}
+
+    </select>
 
 
     <select id="getCircleSubway" parameterType="hashMap" resultType="kr.or.ddit.caa.domain.SubwayPopVO">

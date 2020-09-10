@@ -1,9 +1,18 @@
 package kr.or.ddit.caa.service;
 
-import kr.or.ddit.caa.domain.*;
-
 import java.util.List;
 import java.util.Map;
+
+import kr.or.ddit.caa.domain.CscodeVO;
+import kr.or.ddit.caa.domain.IndiVO;
+import kr.or.ddit.caa.domain.SalesByIndustryVO;
+import kr.or.ddit.caa.domain.SalesParamVO;
+import kr.or.ddit.caa.domain.SectorParamVO;
+import kr.or.ddit.caa.domain.StoreCountInfoVO;
+import kr.or.ddit.caa.domain.StoreCountVO;
+import kr.or.ddit.caa.domain.StoreVO;
+import kr.or.ddit.caa.domain.SubwayPopVO;
+import kr.or.ddit.sales.domain.SigunguVO;
 
 public interface CAAService {
 	
@@ -14,6 +23,7 @@ public interface CAAService {
 	
 	public List<SalesByIndustryVO> SalesByIndustryList(SalesParamVO vo);
 
+	public List<SigunguVO> getSigungucodeList(String keyword);
 	/* 영현 ↓ */
 	
 	

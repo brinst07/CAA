@@ -5,6 +5,8 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import kr.or.ddit.bs.service.BSService;
 import kr.or.ddit.caa.domain.*;
 import kr.or.ddit.caa.service.CAAService;
+import kr.or.ddit.sales.domain.SigunguVO;
+import kr.or.ddit.sales.service.SalesService;
 import lombok.AllArgsConstructor;
 import lombok.extern.log4j.Log4j;
 import org.apache.http.client.HttpClient;
@@ -12,6 +14,8 @@ import org.apache.http.client.ResponseHandler;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.impl.client.BasicResponseHandler;
 import org.apache.http.impl.client.DefaultHttpClient;
+import org.apache.ibatis.annotations.Param;
+import org.apache.tiles.autotag.core.runtime.annotation.Parameter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -50,21 +54,46 @@ public class CAARestController {
 	private BSService bsservice;
 	@Autowired
 	private JavaMailSenderImpl mailSender;
-
+	@Autowired
+	private SalesService salesservice;
+	
+//	@GetMapping(value = "/div/{cs_code}",
+//			produces = {MediaType.APPLICATION_JSON_UTF8_VALUE, MediaType.APPLICATION_XML_VALUE})
+//	public ResponseEntity<List<CscodeVO>> csCodeList(@PathVariable("cs_code") String cs_code){
+//
+//		
+//		// Ajax는 view resolver나 tilesResolver로 가지 않기 때문에 Status 값을 넣어줘야한다.
+//		// 따라서 상태값을 같이 전달해주기 위해 ResponseEntity를 사용한다.
+//		List<CscodeVO> list = salesservice.getCscodeList2(cs_code);
+//		
+//
+//		return new ResponseEntity<List<CscodeVO>>(list, HttpStatus.OK);
+//	}
+	
 	@GetMapping(value = "/div/{keyword}", produces = { MediaType.APPLICATION_JSON_UTF8_VALUE,
 			MediaType.APPLICATION_XML_VALUE })
 	public ResponseEntity<List<CscodeVO>> otherCscodeList(@PathVariable("keyword") String keyword) {
 		log.info("ajax를 통한 분류 선택");
-
+		log.info(service.otherCscodeList(keyword));
 		// Ajax는 view resolver나 tilesResolver로 가지 않기 때문에 Status 값을 넣어줘야한다.
 		// 따라서 상태값을 같이 전달해주기 위해 ResponseEntity를 사용한다.
 		return new ResponseEntity<List<CscodeVO>>(service.otherCscodeList(keyword), HttpStatus.OK);
 	}
-
-	@GetMapping(value = "/businessstatus", produces = { MediaType.APPLICATION_JSON_UTF8_VALUE,
+	
+	@GetMapping(value = "/sido/{keyword}", produces = { MediaType.APPLICATION_JSON_UTF8_VALUE,
 			MediaType.APPLICATION_XML_VALUE })
-	public ResponseEntity<List<String>> detailCscodeList() {
+	public ResponseEntity<List<SigunguVO>> sidoCscodeList(@PathVariable("keyword") String keyword) {
+		log.info("ajax를 통한 분류 선택");
+		
+		// Ajax는 view resolver나 tilesResolver로 가지 않기 때문에 Status 값을 넣어줘야한다.
+		// 따라서 상태값을 같이 전달해주기 위해 ResponseEntity를 사용한다.
+		return new ResponseEntity<List<SigunguVO>>(service.getSigungucodeList(keyword), HttpStatus.OK);
+	}
 
+	@GetMapping(value = "/businessstatus/{upjong}/{detailupjong}/{sigungu}", produces = { MediaType.APPLICATION_JSON_UTF8_VALUE,
+			MediaType.APPLICATION_XML_VALUE })
+	public ResponseEntity<List<String>> detailCscodeList(@PathVariable("upjong") String upjong,@PathVariable("detailupjong") String detailupjong,@PathVariable("sigungu") String sigungu) {
+		
 		log.info("ajaxController");
 
 		return new ResponseEntity<List<String>>(bsservice.select(), HttpStatus.OK);
