@@ -2,6 +2,10 @@ package kr.or.ddit.member.controller;
 
 import javax.servlet.http.HttpSession;
 
+import kr.or.ddit.example.service.APiExamCaptchaImageCompareService;
+import kr.or.ddit.example.service.ApiExamCaptchaImageService;
+import kr.or.ddit.example.service.ApiExamCaptchaNkeyService;
+import lombok.Setter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -17,6 +21,8 @@ import kr.or.ddit.member.util.Sha256;
 import lombok.AllArgsConstructor;
 import lombok.extern.log4j.Log4j;
 
+import java.util.Map;
+
 @RequestMapping("/member")
 @Log4j
 @Controller
@@ -28,6 +34,8 @@ public class MemberController {
 
 	@Autowired
 	private Sha256 sha256;
+
+
 
 
 
@@ -66,6 +74,9 @@ public class MemberController {
 		if (resultVO != null) {
 			session.setAttribute("member", resultVO);
 		}
+
+
+
 
 		return new ResponseEntity<MemberVO>(resultVO, HttpStatus.OK);
 	}

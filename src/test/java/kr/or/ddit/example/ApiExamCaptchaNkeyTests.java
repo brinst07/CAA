@@ -18,10 +18,10 @@ import lombok.extern.log4j.Log4j;
 @Log4j
 public class ApiExamCaptchaNkeyTests {
 
-	@Setter(onMethod_ = @Autowired)
+	@Autowired
 	ApiExamCaptchaNkeyComponent captChaApiNkey;
 	
-	@Setter(onMethod_ = @Autowired)
+	@Autowired
 	ApiExamCaptchaImageComponent captChaApiImage;
 	
 	
