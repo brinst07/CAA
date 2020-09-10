@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import kr.or.ddit.sales.domain.SigunguVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -54,5 +55,18 @@ public class SalesRestController {
 		
 		
 		return new ResponseEntity<List<SalesAnalysisVO>>(service.getSales(map), HttpStatus.OK);
+	}
+
+
+	@GetMapping(value = "/sido/{sidoCode}",
+			produces = {MediaType.APPLICATION_JSON_UTF8_VALUE, MediaType.APPLICATION_XML_VALUE})
+	public ResponseEntity<List<SigunguVO>> getSalesList(@PathVariable("sidoCode") String sidoCode){
+
+		// Ajax는 view resolver나 tilesResolver로 가지 않기 때문에 Status 값을 넣어줘야한다.
+		// 따라서 상태값을 같이 전달해주기 위해 ResponseEntity를 사용한다.
+
+		List<SigunguVO> list = service.getSigunguList(sidoCode);
+
+		return new ResponseEntity<List<SigunguVO>>(service.getSigunguList(sidoCode), HttpStatus.OK);
 	}
 }

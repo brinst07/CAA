@@ -18,7 +18,7 @@ public interface SalesService {
 	
 	/**
 	 * 시군구 중 로,역을 가져오는 메소드
-	 * @param Sido_Code
+	 * @param sido_code
 	 * @return List<SigunguVO>
 	 */
 	public List<SigunguVO> getSigunguList(String sido_code);
