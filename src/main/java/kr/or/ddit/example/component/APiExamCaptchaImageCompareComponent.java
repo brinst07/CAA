@@ -26,7 +26,7 @@ public class APiExamCaptchaImageCompareComponent implements APiExamCaptchaImageC
 		//param.put("Nkey", Nkey);
         String code = "1"; // 키 발급시 0,  캡차 이미지 비교시 1로 세팅
         String key = compare.get("Nkey"); // 캡차 키 발급시 받은 키값
-        String value = "YOUR_INPUT"; // 사용자가 입력한 캡차 이미지 글자값
+        String value = compare.get("inputValue"); // 사용자가 입력한 캡차 이미지 글자값 inputValue
         String apiURL = "https://openapi.naver.com/v1/captcha/nkey?code=" + code + "&key=" + key + "&value=" + value;
 
         Map<String, String> requestHeaders = new HashMap<>();
@@ -34,9 +34,20 @@ public class APiExamCaptchaImageCompareComponent implements APiExamCaptchaImageC
         requestHeaders.put("X-Naver-Client-Secret", clientSecret);
         String responseBody = get(apiURL, requestHeaders);
 
+
+        String[] temp = responseBody.split("\"");
+        for (int i = 0; i < temp.length; i++) {
+            System.out.println(i + " : " + temp[i]);
+        }
+        String checkValue = temp[2].replace(":", "");
+        checkValue = checkValue.replace(",", "");
+        System.out.println(checkValue);
+
         System.out.println(responseBody);
+
+
         
-		return responseBody;
+		return checkValue;
     }
 
     private static String get(String apiUrl, Map<String, String> requestHeaders){

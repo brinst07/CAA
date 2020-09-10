@@ -82,12 +82,12 @@
                     url: '/member/login',
                     data: memberJson,
                     type: 'POST',
-                    contentType : "application/json",
+                    contentType: "application/json",
                     traditional: true,
                     success: function (data) {
-                        if(data != ""){
-                            location.href="caa/main";
-                        }else{
+                        if (data != "") {
+                            location.href = "caa/main";
+                        } else {
                             swal("error!", "회원정보를 확인해주세요!", "error");
                         }
                     }, error: function (xhr, status) {
@@ -244,47 +244,76 @@
 
                 $.ajax({
                     url: '/member/login',
-                    data : member,
+                    data: member,
                     dataType: 'json',
-                    type : 'post',
-                    success : function(data){
+                    type: 'post',
+                    success: function (data) {
                         console.log(data);
-                    },fail : function(xhr, status){
-                        console.log(xhr,status);
+                    }, fail: function (xhr, status) {
+                        console.log(xhr, status);
                     }
                 });
             });
         });
 
-        $(function(){
 
-            // $.ajax({
-            //     type: "get",
-            //     url: "/member/rest/captchaImage",
-            //     dataType: "json",
-            //     success: function (result) {
+        $('#captchaImageInput').keyup(function () {
+            // type: "get",
+            // url: "/member/rest/captchaImage",
+            // dataType: "json",
+            // success: function (result) {
             //
-            //         $("#captchaImage").empty();
+            //     $("#captchaImage").empty();
             //
-            //         var temp = result.apiURL;
-            //
-            //
-            //         var captchaImage = '<div>';
-            //         captchaImage += '<img alt="캡차 이미지 입니다" src="'+temp+'">';
-            //         captchaImage += '</div>';
+            //     var temp = result.apiURL;
             //
             //
+            //     var captchaImage = '<div>';
+            //     captchaImage += '<img alt="캡차 이미지 입니다" src="'+temp+'">';
+            //     captchaImage += '</div>';
             //
-            //         $('#captchaImage').append(captchaImage);
             //
-            //     }, error: function (e) {
-            //         alert('캡차 이미지 발급 실패')
-            //     }
-            // });
-
-
-
+            //
+            //     $('#captchaImage').append(captchaImage);
+            //
+            // }, error: function (e) {
+            //     alert('캡차 이미지 발급 실패')
+            // }
         })
+
+        function captchaCheck() {
+
+            let key = $('input[name=Nkey]').val();
+            let inputValue = $('#captchaImageInput').val();
+
+
+            $.ajax({
+                type: "get",
+                url: "/member/rest/captchaCompare/" + key + "/" + inputValue,
+                dataType: "json",
+                success: function (data) {
+                    console.log(data);
+
+
+                    if (data.check == "false") {
+                        // 틀렷을 때
+                        // 안에 있는 값 지우기
+                        $('#capChaImage').empty();
+                        var captchaImg = '<img alt="캡차 이미지 입니다" src="' + data.apiURL + '">';
+                        captchaImg += '<input type="hidden" name="Nkey" value="' + data.Nkey + '">';
+                        $("#reg_submit").attr("disabled", false);
+                        $('#capChaImage').append(captchaImg);
+                    }
+                    if (data.check == "true") {
+                        $("#reg_submit").attr("disabled", true);
+                    }
+
+
+                }, fail: function (xhr, status) {
+                    console.log(xhr, status);
+                }
+            });
+        }
     </script>
 
 </head>
@@ -393,14 +422,20 @@
                         </div>
                     </div>
                     <div class="form-group form-show-validation">
-                       <label for="confirmpassword" class="placeholder"><b>캡차</b></label>
-                       <div id="capChaImage">
-                           <img src="${capCha.apiURL}">
-                       </div>
-                        <div class="position-relative" style="padding-top: 10px">
-                            <input id="capchaImageInput" name="capchaImage" class="form-control"
-                                   placeholder="사진에 보이는 문자를 입력해주세요" required="">
+                        <label for="confirmpassword" class="placeholder"><b>캡차</b></label>
+                        <div id="capChaImage">
+                            <img src="${capCha.apiURL}">
+                            <input type="hidden" name="Nkey" value="${capCha.Nkey}">
                         </div>
+                        <div class="position-relative" style="padding-top: 10px">
+                            <input id="captchaImageInput" name="captchaImageValue" class="form-control"
+                                   placeholder="사진에 보이는 문자를 입력해주세요" required="">
+                            <button class="btn btn-primary btn-round btn-lg"
+                                    type="button" onclick="captchaCheck()" style="float: right;">확인
+                            </button>
+                        </div>
+                    </div>
+                    <div class="form-group form-show-validation" style="padding: 30px">
                     </div>
                     <div class="row form-action">
                         <div class="col-md-6">
