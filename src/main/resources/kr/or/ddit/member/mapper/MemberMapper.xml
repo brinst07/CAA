@@ -14,7 +14,7 @@
     <!-- 	회원정보 수정 완벽한거 아님 -->
     <update id="modifyMember">
         update member
-        set member_id       = '2',
+        set member_id       = #{member_id ,jdbcType=VARCHAR},
             member_password = #{member_password ,jdbcType=VARCHAR},
             member_email    = #{member_email,jdbcType=VARCHAR},
             member_username = #{member_username,jdbcType=VARCHAR}
