@@ -87,6 +87,7 @@
                                         <option value="${csCodeList.cs_code }">${csCodeList.cs_code_name }</option>
                                     </c:forEach>
                                 </select> <select class="form-control form-control-sm" name="middle">
+                                    <option value="${csCodeList[0].cs_code }">전체</option>
                                     <c:forEach items="${csCodeList2 }" var="csCodeList2">
                                         <option value="${csCodeList2.cs_code }">${csCodeList2.cs_code_name }</option>
 
@@ -96,7 +97,7 @@
 
                                     <!-- 상권 업종 ↑ -->
 
-                                    <button id="viewButton" class="btn btn-primary btn-s selectStatus"
+                                    <button id="viewButton" onclick="viewButton()" class="btn btn-primary btn-s selectStatus"
                                             style="margin-left: 10px">현황보기
                                     </button>
                                 </div>
@@ -131,7 +132,7 @@
                                     <th scope="col">건 단가</th>
                                 </tr>
                                 </thead>
-                                <tbody>
+                                <tbody id="tbody">
                                 <tr>
                                     <td colspan="2">일반형</td>
                                     <td colspan="2">전체 업종구성시 기존</td>
@@ -159,18 +160,18 @@
 <script type="text/javascript">
     /* 분류 코드 Ajax ↓ */
     function selectedLarge() {
-        var cs_code = $("select[name=large]").val();
+        var large = $("select[name=large]").val();
 
         $('select[name=middle]').children('option').remove();
 
         $.ajax({
             type: 'get',
-            url: '/caa/rest/div/' + cs_code,
+            url: '/caa/rest/div/' + large,
             contentType: "application/json; charset=utf-8",
             success: function (result, status, xhr) {
-
+                let allselect = "전체";
                 console.log("Ajax 성공 : " + result);
-
+                $('select[name=middle]').append('<option value=' + large + '>'+allselect+'</option>');
                 for (var i = 0; i < result.length; i++) {
                     console.log(result[i]);
                     $('select[name=middle]').append(
@@ -191,52 +192,56 @@
 
     /* 분류 코드 Ajax ↑ */
 
-	/*시도 시군구 Ajax ↓ */
+    /*시도 시군구 Ajax ↓ */
     function selectedSido() {
         const sidoCode = $("select[name=sido]").val();
 
-		$('select[name=sigungu]').children('option').remove();
+        $('select[name=sigungu]').children('option').remove();
 
-		$.ajax({
-			type: 'get',
-			url: '/caa/rest/sido/' + sidoCode,
-			contentType: "application/json; charset=utf-8",
-			success: function (result, status, xhr) {
+        $.ajax({
+            type: 'get',
+            url: '/caa/rest/sido/' + sidoCode,
+            contentType: "application/json; charset=utf-8",
+            success: function (result, status, xhr) {
 
-				console.log("Ajax 성공 : " + result);
+                console.log("Ajax 성공 : " + result);
 
-				for (var i = 0; i < result.length; i++) {
-					console.log(result[i]);
-					$('select[name=sigungu]').append(
-							'<option value=' + result[i].sigungu_code + '>'
-							+ result[i].sigungu_name + '</option>');
-				}
+                for (var i = 0; i < result.length; i++) {
+                    console.log(result[i]);
+                    $('select[name=sigungu]').append(
+                        '<option value=' + result[i].sigungu_code + '>'
+                        + result[i].sigungu_name + '</option>');
+                }
 
-			},
-			error: function (xhr, status, er) {
-				console.log("아작쓰 실패")
-				if (er) {
-					error(er);
-				}
-			}
-		})
-
-
-
+            },
+            error: function (xhr, status, er) {
+                console.log("아작쓰 실패")
+                if (er) {
+                    error(er);
+                }
+            }
+        })
 
 
     }
-	/*시도 시군구 Ajax ↑ */
+
+    /*시도 시군구 Ajax ↑ */
+
+    /*현황 보기 ↓*/
 
 
-    $(function () {
-        var sales_ser_name = $("select[name=middle]").val();
-        var sales_bd_name = $("select[name=sel2]").val();
+    function viewButton() {
+        const sigungu = $("select[name=sigungu]").val();
+        const large = $("select[name=large]").val();
+        const middle = $("select[name=middle]").val();
+
+
+
 
 
         $.ajax({
             type: 'get',
-            url: '/sales/rest/table/' + sales_ser_name + '/' + sales_bd_name,
+            url: '/sales/rest/table/' + sigungu + '/' + large + '/' + middle,
             contentType: "application/json; charset=utf-8",
             success: function (result, status, xhr) {
 
@@ -259,7 +264,9 @@
         })
 
 
-    })
+    }
+
+    /*현황 보기 ↑*/
 </script>
 
 

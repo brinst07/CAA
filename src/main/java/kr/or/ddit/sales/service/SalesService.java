@@ -22,6 +22,13 @@ public interface SalesService {
 	 * @return List<SigunguVO>
 	 */
 	public List<SigunguVO> getSigunguList(String sido_code);
+
+	/**
+	 *  시군구 코드를 이용하여 시군구 이름을 가져온다.
+	 * @param str 시군구 코드
+	 * @return SigunguVO
+	 */
+	public SigunguVO getSigungu(String str);
 	
 	/**
 	 * 대분류 코드
@@ -36,7 +43,12 @@ public interface SalesService {
 	 * @return List<CscodeVO>
 	 */
 	public List<CscodeVO> getCscodeList2(String cs_code);
-	
+
+	/**
+	 * 테이블 값을 가져온다.
+	 * @param map 1. 상권이름, 2. 분류코드 large, 3. 분류코드 middle
+	 * @return List<SalesAnalysisVO>
+	 */
 	public List<SalesAnalysisVO> getSales(Map<String, String> map);
 	
 }

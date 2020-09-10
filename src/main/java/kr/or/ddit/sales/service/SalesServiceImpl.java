@@ -3,6 +3,7 @@ package kr.or.ddit.sales.service;
 import java.util.List;
 import java.util.Map;
 
+import lombok.Setter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -19,7 +20,7 @@ import lombok.extern.log4j.Log4j;
 @AllArgsConstructor
 public class SalesServiceImpl implements SalesService {
 	
-	@Autowired
+	@Setter
 	private SalesMapper mapper;
 
 	@Override
@@ -42,6 +43,11 @@ public class SalesServiceImpl implements SalesService {
 	@Override
 	public List<SigunguVO> getSigunguList(String sido_code) {
 		return mapper.getSigunguList(sido_code);
+	}
+
+	@Override
+	public SigunguVO getSigungu(String sigungu_code) {
+		return mapper.getSigungu(sigungu_code);
 	}
 
 	@Override
