@@ -189,7 +189,7 @@ public class CAAController {
 
 	/* 전영현 ↓ */
 	// 인구분석
-	@GetMapping("PopAnalysis")
+	@GetMapping("popAnalysis")
 	public String PopAnalysis(Model model, HttpSession session) {
 //		List<Map<String, String>> popListMap = service.getSubwayPop();
 //		model.addAttribute("popListMap", popListMap);
