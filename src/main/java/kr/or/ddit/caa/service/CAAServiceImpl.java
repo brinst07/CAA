@@ -1,20 +1,31 @@
 package kr.or.ddit.caa.service;
 
-import com.google.gson.JsonArray;
-import com.google.gson.JsonObject;
-import com.google.gson.JsonParser;
-import kr.or.ddit.caa.domain.*;
-import kr.or.ddit.caa.mapper.CAAMapper;
-import lombok.AllArgsConstructor;
-import lombok.Setter;
-import lombok.extern.log4j.Log4j;
-import org.apache.commons.collections.map.HashedMap;
-import org.springframework.stereotype.Service;
-
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import org.apache.commons.collections.map.HashedMap;
+import org.springframework.stereotype.Service;
+
+import com.google.gson.JsonArray;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
+
+import kr.or.ddit.caa.domain.CscodeVO;
+import kr.or.ddit.caa.domain.IndiVO;
+import kr.or.ddit.caa.domain.SalesByIndustryVO;
+import kr.or.ddit.caa.domain.SalesParamVO;
+import kr.or.ddit.caa.domain.SectorParamVO;
+import kr.or.ddit.caa.domain.StoreCountInfoVO;
+import kr.or.ddit.caa.domain.StoreCountVO;
+import kr.or.ddit.caa.domain.StoreVO;
+import kr.or.ddit.caa.domain.SubwayPopVO;
+import kr.or.ddit.caa.mapper.CAAMapper;
+import kr.or.ddit.sales.domain.SigunguVO;
+import lombok.AllArgsConstructor;
+import lombok.Setter;
+import lombok.extern.log4j.Log4j;
 
 @Service
 @Log4j
@@ -122,5 +133,13 @@ public class CAAServiceImpl implements CAAService {
 		return subwayPopList;
 
 	}
+
+	@Override
+	public List<SigunguVO> getSigungucodeList(String keyword) {
+		// TODO Auto-generated method stub
+		return mapper.getSigunguList(keyword);
+	}
+
+
 
 }

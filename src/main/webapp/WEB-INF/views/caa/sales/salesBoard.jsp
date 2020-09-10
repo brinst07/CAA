@@ -150,7 +150,7 @@
 
 		$.ajax({
 			type : 'get',
-			url : '/sales/rest/div/' + cs_code,
+			url : '/caa/rest/div/' + cs_code,
 			contentType : "application/json; charset=utf-8",
 			success : function(result, status, xhr) {
 

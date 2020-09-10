@@ -56,14 +56,14 @@ public class MemberController {
 		service.insertMember(vo);
 		session.setAttribute("member", vo);
 
-		return "caa/main";
+		return "caa/mainPage/main";
 	}
 
 	@RequestMapping("/modifyMember")
 	public String modifyMember(MemberVO vo) {
 
 		service.modifyMember(vo);
-		return "caa/mainPage/test";
+		return "caa/member/modifyMember";
 	}
 
 	@PostMapping(value = "/login", produces = { MediaType.APPLICATION_JSON_UTF8_VALUE })
