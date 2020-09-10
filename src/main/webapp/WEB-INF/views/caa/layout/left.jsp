@@ -77,7 +77,7 @@
                 <li class="nav-item" id="status"><a href="/caa/businessstatus"> <i class="fas fa-cloud"></i>
                     <p>업종현황</p>
                 </a></li>
-                <li class="nav-item" id="sector"><a href="iRecommendation"> <i class="fas fa-chart-bar"></i>
+                <li class="nav-item" id="sector"><a href="/ir/irSelectPage"> <i class="fas fa-chart-bar"></i>
                     <p>업종 추천</p>
                 </a></li>
                 <li class="nav-section"><span class="sidebar-mini-icon"> <i class="fa fa-ellipsis-h"></i>

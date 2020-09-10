@@ -1,5 +1,7 @@
 package kr.or.ddit.example;
 
+import java.util.Map;
+
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,11 +18,11 @@ import lombok.extern.log4j.Log4j;
 @Log4j
 public class ApiExamCaptchaNkeyTests {
 
-	@Setter(onMethod_ = @Autowired)
-	private ApiExamCaptchaNkeyComponent captChaApiNkey;
+	@Autowired
+	ApiExamCaptchaNkeyComponent captChaApiNkey;
 	
-	@Setter(onMethod_ = @Autowired)
-	private ApiExamCaptchaImageComponent captChaApiImage;
+	@Autowired
+	ApiExamCaptchaImageComponent captChaApiImage;
 	
 	
 	@Test
@@ -35,11 +37,21 @@ public class ApiExamCaptchaNkeyTests {
 		
 		log.info("temp : " + temp);
 		
-		String keyDivArray = temp.replaceAll("\"", "");
-			log.info("keyIndex => " + keyDivArray);
+		String[] keyDivArray = temp.split("\"");
 		
-		log.info("이미지 발급");
-		log.warn("이미지 발급 : " + captChaApiImage.reception(keyDivArray));
+		for (int i = 0; i < keyDivArray.length; i++) {
+			System.out.println("keyDivArray : " + i + " : " + keyDivArray[i]);
+		}
+
+		// 이미지 발급
+		Map<String, String> param = captChaApiImage.reception(keyDivArray[3]); 
+		log.warn("param : " + param);
+		log.warn("apiURL : " + param.get("apiURL"));
+		//param.put("apiURL", apiURL); // 이미지 정보
+		//param.put("Nkey", Nkey);
+		
+		
+		
 		
 	}
 }

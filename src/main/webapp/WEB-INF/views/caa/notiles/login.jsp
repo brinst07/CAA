@@ -255,6 +255,36 @@
                 });
             });
         });
+
+        $(function(){
+
+            // $.ajax({
+            //     type: "get",
+            //     url: "/member/rest/captchaImage",
+            //     dataType: "json",
+            //     success: function (result) {
+            //
+            //         $("#captchaImage").empty();
+            //
+            //         var temp = result.apiURL;
+            //
+            //
+            //         var captchaImage = '<div>';
+            //         captchaImage += '<img alt="캡차 이미지 입니다" src="'+temp+'">';
+            //         captchaImage += '</div>';
+            //
+            //
+            //
+            //         $('#captchaImage').append(captchaImage);
+            //
+            //     }, error: function (e) {
+            //         alert('캡차 이미지 발급 실패')
+            //     }
+            // });
+
+
+
+        })
     </script>
 
 </head>
@@ -362,10 +392,14 @@
                             </div>
                         </div>
                     </div>
-                    <div class="row form-sub m-0">
-                        <div class="custom-control custom-checkbox">
-                            <input type="checkbox" class="custom-control-input" name="agree" id="agree">
-                            <label class="custom-control-label" for="agree">I Agree the terms and conditions.</label>
+                    <div class="form-group form-show-validation">
+                       <label for="confirmpassword" class="placeholder"><b>캡차</b></label>
+                       <div id="capChaImage">
+                           <img src="${capCha.apiURL}">
+                       </div>
+                        <div class="position-relative" style="padding-top: 10px">
+                            <input id="capchaImageInput" name="capchaImage" class="form-control"
+                                   placeholder="사진에 보이는 문자를 입력해주세요" required="">
                         </div>
                     </div>
                     <div class="row form-action">
@@ -386,6 +420,9 @@
 <script src="/resources/assets/js/core/popper.min.js"></script>
 <script src="/resources/assets/js/core/bootstrap.min.js"></script>
 <script src="/resources/assets/js/atlantis.min.js"></script>
+<script type="text/javascript">
+
+</script>
 
 
 </body>

@@ -1,12 +1,16 @@
 package kr.or.ddit.member.controller;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import kr.or.ddit.example.service.APiExamCaptchaImageCompareService;
+import kr.or.ddit.example.service.ApiExamCaptchaImageService;
+import kr.or.ddit.example.service.ApiExamCaptchaNkeyService;
 import kr.or.ddit.member.domain.KaKaoProfile;
 import kr.or.ddit.member.domain.MemberVO;
 import kr.or.ddit.member.domain.OAuthToken;
 import kr.or.ddit.member.service.MemberService;
 import kr.or.ddit.member.util.Sha256;
 import lombok.AllArgsConstructor;
+import lombok.Setter;
 import lombok.extern.log4j.Log4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpEntity;
@@ -14,6 +18,7 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -21,6 +26,7 @@ import org.springframework.web.client.RestTemplate;
 
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
+import java.util.Map;
 import java.util.UUID;
 
 @Controller
@@ -34,10 +40,33 @@ public class MembersController {
     @Autowired
     private Sha256 sha256;
 
+    @Autowired
+    ApiExamCaptchaNkeyService captChaApiNkey;
+    @Autowired
+    ApiExamCaptchaImageService captChaApiImage;
+    @Autowired
+    APiExamCaptchaImageCompareService captChaCompare;
+
     @GetMapping("/login")
-    public String login() {
+    public String login(Model model) {
 
         log.info("login화면 전환을 위한 메소드");
+
+
+//        캡차
+        String temp = captChaApiNkey.captchaNkey();
+
+        String[] keyDivArray = temp.split("\"");
+
+        for (int i = 0; i < keyDivArray.length; i++) {
+            System.out.println("keyDivArray : " + i + " : " + keyDivArray[i]);
+        }
+
+        // 이미지 발급
+        Map<String, String> capCha = captChaApiImage.reception(keyDivArray[3]);
+        model.addAttribute("capCha", capCha);
+
+//        캡차
 
         return "login.do";
     }

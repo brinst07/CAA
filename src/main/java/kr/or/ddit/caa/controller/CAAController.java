@@ -96,28 +96,7 @@ public class CAAController {
 
 	/* 영현 */
 
-	/* ↓ 상권 추천 영현 */
-	@GetMapping("iRecommendationMap")
-	public String iRecommendationMap() {
-		return "caa/ir/iRecommendationMap";
-	}
 
-	@GetMapping("/iRecommendation")
-	public String IRtest() {
-		return "caa/ir/iRecommendation";
-	}
-
-	@GetMapping("/iRecommendation2")
-	public String IRtest2() {
-		return "caa/ir/iRecommendation2";
-	}
-
-	@GetMapping("/iRecommendation3")
-	public String IRtest3() {
-		return "caa/ir/iRecommendation3";
-	}
-
-	/* ↑ 상권 추천 */
 
 
 	
