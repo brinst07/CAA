@@ -85,8 +85,9 @@ public class SalesRestController {
 		map.put("sigungu", temp.getSigungu_name());
 		map.put("large", large);
 		map.put("middle", middle);
+		map.put("commercial_name", temp.getSigungu_name());
 
-		List<SalesAnalysisVO> list = service.getSales(map);
+//		List<SalesAnalysisVO> list = service.getSales(map);
 
 
 

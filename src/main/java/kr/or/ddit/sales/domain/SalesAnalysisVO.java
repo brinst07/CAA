@@ -8,6 +8,7 @@ public class SalesAnalysisVO {
 	private String first;
 	private String second;
 	private String sales_ser_name;
+	private String commercial_name; 
 
 
 

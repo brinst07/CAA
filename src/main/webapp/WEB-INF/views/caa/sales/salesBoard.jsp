@@ -117,33 +117,87 @@
                     <div class="card">
                         <div class="card-body">
 
-                            <table class="table table-bordered">
-                                <thead>
-                                <tr>
-                                    <th scope="col" colspan="2" rowspan="2">지역</th>
-                                    <th scope="col" colspan="2" rowspan="2">업종</th>
-                                    <th scope="col" colspan="2" style="text-align: center;">2019년 상반기</th>
-                                    <th scope="col" colspan="2" style="text-align: center;">2019년 하반기</th>
-                                </tr>
-                                <tr>
-                                    <th scope="col">월평균 매출</th>
-                                    <th scope="col">건 단가</th>
-                                    <th scope="col">월 평균 매출</th>
-                                    <th scope="col">건 단가</th>
-                                </tr>
-                                </thead>
-                                <tbody id="tbody">
-                                <tr>
-                                    <td colspan="2">일반형</td>
-                                    <td colspan="2">전체 업종구성시 기존</td>
-                                    <td>7,068</td>
-                                    <td>31,252</td>
-                                    <td>7,716</td>
-                                    <td>31,252</td>
-                                </tr>
+<!--                             <table class="table table-bordered"> -->
+<!--                                 <thead> -->
+<!--                                 <tr> -->
+<!--                                     <th scope="col" colspan="2" rowspan="2">지역</th> -->
+<!--                                     <th scope="col" colspan="2" rowspan="2">업종</th> -->
+<!--                                     <th scope="col" colspan="2" style="text-align: center;">2019년 상반기</th> -->
+<!--                                     <th scope="col" colspan="2" style="text-align: center;">2019년 하반기</th> -->
+                                    
+<!--                                 </tr> -->
+<!--                                 <tr> -->
+<!--                                     <th scope="col">월평균 매출</th> -->
+<!--                                     <th scope="col">건 단가</th> -->
+<!--                                     <th scope="col">월 평균 매출</th> -->
+<!--                                     <th scope="col">건 단가</th> -->
+<!--                                 </tr> -->
+<!--                                 </thead> -->
+<!--                                 <tbody id="tbody"> -->
+<!--                                 <tr> -->
+<!--                                     <td colspan="2">일반형</td> -->
+<!--                                     <td colspan="2">전체 업종구성시 기존</td> -->
+<!--                                     <td>7,068</td> -->
+<!--                                     <td>31,252</td> -->
+<!--                                     <td>7,716</td> -->
+<!--                                     <td>31,252</td> -->
+<!--                                 </tr> -->
 
-                                </tbody>
-                            </table>
+<!--                                 </tbody> -->
+<!--                             </table> -->
+
+						<div class="table table-head-bg-primary mt-4">
+                           <div id="basic-datatables_wrapper"
+                              class="dataTables_wrapper container-fluid dt-bootstrap4">
+                              <div class="row">
+                                 <div class="col-sm-12">
+                                    <table id="basic-datatables"
+                                       class="display table table-striped table-hover dataTable"
+                                       role="grid" aria-describedby="basic-datatables_info">
+                                       <thead>
+                                          <tr role="row">
+                                          <th class="sorting_asc" tabindex="0"
+                                                aria-controls="basic-datatables" rowspan="1" colspan="1"
+                                                aria-sort="ascending"
+                                                aria-label="Name: activate to sort column descending"
+                                                style="width: 76px;">년도</th>
+                                             <th class="sorting_asc" tabindex="0"
+                                                aria-controls="basic-datatables" rowspan="1" colspan="1"
+                                                aria-sort="ascending"
+                                                aria-label="Name: activate to sort column descending"
+                                                style="width: 76px;">주요상권</th>
+                                             <th class="sorting_asc" tabindex="0"
+                                                aria-controls="basic-datatables" rowspan="1" colspan="1"
+                                                aria-sort="ascending"
+                                                aria-label="Name: activate to sort column descending"
+                                                style="width: 76px;">세부업종</th>
+                                             <th class="sorting" tabindex="0"
+                                                aria-controls="basic-datatables" rowspan="1" colspan="1"
+                                                aria-label="Position: activate to sort column ascending"
+                                                style="width: 96px;">상반기</th>
+                                             <th class="sorting" tabindex="0"
+                                                aria-controls="basic-datatables" rowspan="1" colspan="1"
+                                                aria-label="Office: activate to sort column ascending"
+                                                style="width: 70px;">하반기</th>
+                                             <th class="sorting" tabindex="0"
+                                                aria-controls="basic-datatables" rowspan="1" colspan="1"
+                                                aria-label="Age: activate to sort column ascending"
+                                                style="width: 27px;">증감률</th>
+
+                                          </tr>
+                                       </thead>
+
+                                       <tbody id=tbody>
+                                          
+                                       </tbody>
+                                    </table>
+                                 </div>
+                              </div>
+                              <div class="row">
+                                 <div class="col-sm-12 col-md-5"></div>
+                              </div>
+                           </div>
+                        </div>
 
                         </div>
                     </div>
@@ -204,7 +258,6 @@
             contentType: "application/json; charset=utf-8",
             success: function (result, status, xhr) {
 
-                console.log("Ajax 성공 : " + result);
 
                 for (var i = 0; i < result.length; i++) {
                     console.log(result[i]);
@@ -235,7 +288,7 @@
         const large = $("select[name=large]").val();
         const middle = $("select[name=middle]").val();
 
-
+		
 
 
 
@@ -244,15 +297,40 @@
             url: '/sales/rest/table/' + sigungu + '/' + large + '/' + middle,
             contentType: "application/json; charset=utf-8",
             success: function (result, status, xhr) {
+				
+            	$('#tbody').empty();
+					let tdTags = '';
+				
+				for (var i = 0; i < result.length; i++) {
+						tdTags += '<tr>';
+						tdTags += '<td>'+result[i].sales_year+' 년</td>';
+						tdTags += '<td>'+result[i].commercial_name+'</td>';
+						tdTags += '<td>'+result[i].sales_ser_name+'</td>';
+						tdTags += '<td>'+result[i].first+' 원</td>';
+						tdTags += '<td>'+result[i].second+' 원</td>';
+						
+						let tempCal = result[i].first - result[i].second;
+						if(tempCal > 0){
+							tdTags += '<td>'+tempCal+' 원 <div style="color:blue; display:inline">▲</div></td>';
+						}else if(tempCal < 0){
+							tdTags += '<td>'+tempCal+' 원 <div style="color:red; display:inline">▼</div> </td>';
+						}else if(tempCal == 0){
+							tdTags += '<td>'+tempCal+' 원 <td>'+tableValue+'% <div style=" display:inline">-</div></td>';
+						}
+						
+						
+					
+						tdTags += '<tr>';
+				}
+				
+				
+				$('#tbody').append(tdTags);
+				
+					
+            	
+                
 
-                console.log("Ajax 성공 : " + result);
-
-                for (var i = 0; i < result.length; i++) {
-                    console.log(result[i]);
-                    $('select[name=middle]').append(
-                        '<option value=' + result[i].cs_code + '>'
-                        + result[i].cs_code_name + '</option>');
-                }
+                
 
             },
             error: function (xhr, status, er) {
