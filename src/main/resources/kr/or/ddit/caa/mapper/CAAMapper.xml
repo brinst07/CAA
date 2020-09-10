@@ -13,8 +13,8 @@
         select *
         from cs_code
         where cs_code2 = #{keyword}
-
     </select>
+    
     <select id="getSigunguList" resultType="kr.or.ddit.sales.domain.SigunguVO">
         select *
         from sigungu

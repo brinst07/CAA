@@ -4,9 +4,9 @@ import lombok.Data;
 
 @Data
 public class BusinessStatusResultVO {
-	private String sangun;
-	private String upjong;
+	private String sales_ser_name;
+	private String sales_bd_name;
 	private String first;
-	private String last;
-	private String percentage;
+	private String second;
+	private String store;
 }

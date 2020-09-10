@@ -1,6 +1,7 @@
 package kr.or.ddit.bs.service;
 
 import kr.or.ddit.bs.domain.BusinessStatusParamVO;
+import kr.or.ddit.bs.domain.BusinessStatusResultVO;
 import kr.or.ddit.bs.domain.BusinessStatusVO;
 import kr.or.ddit.bs.mapper.BusinessStatusMapper;
 import kr.or.ddit.caa.domain.CscodeVO;
@@ -25,7 +26,7 @@ public class BSServiceImpl implements BSService{
 	}
 
 	@Override
-	public List<BusinessStatusVO> getList(BusinessStatusParamVO vo) {
+	public List<BusinessStatusResultVO> getList(BusinessStatusParamVO vo) {
 		// TODO Auto-generated method stub
 		return mapper.getList(vo);
 	}

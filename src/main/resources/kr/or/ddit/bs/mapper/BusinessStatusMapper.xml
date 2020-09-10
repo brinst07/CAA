@@ -10,9 +10,24 @@
 	</select>
 	
 	
-	<select id="getList"    resultType="kr.or.ddit.bs.domain.BusinessStatusVO">
-		select SALES_BUNGI_CODE ,SALES_BD_NAME,SALES_SER_NAME,SALES_STORE_COUNT from SALES_TEMP where SALES_BD_NAME like  '%' || #{area2} || '%' and SALES_SER_NAME like  '%' || #{detailselectStatus} || '%' order by  SALES_BUNGI_CODE
+	<select id="getList"    resultType="kr.or.ddit.bs.domain.BusinessStatusResultVO">
+
+
+		select  SALES_SER_NAME,
+       SALES_BD_NAME,
+       MIN(DECODE(SALES_BUNGI_CODE, 2, SALES_STORE_COUNT)) FIRST,
+       MIN(DECODE(SALES_BUNGI_CODE, 4, SALES_STORE_COUNT)) SECOND,
+       MIN(DECODE(SALES_BUNGI_CODE, 2, SALES_STORE_COUNT))- MIN(DECODE(SALES_BUNGI_CODE, 4, SALES_STORE_COUNT)) STORE
+
+
+		from SALES_TEMP_CSCODE
+		where SALES_BD_NAME = #{area2}
+		  and SALES_CS_CODE like '%'||#{upjong}|| '%'
+		  and SALES_CS_CODE like '%'||#{detailupjong} || '%'
+		 and SALES_BUNGI_CODE IN ( 2, 4)
+		GROUP BY SALES_SER_NAME, SALES_BD_NAME
 	</select>
+	
 	
 	
 </mapper>

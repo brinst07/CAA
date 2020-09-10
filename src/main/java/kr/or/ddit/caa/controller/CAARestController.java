@@ -2,6 +2,9 @@ package kr.or.ddit.caa.controller;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
+
+import kr.or.ddit.bs.domain.BusinessStatusParamVO;
+import kr.or.ddit.bs.domain.BusinessStatusResultVO;
 import kr.or.ddit.bs.service.BSService;
 import kr.or.ddit.caa.domain.*;
 import kr.or.ddit.caa.service.CAAService;
@@ -92,11 +95,21 @@ public class CAARestController {
 
 	@GetMapping(value = "/businessstatus/{upjong}/{detailupjong}/{sigungu}", produces = { MediaType.APPLICATION_JSON_UTF8_VALUE,
 			MediaType.APPLICATION_XML_VALUE })
-	public ResponseEntity<List<String>> detailCscodeList(@PathVariable("upjong") String upjong,@PathVariable("detailupjong") String detailupjong,@PathVariable("sigungu") String sigungu) {
+	public ResponseEntity<List<BusinessStatusResultVO>> detailCscodeList(@PathVariable("upjong") String upjong,@PathVariable("detailupjong") String detailupjong,@PathVariable("sigungu") String sigungu) {
+		
+		List<BusinessStatusResultVO> totalList = new ArrayList<BusinessStatusResultVO>();
+		
+		
+		BusinessStatusParamVO  vo = new BusinessStatusParamVO();
+		vo.setArea2(sigungu);
+		vo.setUpjong(upjong);
+		vo.setDetailupjong(detailupjong);
+	
+		totalList= bsservice.getList(vo);
 		
 		log.info("ajaxController");
-
-		return new ResponseEntity<List<String>>(bsservice.select(), HttpStatus.OK);
+		
+		return new ResponseEntity<List<BusinessStatusResultVO>>(totalList, HttpStatus.OK);
 
 	}
 

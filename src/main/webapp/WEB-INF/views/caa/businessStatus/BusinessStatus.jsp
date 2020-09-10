@@ -53,7 +53,7 @@
 					console.log(result[i]);
 					if(i==0){
 						$('select[name=sel2]').append(
-								'<option>전체</option>');
+								'<option value="a">전체</option>');
 					}
 					$('select[name=sel2]').append(
 							'<option value=' + result[i].sigungu_name + '>'
@@ -81,15 +81,14 @@
 			contentType : "application/json; charset=utf-8",
 			success : function(result, status, xhr) {
 
-				console.log("Ajax 성공 : " + result);
 				for (var i = 0; i < result.length; i++) {
 					console.log(result[i]);
 					if(i==0){
 						$('select[name=middle]').append(
-								'<option value="전체">전체</option>');
+								'<option value="a">전체</option>');
 					}
 					$('select[name=middle]').append(
-							'<option value=' + result[i].cs_code_name + '>'
+							'<option value=' + result[i].cs_code + '>'
 									+ result[i].cs_code_name + '</option>');
 				}
 
@@ -119,7 +118,6 @@
 		var params = '?upjong='+upjong;
 		params += '&detailupjong='+detailupjong;
 		params += '&sigungu='+sigungu;
-		alert(params);
 		if(  sido == '' || sido == '전체' || sigungu == '전체' || sido == '1000' || sigungu == '1000' ||  sigungu == ''  ){
 			alert("지역을 선택해주세요.");
 			return false;
@@ -129,13 +127,40 @@
 			return false;
 		}
 		
+		$('#tdResult').children('tr').remove();
+		
 		$.ajax({
 			type : 'get',
 			url : '/caa/rest/businessstatus/'+upjong+'/'+detailupjong+'/'+sigungu,
 			contentType : "application/json; charset=utf-8",
 			success : function(result, status, xhr) {
 
-				console.log("Ajax 성공 : " + result);
+				console.log("Ajax 성!!!!공!!!!! : " + result);
+				
+					if(result[0] != null){
+						for (var i = 0; i < result.length; i++) {
+							console.log(result[i]);
+								
+							var tdResult  = '<tr>';
+							tdResult  += '<td style="text-align:center;" >' + result[i].sales_bd_name+'</td>';
+							tdResult += '<td style="text-align:center;">' + result[i].sales_ser_name + '</td>';
+							
+							tdResult += '<td style="text-align:center;">' + result[i].first+'</td>';
+							tdResult += '<td style="text-align:center;">' + result[i].second+'</td>';
+							if ( result[i].store > 0) {
+									tdResult += '<td style="text-align:center;">' + result[i].store+'<div style="color:blue; display:inline">▲</div></td>';
+								}else if( result[i].store < 0){
+									tdResult += '<td style="text-align:center;">' + result[i].store+'<div style="color:red; display:inline">▼</div></td>';
+								}else {
+									tdResult += '<td style="text-align:center;">' + result[i].store+'</td>';
+									
+								}
+							tdResult += '</tr>';
+							$('#tdResult').append(
+									tdResult
+							);
+					};
+				}
 
 			},
 			error : function(xhr, status, er) {
@@ -258,7 +283,7 @@ CSS Just for demo purpose, don't include it in your project
 													</c:forEach>
 										</select> 
 										<select name="sel2" id="sel2" class="form-control form-control-sm selectStatus">
-												<option value="">전체</option>
+												<option value="0">전체</option>
 										</select>
 										<!-- 상권 업종 ↓ -->
 										 <label class="selectStatus selectgroup-item" style="padding-left: 10px"> <input type="radio" name="value" value="50" class="selectgroup-input" checked="checked"> <span class="selectgroup-button">상권업종</span>
@@ -287,7 +312,7 @@ CSS Just for demo purpose, don't include it in your project
 					<div class="col-md-12">
 						<div class="card">
 							<div class="card-body">
-								<div class="table-responsive">
+								<div class="table table-head-bg-primary mt-4">
 									<div id="basic-datatables_wrapper"
 										class="dataTables_wrapper container-fluid dt-bootstrap4">
 										<div class="row">
@@ -323,20 +348,8 @@ CSS Just for demo purpose, don't include it in your project
 														</tr>
 													</thead>
 
-													<tbody>
-														<c:forEach items="${bsList} " var="Info" varStatus="status">
-															
-															<c:if test="status eq 1 || status eq 3 ">
-																<tr role="row" class="odd">
-																	<td class="sorting_1">${Info.sales_bd_name }</td>
-																	<td>${Info.sales_ser_name }</td>
-																	<td>${Info.sales_first}</td>
-																	<td>${Info.sales_last }</td>
-																	<td>${Info.sales_store_count }</td>
-		
-																</tr>
-															</c:if>
-														</c:forEach>
+													<tbody id=tdResult>
+														
 													</tbody>
 												</table>
 											</div>
@@ -377,67 +390,6 @@ CSS Just for demo purpose, don't include it in your project
 	<!-- Atlantis JS -->
 	<script src="/resources/assets/js/atlantis.min.js"></script>
 
-	<script>
-		$(document)
-				.ready(
-						function() {
-							$('#basic-datatables').DataTable({});
 
-							$('#multi-filter-select')
-									.DataTable(
-											{
-												"pageLength" : 5,
-												initComplete : function() {
-													this
-															.api()
-															.columns()
-															.every(
-																	function() {
-																		var column = this;
-																		var select = $(
-																				'<select class="form-control"><option value=""></option></select>')
-																				.appendTo(
-																						$(
-																								column
-																										.footer())
-																								.empty())
-																				.on(
-																						'change',
-																						function() {
-																							var val = $.fn.dataTable.util
-																									.escapeRegex($(
-																											this)
-																											.val());
-
-																							column
-																									.search(
-																											val ? '^'
-																													+ val
-																													+ '$'
-																													: '',
-																											true,
-																											false)
-																									.draw();
-																						});
-
-																		column
-																				.data()
-																				.unique()
-																				.sort()
-																				.each(
-																						function(
-																								d,
-																								j) {
-																							select
-																									.append('<option value="'+d+'">'
-																											+ d
-																											+ '</option>')
-																						});
-																	});
-												}
-											});
-
-						});
-	</script>
 </body>
 </html>
