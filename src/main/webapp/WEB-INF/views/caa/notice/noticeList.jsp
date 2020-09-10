@@ -75,7 +75,7 @@
                                                     <td><a class="move"
                                                            href='/notice/get?board_id=<c:out value="${board.board_id }"></c:out>'>
                                                         <c:out value="${board.board_title }"></c:out></a></td>
-                                                    <td><c:out value="${board.member_id }"/></td>
+                                                    <td><c:out value="${member.member_id }"/></td>
                                                     <td><fmt:formatDate pattern="yyyy-MM-dd"
                                                                         value="${board.board_datetime }"/></td>
 
