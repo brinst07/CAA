@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="kr.or.ddit.ir.mapper.RecommandMapper">
+    <select id="SectorsLargeLevel" parameterType="String" resultType="kr.or.ddit.ir.domain.SectorsLargeLevelVO">
+        select sum(SALES_STORE_COUNT) store_count, a.decode sectors
+        from (
+                 select SALES_STORE_COUNT, decode(substr(SALES_CS_CODE, 1, 1), 'a', '외식업', 'b', '서비스업', 'c', '소매업') decode
+                 from SALES_TEMP_CSCODE
+                 where SALES_BD_NAME = #{sales_bd_name}
+                   and SALES_BUNGI_CODE = '4'
+                 group by sales_bd, SALES_BD_NAME, SALES_SER_NAME, SALES_CS_CODE, SALES_STORE_COUNT) a
+        group by a.decode
+    </select>
+
+    <select id="SectorsMiddleLevel" parameterType="String" resultType="kr.or.ddit.ir.domain.SectorsMiddleLevelVO">
+        select SALES_BD, SALES_BD_NAME, SALES_SER_NAME, TO_NUMBER(SALES_STORE_COUNT) sales_store_count, SALES_CS_CODE
+        from SALES_TEMP_CSCODE
+        where SALES_BD_NAME = #{sales_bd_name}
+          and SALES_BUNGI_CODE = '4'
+        group by sales_bd, SALES_BD_NAME, SALES_SER_NAME, SALES_CS_CODE, SALES_STORE_COUNT
+        order by TO_NUMBER(SALES_STORE_COUNT) desc
+    </select>
+
+
+</mapper>

@@ -33,7 +33,7 @@
 						<div class="nav-scroller d-flex">
 							<div
 								class="nav nav-line nav-color-info d-flex align-items-center justify-contents-center">
-								<a class="nav-link active" href="iRecommendation">업종별 등급<span
+								<a class="nav-link active" href="RecommendSectorsLevel">업종별 등급<span
 									class="badge badge-info ml-2">8</span></a> <a class="nav-link"
 									href="iRecommendation2">상권 유형 판별</a> <a class="nav-link"
 									href="iRecommendation3">안정성 우수 업종<span
@@ -51,7 +51,7 @@
 
 				<div class="col-md-12">
 				<div class="row">
-				<div class="col-md-6">
+				<div class="col-md-6" id="SectorsLarge">
 					<div class="card">
 						<div class="card-header">
 							<div class="card-title">Radar Chart</div>
@@ -65,7 +65,7 @@
 
 
 				</div>
-				<div class="col-md-6">
+				<div class="col-md-6" id="SectorsMiddle">
 					<div class="card">
 						<div class="card-header">
 							<div class="card-title">Radar Chart</div>
@@ -95,9 +95,9 @@
 	var myRadarChart = new Chart(radarChart, {
 		type : 'radar',
 		data : {
-			labels : [ 'Running', 'Swimming', 'Eating', 'Cycling', 'Jumping' ],
+			labels : [  'Eating', 'Cycling', 'Jumping' ],
 			datasets : [ {
-				data : [ 20, 10, 30, 2, 30 ],
+				data : [  30, 2, 30 ],
 				borderColor : '#1d7af3',
 				backgroundColor : 'rgba(29, 122, 243, 0.25)',
 				pointBackgroundColor : "#1d7af3",
@@ -105,7 +105,7 @@
 				pointRadius : 3,
 				label : 'Team 1'
 			}, {
-				data : [ 10, 20, 15, 30, 22 ],
+				data : [  30, 22 ],
 				borderColor : '#716aca',
 				backgroundColor : 'rgba(113, 106, 202, 0.25)',
 				pointBackgroundColor : "#716aca",

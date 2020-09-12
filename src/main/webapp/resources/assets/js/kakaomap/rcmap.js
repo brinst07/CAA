@@ -18,7 +18,7 @@ function deletePolygon(polygons) {
 }
 
 function callArea(area){
-    location.href = "/ir/callArea?areaName="+area;
+    location.href = "/ir/recommendSectorsLevel?areaName="+area;
 }
 
 polygons = [];

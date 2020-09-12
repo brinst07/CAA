@@ -50,6 +50,7 @@
 	<mybatis-spring:scan base-package="kr.or.ddit.bs.mapper" />
 	<mybatis-spring:scan base-package="kr.or.ddit.notice.mapper" />
 	<mybatis-spring:scan base-package="kr.or.ddit.member.mapper" />
+	<mybatis-spring:scan base-package="kr.or.ddit.ir.mapper" />
 
 
 

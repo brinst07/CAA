@@ -35,7 +35,7 @@
 								<div class="nav-scroller d-flex">
 									<div
 										class="nav nav-line nav-color-info d-flex align-items-center justify-contents-center">
-										<a class="nav-link" href="iRecommendation">업종별 등급<span
+										<a class="nav-link" href="RecommendSectorsLevel">업종별 등급<span
 											class="badge badge-info ml-2">8</span></a> <a
 											class="nav-link active" href="iRecommendation2">상권 유형 판별</a>
 										<a class="nav-link" href="iRecommendation3">안정성 우수 업종<span
