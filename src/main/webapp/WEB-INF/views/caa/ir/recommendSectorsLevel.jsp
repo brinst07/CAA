@@ -54,11 +54,11 @@
 				<div class="col-md-6" id="SectorsLarge">
 					<div class="card">
 						<div class="card-header">
-							<div class="card-title">Radar Chart</div>
+							<div class="card-title">대분류</div>
 						</div>
 						<div class="card-body">
 							<div class="chart-container">
-								<canvas id="radarChart"></canvas>
+								<canvas id="LargeRadarChart"></canvas>
 							</div>
 						</div>
 					</div>
@@ -68,11 +68,11 @@
 				<div class="col-md-6" id="SectorsMiddle">
 					<div class="card">
 						<div class="card-header">
-							<div class="card-title">Radar Chart</div>
+							<div class="card-title">중분류</div>
 						</div>
 						<div class="card-body">
 							<div class="chart-container">
-								<canvas id="radarChart2"></canvas>
+								<canvas id="MiddleRadarChart"></canvas>
 							</div>
 						</div>
 					</div>
@@ -90,9 +90,14 @@
 </body>
 
 <script>
-	radarChart = document.getElementById('radarChart').getContext('2d');
+let SectorsLargeLevel = '${SectorsLargeLevel}';
+let SectorsMiddleLevel = '${SectorsMiddleLevel}';
 
-	var myRadarChart = new Chart(radarChart, {
+const jsonSectorsLargeLevel = JSON.parse(SectorsLargeLevel);
+
+	myRadarChart = document.getElementById('LargeRadarChart').getContext('2d');
+
+	var myRadarChart = new Chart(LargeRadarChart, {
 		type : 'radar',
 		data : {
 			labels : [  'Eating', 'Cycling', 'Jumping' ],
@@ -104,14 +109,6 @@
 				pointHoverRadius : 4,
 				pointRadius : 3,
 				label : 'Team 1'
-			}, {
-				data : [  30, 22 ],
-				borderColor : '#716aca',
-				backgroundColor : 'rgba(113, 106, 202, 0.25)',
-				pointBackgroundColor : "#716aca",
-				pointHoverRadius : 4,
-				pointRadius : 3,
-				label : 'Team 2'
 			}, ]
 		},
 		options : {
@@ -122,7 +119,10 @@
 			}
 		}
 	});
-	var myRadarChart = new Chart(radarChart2, {
+	
+	myRadarChart = document.getElementById('MiddleRadarChart').getContext('2d');
+	
+	var myRadarChart = new Chart(MiddleRadarChart, {
 		type : 'radar',
 		data : {
 			labels : [ 'Running', 'Swimming', 'Eating', 'Cycling', 'Jumping' ],
