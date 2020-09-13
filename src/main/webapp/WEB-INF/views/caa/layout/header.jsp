@@ -87,6 +87,7 @@
 <!-- CSS Files -->
 <link rel="stylesheet" href="/resources/assets/css/bootstrap.min.css">
 <link rel="stylesheet" href="/resources/assets/css/atlantis.css">
+<script src="/resources/assets/js/jquery.oLoader.js"></script>
 <script>
     WebFont.load({
         google: {
@@ -116,8 +117,22 @@
 
             });
         });
+        $(document).ajaxStart(function(){
+            $('body').oLoader({
+                wholeWindow: true, //makes the loader fit the window size
+                lockOverflow: true, //disable scrollbar on body
+                backgroundColor: '#000',
+                fadeInTime: 1000,
+                fadeLevel: 0.4,
+                image: '/resources/assets/img/Spin-1s-51px.gif'
+            });
+        }).ajaxStop(function(){
+            $('body').oLoader('hide');
+        });
+
     });
 </script>
+<div id="loading-custom-overlay"></div>
 <div class="wrapper fullheight-side sidebar_minimize">
     <!-- Logo Header -->
     <div class="logo-header position-fixed" data-background-color="blue">

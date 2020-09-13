@@ -2,10 +2,6 @@
 <script type="text/javascript">
     $(function () {
 
-        $(document).ajaxStop(function () {
-            alert('ajax stop!');
-        });
-
         // 차트 색을 정해주기 위한 배열 선언
         const color = [];
         var colorObj = new Object();

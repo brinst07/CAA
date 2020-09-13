@@ -65,12 +65,13 @@
 
 			console.log(d);
 
-			var frequency_list = $.post({
+			var frequency_list = $.ajax({
 				url : "/sns/rest/wordCloud",
 				dataType : "json",
 				contentType : "application/json",
 				async : false,
-				data : JSON.stringify(d)
+				data : JSON.stringify(d),
+				type : 'post'
 			}).responseText;
 			var list = JSON.parse(frequency_list);
 
