@@ -20,13 +20,7 @@
 </script>
 <div class="main-panel full-height">
     <div class="container">
-        <div class="panel-header">
-            <div class="owl-carousel owl-theme owl-img-responsive">
-                <div class="item"><img src="/resources/assets/img/one.png"></div>
-                <div class="item"><img src="/resources/assets/img/two.png"></div>
-                <div class="item"><img src="/resources/assets/img/three.png"></div>
-            </div>
-        </div>
+        v
         <div class="row row-card-no-pd">
             <div class="col-sm-6 col-md-2 animation">
                 <div class="card card-stats card-round">
