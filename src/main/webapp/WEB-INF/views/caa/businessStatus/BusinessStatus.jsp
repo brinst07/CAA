@@ -135,7 +135,7 @@
 			contentType : "application/json; charset=utf-8",
 			success : function(result, status, xhr) {
 
-				console.log("Ajax 성!!!!공!!!!! : " + result);
+				console.log("Ajax Success ");
 				
 					if(result[0] != null){
 						for (var i = 0; i < result.length; i++) {
@@ -155,7 +155,7 @@
 									tdResult += '<td style="text-align:center;">' + result[i].store+'</td>';
 									
 								}
-							tdResult += '</tr>';
+							tdResult +='</tr>';
 							$('#tdResult').append(
 									tdResult
 							);

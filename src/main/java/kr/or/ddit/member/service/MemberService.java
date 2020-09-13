@@ -1,5 +1,7 @@
 package kr.or.ddit.member.service;
 
+import kr.or.ddit.member.domain.FindIDVO;
+import kr.or.ddit.member.domain.FindPWVO;
 import kr.or.ddit.member.domain.MemberVO;
 
 public interface MemberService {
@@ -22,4 +24,10 @@ public interface MemberService {
     public void insertSocialMember(MemberVO memVo);
 
     public MemberVO selectMember(String id);
+
+	public String findID(FindIDVO vo);
+	
+	public String findPW(FindPWVO vo);
+	
+	public void modifyPW(MemberVO vo);
 }

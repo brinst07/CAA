@@ -1,13 +1,10 @@
 package kr.or.ddit.member.controller;
 
-import kr.or.ddit.example.service.APiExamCaptchaImageCompareService;
-import kr.or.ddit.example.service.ApiExamCaptchaImageService;
-import kr.or.ddit.example.service.ApiExamCaptchaNkeyService;
-import kr.or.ddit.member.service.MemberService;
-import kr.or.ddit.member.util.GenerateCertCharacter;
-import lombok.AllArgsConstructor;
-import lombok.Setter;
-import lombok.extern.log4j.Log4j;
+import java.util.HashMap;
+import java.util.Map;
+
+import javax.mail.internet.MimeMessage;
+
 import org.apache.commons.collections.map.HashedMap;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -15,11 +12,27 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RestController;
 
-import javax.mail.internet.MimeMessage;
-import java.util.HashMap;
-import java.util.Map;
+import kr.or.ddit.example.service.APiExamCaptchaImageCompareService;
+import kr.or.ddit.example.service.ApiExamCaptchaImageService;
+import kr.or.ddit.example.service.ApiExamCaptchaNkeyService;
+import kr.or.ddit.member.domain.FindIDVO;
+import kr.or.ddit.member.domain.FindPWVO;
+import kr.or.ddit.member.domain.MemberVO;
+import kr.or.ddit.member.service.MemberService;
+import kr.or.ddit.member.util.GenerateCertCharacter;
+import kr.or.ddit.member.util.Sha256;
+import lombok.AllArgsConstructor;
+import lombok.Setter;
+import lombok.extern.log4j.Log4j;
 
 @RestController
 @Log4j
@@ -32,43 +45,104 @@ public class MemberRestController {
     JavaMailSender mailSender;
     @Setter
     GenerateCertCharacter password;
-
+	@Autowired
+	private Sha256 sha256;
+    
     @Setter
     ApiExamCaptchaNkeyService captChaApiNkey;
     @Setter
     ApiExamCaptchaImageService captChaApiImage;
     @Setter
     APiExamCaptchaImageCompareService captChaCompare;
+    
+ // 아이디 찾기 메일
+ 	@GetMapping(value = "/emailSend/{clientemail}/{name}", produces = { MediaType.APPLICATION_JSON_UTF8_VALUE,
+ 			MediaType.APPLICATION_XML_VALUE })
+ 	public ResponseEntity<String> sendMail(@PathVariable("clientemail") String clientemail,@PathVariable("name") String name) {
+ 		log.info("ajaxController");
+ 		log.info("고객 이메일 정보 : " + clientemail);
+ 		log.info("고객 이름 정보 : " + name);
+ 		FindIDVO vo = new FindIDVO();
+ 		vo.setMember_email(clientemail);
+ 		vo.setMember_username(name);
+ 		String userID = service.findID(vo);
+ 		if(userID != null) {
+	 		String from = "chawanho9@gmail.com";
+	        String subject = "ThinkPeople에서 보낸 고객님 정보입니다.";
+	 		String to = clientemail;
+	 		String contents = name+"님이 요청하신 아이디는["+ userID +"]입니다.";
+	 		
+	 		try {
+	 			MimeMessage message = mailSender.createMimeMessage();
+	 			MimeMessageHelper messageHelper = new MimeMessageHelper(message, true, "UTF-8");
+	
+	 			messageHelper.setFrom(from); // 보내는사람 생략하거나 하면 정상작동을 안함
+	 			messageHelper.setTo(to); // 받는사람 이메일
+	 			messageHelper.setSubject(subject); // 메일제목은 생략이 가능하다
+	 			messageHelper.setText(contents); // 메일 내용
+	
+	 			mailSender.send(message);
+	 		} catch (Exception e) {
+	 			System.out.println(e);
+	 		}
+	
+	 		return new ResponseEntity<>(HttpStatus.OK);
+ 		}else  return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+ 	}
+ 	// 비밀번호 찾기 메일
+ 	@PostMapping(value = "emailSendPW", produces = { MediaType.APPLICATION_JSON_UTF8_VALUE,
+ 			MediaType.APPLICATION_XML_VALUE })
+ 	public ResponseEntity<String> emailSendPW(@RequestBody Map<String,String>map) {
+ 		log.info("ajaxController");
+ 		log.info("고객 아이디 정보 : " + map.get("userID"));
+ 		log.info("고객 이름 정보 : " + map.get("userName"));
+ 		log.info("고객 이메일 정보 : " + map.get("userEmail"));
+ 		FindPWVO vo = new FindPWVO();
+ 		vo.setUserEmail(map.get("userEmail"));
+ 		vo.setUserName(map.get("userName"));
+ 		vo.setUserID(map.get("userID"));
+ 		
+ 		String userPW =  service.findPW(vo);
+ 		
+ 		if(userPW != null) {
+ 			//1.해당 비밀번호가 존재하면  랜덤 비밀번호를 만들기 
+ 			String newPW = password.excuteGenerate();
+ 			String contents =  map.get("userName")+"님의  비밀번호는["+ newPW +"]입니다.";
+ 			
+ 			//2. 랜덤 비밀번호를 Sha256.java를 이용해 암호화 하기 
+ 			String keynewPW =  sha256.encrypt(newPW);
+ 			
+ 			//이메일 보내기
+ 			String from = "chawanho9@gmail.com";
+ 			String subject = "ThinkPeople에서 보낸 고객님 정보입니다.";
+ 			String to =  map.get("userEmail");
+ 			
+			//3. 사용자 비밀번호 update하기  		
+ 			MemberVO newVO = new MemberVO();
+ 			newVO.setMember_id(map.get("userID"));
+ 			newVO.setMember_password(keynewPW);
+ 			
+ 			service.modifyPW(newVO);
+ 			try {
+ 				MimeMessage message = mailSender.createMimeMessage();
+ 				MimeMessageHelper messageHelper = new MimeMessageHelper(message, true, "UTF-8");
+ 				
+ 				messageHelper.setFrom(from); // 보내는사람 생략하거나 하면 정상작동을 안함
+ 				messageHelper.setTo(to); // 받는사람 이메일
+ 				messageHelper.setSubject(subject); // 메일제목은 생략이 가능하다
+ 				messageHelper.setText(contents); // 메일 내용
+ 				
+ 				mailSender.send(message);
+ 				
+ 				
+ 			} catch (Exception e) {
+ 				System.out.println(e);
+ 			}
+ 			
+ 			return new ResponseEntity<>(HttpStatus.OK);
+ 		}else  return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+ 	}
 
-    // 메일 아직 완전안됨
-    @GetMapping(value = "/sendMail/{clientemail}", produces = {MediaType.APPLICATION_JSON_UTF8_VALUE,
-            MediaType.APPLICATION_XML_VALUE})
-    public ResponseEntity<String> sendMail(@PathVariable("clientemail") String clientemail) {
-        log.info("ajaxController");
-        log.info("고객 이메일 정보 : " + clientemail);
-
-        String from = "chawanho9@gmail.com";
-        String to = "jyh6842@naver.com";
-        String subject = clientemail;
-        String contents = "고객님이 요청하신 아이디는+ + 입니다.";
-
-        try {
-            MimeMessage message = mailSender.createMimeMessage();
-            MimeMessageHelper messageHelper = new MimeMessageHelper(message, true, "UTF-8");
-
-            messageHelper.setFrom(from); // 보내는사람 생략하거나 하면 정상작동을 안함
-            messageHelper.setTo(to); // 받는사람 이메일
-            messageHelper.setSubject(subject); // 메일제목은 생략이 가능하다
-            messageHelper.setText(contents); // 메일 내용
-
-            mailSender.send(message);
-        } catch (Exception e) {
-            System.out.println(e);
-        }
-
-        return new ResponseEntity<>(HttpStatus.OK);
-
-    }
 
     @ResponseBody
     @PostMapping("/checkmail")

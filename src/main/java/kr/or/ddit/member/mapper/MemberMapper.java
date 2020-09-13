@@ -1,5 +1,7 @@
 package kr.or.ddit.member.mapper;
 
+import kr.or.ddit.member.domain.FindIDVO;
+import kr.or.ddit.member.domain.FindPWVO;
 import kr.or.ddit.member.domain.MemberVO;
 
 public interface MemberMapper {
@@ -22,4 +24,11 @@ public interface MemberMapper {
     public void insertSocialMember(MemberVO memVo);
 
     public MemberVO selectMember(String id);
+
+	public String findID(FindIDVO vo);
+	
+	public void modifyPW(MemberVO vo);
+
+	public String findPW(FindPWVO vo);
+	
 }

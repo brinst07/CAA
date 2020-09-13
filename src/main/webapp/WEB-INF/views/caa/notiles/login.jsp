@@ -330,12 +330,13 @@
             <div class="login-form">
 
                 <div class="form-group">
-                    <label for="member_id" class="placeholder"><b>Username</b></label>
+                    <label for="member_id" class="placeholder"><b>ID</b></label>
+                       <a href="/member/findID" class="link float-right">아이디찾기</a>
                     <input id="username" name="member_id" type="text" class="form-control" required="">
                 </div>
                 <div class="form-group">
                     <label for="password" class="placeholder"><b>Password</b></label>
-                    <a href="#" class="link float-right">비밀번호찾기</a>
+                    <a href="/member/findPW" class="link float-right">비밀번호찾기</a>
                     <div class="position-relative">
                         <input id="password" name="member_password" type="password" class="form-control" required="">
                         <div class="show-password">

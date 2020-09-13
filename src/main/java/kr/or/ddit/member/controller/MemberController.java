@@ -90,6 +90,15 @@ public class MemberController {
 		return new ResponseEntity<String>(id, HttpStatus.OK);
 	};
 
-
+	
+	@RequestMapping("/findID")
+	public String findID() {
+		return "caa/member/SearchIDMember";
+	}
+	
+	@RequestMapping("/findPW")
+	public String findPW() {
+		return "caa/member/SearchPWMember";
+	}
 
 }

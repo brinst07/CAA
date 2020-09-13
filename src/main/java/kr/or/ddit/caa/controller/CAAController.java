@@ -258,19 +258,11 @@ public class CAAController {
 		return "caa/member/SearchIDMember";
 	}
 
-	@GetMapping("/searchID")
-	public String searchID() {
-		return "caa/member/SearchIDMember";
-	}
 
 	@GetMapping("/main")
 	public String mainPage() {
 		return "caa/mainPage/main";
 	}
 
-	@GetMapping("/survive")
-	public String survivePage() {
-		return "caa/caa/survive";
-	}
 
 }

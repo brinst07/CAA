@@ -4,7 +4,24 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="kr.or.ddit.member.mapper.MemberMapper">
 
-
+	<!-- 아이디찾기-->
+	<select id="findID" parameterType="kr.or.ddit.member.domain.FindIDVO" resultType="String">
+	select member_id from MEMBER where member_email = #{member_email} and MEMBER_USERNAME=#{member_username}
+	</select>
+	<select id="findPW" parameterType="kr.or.ddit.member.domain.FindPWVO" resultType="String">
+	select MEMBER_PASSWORD from MEMBER where member_email =#{userEmail} and MEMBER_USERNAME=#{userName} and Member_id = #{userID}
+	</select>
+	
+	
+    <!-- 비밀번호 변경-->
+    <update id="modifyPW" parameterType="kr.or.ddit.member.domain.MemberVO" >
+        update member
+        set 
+            member_password = #{member_password ,jdbcType=VARCHAR}
+        where member_id = #{member_id,jdbcType=VARCHAR}
+    </update>
+	
+	
     <!-- 	회원가입 -->
     <insert id="insertMember" parameterType="kr.or.ddit.member.domain.MemberVO">
         INSERT INTO member(MEMBER_ID, MEMBER_PASSWORD, MEMBER_EMAIL, MEMBER_USERNAME)

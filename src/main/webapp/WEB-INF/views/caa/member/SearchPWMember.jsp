@@ -16,6 +16,9 @@
 	width: 250px;
 	padding-bottom: 20px;
 }
+.findid{
+	padding-left: 30%;
+}
 </style>
 <script>
 	WebFont.load({
@@ -33,15 +36,31 @@
 		}
 	});
 	
-	function sendEmail() {
-		var id = document.getElementById("id").value;
-		var name = document.getElementById("name").value;
-		var email = document.getElementById("email").value;
-		if(name == "" || email == "" || id == ""){
-			alert("모든 정보를 입력해주세요.");
-		}else {
-			alert("회원님의 비밀번호 정보가 "+email +"로 발송되었습니다.");
+	function emailSend() {
+		var name = document.getElementById("username").value;
+		var clientemail = document.getElementById("email").value;
+		var userid = document.getElementById("member_id").value;
+		
+		console.log('입력 이메일' + clientemail );
+		
+		var data = {};
+		data["userID"] = userid;
+		data["userEmail"] = clientemail;
+		data["userName"] = name;
+		
+		$.ajax({
+			type:"POST",
+			url:"/member/rest/emailSendPW",
+			 data : JSON.stringify(data),
+			 contentType : "application/json; charset=utf-8",
+			success : function(data){
+				console.log("ajax success : " );
+				alert("발송 성공!");
+			}, error : function(e){
+				alert("발송 실패! 아이디, 이메일 혹은 이름을 확인해주세요.");
 			}
+		});
+		
 	};
 
 </script>
@@ -66,8 +85,8 @@ CSS Just for demo purpose, don't include it in your project
 							<div class="nav-scroller d-flex">
 								<div
 									class="nav nav-line nav-color-info d-flex align-items-center justify-contents-center">
-									<a class="nav-link" href="test3">아이디 찾기</a> <a
-										class="nav-link active" href="test4">비밀번호 찾기</a>
+									<a class="nav-link " href="/member/findID">아이디 찾기</a>
+									 <a class="nav-link active" href="/member/findPW">비밀번호 찾기</a>
 								</div>
 
 							</div>
@@ -75,37 +94,68 @@ CSS Just for demo purpose, don't include it in your project
 					</div>
 				</div>
 				<div class="page-inner">
-					<form action="">
-						<!-- 이름 /이메일 /아이디 입력란 -->
+					<!-- 이름 /이메일 /아이디 입력란 -->
+						
 						<div class="form-group" align="center">
 							<!-- thinpeopleLogo -->
+							
 							<div>
 								<img id="logo" alt="logo"
 									src="/resources/assets/img/thinkpeopleLogo.png">
 							</div>
-							<label for="password">아이디&nbsp</label><input
-								style="display: inline; width: 500px" type="text"
-								class="form-control" id="id" placeholder="Enter ID">
+							<br>
+							<br>
+                              <div class="form-group form-show-validation row">
+                                 <label  class="findid" for="member_id"
+                                       class="col-lg-3 col-md-3 col-sm-4 mt-sm-2 text-right">아이디
+                                    <span class="required-label">*</span>
+                                 </label>
+                                 <div class="col-lg-4 col-md-9 col-sm-8">
+                                    <input type="text" class="form-control" id="member_id"
+                                       name="member_id" placeholder="Enter Username" required="">
+                                       <div class="check_font" id="id_check"></div>
+                                 </div>
+                                 </div>
+                                 <br>
+								  <div class="form-group form-show-validation row">
+                                 <label  class="findid" for="username"
+                                    class="col-lg-3 col-md-3 col-sm-4 mt-sm-2 text-right">이름
+                                    <span class="required-label">*&nbsp&nbsp&nbsp</span>
+                                 </label>
+                                 <div class="col-lg-4 col-md-9 col-sm-8">
+                                    <div class="input-group">
+                                       <div class="input-group-prepend">
+                                          <span class="input-group-text" id="username-addon">@</span>
+                                       </div>
+                                       <input type="text" class="form-control"
+                                          placeholder="username" aria-label="username"
+                                          aria-describedby="username-addon" id="username"
+                                          name="member_username" required="">
+                                    </div>
+                                 </div>
+                              </div>
 						</div>
-						<div class="form-group" align="center">
-							<label for="password">이름&nbsp&nbsp&nbsp</label><input
-								style="display: inline; width: 500px" type="text"
-								class="form-control" id="name" placeholder="Enter Name">
-						</div>
-						<div class="form-group" align="center">
-							<label for="email2">이메일&nbsp </label><input
-								style="display: inline; width: 500px" type="email"
-								class="form-control" id="email" placeholder="Enter Email">
-							<small id="emailHelp2" class="form-text text-muted">
-								ThinkPeople은 회원님의 개인정보를 보호합니다.</small>
-						</div>
+							<br>
+						  <div class="form-group form-show-validation row ">
+                                 <label class="findid" for="email"
+                                    class="col-lg-3 col-md-3 col-sm-4 mt-sm-2 text-right findid">이메일
+                                    <span class="required-label">*</span>
+                                 </label>
+                                 <div class="col-lg-4 col-md-9 col-sm-8" style="float: left:">
+                                    <input type="email" class="form-control" id="email"
+                                       placeholder="Enter Email" name="member_email" required="">
+                                       <div class="check_font" id="email_check"></div>
+                                 </div>
+                              </div>
 						<div></div>
+						<br>
+						<br>
 						<!-- 버튼 -->
 						<div class="card-action" align="center">
-							<button type="button" class="btn btn-primary" onclick="sendEmail()">확인</button>
+							<button id="btnConfirm" type="button" class="btn btn-primary" onclick="emailSend()">찾기</button>
 							<button type="reset" class="btn btn-black">취소</button>
+							<div>ThinkPeople은 회원님의 개인정보를 보호합니다.</div>
 						</div>
-					</form>
 				</div>
 			</div>
 

@@ -113,35 +113,7 @@ public class CAARestController {
 
 	}
 
-	// 메일
-	@GetMapping(value = "/sendMail/{clientemail}", produces = { MediaType.APPLICATION_JSON_UTF8_VALUE,
-			MediaType.APPLICATION_XML_VALUE })
-	public ResponseEntity<String> sendMail(@PathVariable("clientemail") String clientemail) {
-		log.info("ajaxController");
-		log.info("고객 이메일 정보 : " + clientemail);
-
-		String from = "chawanho9@gmail.com";
-		String to = "jyh6842@naver.com";
-		String subject = clientemail;
-		String contents = "고객님이 요청하신 아이디는+ + 입니다.";
-
-		try {
-			MimeMessage message = mailSender.createMimeMessage();
-			MimeMessageHelper messageHelper = new MimeMessageHelper(message, true, "UTF-8");
-
-			messageHelper.setFrom(from); // 보내는사람 생략하거나 하면 정상작동을 안함
-			messageHelper.setTo(to); // 받는사람 이메일
-			messageHelper.setSubject(subject); // 메일제목은 생략이 가능하다
-			messageHelper.setText(contents); // 메일 내용
-
-			mailSender.send(message);
-		} catch (Exception e) {
-			System.out.println(e);
-		}
-
-		return new ResponseEntity<>(HttpStatus.OK);
-
-	}
+	
 
     // 업종분석
     // JSON을 보낼때는 @ReqeustBody로 받아야함
@@ -317,57 +289,8 @@ public class CAARestController {
                     // 선택한 영역에는 여러가지 상권이 존재하기 때문에 먼저 배열에 상권이름을 저장한다.
                     scName.add((String) finalList.get(j).get("mainTrarNm"));
 
-                    // for문으로 분류 선택 개수에 다르게 조회하게 로직 구성
-                    // 상권번호를 통해서 상권내 상가업소 조회
-//					for (int k = 0; k < sectorList.size(); k++) {
-//						// 분류별 2차 배열
-//
-//						for (Map.Entry<String, String> entry : sectorList.get(k).entrySet()) {
-//							String div = "";
-//							String temp = "";
-//							if (entry.getKey().equals("large")) {
-//								div = "&indsLclsCd=" + entry.getValue();
-//							} else if (entry.getKey().equals("middle")) {
-//								div = "&indsMclsCd=" + entry.getValue();
-//							} else {
-//								div = "&indsSclsCd=" + entry.getValue();
-//							}
-//							temp = entry.getKey();
-//							url = "http://apis.data.go.kr/B553077/api/open/sdsc/storeListInArea?key="
-//									+ finalList.get(i).get("trarNo") + "&ServiceKey=" + ServiceKey + "&type=json" + div;
-//							httpGet.setURI(new URI(url));
-//							responseBody = httpClient.execute(httpGet, responseHandler);
-//							Map<String, Map<String, List<Map<String, Object>>>> ubso = objectMapper
-//									.readValue(responseBody, new TypeReference<Map<String, Map<String, Object>>>() {
-//									});
-//
-//							int ubsoCount = ubso.get("body").get("items").size();
-//
-//							if (temp.equals("large")) {
-//								large += ubsoCount;
-//							} else if (temp.equals("middle")) {
-//								middle += ubsoCount;
-//							} else if (temp.equals("small")) {
-//								small += ubsoCount;
-//							}
-//
-//							/*
-//							 * ubsoMap.put(temp, ubso.get("body").get("items").size())); // 선택한 현재 상권의 대, 중,
-//							 * 소 분류별로 조회해서 저장. ubsoList.add(ubsoMap);
-//							 */
-//						}
-//
-//					}
 					totalscName.add(scName);
 				}
-//				// 위에서 구한 현재 선택한 영역의 대, 중, 소 분류별로 조회해서 숫자를 더해 저장한 값들을 map에 넣는다.
-//				Map<String, String> ubso = new HashMap<>();
-//				ubso.put("large", Integer.toString(large));
-//				ubso.put("middle", Integer.toString(middle));
-//				ubso.put("small", Integer.toString(small));
-//
-//				// 관리에 용이하도록 List에 넣는다.
-//				ubsoList.add(ubso);
 				List<SalesByIndustryVO> storeList = null;
 				// DB에서 상권이름 그리고 분류로 select를 하기 위해서 VO에 저장하는 과정을 거친다.
 				if(scName.size() != 0) {

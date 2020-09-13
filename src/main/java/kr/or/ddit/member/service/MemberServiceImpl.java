@@ -1,12 +1,15 @@
 package kr.or.ddit.member.service;
 
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
+import kr.or.ddit.member.domain.FindIDVO;
+import kr.or.ddit.member.domain.FindPWVO;
 import kr.or.ddit.member.domain.MemberVO;
 import kr.or.ddit.member.mapper.MemberMapper;
 import lombok.AllArgsConstructor;
 import lombok.Setter;
 import lombok.extern.log4j.Log4j;
-import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 @Service
 @Log4j
@@ -51,6 +54,23 @@ public class MemberServiceImpl implements MemberService {
     public void modifyMember(MemberVO vo) {
         mapper.modifyMember(vo);
     }
+
+	@Override
+	public String findID(FindIDVO vo) {
+		return mapper.findID(vo);
+	}
+
+	@Override
+	public void modifyPW(MemberVO vo) {
+		// TODO Auto-generated method stub
+		mapper.modifyPW(vo);
+	}
+
+	@Override
+	public String findPW(FindPWVO vo) {
+		// TODO Auto-generated method stub
+		return mapper.findPW(vo);
+	}
 
 
 }
