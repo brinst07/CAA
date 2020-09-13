@@ -10,3 +10,4 @@ public interface RecommandMapper {
     public List<SectorsLargeLevelVO> getSectorsLargeLevel(String areaName);
     public List<SectorsMiddleLevelVO> getSectorsMiddleLevel(String areaName);
 }
+ 

@@ -21,7 +21,7 @@
           and SALES_BUNGI_CODE = '4'
         group by sales_bd, SALES_BD_NAME, SALES_SER_NAME, SALES_CS_CODE, SALES_STORE_COUNT
         order by TO_NUMBER(SALES_STORE_COUNT) desc
-    </select>
+    </select> 
 
 
 </mapper>

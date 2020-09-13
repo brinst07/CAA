@@ -9,4 +9,4 @@ public class SectorsMiddleLevelVO {
     private String sales_ser_name;
     private String sales_store_count;
     private String sales_cs_code;
-}
+} 

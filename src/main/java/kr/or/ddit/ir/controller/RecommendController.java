@@ -15,7 +15,7 @@ import java.util.List;
 @Controller
 @Log4j
 @RequestMapping("/ir/*")
-public class RecommendController {
+public class RecommendController { 
 
     @Autowired
     private RecommandService service;

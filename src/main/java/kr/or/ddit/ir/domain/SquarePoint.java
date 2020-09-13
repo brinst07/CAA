@@ -9,3 +9,4 @@ public class SquarePoint {
     private String maxx;
     private String maxy;
 }
+ 

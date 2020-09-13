@@ -10,3 +10,4 @@ public interface RecommandService {
     public List<SectorsLargeLevelVO> getSectorsLargeLevel(String areaName);
     public List<SectorsMiddleLevelVO> getSectorsMiddleLevel(String areaName);
 }
+ 

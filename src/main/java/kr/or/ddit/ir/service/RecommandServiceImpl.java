@@ -28,6 +28,6 @@ public class RecommandServiceImpl implements RecommandService{
     public List<SectorsMiddleLevelVO> getSectorsMiddleLevel(String areaName) {
         return mapper.getSectorsMiddleLevel(areaName);
     }
-
+ 
 
 }
