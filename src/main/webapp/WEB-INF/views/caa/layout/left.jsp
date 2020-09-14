@@ -17,44 +17,6 @@
 <div class="sidebar sidebar-style-2" data-background-color="blue">
     <div class="sidebar-wrapper scrollbar scrollbar-inner">
         <div class="sidebar-content">
-            <c:if test="${null ne user}">
-                <div class="user">
-                    <div class="avatar-sm float-left mr-2">
-                        <img src="/resources/assets/img/profile.jpg" alt="..." class="avatar-img rounded-circle">
-                    </div>
-                    <!-- 사이드바 user정보 -->
-                    <div class="info">
-                        <a data-toggle="collapse" href="collapseExample" aria-expanded="true"> <span> Hizrian <span
-                                class="user-level">Administrator</span> <span class="caret"></span>
-						</span>
-                        </a>
-                        <div class="clearfix"></div>
-
-                        <div class="collapse in" id="collapseExample">
-                            <ul class="nav">
-                                <li><a> <span class="link-collapse">My Profile</span>
-                                </a></li>
-                                <li><a> <span class="link-collapse">Edit Profile</span>
-                                </a></li>
-                                <li><a> <span class="link-collapse">Settings</span>
-                                </a></li>
-                            </ul>
-                        </div>
-                    </div>
-
-                </div>
-            </c:if>
-            <div class="user">
-                <div class="avatar-sm float-left">
-                    <a><span class="btn-label"><i class="flaticon-profile"></i></span></a>
-                </div>
-                <div class="info">
-                    <a data-toggle="collapse" href="collapseExample" aria-expanded="true"> <span> 비회원 <span
-                            class="user-level">비회원</span> <span class="caret"></span>
-						</span>
-                    </a>
-                </div>
-            </div>
             <ul class="nav" id="leftMenu">
                 <li class="nav-item" id="main"><a> <i class="fas fa-home"></i>
                     <p>메인화면</p>

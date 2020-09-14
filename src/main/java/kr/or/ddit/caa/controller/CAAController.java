@@ -10,6 +10,7 @@ import kr.or.ddit.bs.service.BSService;
 import kr.or.ddit.caa.domain.CscodeVO;
 import kr.or.ddit.caa.domain.SubwayPopVO;
 import kr.or.ddit.caa.service.CAAService;
+import kr.or.ddit.member.domain.MemberVO;
 import kr.or.ddit.sales.service.SalesService;
 import lombok.AllArgsConstructor;
 import lombok.extern.log4j.Log4j;
@@ -38,13 +39,21 @@ public class CAAController {
 
 
 	@GetMapping("/caaSelect")
-	public String caaSelect(Model model) {
+	public String caaSelect(Model model,HttpSession session) {
 
 		List<CscodeVO> list = service.getCscodeList("1");
 
 		model.addAttribute("firstDiv", list);
 
-		return "caa/caa/selectPage";
+		String returnPage = "";
+		MemberVO vo = (MemberVO) session.getAttribute("member");
+		if(vo == null){
+			returnPage = "redirect:/login";
+		}else{
+			returnPage = "caa/caa/selectPage";
+		}
+
+		return returnPage;
 	}
 
 	@GetMapping("/businessstatus")
