@@ -22,7 +22,7 @@ public class DataLab {
 		Map<String, String> requestHeaders = new HashMap<>();
 		requestHeaders.put("X-Naver-Client-Id", clientId);
 		requestHeaders.put("X-Naver-Client-Secret", clientSecret);
-		requestHeaders.put("Content-Type", "application/json");
+		requestHeaders.put("Content-Type", "application/json; charset=utf-8");
 		
 		 String requestBody = "{\"startDate\":\""+startDate+"\"," +
 	                "\"endDate\":\""+endDate+"\"," +
