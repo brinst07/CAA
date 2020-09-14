@@ -1,12 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
-</head>
-<body>
 
 
 	<div class="main-panel full-height">
@@ -87,29 +80,71 @@
 
 		</div>
 	</div>
-</body>
 
 <script>
-let SectorsLargeLevel = '${SectorsLargeLevel}';
-let SectorsMiddleLevel = '${SectorsMiddleLevel}';
+const SectorsLargeLevel = ${SectorsLargeLevel};
+const SectorsMiddleLevel = ${SectorsMiddleLevel};
 
-const jsonSectorsLargeLevel = JSON.parse(SectorsLargeLevel);
+let arrayLabelLargeSectors = [];
+let arrayLabelLargeStoreCount = [];
 
-	myRadarChart = document.getElementById('LargeRadarChart').getContext('2d');
+let arrayLabelMiddleSectors = [];
+let arrayLabelMiddleStoreCount = [];
 
-	var myRadarChart = new Chart(LargeRadarChart, {
-		type : 'radar',
-		data : {
-			labels : [  'Eating', 'Cycling', 'Jumping' ],
-			datasets : [ {
-				data : [  30, 2, 30 ],
+for (var i = 0; i < SectorsLargeLevel.length; i++) {
+	arrayLabelLargeSectors.push(SectorsLargeLevel[i].sectors);
+	arrayLabelLargeStoreCount.push(SectorsLargeLevel[i].store_count);
+}
+for (var i = 0; i < SectorsMiddleLevel.length; i++) {
+	arrayLabelMiddleSectors.push(SectorsMiddleLevel[i].sales_ser_name);
+	arrayLabelMiddleStoreCount.push(SectorsMiddleLevel[i].sales_store_count);
+}
+
+
+	
+$(function(){
+	
+	// 대분류
+	LargeRadarChart.data.labels = arrayLabelLargeSectors;
+	LargeRadarChart.data.datasets.push({
+		 
+				data : arrayLabelLargeStoreCount,
 				borderColor : '#1d7af3',
 				backgroundColor : 'rgba(29, 122, 243, 0.25)',
 				pointBackgroundColor : "#1d7af3",
 				pointHoverRadius : 4,
 				pointRadius : 3,
-				label : 'Team 1'
-			}, ]
+				label : '대분류'
+			
+	});
+	
+	LargeRadarChart.update();
+	
+	// 중분류
+	MiddleRadarChart.data.labels = arrayLabelMiddleSectors;
+	MiddleRadarChart.data.datasets.push({
+		 
+		data : arrayLabelMiddleStoreCount,
+		borderColor : '#1d7af3',
+		backgroundColor : 'rgba(29, 122, 243, 0.25)',
+		pointBackgroundColor : "#1d7af3",
+		pointHoverRadius : 4,
+		pointRadius : 3,
+		label : '중분류'
+	
+});
+	
+	MiddleRadarChart.update();
+	
+	
+})
+
+var LargeRadarChart = document.getElementById('LargeRadarChart').getContext('2d');
+var LargeRadarChart = new Chart(LargeRadarChart, {
+		type : 'radar',
+		data : {
+			labels : [],
+			datasets : []
 		},
 		options : {
 			responsive : true,
@@ -120,29 +155,14 @@ const jsonSectorsLargeLevel = JSON.parse(SectorsLargeLevel);
 		}
 	});
 	
-	myRadarChart = document.getElementById('MiddleRadarChart').getContext('2d');
+
+	var MiddleRadarChart = document.getElementById('MiddleRadarChart').getContext('2d');
 	
-	var myRadarChart = new Chart(MiddleRadarChart, {
+	var MiddleRadarChart = new Chart(MiddleRadarChart, {
 		type : 'radar',
 		data : {
-			labels : [ 'Running', 'Swimming', 'Eating', 'Cycling', 'Jumping' ],
-			datasets : [ {
-				data : [ 20, 10, 30, 2, 30 ],
-				borderColor : '#1d7af3',
-				backgroundColor : 'rgba(29, 122, 243, 0.25)',
-				pointBackgroundColor : "#1d7af3",
-				pointHoverRadius : 4,
-				pointRadius : 3,
-				label : 'Team 1'
-			}, {
-				data : [ 10, 20, 15, 30, 22 ],
-				borderColor : '#716aca',
-				backgroundColor : 'rgba(113, 106, 202, 0.25)',
-				pointBackgroundColor : "#716aca",
-				pointHoverRadius : 4,
-				pointRadius : 3,
-				label : 'Team 2'
-			}, ]
+			labels : [],
+			datasets : []
 		},
 		options : {
 			responsive : true,
@@ -153,4 +173,3 @@ const jsonSectorsLargeLevel = JSON.parse(SectorsLargeLevel);
 		}
 	});
 </script>
-</html>
