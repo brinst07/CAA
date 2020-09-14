@@ -22,7 +22,7 @@
 	<update id="modify">
 		update board  
 		set 
-		member_id = '2',
+		member_id = #{member_id ,jdbcType=VARCHAR},
 		board_title = #{board_title ,jdbcType=VARCHAR},
 		board_content = #{board_content,jdbcType=VARCHAR},
 		board_datetime = sysdate

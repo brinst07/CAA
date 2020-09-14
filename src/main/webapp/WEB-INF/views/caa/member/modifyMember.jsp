@@ -84,7 +84,7 @@
                   <div class="col-md-12">
                      <div class="card">
 
-                        <form role="form" action="/member/insertMember" method="post" action="" id="exampleValidation" novalidate="novalidate">
+                        <form role="form" action="/member/updateMember" method="post" action="" id="exampleValidation" novalidate="novalidate">
                            <div class="card-body">
                            
                            
@@ -162,8 +162,8 @@
                            <div class="card-action">                                       
                               <div class="row">
                                  <div class="col-md-12">
-                                    <button class="btn btn-danger" type="reset" style="float: right; margin-left: 15px;">취소</button>
-                                    <input data-oper='register' class="btn btn-success" type="submit" value="확인" style="float: right; margin-left: 15px;">
+									<a href="../caa/main" class="btn btn-primary ml-2" style="float: right; margin-left: 15px;"> 목록 </a>
+                                    <input data-oper='modifyMember' class="btn btn-success" type="submit" value="확인" style="float: right; margin-left: 15px;">
                                  </div>
                               </div>
                            </div>
@@ -335,34 +335,6 @@
    $("#member_id").keyup(function() {
       // id = "id_reg" / name = "userId"
       var member_id = $('#member_id').val();
-      
-      
-      
-//       var re = /^[a-zA-Z0-9]{4,12}$/ // 아이디와 패스워드가 적합한지 검사할 정규식
-//       var re2 = /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i;// 이메일이 적합한지 검사할 정규식
-      
-
-//        var id = document.getElementById("member_id");
-//        var pw1 = document.getElementById("password");
-//        var pw2 = document.getElementById("confirmpassword");
-//        var email = document.getElementById("email");
-       
-//        if(!id_check(re,id,"아이디는 4~12자의 영문 대소문자와 숫자로만 입력")) {
-//               return false;
-//           }
-
-//        if(!check(re,pw1,"패스워드는 4~12자의 영문 대소문자와 숫자로만 입력")) {
-//               return false;
-//           }
-//        if(!check(re,pw2,"패스워드는 4~12자의 영문 대소문자와 숫자로만 입력")) {
-//               return false;
-//           }
-
-//        if(!check(re2, email, "적합하지 않은 이메일 형식입니다.")) {
-//               return false;
-//           }   
-          
-          
           
       $.ajax({
          url : '/member/rest/idCheck?member_id='+ member_id,
@@ -423,13 +395,13 @@
 
 </script>
 
- <script type="text/javascript">
+  <script type="text/javascript">
    $(document).ready(function() {
 
          var operForm = $("#exampleValidation");
 
 
-            $("button[data-oper='register']").on("click",function(e) {
+            $("button[data-oper=modifyMember]").on("click",function(e) {
 
                // 추가한거
                e.preventDefault();
@@ -442,19 +414,45 @@
 
                   var jobj = $(obj);
 
-                  console.dir(jobj);
+                  console.dir("testtest"+jobj);
 
                   str += "<input type='hidden' name='attachList["+ i+ "].member_id'value='"+ jobj.data("member_id")+ "'>";
                   str += "<input type='hidden' name='attachList["+ i+ "].member_username'value='"+ jobj.data("member_username")+ "'>";
                   str += "<input type='hidden' name='attachList["+ i+ "].member_email'value='"+ jobj.data("member_email")+ "'>";
-                  str += "<input type='hidden' name='attachList["+ i+ "].member_enabled'value='"+ jobj.data("member_enabled")+ "'>";
                   str += "<input type='hidden' name='attachList["+ i+ "].member_password'value='"+ jobj.data("member_password")+ "'>";
 
                   });
 
-                  operForm.append(str).attr("action","/member/insertMember").submit();
+                  operForm.append(str).attr("action","/member/modifyMember").submit();
                   });
                });
-</script>
+ </script> 
+ <script type="text/javascript">
+   
+   
+ 
+//   $(document).ready(function() {
+// 		var formObj = $("#modifyMember");
+
+//     $('button').on("click", function(e) {
+
+//        e.preventDefault();
+
+// 	   var operation = $(this).data("oper");
+		
+
+//        console.log(operation);
+
+//        if (operation === 'modifyMember') {
+//           formObj.attr("action", "/member/modifyMember");
+//        } else if (operation === 'main') {
+//           // move to list
+//            self.location = "caa/mainPage/main";
+//           return;
+//        }
+//        formObj.submit();
+//     }); 
+//  });
+    </script>
 </body>
 </html>

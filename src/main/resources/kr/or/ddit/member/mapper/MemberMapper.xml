@@ -37,6 +37,13 @@
             member_username = #{member_username,jdbcType=VARCHAR}
         where member_id = #{member_id,jdbcType=VARCHAR}
     </update>
+    
+	<!-- 회원정보 조회 -->
+	<select id="selectModify" resultType="kr.or.ddit.member.domain.MemberVO" parameterType="kr.or.ddit.member.domain.MemberVO">
+		select member_id, member_username,  member_email, member_password
+        from MEMBER
+        where MEMBER_ID = #{member_id}
+	</select>
 
     <!-- 	아이디중복검사 -->
     <select id="idCheck" resultType="Integer">
