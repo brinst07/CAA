@@ -82,11 +82,10 @@ $(function(){
 								<li class="list-group-item">영역을 선택해주세요</li>
 								<li class="list-group-item">
 									<ul class="wizard-menu nav nav-pills nav-primary" style="width: 480px;">
-										<li class="step" style="width: 25%;" onclick="selectOverlay('CIRCLE')"><a id="circle" class="nav-link active" href="#about" data-toggle="tab" aria-expanded="true"><i
+										<li class="step" style="width: 50%;" onclick="selectOverlay('CIRCLE')"><a id="circle" class="nav-link active" href="#about" data-toggle="tab" aria-expanded="true"><i
 												class="far fa-circle"></i>원형</a></li>
-										<li class="step" style="width: 25%;" onclick="selectOverlay('RECTANGLE')"><a class="nav-link" href="#address" data-toggle="tab"><i class="fab fa-connectdevelop"></i>사각</a></li>
-										<li class="step" style="width: 25%;" onclick="selectOverlay('POLYGON')"><a class="nav-link" href="#address" data-toggle="tab"><i class="fab fa-connectdevelop"></i>다각</a></li>
-										<li class="step" style="width: 25%;" onclick="test()"><a class="nav-link" href="#address" data-toggle="tab"><i class="fas fa-map-marked-alt"></i>상권</a></li>
+										<li class="step" style="width: 50%;" onclick="selectOverlay('RECTANGLE')"><a class="nav-link" href="#address" data-toggle="tab"><i class="fab fa-connectdevelop"></i>사각</a></li>
+
 									</ul>
 
 								</li>

@@ -321,7 +321,7 @@
 <div class="wrapper wrapper-login wrapper-login-full p-0">
     <div class="login-aside w-50 d-flex flex-column align-items-center justify-content-center text-center bg-primary-gradient">
         <h1 class="title fw-bold text-white mb-3">Join Our Comunity</h1>
-        <p class="subtitle text-white op-7">Ayo bergabung dengan komunitas kami untuk masa depan yang lebih baik</p>
+        <p class="subtitle text-white op-7">CAA 상권분석 서비스에 회원가입 해주세요</p>
     </div>
     <div class="login-aside w-50 d-flex align-items-center justify-content-center bg-white">
         <div class="container container-login container-transparent animated fadeIn" style="display: block;">

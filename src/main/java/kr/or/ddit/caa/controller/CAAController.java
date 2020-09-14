@@ -131,7 +131,7 @@ public class CAAController {
 			e.printStackTrace();
 		}
 
-		return "caa/caa/CommercialAnalysis";
+		return "caa/caa/IndustryAnalysis";
 	}
 
 	@GetMapping(value = "/caaAnalysis")

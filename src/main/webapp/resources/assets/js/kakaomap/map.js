@@ -13,6 +13,8 @@ var map = new kakao.maps.Map(mapContainer, mapOption),
 	customOverlay = new kakao.maps.CustomOverlay({}),
 	infowindow = new kakao.maps.InfoWindow({removable: true});
 
+var flag = false;
+
 //행정구역 구분
 $.getJSON("/resources/assets/guJson.geojson",function(geojson){
 	var data = geojson.features;
@@ -116,6 +118,8 @@ function displayArea(coordinates,name){
 		map.setLevel(level, {anchor: centroid(points), animate:{duration : 350}});
 
 		deletePolygon(polygons);
+
+		flag = true;
 	});
 }
 
@@ -185,8 +189,6 @@ var options = { // Drawing Manager를 생성할 때 사용할 옵션입니다
 var manager = new kakao.maps.drawing.DrawingManager(
 	options);
 data = manager.getData();
-console.log(manager);
-console.log(data);
 
 // Java단으로 전달해줄 객체를 생성한다.
 // 영역선택 리스트
@@ -198,6 +200,13 @@ let sectorList = [];
 
 // 버튼 클릭 시 호출되는 핸들러 입니다
 function selectOverlay(type) {
+
+	if(flag != true){
+		//active 제거
+		$('.nav-link').removeClass('active show');
+		swal("error", "먼저 폴리곤을 클릭해 영역을 선택해주세요!!!", "error");
+		return;
+	}
 
 	if (list.length >= 3) {
 		swal("error", "더이상 영역을 선택할 수 없습니다!!!", "error");
@@ -288,15 +297,15 @@ function deleteData(name) {
 manager.addListener('drawend', function (data) {
 	console.log('drawend', data);
 
-	function inputName() {
+	(function () {
 		swal({
-			title : "이름작성",
-			text : "공백을 제외한 이름을 작성해주세요",
+			title: "이름작성",
+			text: "공백을 제외한 이름을 작성해주세요",
 			content: "input"
 
 		})
 			.then((value) => {
-				if (!value){
+				if (!value) {
 					swal({
 						icon: "error",
 						title: "ERROR",
@@ -309,7 +318,7 @@ manager.addListener('drawend', function (data) {
 					for (var i = 0; i < list.length; i++) {
 
 						if (value == list[i].name) {
-						
+
 							swal({
 								icon: "error",
 								title: "ERROR",
@@ -336,9 +345,8 @@ manager.addListener('drawend', function (data) {
 
 			});
 
-	}
+	}());
 
-	inputName();
 });
 
 
