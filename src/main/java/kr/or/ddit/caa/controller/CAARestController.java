@@ -177,8 +177,6 @@ public class CAARestController {
                 // 선택한 영역의 데이터 전처리 후 필요한 데이터만을 저장하는 list
                 List<Map<String, Object>> finalList = list.get("body").get("items");
 
-                List<List<StoreVO>> store = new ArrayList<List<StoreVO>>();
-
                 // 하단에서 분류별 숫자를 체크하기 위해 변수를 선언해준다.
                 int count = 0;
 

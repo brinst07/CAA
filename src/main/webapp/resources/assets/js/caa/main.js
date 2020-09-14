@@ -134,6 +134,12 @@ const chart1 = function(val) {
             });
 
             myHorizonChart.update();
+
+            let change = data[0].indi_change_name;
+            // change = encodeURI(encodeURIComponent(change));
+
+            $('#trafficLight').attr("src","/resources/assets/img/"+change+".png");
+
         },
         error: function (xhr, status) {
             console.log(xhr, status);

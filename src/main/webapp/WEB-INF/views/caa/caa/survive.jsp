@@ -1,5 +1,5 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<script src="/resources/assets/js/caa/main.js"></script>
+<script src="/resources/assets/js/caa/main.js" charset="UTF-8"></script>
 <div class="main-panel full-height">
     <div class="container">
         <div class="panel-header">
@@ -63,7 +63,9 @@
                                 <h4 class="card-title" style="text-align: center; color: white">창업위험도</h4>
                             </div>
                             <div class="card-body">
-                                <div id="trafficLight"></div>
+                                <div class="col-md-12">
+                                    <img id="trafficLight" src="" style="height: 100%; width: 100%">
+                                </div>
                             </div>
                         </div>
                     </div>

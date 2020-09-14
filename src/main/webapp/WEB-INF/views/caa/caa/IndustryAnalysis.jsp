@@ -298,7 +298,7 @@
                             closeDataList.push(csList[j][k].store_CLOSE_COUNT);
 
                             tableTags += ' <tr>\n' +
-                                '                                <td>' + csList[j][k].store_YEAR + '+</td>\n' +
+                                '                                <td>' + csList[j][k].store_YEAR + '</td>\n' +
                                 '                                <td>' + csList[j][k].store_BUNGI + '</td>\n' +
                                 '                                <td>' + csList[j][k].store_SER_CODE_NAME + '</td>\n' +
                                 '                                <td>' + csList[j][k].store_COUNT + '</td>\n' +
@@ -306,7 +306,7 @@
                                 '                            </tr>';
 
                             openTableTags += ' <tr>\n' +
-                                '                                <td>' + csList[j][k].store_YEAR + '+</td>\n' +
+                                '                                <td>' + csList[j][k].store_YEAR + '</td>\n' +
                                 '                                <td>' + csList[j][k].store_BUNGI + '</td>\n' +
                                 '                                <td>' + csList[j][k].store_SER_CODE_NAME + '</td>\n' +
                                 '                                <td>' + csList[j][k].store_OPEN_COUNT + '</td>\n' +
