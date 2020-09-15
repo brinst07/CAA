@@ -93,11 +93,6 @@ public class CAAController {
 //		return "caa/caa/IndustryAnalysis";
 //	}
 
-	// cctv
-	@GetMapping("/CCTVAnalysis")
-	public String cctv() {
-		return "caa/cctv/CCTVAnalysis";
-	}
 
 	/* 영현 */
 
@@ -270,8 +265,19 @@ public class CAAController {
 	}
 
 	@GetMapping("/survive")
-	public String survivePage(){
-		return "caa/caa/survive";
+	public String survivePage(HttpSession session){
+
+		MemberVO vo = (MemberVO) session.getAttribute("member");
+
+		String returnPage = "";
+
+		if(vo == null){
+			returnPage = "redirect:/login";
+		}else{
+			returnPage = "caa/caa/survive";
+		}
+
+		return returnPage;
 	}
 
 }

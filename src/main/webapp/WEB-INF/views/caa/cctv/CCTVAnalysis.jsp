@@ -10,6 +10,10 @@
            console.log(name);
        });
     });
+
+    function cctv(url){
+        $('#video').attr('src',url);
+    }
 </script>
 <div class="main-panel full-height">
     <div class="container">
@@ -31,7 +35,7 @@
                             </div>
                         </div>
                         <div class="card-body">
-                            <div id="map" style="display: block; widht: 785px; height: 375px;"></div>
+                            <div id="map" style="display: block; width: 785px; height: 570px;"></div>
                             <script>
                                 var container = document
                                     .getElementById('map');
@@ -42,7 +46,7 @@
                                 };
 
                                 map = new kakao.maps.Map(container, options);
-                                kakao.maps.event.addListener(map, 'tilesloaded', function () {
+                                kakao.maps.event.addListener(map, 'dragend', function () {
 
                                     var bounds = map.getBounds();
                                     // 영역의 남서쪽 좌표를 얻어옵니다
@@ -77,7 +81,7 @@
 
                                                 var mapInfo = new Object();
                                                 mapInfo.content = '<div style="padding:5px;">' +
-                                                    '<a href="'+cctv[i].cctvurl+'">'+cctv[i].cctvname+'</a>' +
+                                                    '<a onclick="cctv(\''+cctv[i].cctvurl+'\')" data-toggle="modal" data-target="#exampleModalCenter">'+cctv[i].cctvname+'</a>' +
                                                     '</div>';
                                                 mapInfo.latlng = new kakao.maps.LatLng(y,x);
 
@@ -122,6 +126,23 @@
                     </div>
                 </div>
             </div>
+        </div>
+    </div>
+</div>
+<!-- Modal -->
+<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLongTitle">CCTV 영상 출력</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <video id="video" autoplay width="100%" height="100%"></video>
+            </div>
+
         </div>
     </div>
 </div>
