@@ -91,15 +91,10 @@ function modify(){
                                     <span class="required-label">*</span>
                                  </label>
                                  <div class="col-lg-4 col-md-9 col-sm-8">
-                                    <input type="text" class="form-control" id="member_id"
-                                       name="member_id" placeholder="" required="" readonly="readonly"  value="${userInfo.member_id }">
-                                       <div class="check_font" id="id_check"></div>
+                                    <input type="text" class="form-control" id="member_id" name="member_id" placeholder="" required="" readonly="readonly"  value="${userInfo.member_id }">
+                                    <div class="check_font" id="id_check"></div>
                                  </div>
-
-                          
                               </div>
-                              
-                              
                               <div class="form-group form-show-validation row">
                                  <label for="username"
                                     class="col-lg-3 col-md-3 col-sm-4 mt-sm-2 text-right">이름

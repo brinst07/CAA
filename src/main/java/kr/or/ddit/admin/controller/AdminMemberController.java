@@ -28,7 +28,6 @@ public class AdminMemberController {
 		model.addAttribute("memberList",list);
 		return "caa/admin/membermanagement";
 	}
-	
 	@GetMapping("update")
 	String update(String user_auth,String user_id, String user_name) {
 		MemberVO vo = new MemberVO();
@@ -43,7 +42,6 @@ public class AdminMemberController {
 		service.delelte(userid);
 		return "redirect:/admin/memberList";
 	}
-	
 	@GetMapping("modifymember")
 	String modifymember(String userid, Model model) {
 		MemberVO vo = service.select(userid);

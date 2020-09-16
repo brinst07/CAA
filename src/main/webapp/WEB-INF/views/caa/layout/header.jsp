@@ -89,20 +89,15 @@
 <link rel="stylesheet" href="/resources/assets/css/atlantis.css">
 <script src="/resources/assets/js/jquery.oLoader.js"></script>
 <script>
-    WebFont.load({
-        google: {
-            "families": ["Lato:300,400,700,900"]
-        },
-        custom: {
-            "families": ["Flaticon", "Font Awesome 5 Solid",
-                "Font Awesome 5 Regular", "Font Awesome 5 Brands",
-                "simple-line-icons"],
-            urls: ['/resources/assets/css/fonts.min.css']
-        },
-        active: function () {
-            sessionStorage.fonts = true;
-        }
-    });
+$(document).ready(function(){         // 웹 페이지 문서가 준비되면 다음 내용을 실행한다.
+	if(${member.member_auth ==  "ROLE_ADMIN"}){
+		var adminmode = "<a class='dropdown-item' href='/admin/memberList'>회원관리</a>";
+		$('#memberController').append(adminmode);
+	}
+	
+});
+
+       
 
     $(function () {
         $('#logout').on('click', function () {
@@ -140,8 +135,8 @@
 
         <button class="navbar-toggler sidenav-toggler ml-auto" type="button" data-toggle="collapse"
                 data-target="collapse" aria-expanded="false" aria-label="Toggle navigation">
-				<span class="navbar-toggler-icon"> <i class="icon-menu"></i>
-				</span>
+            <span class="navbar-toggler-icon"> <i class="icon-menu"></i>
+            </span>
         </button>
         <button class="topbar-toggler more">
             <i class="icon-options-vertical"></i>
@@ -183,21 +178,21 @@
                                         <div class="notif-content">
                                             <span class="block"> New user registered </span> <span class="time">5 minutes ago</span>
                                         </div>
-                                        <!-- 										</a> <a  > -->
+                                        <!--                               </a> <a  > -->
                                         <div class="notif-icon notif-success">
                                             <i class="fa fa-comment"></i>
                                         </div>
                                         <div class="notif-content">
                                             <span class="block"> Rahmad commented on Admin </span> <span class="time">12 minutes ago</span>
                                         </div>
-                                        <!-- 										</a> <a  > -->
+                                        <!--                               </a> <a  > -->
                                         <div class="notif-img">
                                             <img src="/resources/assets/img/profile2.jpg" alt="Img Profile">
                                         </div>
                                         <div class="notif-content">
                                             <span class="block"> Reza send messages to you </span> <span class="time">12 minutes ago</span>
                                         </div>
-                                        <!-- 										</a> <a  > -->
+                                        <!--                               </a> <a  > -->
                                         <div class="notif-icon notif-danger">
                                             <i class="fa fa-heart"></i>
                                         </div>
@@ -254,6 +249,7 @@
                                 </li>
                                 <li>
                                     <div class="dropdown-divider"></div>
+                                    <div id="memberController"></div>
                                      <a class="dropdown-item">My Balance</a>
                                     <a class="dropdown-item" id="logout">Logout</a>
                                 </li>
