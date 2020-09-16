@@ -3,7 +3,7 @@ var mapContainer = document
     mapOption = {
         center: new kakao.maps.LatLng(
             37.559907, 126.984459), // 지도의 중심좌표
-        level: 1
+        level: 4
         // 지도의 확대 레벨
     };
 
