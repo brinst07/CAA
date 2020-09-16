@@ -89,15 +89,20 @@
 <link rel="stylesheet" href="/resources/assets/css/atlantis.css">
 <script src="/resources/assets/js/jquery.oLoader.js"></script>
 <script>
-$(document).ready(function(){         // 웹 페이지 문서가 준비되면 다음 내용을 실행한다.
-	if(${member.member_auth ==  "ROLE_ADMIN"}){
-		var adminmode = "<a class='dropdown-item' href='/admin/memberList'>회원관리</a>";
-		$('#memberController').append(adminmode);
-	}
-	
-});
-
-       
+    WebFont.load({
+        google: {
+            "families": ["Lato:300,400,700,900"]
+        },
+        custom: {
+            "families": ["Flaticon", "Font Awesome 5 Solid",
+                "Font Awesome 5 Regular", "Font Awesome 5 Brands",
+                "simple-line-icons"],
+            urls: ['/resources/assets/css/fonts.min.css']
+        },
+        active: function () {
+            sessionStorage.fonts = true;
+        }
+    });
 
     $(function () {
         $('#logout').on('click', function () {
@@ -249,7 +254,6 @@ $(document).ready(function(){         // 웹 페이지 문서가 준비되면 �
                                 </li>
                                 <li>
                                     <div class="dropdown-divider"></div>
-                                    <div id="memberController"></div>
                                      <a class="dropdown-item">My Balance</a>
                                     <a class="dropdown-item" id="logout">Logout</a>
                                 </li>
