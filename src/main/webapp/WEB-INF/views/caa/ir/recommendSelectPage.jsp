@@ -8,7 +8,7 @@
         <div class="panel-header">
             <div class="page-inner border-bottom pb-0 mb-3">
                 <div class="d-flex align-items-left flex-column">
-                    <h2 class="pb-2 fw-bold">업종추천</h2>
+                    <h2 class="pb-2 fw-bold">상권 유형 판별</h2>
                 </div>
             </div>
         </div>
@@ -32,21 +32,21 @@
                     <div class="card-body">
                         <ul class="list-group list-group-bordered">
                             <li class="list-group-item active">1단계</li>
-                            <li class="list-group-item">영역을 선택해주세요</li>
+                            <li class="list-group-item">알고 싶은 상권 유형을 선택하기 위해 지도를 이동해주세요.</li>
                         </ul>
                         <br>
                         <ul id="middleul" class="list-group list-group-bordered">
                             <li class="list-group-item active">2단계</li>
-                            <li class="list-group-item">영역을 선택해주세요</li>
+                            <li class="list-group-item">표시된 상권을 클릭해서 분석해주세요</li>
 
 
 
                         </ul>
 
-                        <div class="container" style="align-content: end;">
-                            <button class="btn btn-info"  type="button" id="tempBtn">분석</button>
-                            <button class="btn btn-info" type="button" id="tempBtnEnd">분석End</button>
-                        </div>
+<!--                         <div class="container" style="align-content: end;"> -->
+<!--                             <button class="btn btn-info"  type="button" id="tempBtn">분석</button> -->
+<!--                             <button class="btn btn-info" type="button" id="tempBtnEnd">분석End</button> -->
+<!--                         </div> -->
                     </div>
                 </div>
 

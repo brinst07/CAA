@@ -102,7 +102,7 @@
             </div>
             <div class="col-sm-6 col-md-2 animation">
                 <div class="card card-stats card-round">
-                    <div class="card-body" style="cursor: pointer">
+                    <div class="card-body" style="cursor: pointer" onclick="location.href='/ir/irSelectPage'">
                         <div class="row">
                             <div class="col-5">
                                 <div class="icon-big text-center">

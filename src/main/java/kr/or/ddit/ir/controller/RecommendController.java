@@ -1,8 +1,5 @@
 package kr.or.ddit.ir.controller;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.HashSet;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
@@ -17,29 +14,45 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.google.gson.Gson;
 
 import kr.or.ddit.ir.domain.SectorsLargeLevelVO;
-import kr.or.ddit.ir.domain.SectorsLargeMiddleVO;
 import kr.or.ddit.ir.domain.SectorsMiddleLevelVO;
 import kr.or.ddit.ir.service.RecommandService;
+import kr.or.ddit.member.domain.MemberVO;
 import lombok.extern.log4j.Log4j;
 
 @Controller
 @Log4j
 @RequestMapping("/ir/*")
 public class RecommendController {
-
+//
 	@Autowired
 	private RecommandService service;
 
 	@GetMapping("/irSelectPage")
-	public String caaSelect(Model model) {
+	public String caaSelect(Model model, HttpSession session) {
 
-		return "caa/ir/recommendSelectPage";
+		String returnPage = "";
+		MemberVO vo = (MemberVO) session.getAttribute("member");
+		if(vo == null){
+			returnPage = "redirect:/login";
+		}else{
+			returnPage = "caa/ir/recommendSelectPage";
+		}
+		
+		return returnPage;
+	}
+	
+	@GetMapping("recommendSectors")
+	public String recommendSectors(@RequestParam("areaName") String sales_bd_name, Model model, HttpSession session) {
+		session.setAttribute("sales_bd_name", sales_bd_name);
+		
+		return "redirect:/ir/recommendSectorsLevel";
 	}
 
 	@GetMapping("/recommendSectorsLevel")
-	public String recommendSectorsLevel(@RequestParam("areaName") String sales_bd_name, Model model, HttpSession session) {
-
-		session.setAttribute("sales_bd_name", sales_bd_name);
+	public String recommendSectorsLevel(Model model, HttpSession session) {
+		
+		String sales_bd_name = (String) session.getAttribute("sales_bd_name");
+		
 
 		List<SectorsLargeLevelVO> LargeLevelList = service.getSectorsLargeLevel(sales_bd_name);
 		List<SectorsMiddleLevelVO> MiddleLevelList = service.getSectorsMiddleLevel(sales_bd_name);

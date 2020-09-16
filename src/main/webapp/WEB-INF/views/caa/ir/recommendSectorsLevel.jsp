@@ -5,7 +5,7 @@
 	<div class="container">
 		<div class="page-inner">
 			<div class="page-header">
-				<h4 class="page-title">Dashboard</h4>
+				<h4 class="page-title">상권 유형</h4>
 				<ul class="breadcrumbs">
 					<li class="nav-home"><a href="#"> <i class="flaticon-home"></i>
 					</a></li>
@@ -23,7 +23,7 @@
 					<!-- <h2 class="pb-2 fw-bold">Dashboard</h2> -->
 					<div class="nav-scroller d-flex">
 						<div class="nav nav-line nav-color-info d-flex align-items-center justify-contents-center">
-							<a class="nav-link active" href="/ir/RecommendSectorsLevel">업종별 등급<span class="badge badge-info ml-2">8</span></a> <a class="nav-link" href="/ir/recommendSectorsType">상권 유형 판별</a> <a class="nav-link" href="/ir/iRecommendation3">안정성 우수 업종<span class="badge badge-danger ml-2">2</span></a>
+							<a class="nav-link active" href="/ir/recommendSectorsLevel">업종별 등급</a> <a class="nav-link" href="/ir/recommendSectorsType">상권 유형 판별</a> 
 						</div>
 
 					</div>
