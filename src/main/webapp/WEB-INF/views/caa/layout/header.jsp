@@ -89,6 +89,13 @@
 <link rel="stylesheet" href="/resources/assets/css/atlantis.css">
 <script src="/resources/assets/js/jquery.oLoader.js"></script>
 <script>
+$(function(){
+	if(${member.member_auth == "ROLE_ADMIN" }){
+		var member = "";
+		member += '<a class="dropdown-item" href="/admin/memberList">회원관리</a>';
+		$('#memberController').append(member);
+	}
+});
     WebFont.load({
         google: {
             "families": ["Lato:300,400,700,900"]
@@ -254,6 +261,7 @@
                                 </li>
                                 <li>
                                     <div class="dropdown-divider"></div>
+                                    <div id="memberController"></div>
                                      <a class="dropdown-item">My Balance</a>
                                     <a class="dropdown-item" id="logout">Logout</a>
                                 </li>

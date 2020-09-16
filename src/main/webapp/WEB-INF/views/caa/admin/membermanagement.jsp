@@ -21,16 +21,18 @@ $(function(){
 });
 
 function Delete(){
-	alert(userid);
-	
-	location.href = "/admin/deletemember?userid="+userid;
-	alert("삭제완료");
-	userid="";
+	if(userid != ""){
+		
+		location.href = "/admin/deletemember?userid="+userid;
+		alert("삭제완료");
+		userid="";
+	}else alert("선택해주세요.")
 }
 function Modify(){
-	alert(userid);
-	location.href = "/admin/modifymember?userid="+userid;
-	userid="";
+	if(userid != ""){
+		location.href = "/admin/modifymember?userid="+userid;
+		userid="";
+	}else alert("선택해주세요.")
 }
 </script>
 
