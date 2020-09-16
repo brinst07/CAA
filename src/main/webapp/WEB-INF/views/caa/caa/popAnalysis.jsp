@@ -1,29 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%-- <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"  %> --%>
 <link rel="icon" href="/resources/assets/img/icon.ico" type="image/x-icon" />
 <script src="/resources/assets/js/plugin/webfont/webfont.min.js"></script>
-<style type="text/css">
-#logo {
-	width: 250px;
-	padding-bottom: 20px;
-}
-</style>
-<script>
-	WebFont.load({
-		google : {
-			"families" : [ "Lato:300,400,700,900" ]
-		},
-		custom : {
-			"families" : [ "Flaticon", "Font Awesome 5 Solid",
-					"Font Awesome 5 Regular", "Font Awesome 5 Brands",
-					"simple-line-icons" ],
-			urls : [ '/resources/assets/css/fonts.min.css' ]
-		},
-		active : function() {
-			sessionStorage.fonts = true;
-		}
-	});
-</script>
+
 
 	<div class="main-panel full-height">
 		<div class="container">

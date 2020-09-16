@@ -23,5 +23,65 @@
         order by TO_NUMBER(SALES_STORE_COUNT) desc
     </select> 
 
+	<select id="getSectorsType" parameterType="String" resultType="kr.or.ddit.ir.domain.SectorsTypeVO">
+	select c.total_count, d.each_store_count, d.sectors,  TO_CHAR(ROUND(d.each_store_count/c.total_count*100)) ratio
+	from (select sum(b.store_count) total_count
+      from (select sum(SALES_STORE_COUNT) store_count, a.decode sectors
+            from (
+                     select SALES_STORE_COUNT,
+                            decode(substr(SALES_CS_CODE, 1, 1), 'a', '외식업', 'b', '서비스업', 'c', '소매업') decode
+                     from SALES_TEMP_CSCODE
+                     where SALES_BD_NAME = #{sales_bd_name}
+                       and SALES_BUNGI_CODE = '4'
+                     group by sales_bd, SALES_BD_NAME, SALES_SER_NAME, SALES_CS_CODE, SALES_STORE_COUNT) a
+            group by a.decode) b) c,
+     (select sum(SALES_STORE_COUNT) each_store_count , a.decode sectors
+      from (
+               select SALES_STORE_COUNT, decode(substr(SALES_CS_CODE, 1, 1), 'a', '외식업', 'b', '서비스업', 'c', '소매업') decode
+               from SALES_TEMP_CSCODE
+               where SALES_BD_NAME = #{sales_bd_name}
+                 and SALES_BUNGI_CODE = '4'
+               group by sales_bd, SALES_BD_NAME, SALES_SER_NAME, SALES_CS_CODE, SALES_STORE_COUNT) a
+      group by a.decode) d
+    order by ratio desc
+	</select>
+	
+	<select id="getSectorsLargeMiddle" parameterType="String" resultType="kr.or.ddit.ir.domain.SectorsLargeMiddleVO">
+		select rank,
+       MIN(DECODE(CS_CODE_NAME, '외식업', SALES_SER_NAME))     sales_ser_name_1,      
+       MIN(DECODE(CS_CODE_NAME, '외식업', SALES_STORE_COUNT))  sales_store_count_1,   
+       MIN(DECODE(CS_CODE_NAME, '외식업', SALES_BD_NAME))      sales_bd_name_1,       
+       MIN(DECODE(CS_CODE_NAME, '외식업', CS_CODE_NAME))       cs_code_name_1,        
+       MIN(DECODE(CS_CODE_NAME, '소매업', SALES_SER_NAME))     sales_ser_name_2,      
+       MIN(DECODE(CS_CODE_NAME, '소매업', SALES_STORE_COUNT))  sales_store_count_2,   
+       MIN(DECODE(CS_CODE_NAME, '소매업', SALES_BD_NAME))      sales_bd_name_2,       
+       MIN(DECODE(CS_CODE_NAME, '소매업', CS_CODE_NAME))       cs_code_name_2,        
+       MIN(DECODE(CS_CODE_NAME, '서비스업', SALES_SER_NAME))   sales_ser_name_3,      
+       MIN(DECODE(CS_CODE_NAME, '서비스업', SALES_STORE_COUNT))sales_store_count_3,   
+       MIN(DECODE(CS_CODE_NAME, '서비스업', SALES_BD_NAME))    sales_bd_name_3,       
+       MIN(DECODE(CS_CODE_NAME, '서비스업', CS_CODE_NAME))     cs_code_name_3   
+
+from (
+         select SALES_SER_NAME,
+                TO_NUMBER(SALES_STORE_COUNT) SALES_STORE_COUNT,
+                SALES_BD_NAME,
+                cc.CS_CODE_NAME,
+                ROW_NUMBER() over (partition by cc.CS_CODE_NAME order by TO_NUMBER(SALES_STORE_COUNT) desc) rank
+
+
+         from SALES_TEMP_CSCODE
+                  inner join CS_CODE a on SALES_BD_NAME = #{sales_bd_name}
+             and SALES_BUNGI_CODE = '4' and SALES_TEMP_CSCODE.SALES_CS_CODE = a.CS_CODE
+                  inner join CS_CODE CC on CC.CS_CODE = a.CS_CODE2
+         group by SALES_CS_CODE, SALES_SER_NAME, TO_NUMBER(SALES_STORE_COUNT), SALES_BD_NAME, cc.CS_CODE_NAME
+         order by CS_CODE_NAME desc, TO_NUMBER(SALES_STORE_COUNT) desc
+     )
+<![CDATA[     
+WHERE rank <= 5
+
+GROUP BY rank
+order by rank asc
+ ]]>
+    </select> 
 
 </mapper>

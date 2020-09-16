@@ -1,7 +1,9 @@
 package kr.or.ddit.ir.service;
 
 import kr.or.ddit.ir.domain.SectorsLargeLevelVO;
+import kr.or.ddit.ir.domain.SectorsLargeMiddleVO;
 import kr.or.ddit.ir.domain.SectorsMiddleLevelVO;
+import kr.or.ddit.ir.domain.SectorsTypeVO;
 import kr.or.ddit.ir.mapper.RecommandMapper;
 import lombok.AllArgsConstructor;
 import lombok.Setter;
@@ -28,6 +30,16 @@ public class RecommandServiceImpl implements RecommandService{
     public List<SectorsMiddleLevelVO> getSectorsMiddleLevel(String areaName) {
         return mapper.getSectorsMiddleLevel(areaName);
     }
+
+    @Override
+	public List<SectorsTypeVO> getSectorsType(String areaName) {
+		return mapper.getSectorsType(areaName);
+	}
+
+	@Override
+	public List<SectorsLargeMiddleVO> getSectorsLargeMiddle(String areaName) {
+		return mapper.getSectorsLargeMiddle(areaName);
+	}
  
 
 }

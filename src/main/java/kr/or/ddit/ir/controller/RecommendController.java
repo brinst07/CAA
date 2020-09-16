@@ -1,9 +1,12 @@
 package kr.or.ddit.ir.controller;
 
-import kr.or.ddit.ir.domain.SectorsLargeLevelVO;
-import kr.or.ddit.ir.domain.SectorsMiddleLevelVO;
-import kr.or.ddit.ir.service.RecommandService;
-import lombok.extern.log4j.Log4j;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashSet;
+import java.util.List;
+
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -13,9 +16,11 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.google.gson.Gson;
 
-import java.util.List;
-
-import javax.servlet.http.HttpSession;
+import kr.or.ddit.ir.domain.SectorsLargeLevelVO;
+import kr.or.ddit.ir.domain.SectorsLargeMiddleVO;
+import kr.or.ddit.ir.domain.SectorsMiddleLevelVO;
+import kr.or.ddit.ir.service.RecommandService;
+import lombok.extern.log4j.Log4j;
 
 @Controller
 @Log4j
@@ -32,7 +37,7 @@ public class RecommendController {
 	}
 
 	@GetMapping("/recommendSectorsLevel")
-	public String caaArea(@RequestParam("areaName") String sales_bd_name, Model model, HttpSession session) {
+	public String recommendSectorsLevel(@RequestParam("areaName") String sales_bd_name, Model model, HttpSession session) {
 
 		session.setAttribute("sales_bd_name", sales_bd_name);
 
@@ -49,5 +54,18 @@ public class RecommendController {
 
 		return "caa/ir/recommendSectorsLevel";
 
+	}
+	
+	@GetMapping("/recommendSectorsType")
+	public String recommendSectorsType(Model model, HttpSession session) {
+		
+		String sales_bd_name = (String) session.getAttribute("sales_bd_name");
+		
+		model.addAttribute("SectorsType", service.getSectorsType(sales_bd_name));
+		
+		model.addAttribute("SectorsLargeMiddle", service.getSectorsLargeMiddle(sales_bd_name));
+		
+		return "caa/ir/recommendSectorsType";
+		
 	}
 }
