@@ -2,15 +2,10 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
-<html>
-<head>
-<meta http-equiv="X-UA-Compatible" content="IE=edge" />
-<title>Atlantis Bootstrap 4 Admin Dashboard</title>
 <meta content='width=device-width, initial-scale=1.0, shrink-to-fit=no'
 	name='viewport' />
 <link rel="icon" href="/resources/assets/img/icon.ico"
 	type="image/x-icon" />
-<!-- Fonts and icons -->
 <script src="/resources/assets/js/plugin/webfont/webfont.min.js"></script>
 <style type="text/css">
 #logo {
@@ -23,20 +18,7 @@
 }
 </style>
 <script>
-	WebFont.load({
-		google : {
-			"families" : [ "Lato:300,400,700,900" ]
-		},
-		custom : {
-			"families" : [ "Flaticon", "Font Awesome 5 Solid",
-					"Font Awesome 5 Regular", "Font Awesome 5 Brands",
-					"simple-line-icons" ],
-			urls : [ '/resources/assets/css/fonts.min.css' ]
-		},
-		active : function() {
-			sessionStorage.fonts = true;
-		}
-	});
+	
 	
 	function selectedSido(){
 		var sido_code = $("select[name=sel1]").val();
@@ -173,43 +155,8 @@
 	
 	
 </script>
-
-
-
-<!-- CSS Files -->
-<!-- <link rel="stylesheet" href="/resources/assets/css/bootstrap.min.css">
-<link rel="stylesheet" href="/resources/assets/css/atlantis.css">
-
-CSS Just for demo purpose, don't include it in your project
-<link rel="stylesheet" href="/resources/assets/css/demo.css">
- -->
-<meta http-equiv="X-UA-Compatible" content="IE=edge" />
-<title>Atlantis Bootstrap 4 Admin Dashboard</title>
-<meta content='width=device-width, initial-scale=1.0, shrink-to-fit=no'
-	name='viewport' />
-<link rel="icon" href="/resources/assets/img/icon.ico"
-	type="image/x-icon" />
-
-<!-- Fonts and icons -->
 <script src="/resources/assets/js/plugin/webfont/webfont.min.js"></script>
-<script>
-	WebFont.load({
-		google : {
-			"families" : [ "Lato:300,400,700,900" ]
-		},
-		custom : {
-			"families" : [ "Flaticon", "Font Awesome 5 Solid",
-					"Font Awesome 5 Regular", "Font Awesome 5 Brands",
-					"simple-line-icons" ],
-			urls : [ '/resources/assets/css/fonts.min.css' ]
-		},
-		active : function() {
-			sessionStorage.fonts = true;
-		}
-	});
-	
-	
-</script>
+
 
 
 			
@@ -218,13 +165,11 @@ CSS Just for demo purpose, don't include it in your project
 <link rel="stylesheet" href="/resources/assets/css/bootstrap.min.css">
 <link rel="stylesheet" href="/resources/assets/css/atlantis.css">
 
-</head>
-<body>
-	<div class="wrapper fullheight-side sidebar_minimize">
 
 		<div class="main-panel full-height">
 			<div class="container">  
 				<div class="panel-header">
+				
 					<div class="page-inner border-bottom pb-0 mb-3">
 						<div class="d-flex align-items-left flex-column">
 
@@ -235,9 +180,9 @@ CSS Just for demo purpose, don't include it in your project
 											class="flaticon-home"></i>
 									</a></li>
 									<li class="separator"><i class="flaticon-right-arrow"></i></li>
-									<li class="nav-item"><a href="#">Pages</a></li>
+									<li class="nav-item"><a href="#">업소 현황</a></li>
 									<li class="separator"><i class="flaticon-right-arrow"></i></li>
-									<li class="nav-item"><a href="#">Starter Page</a></li>
+									<li class="nav-item"><a href="#">Main Page</a></li>
 								</ul>
 							</div>
 						</div>
@@ -267,6 +212,7 @@ CSS Just for demo purpose, don't include it in your project
 
 					</div>
 				</div>
+				
 				<div class="page-inner">
 				<div class="col-md-12">
 						<div class="card">
@@ -368,28 +314,8 @@ CSS Just for demo purpose, don't include it in your project
 
 		</div>
 
-	</div>
-
-	<!--   Core JS Files   -->
-	<script src="/resources/assets/js/core/jquery.3.2.1.min.js"></script>
-	<script src="/resources/assets/js/core/popper.min.js"></script>
-	<script src="/resources/assets/js/core/bootstrap.min.js"></script>
-	<!-- jQuery UI -->
-	<script
-		src="/resources/assets/js/plugin/jquery-ui-1.12.1.custom/jquery-ui.min.js"></script>
-	<script
-		src="/resources/assets/js/plugin/jquery-ui-touch-punch/jquery.ui.touch-punch.min.js"></script>
-	<!-- Bootstrap Toggle -->
-	<script
-		src="/resources/assets/js/plugin/bootstrap-toggle/bootstrap-toggle.min.js"></script>
-	<!-- jQuery Scrollbar -->
-	<script
-		src="/resources/assets/js/plugin/jquery-scrollbar/jquery.scrollbar.min.js"></script>
-	<!-- Datatables -->
-	<script src="/resources/assets/js/plugin/datatables/datatables.min.js"></script>
-	<!-- Atlantis JS -->
-	<script src="/resources/assets/js/atlantis.min.js"></script>
 
 
-</body>
+
+
 </html>
