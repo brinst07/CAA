@@ -247,14 +247,14 @@
                                         <div class="u-text">
                                             <h4><c:out value="${member.member_id}"/></h4>
                                             <p class="text-muted"><c:out value="${member.member_email}"/></p>
-                                            <a href="profile.html" class="btn btn-xs btn-secondary btn-sm">View
+                                            <a href="/member/modifyMember" class="btn btn-xs btn-secondary btn-sm">View
                                                 Profile</a>
                                         </div>
                                     </div>
                                 </li>
                                 <li>
                                     <div class="dropdown-divider"></div>
-                                    <a class="dropdown-item">My Profile</a> <a class="dropdown-item">My Balance</a>
+                                     <a class="dropdown-item">My Balance</a>
                                     <a class="dropdown-item" id="logout">Logout</a>
                                 </li>
                             </div>

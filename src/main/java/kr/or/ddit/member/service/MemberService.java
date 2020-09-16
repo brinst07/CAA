@@ -24,7 +24,7 @@ public interface MemberService {
     public void insertSocialMember(MemberVO memVo);
 
     public MemberVO selectMember(String id);
-
+    
 	public String findID(FindIDVO vo);
 	
 	public String findPW(FindPWVO vo);

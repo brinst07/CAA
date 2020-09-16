@@ -23,7 +23,6 @@ public interface MemberMapper {
 
     public void insertSocialMember(MemberVO memVo);
 
-    public MemberVO selectMember(String id);
 
 	public String findID(FindIDVO vo);
 	
@@ -31,4 +30,6 @@ public interface MemberMapper {
 
 	public String findPW(FindPWVO vo);
 	
+    //회원정보 수정 조회
+    public MemberVO selectMember(String id);
 }

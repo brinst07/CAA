@@ -41,9 +41,15 @@ public class MemberController {
 
 	@RequestMapping("/joinMember")
 	public String joinMember() {
-
+		
 		return "caa/member/JoinMember";
 
+	}
+	@RequestMapping("/updateMember")
+	public String updateMember(MemberVO vo) {
+		service.modifyMember(vo);
+		return "caa/mainPage/main";
+		
 	}
 
 	@PostMapping("/insertMember")
@@ -59,11 +65,18 @@ public class MemberController {
 		return "caa/mainPage/main";
 	}
 
-	@RequestMapping("/modifyMember")
-	public String modifyMember(MemberVO vo) {
-
-		service.modifyMember(vo);
+	@RequestMapping("/modifyMember/{member_id}")
+	public String modifyMember(String id) {
+		service.selectMember(id);
+		
 		return "caa/member/modifyMember";
+	}
+	
+	@RequestMapping("/selectMember")
+	public String selectMember(MemberVO vo) {
+		service.modifyMember(vo);
+		
+		return "caa/mainPage/main";
 	}
 
 	@PostMapping(value = "/login", produces = { MediaType.APPLICATION_JSON_UTF8_VALUE })

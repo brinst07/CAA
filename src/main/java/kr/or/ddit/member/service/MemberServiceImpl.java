@@ -45,10 +45,7 @@ public class MemberServiceImpl implements MemberService {
         mapper.insertSocialMember(memVo);
     }
 
-    @Override
-    public MemberVO selectMember(String id) {
-        return mapper.selectMember(id);
-    }
+   
 
     @Override
     public void modifyMember(MemberVO vo) {
@@ -70,6 +67,11 @@ public class MemberServiceImpl implements MemberService {
 	public String findPW(FindPWVO vo) {
 		// TODO Auto-generated method stub
 		return mapper.findPW(vo);
+	}
+
+	@Override
+	public MemberVO selectMember(String id) {
+		return mapper.selectMember(id);
 	}
 
 

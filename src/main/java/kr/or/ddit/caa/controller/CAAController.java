@@ -221,7 +221,7 @@ public class CAAController {
 
 	@GetMapping("/modifyMember")
 	public String modifyMember() {
-		return "caa/member/modifyMember";
+		return "caa/mainPage/main";
 	}
 
 	@GetMapping("/noticeList")
