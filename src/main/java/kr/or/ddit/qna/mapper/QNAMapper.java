@@ -30,4 +30,8 @@ public interface QNAMapper {
 	public void updateReplyCnt(@Param("bno") Long bno, @Param("amount") int amount);
 
 	public void updateHit(String board_id);
+
+	public void insertBoardReply(BoardVO board);
+
+	public void updateBoardReSeq(BoardVO board);
 }

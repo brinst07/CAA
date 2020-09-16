@@ -14,17 +14,24 @@
                         </div>
                         <div class="col-auto">
 
-                            <button data-oper='modify' class="btn btn-light btn-border"
+                            <%-- <button data-oper='modify' class="btn btn-light btn-border"
                                     onclick="location.href='/qna/modify?board_id=<c:out
                                             value="${board.board_id }"/>&board_title=<c:out value="${board_title}"/>'">
                                 수정
-                            </button>
+                            </button> --%>
+                            
+                           <a href="/qna/modify?board=${board.board_id }" class="btn btn-light btn-border">수정 </a> 
+                            
+                            
+                            
+                            
                             <a href="/qna/list" class="btn btn-primary ml-2"> 목록 </a>
                             <c:if test="${member.member_auth eq 'ROLE_ADMIN'}">
                                 <button data-oper='modify' class="btn btn-light btn-border"
-                                        onclick="location.href='/qna/register?board_id=<c:out
-                                                value="${board.board_id }"/>&board_title=<c:out
-                                                value="${board_title}"/>'">
+                                        onclick="location.href='/qna/reply?board_id=<c:out
+                                                value="${board.board_id }"/>&board_re_ref=<c:out
+                                                value="${board.board_re_ref}"/>'">
+                                                
                                     답글
                                 </button>
                             </c:if>
@@ -55,6 +62,9 @@
                                             <h5 class="sub">작성자</h5>
                                             <p>
                                                 <c:out value="${board.member_id }"></c:out>
+                                                <%-- <c:out value="${board.board_id }"></c:out> --%>
+                                                <input type="hidden" name="board_id" id="board_id" value="${board.board_id}">
+                                                
                                             </p>
                                         </div>
 
@@ -66,6 +76,13 @@
                                         <c:out value="${board.board_content }"></c:out>
                                     </div>
                                 </div>
+                                <%-- <form name="loginForm" action="/qna/reply"  method="get">
+									<input type="hidden" name="board_re_ref" id="board_re_ref" value="${board_id}">
+									<input type="submit" value="전송">
+								</form> --%>
+
+
+                                
                             </div>
                         </div>
                     </div>
@@ -74,6 +91,5 @@
         </div>
     </div>
 </div>
-
 
 

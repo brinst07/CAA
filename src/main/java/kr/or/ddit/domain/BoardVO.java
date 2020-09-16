@@ -19,4 +19,11 @@ public class BoardVO {
 	private String board_temp_save;
 	private String board_hit;
 	private List<BoardAttachVO> attachList;
+	
+	// 계층형 게시판을 위해 추가
+	private int board_re_ref; // 답변글 그룹
+	private int board_re_lev; // 답변글 레벨
+	private int board_re_seq; //답변글 순서
+
+	
 }

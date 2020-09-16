@@ -3,18 +3,22 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 
-<div class="main-panel full-height">
-	<div class="container">
-		<div class="page-inner">
-			<div class="row justify-content-center">
-				<div class="col-12 col-lg-10 col-xl-9">
-					<form id="operForm" role="form" action="/qna/register"
-						  method="post">
-						<div class="row align-items-center">
-							<div class="col">
-								<h4 class="page-title">QnA</h4>
-								<h6 class="page-pretitle">Questions and Answers</h6>
-							</div>
+
+
+
+<body>
+
+	<div class="main-panel full-height">
+		<div class="container">
+			<div class="page-inner">
+				<div class="row justify-content-center">
+					<div class="col-12 col-lg-10 col-xl-9">
+						<form id="operForm" role="form" action="/qna/register" method="post">
+							<div class="row align-items-center">
+								<div class="col">
+									<h4 class="page-title">QnA</h4>
+									<h6 class="page-pretitle">Questions and Answers</h6>
+								</div>
 
 
 
@@ -49,11 +53,10 @@
 												</p>
 											</div>
 
-										</div>
-
-										<div class="separator-solid"></div>
-										<h5 class="sub">내용</h5>
-										<div style="height: 500px;">
+											<div class="separator-solid"></div>
+											<h5 class="sub">내용</h5>
+											<div style="height: 500px;">
+												<textarea id="editor" name="board_content"></textarea>
 
 											<textarea id="editor" name="board_content"></textarea>
 
@@ -71,14 +74,38 @@
 		</div>
 	</div>
 </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</body>
+
+
+
+
+
 <script>
-	$('#editor').summernote('code', '${board.board_content}');
+
+	/* $('#editor').summernote('code', '${board.board_content}');
 
 	$('#editor').val("${board.board_content}");
 	$('#editor').summernote({
 		fontNames : [ 'Arial', 'Arial Black', 'Comic Sans MS', 'Courier New' ],
 		tabsize : 2,
-		height : 600,
+		height : 500,
+
 		callbacks : {
 			onImageUpload : function(files, editor, welEditable) {
 				for (var i = files.length - 1; i >= 0; i--) {
@@ -86,8 +113,23 @@
 				}
 			}
 		}
-	});
+	}); */
+	
+	$(document).ready(function() {
+		$('textarea[name="board_content"]').val('');
+		
+	    $('textarea[name="board_content"]').summernote({
+	      height: 320
+	    });
+	      $('textarea[name="board_content"]').summernote("code", "");
+	  });
+	
+	
+	
 </script>
+
+
+
 
 
 <script type="text/javascript">

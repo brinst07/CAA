@@ -1,157 +1,131 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
-<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=1a3acaea52f8fb01b6a85dfd59092f27"></script>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=b34009d4b541b528531e4544e9856e95"></script>
 
-</head>
-<body>
-	<div class="main-panel full-height">
-		<div class="container">
-			<div class="panel-header">
-				<div class="page-inner border-bottom pb-0 mb-3">
-					<div class="d-flex align-items-left flex-column">
-						<h2 class="pb-2 fw-bold">점포이력분석</h2>
-					</div>
-				</div>
-			</div>
-			<div class="page-inner">
-				<div class="row">
-					<div class="col-md-8">
-						<div class="card">
-							<div class="card-header">
-								<div class="card-head-row">
-									<div class="card-title">지도</div>
-								</div>
-							</div>
-							<div class="card-body">
-								<div id="map" style="display: block; widht: 785px; height: 375px;"></div>
-								<script>
-									
-									// 지도를 표시할 div
-									var container = document.getElementById('map');
-									var options = {
-										center : new kakao.maps.LatLng(33.450701, 126.570667), // 지도의 중심좌표
-										level : 3 // 지도의 확대 레벨
-									};
+<script type="text/javascript">
+    $(document).ready(function (){
+       $('a').click(function(event){
+    	   event.preventDefault();
+           var url = $(this).attr('href');
+           console.log(url);
+           var name = $(this).text();
+           console.log(name);
+       });
+    });
+</script>
+<div class="main-panel full-height">
+    <div class="container">
+        <div class="panel-header">
+            <div class="page-inner border-bottom pb-0 mb-3">
+                <div class="d-flex align-items-left flex-column">
+                    <h2 class="pb-2 fw-bold">점포이력분석</h2>
+                    <h4 class="pb-2 f2-bold">점포</h4>
+                </div>
+            </div>
+        </div>
+        <div class="page-inner">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="card">
+                        <div class="card-header">
+                            <div class="card-head-row">
+                                <div class="card-title">지도</div>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <div id="map" style="display: block; widht: 785px; height: 375px;"></div>
+                            <script>
+                                var container = document
+                                    .getElementById('map');
+                                var options = {
+                                    center: new kakao.maps.LatLng(
+                                    		37.52247501, 126.8158529),
+                                    level: 3
+                                };
 
-									// 지도를 생성합니다.
-									var map = new kakao.maps.Map(container, options);
-									
-									// 일반 지도와 스카이뷰로 지도 타입을 전환할 수 있는 지도 타입 컨트롤을 생성합니다
-									var mapTypeControl = new kakao.maps.MapTypeControl();
-									
-									// 지도에 컨트롤을 추가해야 지도위에 표시됩니다
-									// kakao.maps.ControlPosition은 컨트롤이 표시될 위치를 정의하는데 TOPRIGHT는 오른쪽 위를 의미
-									map.addControl(mapTypeControl, kakao.maps.ControlPosition.TOPRIGHT);
-									
-									// 지도 확대 축소를 제어할 수 있는 줌 컨트롤을 생성합니다
-									var zoomControl = new kakao.maps.ZoomControl();
-									map.addControl(zoomControl, kakao.maps.ControlPosition.RIGHT);
-									
-									// 지도의 현재 영역을 얻어옵니다.
-									var bounds = map.getBounds();
-									var boundStr = bounds.toString();
+                                map = new kakao.maps.Map(container, options);
+                                kakao.maps.event.addListener(map, 'tilesloaded', function () {
 
-									// 영역의 남서쪽 좌표를 얻어옵니다
-									var swLatLng = bounds.getSouthWest();
+                                    var bounds = map.getBounds();
+                                    // 영역의 남서쪽 좌표를 얻어옵니다
+                                    
+                                    console.info(bounds);
 
-									// 영역의 북동쪽 좌표를 얻어옵니다
-									var neLatLng = bounds.getNorthEast();
-									
-									
-									console.log(boundStr);
-									
-									console.log(swLatLng);
-									console.log(neLatLng);
-									
-									
-									var mapContainer = document.getElementById('map'), // 지도를 표시할 div
-										mapOption = {
-											center: new kakao.map.LatLng(33.450701, 126.570667), // 지도의 중심좌표
-											level: 3 // 지도의 확대 레벨
-									};
-									
-									var map = new kakao.maps.Map(mapContainer, mapOption); // 지도를 생성합니다
-									
-									// 마커를 표시할 위치와 title 객체 배열입니다
-									var positions = [
-										{
-											title: '카카오',
-											latlng: new kakao.maps.LatLng(33.450705, 126.570677)
-										},
-										{
-											title: '생태연못',
-											latlng: new kakao.maps.LatLng(33.450936, 126.569477)
-										},
-										{
-											title: '텃밭',
-											latlng: new kakao.maps.LatLng(33.450879, 1236.569940)
-										},
-										{
-											title: '근린공원',
-											latlng: new kakao.maps.LatLng(33.451393, 126.570738)
-										}
-									];
-									
-									// 머커 이미지의 이미지 주소입니당
-									var imageSrc = "https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/markerStar.png"; 
-									
-									for (var i = 0; i < positions.length; i++){
-										
-										// 마커 이미지의 이미지 크기
-										var imageSize = new kakao.map.Size(24, 35);
-										
-										// 마커 이미지를 생성
-										var markerImage = new kakao.maps.MarkerImage(imageSrc, imageSize);
-										
-										// 마커를 생성합니다
-										var marker = new kakao.maps.Marker({
-											map: map, // 마커를 표시할 지도
-											position: position[i].latlng, // 마커를 표시할 위치
-											title: positions[i].title, // 마커의 타이틀, 마커에 마우스를 올리면 타이틀이 표시
-											image: markerImage // 마커 이미지 
-										});
-									}
-									
+                                    const serviceKey = "IGbeITLd67yRCztv9r65smZLPw2NfvkXkgh7G6BnB3JbBcn3jnPdQ5x5wRJdqMEg62O9YJ9kvgy4jl%2BwoxA5Fg%3D%3D";
 
-								</script>
-							</div>
-						</div>
-					</div>
-					
-					
-					<div class="col-md-4">
-						<div class="card-body">
-							<ul class="list-group list-group-bordered">
-								<li class="list-group-item active">1단계</li>
-								<li class="list-group-item">지역을 선택해주세요</li>
-							</ul>
-							<br>
-							<ul class="list-group list-group-bordered">
-								<li class="list-group-item active">2단계</li>
-								<li class="list-group-item">점포를 선택해주세요</li>
-								
-								
-								
-								
-							</ul>
-							<br>
-							
-							
-							
-							
-							
-							
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
-	</div>
-	</div>
-</body>
-</html>
+//                                     $.ajax({
+//                                         url: "http://apis.data.go.kr/B553077/api/open/sdsc/storeListInRectangle?ServiceKey=" + serviceKey +
+//                                             "&minx=" + bounds.da + "&miny=" + bounds.ka + "&maxx=" + bounds.ia +
+//                                             "&maxy=" + bounds.ja,
+//                                         success: function (data) {
+//                                             var jsonData = $.xml2json(data);
+//                                             var history = jsonData.data;
+// 											if(history == null){
+//                                                 swal({
+//                                                     icon: "info",
+//                                                     title : "history 정보가 존재하지 않습니다."
+//                                                 });
+                                                
+//                                                 return false;
+//                                             }
+											
+											
+// 											console.log(bounds.da);
+											
+// 											var positions = [];
+
+// 											for(var i = 0; i<history.length; i++){
+//                                                 let x = history[i].coordx;
+//                                                 let y = history[i].coordy;
+//                                                 x = x.replace("\"","");
+//                                                 y = y.replace("\"","");
+
+//                                                 var mapInfo = new Object();
+//                                                 mapInfo.content = '<div style="padding:5px;">' +
+//                                                     '<a href="'+history[i].bizesNm+'">'+history[i].bizesNm+'</a>' +
+//                                                     '</div>';
+//                                                 mapInfo.latlng = new kakao.maps.LatLng(y,x);
+
+//                                                 positions.push(mapInfo);
+
+//                                             }
+
+// 											for (var i = 0; i < positions.length; i ++) {
+// 											    // 마커를 생성합니다
+// 											    var marker = new kakao.maps.Marker({
+// 											        map: map, // 마커를 표시할 지도
+// 											        position: positions[i].latlng // 마커의 위치
+// 											    });
+
+// 											    // 마커에 표시할 인포윈도우를 생성합니다 
+// 											    var infowindow = new kakao.maps.InfoWindow({
+// 											        content: positions[i].content, // 인포윈도우에 표시할 내용
+// 											        removable : true
+											        
+// 											    });
+
+// 											    // 마커에 이벤트를 등록하는 함수 만들고 즉시 호출하여 클로저를 만듭니다
+// 											    // 클로저를 만들어 주지 않으면 마지막 마커에만 이벤트가 등록됩니다
+// 											    (function(marker, infowindow) {
+// 											        // 마커에 mouseover 이벤트를 등록하고 마우스 오버 시 인포윈도우를 표시합니다 
+// 											    	kakao.maps.event.addListener(marker, 'click', function() {
+// 											    	      // 마커 위에 인포윈도우를 표시합니다
+// 											    	      infowindow.open(map, marker);  
+// 											    	});
+// 											    })(marker, infowindow);
+// 											}
+
+//                                         }, error: function (xhr, status) {
+//                                             console.log(xhr, status);
+//                                         }
+
+//                                     });
+                                });
+
+                            </script>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

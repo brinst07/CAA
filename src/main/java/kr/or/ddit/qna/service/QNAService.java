@@ -9,6 +9,8 @@ import java.util.List;
 public interface QNAService {
 
 	public void register(BoardVO board_id);
+	
+	public void reply(BoardVO board_id);
 
 	public BoardVO get(String board_id);
 
@@ -22,6 +24,9 @@ public interface QNAService {
 
 
 	public void updateHit(String board_id);
+	
+	public void updateBoardReSeq(BoardVO board );
+	
 }
 	
 	

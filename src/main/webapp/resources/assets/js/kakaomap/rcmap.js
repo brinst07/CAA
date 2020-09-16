@@ -62,7 +62,7 @@ kakao.maps.event.addListener(map, 'dragend', function () {
                 //상권의 좌표를 추출
                 var polygonPoints;
                 polygonPoints = data[csName];
-
+  console.log("======================================================polygonPoints.csName:" + polygonPoints.csName);
                 var path = [];
                 console.log("======================================================polygonPoints.length:" + polygonPoints.length);
                 //다각형을 구성하는 좌표 배열을 동적으로 삽입한다.

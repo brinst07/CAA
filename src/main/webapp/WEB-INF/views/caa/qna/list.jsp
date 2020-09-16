@@ -78,7 +78,10 @@
                                                         <c:out value="${board.board_title }" /></a></td> --%>
                                                     <td><a class="move"
                                                            href='/qna/getDetail?board_id=<c:out value="${board.board_id }"/>'>
-                                                        <c:out value="${board.board_title }"/></a></td>
+                                                        <c:if test="${board.board_re_lev gt 0}">   └ Re: </c:if>
+                                                        	<c:out value="${board.board_title }"/></a></td>
+                                                        
+                                                        
                                                     <td><c:out value="${board.member_id }"/></td>
                                                     <td><fmt:formatDate pattern="yyyy-MM-dd"
                                                                         value="${board.board_datetime }"/></td>
@@ -113,3 +116,34 @@
     </div>
 </div>
 
+<script>
+    $(document).ready(
+            function () {
+                $('#basic-datatables').DataTable({});
+
+                $('#multi-filter-select').DataTable({
+                            "pageLength": 5,
+                            initComplete: function () {this.api().columns().every(
+                                        function () {
+                                            var column = this;
+                                            var select = $('<select class="form-control"><option value=""></option></select>').appendTo(
+                                                    $(column.footer()).empty()).on('change',
+                                                    function () {
+                                                        var val = $.fn.dataTable.util.escapeRegex($(this).val());
+
+                                                        column.search(val ? '^'+ val+ '$': '',true,false).draw();
+                                                    });
+
+                                            column.data().unique().sort().each(
+                                                    function (d,j) {
+                                                        select.append('<option value="' + d + '">'+ d+ '</option>')
+                                                    });
+                                        });
+                            }
+                        });
+
+            });
+    
+    
+   
+</script>

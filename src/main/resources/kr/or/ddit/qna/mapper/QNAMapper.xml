@@ -6,7 +6,7 @@
 
 
     <!-- 리스트 출력 -->
-    <select id="getList" resultType="kr.or.ddit.domain.BoardVO">
+    <!-- <select id="getList" resultType="kr.or.ddit.domain.BoardVO">
         select ROWNUM boardnum, board.*
         from (
                  select *
@@ -14,8 +14,20 @@
                  where BOARD_CATEGORY_ID = #{board_category_id}
                    and BOARD_STATUS = 'y'
                  order by BOARD_ID desc) board
-    </select>
+    </select> -->
 
+    <!-- 리스트 출력 -->
+    <select id="getList" resultType="kr.or.ddit.domain.BoardVO">
+        select ROWNUM boardnum, board.*
+        from (
+                 select *
+                 from BOARD
+                 where BOARD_CATEGORY_ID = #{board_category_id}
+                   and BOARD_STATUS = 'y'
+                 order by BOARD_RE_REF desc, BOARD_RE_SEQ asc) board
+    </select>
+    
+    
     <!-- 상세글 출력 -->
     <select id="read" resultType="kr.or.ddit.domain.BoardVO">
         select *
@@ -27,8 +39,7 @@
 
     <update id="modify">
         update board
-        set member_id      = '5',
-            board_title    = #{board_title, jdbcType=VARCHAR},
+        set board_title    = #{board_title, jdbcType=VARCHAR},
             board_content  = #{board_content, jdbcType=VARCHAR},
             board_datetime = sysdate
         where board_id = #{board_id, jdbcType=VARCHAR}
@@ -40,6 +51,7 @@
         delete
         from board
         where board_id = #{board_id}
+        or board_re_ref = #{board_id}
     </delete>
 
 
@@ -52,24 +64,32 @@
                            board_content,
                            board_datetime,
                            board_status,
-                           board_category_id
+                           board_category_id,
+                           board_re_ref,
+                           board_re_lev,
+                           board_re_seq
                            )
         values (seq_board.nextval,
                 #{member_id},
                 #{board_title},
                 #{board_content},
                 sysdate,
-                'y')
+                'y',
+                'qna',
+                seq_board.currval,
+                0,
+                0
+                )
     </insert>
 
     <select id="selectKey" resultType="string">
-        SELECT seq_board.nextval board_id
+        SELECT seq_board.nextval board_id	
         FROM DUAL
     </select>
 
     <insert id="insertSelectKey" parameterType="kr.or.ddit.domain.BoardVO">
-        insert into board(board_id, board_title, board_content, member_id, board_datetime, board_category_id)
-        values (#{board_id}, #{board_title}, #{board_content}, #{member_id}, sysdate, #{board_category_id})
+        insert into board(board_id, board_title, board_content, member_id, board_datetime, board_category_id, board_re_ref, board_re_lev, board_re_seq)
+        values (#{board_id}, #{board_title}, #{board_content}, #{member_id}, sysdate, #{board_category_id}, #{board_id}, #{board_re_lev}, #{board_re_seq})
     </insert>
 
     <update id="updateHit">
@@ -77,4 +97,117 @@
         set BOARD_HIT = BOARD_HIT + 1
         where BOARD_ID = #{board_id}
     </update>
+    
+    
+    
+    <!-- 4.게시글 답글 등록(insertBoardReply) 쿼리 추가 -->
+	<!-- - 게시글 답글을 등록하는 쿼리르 추가해야 합니다. -->
+	<insert id="insertBoardReply">
+	
+		INSERT
+		INTO BOARD
+		(
+			board_id,
+			member_id,
+			board_title,
+			board_content,
+			board_datetime,
+			board_status,
+			board_category_id,
+			board_re_ref,
+			board_re_lev,
+			board_re_seq
+                           )
+        values (seq_board.nextval,
+                #{member_id},
+                #{board_title},
+                #{board_content},
+                sysdate,
+                'y',
+                'qna',
+                #{board_re_ref},
+                1,
+                1
+                )
+		
+	
+	</insert>
+    
+    <!-- 3.게시글 답글 순서 수정(updateBoardReSeq) 쿼리 추가 -->
+	<!-- - 게시글 답글을 등록할 때 기존에 등록된 답글의 순서를 증가시키는 쿼리를 추가해야 합니다. -->
+	<delete id="updateBoardReSeq" parameterType="kr.or.ddit.domain.BoardVO">
+		UPDATE BOARD
+		 SET 	BOARD_RE_SEQ = BOARD_RE_SEQ + 1
+		 WHERE BOARD_RE_REF = #{board_re_ref}
+		 AND BOARD_RE_SEQ > #{board_re_seq}
+		 
+	</delete>
+    
+    <!-- 2.게시글 답글 정보 조회(getBoardReplyInfo) 쿼리 추가 -->
+	<!-- - 게시글 답글을 동록할 때 부모 게시글에 그룹 번호와 글의 깊이 및 순서를 조회하는 쿼리를 추가해야 합니다. -->
+    <!-- <select id="getBoardReplyInfo" parameterType="kr.or.ddit.domain.BoardVO" resultType="">
+    	SELECT BOARD_ID,
+    			BOARD_RE_REF,
+    			BOARD_RE_LEV,
+    			BOARD_RE_SEQ
+    	FROM BOARD
+    	WHERE BOARD_ID = #{board_parent_seq}
+    </select> -->
+    
+    <!-- 3.게시글 답글 순서 수정(updateBoardReSeq) 쿼리 추가 -->
+	<!-- - 게시글 답글을 등록할 때 기존에 등록된 답글의 순서를 증가시키는 쿼리를 추가해야 합니다. -->
+	<!-- <delete id="updateBoardReSeq" parameterType="kr.or.ddit.domain.BoardVO">
+		UPDATE BOARD
+		 SET 	BOARD_RE_SEQ = BOARD_RE_SEQ + 1
+		 WHERE BOARD_RE_REF = #{board_re_ref}
+		 AND BOARD_RE_SEQ > #{board_re_seq}
+		 
+	</delete> -->
+	
+	<!-- 4.게시글 답글 등록(insertBoardReply) 쿼리 추가 -->
+	<!-- - 게시글 답글을 등록하는 쿼리르 추가해야 합니다. -->
+	<!-- <insert id="insertBoardReply" parameterType="kr.or.ddit.domain.BoardVO">
+	
+		INSERT
+		INTO BOARD.BOARD
+		(
+			board_id,
+			member_id,
+			board_title,
+			board_content,
+			board_datetime,
+			board_status,
+			board_category_id,
+			board_re_ref,
+			board_re_lev,
+			board_re_seq
+                           )
+        values (seq_board.nextval,
+                #{member_id},
+                #{board_title},
+                #{board_content},
+                sysdate,
+                'y',
+                'qna',
+                seq_board.currval,
+                0,
+                0
+                )
+		)
+	
+	</insert> -->
+	
+	<!-- 5.게시글 목록 조회(getBoardList) 쿼리 수정 -->
+	<!-- - 게시글 그룹 번호와 게시글 답글의 깊이를 기준으로 ORDER BY를 변경해야 합니다. --> 
+	<!-- <select id="getBoardList" resultType="kr.or.ddit.domain.BoardVO">
+        select ROWNUM boardnum, board.*
+        from (
+                 select *
+                 from BOARD
+                 where BOARD_CATEGORY_ID = #{board_category_id}
+                   and BOARD_STATUS = 'y'
+                 order by BOARD_ID desc) board
+    </select> -->
+	
+    
 </mapper>
