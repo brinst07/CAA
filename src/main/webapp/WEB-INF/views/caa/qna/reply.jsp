@@ -55,23 +55,23 @@
 													<input type="hidden" name="member_id" id="member_id" value="${member.member_id}">
 												</p>
 											</div>
-											<%-- <div class="col-md-8 info-invoice">
+											<div class="col-md-8 info-invoice">
 												<h5 class="sub">글 번호</h5>
 												<p>
 													<%= request.getParameter("board_id") %>
 													<c:out value="${param.board_id }"></c:out>
 													<input type="hidden" name="board_id" id="board_id" value="${param.board_id}">
 												</p>
-											</div> --%>
+											</div>
 
-											<%-- <div class="col-md-8 info-invoice">
+											<div class="col-md-8 info-invoice">
 												<h5 class="sub">board_re_ref</h5>
 												<p>
 													<%= request.getParameter("board_re_ref") %>
 													<c:out value="${param.board_re_ref }"></c:out>
 													<input type="hidden" name="board_re_ref" id="board_re_ref" value="${param.board_re_ref}">
 												</p>
-											</div> --%>
+											</div>
 											<div class="separator-solid"></div>
 											<h5 class="sub">내용</h5>
 											<div style="height: 500px;">

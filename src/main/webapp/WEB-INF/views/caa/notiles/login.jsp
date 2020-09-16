@@ -320,12 +320,12 @@
 <body class="login">
 <div class="wrapper wrapper-login wrapper-login-full p-0">
     <div class="login-aside w-50 d-flex flex-column align-items-center justify-content-center text-center bg-primary-gradient">
-        <h1 class="title fw-bold text-white mb-3">Join Our Comunity</h1>
+        <h1 class="title fw-bold text-white mb-3">Join Our Community</h1>
         <p class="subtitle text-white op-7">CAA 상권분석 서비스에 회원가입 해주세요</p>
     </div>
     <div class="login-aside w-50 d-flex align-items-center justify-content-center bg-white">
         <div class="container container-login container-transparent animated fadeIn" style="display: block;">
-            <h3 class="text-center">로그인해주세요</h3>
+            <h3 class="text-center">LOGIN</h3>
 
             <div class="login-form">
 

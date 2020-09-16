@@ -66,7 +66,7 @@
             </div>
             <div class="col-sm-6 col-md-2 animation">
                 <div class="card card-stats card-round">
-                    <div class="card-body" style="cursor: pointer">
+                    <div class="card-body" style="cursor: pointer" onclick="location.href='/history/selectHistory'">
                         <div class="row">
                             <div class="col-5">
                                 <div class="icon-big text-center">
@@ -129,7 +129,7 @@
                             </div>
                             <div class="col-7 col-stats">
                                 <div class="numbers">
-                                    <h5 class="card-title">한눈에보기</h5>
+                                    <h5 class="card-title">생존률</h5>
                                 </div>
                             </div>
                         </div>

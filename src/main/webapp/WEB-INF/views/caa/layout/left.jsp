@@ -18,7 +18,7 @@
     <div class="sidebar-wrapper scrollbar scrollbar-inner">
         <div class="sidebar-content">
             <ul class="nav" id="leftMenu">
-                <li class="nav-item" id="main"><a> <i class="fas fa-home"></i>
+                <li class="nav-item" id="main"><a href="/caa/main"> <i class="fas fa-home"></i>
                     <p>메인화면</p>
                 </a></li>
                 <li class="nav-section"><span class="sidebar-mini-icon"> <i class="fa fa-ellipsis-h"></i>
