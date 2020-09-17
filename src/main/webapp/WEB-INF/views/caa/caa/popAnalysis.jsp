@@ -530,7 +530,21 @@ var myMultipleLineChart = new Chart(
 						top : 15,
 						bottom : 15
 					}
-				}
+				},
+				 scales: {
+                     yAxes: [{
+                         ticks: {
+                             beginAtZero:true,
+                             callback: function(value, index, values) {
+                                 if(parseInt(value) >= 1000){
+                                    return   value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")+'명';
+                                 } else {
+                                    return  value;
+                                 }
+                            }                            
+                         }
+                     }]
+                 }
 			}
 		});
 	
