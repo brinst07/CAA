@@ -431,28 +431,28 @@
    
    
  
-//   $(document).ready(function() {
-// 		var formObj = $("#modifyMember");
+  $(document).ready(function() {
+		var formObj = $("#modifyMember");
 
-//     $('button').on("click", function(e) {
+    $('button').on("click", function(e) {
 
-//        e.preventDefault();
+       e.preventDefault();
 
-// 	   var operation = $(this).data("oper");
+	   var operation = $(this).data("oper");
 		
 
-//        console.log(operation);
+       console.log(operation);
 
-//        if (operation === 'modifyMember') {
-//           formObj.attr("action", "/member/modifyMember");
-//        } else if (operation === 'main') {
-//           // move to list
-//            self.location = "caa/mainPage/main";
-//           return;
-//        }
-//        formObj.submit();
-//     }); 
-//  });
-    </script>
+       if (operation === 'modifyMember') {
+          formObj.attr("action", "/member/modifyMember");
+       } else if (operation === 'main') {
+          // move to list
+           self.location = "caa/mainPage/main";
+          return;
+       }
+       formObj.submit();
+    }); 
+ });
+     </script> 
 </body>
 </html>

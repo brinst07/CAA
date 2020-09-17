@@ -170,21 +170,6 @@
 											<span class="rating rating-sm mr-3">
 												<input type="checkbox" id="star6" value="1">
 											</span>
-											<a href="conversations.html" class="user-avatar">
-												<div>
-													<img src="/resources/assets/img/img_create2_2.png" alt="설문 구성" class="avatar-img rounded-circle">
-												</div>
-											</a>
-										</div>
-										<div class="list-group-item-body pl-3 pl-md-4">
-											<div class="row">
-												<div class="col-12 col-lg-10">
-													<h4 class="list-group-item-title">
-														<a>설문 조사</a>
-													</h4>
-													<p class="list-group-item-text text-truncate">· 상권정보시스템의 이용자를 대상으로 만족도 조사 및 다양한 설문조사 결과를 확인 하실 수 있습니다.</p>
-												</div>
-											</div>
 										</div>
 									</div>
 								</div>

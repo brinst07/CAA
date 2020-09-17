@@ -31,11 +31,11 @@
     <!-- 	회원정보 수정 완벽한거 아님 -->
     <update id="modifyMember">
         update member
-        set member_id       = #{member_id ,jdbcType=VARCHAR},
-            member_password = #{member_password ,jdbcType=VARCHAR},
-            member_email    = #{member_email,jdbcType=VARCHAR},
-            member_username = #{member_username,jdbcType=VARCHAR}
-        where member_id = #{member_id,jdbcType=VARCHAR}
+        set member_id       = #{member_id, jdbcType=VARCHAR},
+            member_password = #{member_password, jdbcType=VARCHAR},
+            member_email    = #{member_email, jdbcType=VARCHAR},
+            member_username = #{member_username, jdbcType=VARCHAR}
+        where member_id = #{member_id, jdbcType=VARCHAR}
     </update>
     
 	<!-- 회원정보 조회 -->
@@ -84,8 +84,8 @@
     </insert>
 
     <select id="selectMember" resultType="kr.or.ddit.member.domain.MemberVO">
-        select *
-        from MEMBER
-        where MEMBER_ID = #{member_id}
+        select member_id, member_username,  member_email, member_password
+        from member
+        where member_id = #{member_id, jdbcType=VARCHAR}
     </select>
 </mapper>

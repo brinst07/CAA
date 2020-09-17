@@ -65,7 +65,7 @@ public class MemberController {
 		return "caa/mainPage/main";
 	}
 
-	@RequestMapping("/modifyMember/{member_id}")
+	@RequestMapping("/modifyMember")
 	public String modifyMember(String id) {
 		service.selectMember(id);
 		
