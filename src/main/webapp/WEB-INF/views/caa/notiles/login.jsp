@@ -257,29 +257,6 @@
         });
 
 
-        $('#captchaImageInput').keyup(function () {
-            // type: "get",
-            // url: "/member/rest/captchaImage",
-            // dataType: "json",
-            // success: function (result) {
-            //
-            //     $("#captchaImage").empty();
-            //
-            //     var temp = result.apiURL;
-            //
-            //
-            //     var captchaImage = '<div>';
-            //     captchaImage += '<img alt="캡차 이미지 입니다" src="'+temp+'">';
-            //     captchaImage += '</div>';
-            //
-            //
-            //
-            //     $('#captchaImage').append(captchaImage);
-            //
-            // }, error: function (e) {
-            //     alert('캡차 이미지 발급 실패')
-            // }
-        })
 
         function captchaCheck() {
 
@@ -458,9 +435,7 @@
 <script src="/resources/assets/js/core/popper.min.js"></script>
 <script src="/resources/assets/js/core/bootstrap.min.js"></script>
 <script src="/resources/assets/js/atlantis.min.js"></script>
-<script type="text/javascript">
 
-</script>
 
 
 </body>
