@@ -40,10 +40,10 @@
                     <p>업종현황</p>
                 </a></li>
                 <li class="nav-item" id="sector"><a href="/sales/salesBoard"> <i class="fas fa-chart-bar"></i>
-                    <p>매출 분석</p>
+                    <p>매출 통계</p>
                 </a></li>
                 <li class="nav-item" id="sector"><a href="/ir/irSelectPage"> <i class="fas fa-chart-bar"></i>
-                    <p>업종 추천</p>
+                    <p>업종 유형</p>
                 </a></li>
                 <li class="nav-section"><span class="sidebar-mini-icon"> <i class="fa fa-ellipsis-h"></i>
 					</span>

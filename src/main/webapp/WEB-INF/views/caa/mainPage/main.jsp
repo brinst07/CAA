@@ -111,7 +111,7 @@
                             </div>
                             <div class="col-7 col-stats">
                                 <div class="numbers">
-                                    <h5 class="card-title">업종추천</h5>
+                                    <h5 class="card-title">업종 유형</h5>
                                 </div>
                             </div>
                         </div>
