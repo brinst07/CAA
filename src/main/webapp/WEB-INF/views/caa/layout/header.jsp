@@ -89,16 +89,6 @@
 <link rel="stylesheet" href="/resources/assets/css/atlantis.css">
 <script src="/resources/assets/js/jquery.oLoader.js"></script>
 <script>
-$(function(){
-	if(${member.member_auth == "ROLE_ADMIN" }){
-		var member = "";
-		member += '<a class="dropdown-item" href="/admin/memberList">회원관리</a>';
-		$('#memberController').append(member);
-	}
-	
-});
-
-
     WebFont.load({
         google: {
             "families": ["Lato:300,400,700,900"]
@@ -172,7 +162,7 @@ $(function(){
             </div>
             <ul class="navbar-nav topbar-nav ml-md-auto align-items-center">
                 <c:if test="${member ne null}">
-                    <c:out value="${member.member_username}"></c:out>
+                    <c:out value="${member.member_id}"></c:out>
                     <!-- 알림 -->
                     <li class="nav-item dropdown hidden-caret"><a class="nav-link dropdown-toggle" id="notifDropdown"
                                                                   role="button" data-toggle="dropdown"
@@ -255,20 +245,15 @@ $(function(){
                                             </c:if>
                                         </div>
                                         <div class="u-text">
-                                            <h4><c:out value="${member.member_username}"/></h4>
+                                            <h4><c:out value="${member.member_id}"/></h4>
                                             <p class="text-muted"><c:out value="${member.member_email}"/></p>
-<%--                                             <a href="/member/modifyMember?member_id=${member.member_id }" class="btn btn-xs btn-secondary btn-sm">View --%>
-											<form method="post" action="/member/modifyMember">
-                                            <button style="background-color: #5a90ed;" type="submit" class=btn btn-xs btn-secondary btn-sm">View
-                                                Profile</button>
-                                                <input value="${member.member_id}" type="hidden" name="member_id">
-											</form>
+                                            <a href="/member/modifyMember" class="btn btn-xs btn-secondary btn-sm">View
+                                                Profile</a>
                                         </div>
                                     </div>
                                 </li>
                                 <li>
                                     <div class="dropdown-divider"></div>
-                                    <div id="memberController"></div>
                                      <a class="dropdown-item">My Balance</a>
                                     <a class="dropdown-item" id="logout">Logout</a>
                                 </li>
