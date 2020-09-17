@@ -86,8 +86,8 @@
                                             </tbody>
 
                                         </table>
-										
-										<hr>
+                              
+                              <hr>
 
 
                                         <button data-oper='register' class="btn btn-primary"

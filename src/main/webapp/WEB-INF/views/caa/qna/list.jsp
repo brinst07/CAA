@@ -58,7 +58,7 @@
                                     style="width: 78px;">Salary</th> -->
                                             </tr>
                                             </thead>
-                                            <tfoot>	
+                                            <tfoot>   
                                             <tr>
                                                 <th rowspan="1" colspan="1">번호</th>
                                                 <th rowspan="1" colspan="1">제목</th>
@@ -79,7 +79,7 @@
                                                     <td><a class="move"
                                                            href='/qna/getDetail?board_id=<c:out value="${board.board_id }"/>'>
                                                         <c:if test="${board.board_re_lev gt 0}">   └ Re: </c:if>
-                                                        	<c:out value="${board.board_title }"/></a></td>
+                                                           <c:out value="${board.board_title }"/></a></td>
                                                         
                                                         
                                                     <td><c:out value="${board.member_id }"/></td>

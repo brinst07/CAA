@@ -172,7 +172,7 @@ $(function(){
             </div>
             <ul class="navbar-nav topbar-nav ml-md-auto align-items-center">
                 <c:if test="${member ne null}">
-                    <c:out value="${member.member_id}"></c:out>
+                    <c:out value="${member.member_username}"></c:out>
                     <!-- 알림 -->
                     <li class="nav-item dropdown hidden-caret"><a class="nav-link dropdown-toggle" id="notifDropdown"
                                                                   role="button" data-toggle="dropdown"
@@ -255,7 +255,7 @@ $(function(){
                                             </c:if>
                                         </div>
                                         <div class="u-text">
-                                            <h4><c:out value="${member.member_id}"/></h4>
+                                            <h4><c:out value="${member.member_username}"/></h4>
                                             <p class="text-muted"><c:out value="${member.member_email}"/></p>
 <%--                                             <a href="/member/modifyMember?member_id=${member.member_id }" class="btn btn-xs btn-secondary btn-sm">View --%>
 											<form method="post" action="/member/modifyMember">
