@@ -85,7 +85,7 @@
 
     <select id="selectMember" resultType="kr.or.ddit.member.domain.MemberVO"
     parameterType="kr.or.ddit.member.domain.MemberVO">
-        select member_id, member_username,  member_email, member_password
+        select *
         from member
         where member_id = #{member_id, jdbcType=VARCHAR}
     </select>

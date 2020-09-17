@@ -394,7 +394,6 @@ function analysis(){
 	// 일시적으로 담았던 list에서 도형별로 추출하기 위한 배열을 생성한다.
 	let circleArray = [];
 	let rectangleArray = [];
-	let polygonArray = [];
 	let figureArray = [];
 
 	//도형별로 추출한다.
@@ -458,28 +457,19 @@ function analysis(){
 		figureArray.push(figureObj);
 	}
 
-	for(var i = 0; i<data.polygon.length; i++){
-		polygonArray[i].points = data.polygon[i].points;
-		var figureObj = new Object();
-		figureObj.name = polygonArray[i].name;
-		figureObj.type = 'polygon';
-		figureObj.points = polygonArray[i].points;
-		figureArray.push(figureObj);
-	}
+
 
 
 
 	let caaInfo = new Object();
 	caaInfo.rectangle = rectangleArray;
 	caaInfo.circle = circleArray;
-	caaInfo.polygon = polygonArray;
+
 
 
 	
 	var sectorList1 = JSON.stringify(sectorList);
-	console.log(sectorList1);
 	var jsonCAA = JSON.stringify(caaInfo);
-	console.log(jsonCAA);
 	var jsonDATA = JSON.stringify(figureArray);
 	//Form을 만들어서 보내는 코드
 	var form = document.createElement('form');

@@ -294,7 +294,29 @@
             });
         }
     </script>
+    <script src="https://cdn.jsdelivr.net/npm/js-cookie@2/src/js.cookie.min.js"></script>
+    <script type="text/javascript">
+        $(function () {
+            $('#username').val(Cookies.get('key'));
+            if ($('#username').val() != "") {
+                $('#rememberme').attr('checked', true);
+            }
 
+            $('#rememberme').change(function () {
+                if ($('#rememberme').is(':checked')) {
+                    Cookies.set('key', $('#username').val(), {expires: 7});
+                } else {
+                    Cookies.remove('key');
+                }
+            });
+
+            $('#username').keyup(function () {
+                if ($('#rememberme').is(':checked')) {
+                    Cookies.set('key', $('#username').val(), {expires: 7});
+                }
+            });
+        });
+    </script>
 </head>
 <body class="login">
 <div class="wrapper wrapper-login wrapper-login-full p-0">
@@ -310,7 +332,7 @@
 
                 <div class="form-group">
                     <label for="member_id" class="placeholder"><b>ID</b></label>
-                       <a href="/member/findID" class="link float-right">아이디찾기</a>
+                    <a href="/member/findID" class="link float-right">아이디찾기</a>
                     <input id="username" name="member_id" type="text" class="form-control" required="">
                 </div>
                 <div class="form-group">
