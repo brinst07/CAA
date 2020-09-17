@@ -41,8 +41,8 @@
    <!-- 게시글 등록  -->
    <insert id="insert">
       insert into board (board_id, member_id, board_title, board_content, board_datetime,
-                     board_reply_count, board_status, board_category_id, board_temp_save, board_hit)
-      values (seq_board.nextval, #{member_id}, #{board_title}, #{board_content}, sysdate, '3', 'y', 'notice','y', '1')
+                    board_status, board_category_id, board_temp_save, board_hit)
+      values (seq_board.nextval, #{member_id}, #{board_title}, #{board_content}, sysdate, 'y', 'notice','y', '1')
    </insert>
    
    <select id="selectKey" resultType="string">

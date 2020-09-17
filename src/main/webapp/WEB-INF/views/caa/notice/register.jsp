@@ -126,7 +126,10 @@ $('#editor').val("${board.board_content}");
             
             const board_content = $("<input type='hidden' name='board_content' value='" + bo_content + "'/>");
 
+            const member_id = $("<input type='hidden' name='member_id' value='"+ ${member.member_id} +"'/>");
+
             operForm.append(board_content);
+            operForm.append(member_id);
 
             operForm.attr("action", "/notice/register").submit();
 
