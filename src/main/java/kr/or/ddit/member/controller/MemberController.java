@@ -11,6 +11,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -46,8 +47,11 @@ public class MemberController {
 
 	}
 	@RequestMapping("/updateMember")
-	public String updateMember(MemberVO vo) {
+	public String updateMember(MemberVO vo, HttpSession session) {
+		//바뀐 비밀번호를 암호화처리 
+		vo.setMember_password(sha256.encrypt(vo.getMember_password()));
 		service.modifyMember(vo);
+		session.setAttribute("member", vo);
 		return "caa/mainPage/main";
 		
 	}
@@ -66,9 +70,9 @@ public class MemberController {
 	}
 
 	@RequestMapping("/modifyMember")
-	public String modifyMember(String id) {
-		service.selectMember(id);
-		
+	public String modifyMember(String member_id , Model model) {
+		MemberVO vo = service.selectMember(member_id);
+		model.addAttribute("memberInfo",vo);
 		return "caa/member/modifyMember";
 	}
 	

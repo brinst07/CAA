@@ -4,7 +4,6 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <!DOCTYPE html>
 <html>
-<head>
 <meta charset="UTF-8" />
 <title>회원정보 수정</title>
 <meta content='width=device-width, initial-scale=1.0, shrink-to-fit=no'
@@ -18,25 +17,6 @@
         #registerForm label.error { margin-left: 10px; color:red; }
         
     </style>
-<!-- Fonts and icons -->
-<script src="/resources/assets/js/plugin/webfont/webfont.min.js"></script>
-<script src="/resources/assets/js/validation.js"></script>
-<script>
-   WebFont.load({
-      google : {
-         "families" : [ "Lato:300,400,700,900" ]
-      },
-      custom : {
-         "families" : [ "Flaticon", "Font Awesome 5 Solid",
-               "Font Awesome 5 Regular", "Font Awesome 5 Brands",
-               "simple-line-icons" ],
-         urls : [ '/resources/assets/css/fonts.min.css' ]
-      },
-      active : function() {
-         sessionStorage.fonts = true;
-      }
-   });
-</script>
 
 
 <!-- CSS Files -->
@@ -46,10 +26,7 @@
 <!-- CSS Just for demo purpose, don't include it in your project -->
 <link rel="stylesheet" href="/resources/assets/css/demo.css">
 
-</head>
 
-<body>
-   <div class="wrapper fullheight-side sidebar_minimize">
 
 
       <div class="main-panel full-height">
@@ -95,7 +72,7 @@
                                  </label>
                                  <div class="col-lg-4 col-md-9 col-sm-8">
                                     <input type="text" class="form-control" id="member_id"
-                                       name="member_id" placeholder="" required="" readonly="readonly"  value="${member.member_id }">
+                                       name="member_id" placeholder="" required="" readonly="readonly"  value="${memberInfo.member_id }">
                                        <div class="check_font" id="id_check"></div>
                                  </div>
 
@@ -116,7 +93,7 @@
                                        <input type="text" class="form-control"
                                           placeholder="" aria-label="username"
                                           aria-describedby="username-addon" id="username"
-                                          name="member_username" required="" readonly="readonly" value="${member.member_username }">
+                                          name="member_username" required="" readonly="readonly" value="${memberInfo.member_username }">
                                     </div>
                                  </div>
                               </div>
@@ -129,7 +106,7 @@
                                  </label>
                                  <div class="col-lg-4 col-md-9 col-sm-8" style="float: left:">
                                     <input type="email" class="form-control" id="email"
-                                       placeholder="Enter Email" name="member_email" required="" value="${member.member_email }">
+                                       placeholder="Enter Email" name="member_email" required="" value="${memberInfo.member_email }">
                                        <div class="check_font" id="email_check"></div>
                                  </div>
                               <div class="separator-solid"></div>
@@ -454,5 +431,4 @@
     }); 
  });
      </script> 
-</body>
 </html>

@@ -95,7 +95,10 @@ $(function(){
 		member += '<a class="dropdown-item" href="/admin/memberList">회원관리</a>';
 		$('#memberController').append(member);
 	}
+	
 });
+
+
     WebFont.load({
         google: {
             "families": ["Lato:300,400,700,900"]
@@ -254,8 +257,12 @@ $(function(){
                                         <div class="u-text">
                                             <h4><c:out value="${member.member_id}"/></h4>
                                             <p class="text-muted"><c:out value="${member.member_email}"/></p>
-                                            <a href="/member/modifyMember" class="btn btn-xs btn-secondary btn-sm">View
-                                                Profile</a>
+<%--                                             <a href="/member/modifyMember?member_id=${member.member_id }" class="btn btn-xs btn-secondary btn-sm">View --%>
+											<form method="post" action="/member/modifyMember">
+                                            <button style="background-color: #5a90ed;" type="submit" class=btn btn-xs btn-secondary btn-sm">View
+                                                Profile</button>
+                                                <input value="${member.member_id}" type="hidden" name="member_id">
+											</form>
                                         </div>
                                     </div>
                                 </li>
