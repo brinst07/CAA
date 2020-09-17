@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <div class="main-panel full-height">
 
     <div class="container">
@@ -295,21 +295,21 @@
 						tdTags += '<td>'+result[i].sales_year+' 년</td>';
 						tdTags += '<td>'+result[i].commercial_name+'</td>';
 						tdTags += '<td>'+result[i].sales_ser_name+'</td>';
-						tdTags += '<td>'+result[i].first+' 원</td>';
-						tdTags += '<td>'+result[i].second+' 원</td>';
+						tdTags += '<td>'+comma(result[i].first)+'원</td>';
+						tdTags += '<td>'+comma(result[i].second)+' 원</td>';
 						
 						let tempCal = result[i].first - result[i].second;
 						if(tempCal > 0){
-							tdTags += '<td>'+tempCal+' 원 <div style="color:blue; display:inline">▲</div></td>';
+							tdTags += '<td>'+comma(tempCal)+' 원 <div style="color:blue; display:inline">▲</div></td>';
 						}else if(tempCal < 0){
-							tdTags += '<td>'+tempCal+' 원 <div style="color:red; display:inline">▼</div> </td>';
+							tdTags += '<td>-'+comma(Math.abs(tempCal))+' 원 <div style="color:red; display:inline">▼</div> </td>';
 						}else if(tempCal == 0){
-							tdTags += '<td>'+tempCal+' 원 <td>'+tableValue+'% <div style=" display:inline">-</div></td>';
+							tdTags += '<td>'+comma(tempCal)+' 원 <td>'+tableValue+'% <div style=" display:inline">-</div></td>';
 						}
 						
 						
 					
-						tdTags += '<tr>';
+						tdTags += '</tr>';
 				}
 				
 				
@@ -334,6 +334,27 @@
     }
 
     /*현황 보기 ↑*/
+</script>
+<script type="text/javascript">
+function comma(num){
+    var len, point, str; 
+       
+    num = num + ""; 
+    point = num.length % 3 ;
+    len = num.length; 
+   
+    str = num.substring(0, point); 
+    while (point < len) { 
+        if (str != "") str += ","; 
+        str += num.substring(point, point + 3); 
+        point += 3; 
+    } 
+     
+    return str;
+ 
+}
+
+
 </script>
 
 

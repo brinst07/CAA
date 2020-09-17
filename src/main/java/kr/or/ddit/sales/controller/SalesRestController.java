@@ -41,21 +41,6 @@ public class SalesRestController {
 	}
 	
 	
-//	@GetMapping(value = "/div/{sales_ser_name}/{sales_bd_name}",
-//			produces = {MediaType.APPLICATION_JSON_UTF8_VALUE, MediaType.APPLICATION_XML_VALUE})
-//	public ResponseEntity<List<SalesAnalysisVO>> getSalesList(@PathVariable("sales_ser_name") String sales_ser_name, @PathVariable("sales_bd_name") String sales_bd_name){
-//
-//		// Ajax는 view resolver나 tilesResolver로 가지 않기 때문에 Status 값을 넣어줘야한다.
-//		// 따라서 상태값을 같이 전달해주기 위해 ResponseEntity를 사용한다.
-//
-//		Map<String, String> map = new HashMap<String, String>();
-//		map.put("sales_ser_name", sales_ser_name);
-//		map.put("sales_bd_name", sales_bd_name);
-//
-//
-//
-//		return new ResponseEntity<List<SalesAnalysisVO>>(service.getSales(map), HttpStatus.OK);
-//	}
 
 
 	@GetMapping(value = "/sido/{sidoCode}",
@@ -87,7 +72,6 @@ public class SalesRestController {
 		map.put("middle", middle);
 		map.put("commercial_name", temp.getSigungu_name());
 
-//		List<SalesAnalysisVO> list = service.getSales(map);
 
 
 

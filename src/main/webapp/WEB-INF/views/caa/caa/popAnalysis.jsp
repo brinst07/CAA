@@ -154,6 +154,26 @@
 
 
 <script type="text/javascript">
+function comma(num){
+    var len, point, str; 
+       
+    num = num + ""; 
+    point = num.length % 3 ;
+    len = num.length; 
+   
+    str = num.substring(0, point); 
+    while (point < len) { 
+        if (str != "") str += ","; 
+        str += num.substring(point, point + 3); 
+        point += 3; 
+    } 
+     
+    return str;
+ 
+}
+
+
+
 var popData = ${jsonFigure};
 
 
@@ -351,13 +371,13 @@ $(function(){
 	
 	tableTags += ' 								<thead> ';
 	tableTags += ' 									<tr> ';
-	tableTags += ' 										<td>지역</td> ';
+	tableTags += ' 										<th> 월 \\ 구역</th> ';
 
 
 // 	년 월
 	for (var i = 0; i < popDataMonth.length; i++) {
 		
-	tableTags += ' 										<td>'+popDataMonth[i]+'</td> ';
+	tableTags += ' 										<th>'+popDataMonth[i]+' 월</th> ';
 	}			
 	
 
@@ -376,7 +396,7 @@ $(function(){
 
 	for (var j = 0; j < popData.length; j++) {
 		if((popDataSelect[i]).replace(/\"/gi, "") == popData[j].selectName.replace(/\"/gi, "")){
-	tableTags += ' 										<td>'+popData[j].ride+'</td> ';
+	tableTags += ' 										<td>'+comma(popData[j].ride)+' 명</td> ';
 		}
 	}
 	
@@ -415,7 +435,7 @@ $(function(){
 	tableTags += ' <tr>';
 	for (var j = 0; j < popData.length; j++) {
 		if((popDataSelect[i]).replace(/\"/gi, "") == popData[j].selectName.replace(/\"/gi, "")){
-	tableTags += ' 										<td>'+popData[j].quit+'</td> ';
+	tableTags += ' 										<td>'+comma(popData[j].quit)+' 명</td> ';
 		}
 	}
 	tableTags += ' </tr>';
@@ -523,6 +543,8 @@ var myMultipleLineChart = new Chart(
 
 	
 </script>
+
+
 
 
 

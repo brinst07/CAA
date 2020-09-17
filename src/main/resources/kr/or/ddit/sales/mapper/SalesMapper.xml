@@ -38,8 +38,8 @@
     <select id="getSales" parameterType="hashMap" resultType="kr.or.ddit.sales.domain.SalesAnalysisVO">
       select SALES_YEAR,
 
-       AVG(DECODE(SALES_BUNGI_CODE,1, SALES_MEN_PRICE, 2, SALES_MEN_PRICE)) FIRST,
-       AVG(DECODE(SALES_BUNGI_CODE,3, SALES_MEN_PRICE, 4, SALES_MEN_PRICE)) SECOND,
+       TRUNC(AVG(DECODE(SALES_BUNGI_CODE,1, SALES_MEN_PRICE, 2, SALES_MEN_PRICE))) FIRST,
+       TRUNC(AVG(DECODE(SALES_BUNGI_CODE,3, SALES_MEN_PRICE, 4, SALES_MEN_PRICE))) SECOND,
 
        SALES_SER_NAME,
        #{commercial_name} commercial_name
