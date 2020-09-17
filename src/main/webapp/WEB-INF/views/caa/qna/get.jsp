@@ -20,13 +20,19 @@
                                 수정
                             </button> --%>
                             
-                           <a href="/qna/modify?board=${board.board_id }" class="btn btn-light btn-border">수정 </a> 
+                           <c:if test="${member.member_id == board.member_id }">
+                           		<a href="/qna/modify?board=${board.board_id }" class="btn btn-light btn-border">수정 </a>
+                           
+                           </c:if>
+                            
+                            
                             
                             
                             
                             
                             <a href="/qna/list" class="btn btn-primary ml-2"> 목록 </a>
                             <c:if test="${member.member_auth eq 'ROLE_ADMIN'}">
+                            <c:if test="${board.board_re_lev == '0' }">
                                 <button data-oper='modify' class="btn btn-light btn-border"
                                         onclick="location.href='/qna/reply?board_id=<c:out
                                                 value="${board.board_id }"/>&board_re_ref=<c:out
@@ -34,6 +40,7 @@
                                                 
                                     답글
                                 </button>
+                                </c:if>
                             </c:if>
                         </div>
                     </div>

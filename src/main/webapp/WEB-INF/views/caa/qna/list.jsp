@@ -30,12 +30,12 @@
                                                     aria-controls="basic-datatables" rowspan="1" colspan="1"
                                                     aria-sort="ascending"
                                                     aria-label="Name: activate to sort column descending"
-                                                    style="width: 76px;">번호
+                                                    style="width: 46px;">번호
                                                 </th>
                                                 <th class="sorting" tabindex="0"
                                                     aria-controls="basic-datatables" rowspan="1" colspan="1"
                                                     aria-label="Position: activate to sort column ascending"
-                                                    style="width: 96px;">제목
+                                                    style="width: 156px;">제목
                                                 </th>
                                                 <th class="sorting" tabindex="0"
                                                     aria-controls="basic-datatables" rowspan="1" colspan="1"
@@ -50,7 +50,7 @@
                                                 <th class="sorting" tabindex="0"
                                                     aria-controls="basic-datatables" rowspan="1" colspan="1"
                                                     aria-label="Start date: activate to sort column ascending"
-                                                    style="width: 83px;">조회수
+                                                    style="width: 53px;">조회수
                                                 </th>
                                                 <!-- <th class="sorting" tabindex="0"
                                     aria-controls="basic-datatables" rowspan="1" colspan="1"
@@ -58,7 +58,7 @@
                                     style="width: 78px;">Salary</th> -->
                                             </tr>
                                             </thead>
-                                            <tfoot>
+                                            <tfoot>	
                                             <tr>
                                                 <th rowspan="1" colspan="1">번호</th>
                                                 <th rowspan="1" colspan="1">제목</th>
@@ -98,6 +98,8 @@
 
 
                                         <hr>
+                                        
+                                        </button>
 
                                         <button data-oper='register' class="btn btn-primary"
                                                 onclick="location.href='/qna/register'" style="float: right;">등록

@@ -23,9 +23,10 @@
 
 
 							<div class="col-auto">
-								 <button type="button" class="btn black mr5" onclick="javascript:goBoardList();">목록으로</button>
+								 <!-- <button type="button" class="btn black mr5" onclick="javascript:goBoardList();">목록으로</button> -->
+								 <a href="/qna/list" class="btn btn-light btn-border"> 목록 </a>
                 				 <!-- <button type="button" class="btn black" onclick="javascript:insertBoardReply();">등록하기</button> -->
-								 <button data-oper='reply' type="button" class="btn btn-light btn-border">등록</button>
+								 <button data-oper='reply' type="button" class="btn btn-primary ml-2">등록</button>
 										
 								<!-- <button data-oper='register' type="button"
 										class="btn btn-light btn-border">등록</button>

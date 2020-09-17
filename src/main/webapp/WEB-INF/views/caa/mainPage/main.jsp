@@ -22,9 +22,9 @@
     <div class="container">
         <div class="panel-header">
             <div class="owl-carousel owl-theme owl-img-responsive">
-                <div class="item"><img src="/resources/assets/img/one.png"></div>
-                <div class="item"><img src="/resources/assets/img/two.png"></div>
-                <div class="item"><img src="/resources/assets/img/three.png"></div>
+                <div class="item"><img src="/resources/assets/img/1.png"></div>
+                <div class="item"><img src="/resources/assets/img/2.png"></div>
+                <div class="item"><img src="/resources/assets/img/3.png"></div>
             </div>
         </div>
         <div class="row row-card-no-pd">

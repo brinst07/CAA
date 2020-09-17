@@ -86,10 +86,12 @@
                                             </tbody>
 
                                         </table>
+										
+										<hr>
 
 
                                         <button data-oper='register' class="btn btn-primary"
-                                                onclick="location.href='/notice/register'">등록
+                                                onclick="location.href='/notice/register'" style="float: right;">등록
                                         </button>
                                     </div>
                                 </div>
