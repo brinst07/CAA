@@ -236,13 +236,24 @@ public class CAARestController {
 
         // 모든 정보를 넣을 리스트를 생성한다.
         Map<String, Object> totalMap = new HashMap<String, Object>();
+        
+        //ServiceKey
+        String ServiceKey = "21SOlCjmfqUliASu82VGE2%2FXQ1uFeVzXzPQ7egYRvgT7cKF1cBdfAONRgbHRnpHFgtd3NlHgCOj2kblMeWg6iQ%3D%3D";
 
+        
         // 선택한 영역의 개수만큼 for문이 돌아간다.
         for (int i = 0; i < jsonMapList.size(); i++) {
-            String ServiceKey = "21SOlCjmfqUliASu82VGE2%2FXQ1uFeVzXzPQ7egYRvgT7cKF1cBdfAONRgbHRnpHFgtd3NlHgCOj2kblMeWg6iQ%3D%3D";
-            String url = "http://apis.data.go.kr/B553077/api/open/sdsc/storeZoneInRadius?radius="
-                    + jsonMapList.get(i).get("radius") + "&cx=" + jsonMapList.get(i).get("cx") + "&cy="
-                    + jsonMapList.get(i).get("cy") + "&ServiceKey=" + ServiceKey + "&type=json";
+        	 String url = "";
+
+             if (jsonMapList.get(i).get("type").equals("circle")) {
+                 url = "http://apis.data.go.kr/B553077/api/open/sdsc/storeZoneInRadius?radius="
+                         + jsonMapList.get(i).get("radius") + "&cx=" + jsonMapList.get(i).get("cx") + "&cy="
+                         + jsonMapList.get(i).get("cy") + "&ServiceKey=" + ServiceKey + "&type=json";
+             } else if (jsonMapList.get(i).get("type").equals("rectangle")) {
+                 url = "http://apis.data.go.kr/B553077/api/open/sdsc/storeZoneInRectangle?" +
+                         "minx=" + jsonMapList.get(i).get("minx") + "&miny=" + jsonMapList.get(i).get("miny") + "&maxx="
+                         + jsonMapList.get(i).get("maxx") + "&maxy=" + jsonMapList.get(i).get("maxy") + "&ServiceKey=" + ServiceKey + "&type=json";
+             }
 
             HttpClient httpClient = new DefaultHttpClient();
             ResponseHandler<String> responseHandler = new BasicResponseHandler();
