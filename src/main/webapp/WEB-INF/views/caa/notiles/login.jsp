@@ -303,9 +303,11 @@
                         captchaImg += '<input type="hidden" name="Nkey" value="' + data.Nkey + '">';
                         $("#reg_submit").attr("disabled", false);
                         $('#capChaImage').append(captchaImg);
+                        swal("캡차 실패", "캡차에 실패하였습니다.", "error");
                     }
                     if (data.check == "true") {
                         $("#reg_submit").attr("disabled", true);
+                        swal("캡차 성공", "캡차에 성공하였습니다.", "success");
                     }
 
 
