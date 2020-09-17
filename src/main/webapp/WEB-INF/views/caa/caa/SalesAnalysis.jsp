@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
    pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE html>
 <html>
 <meta http-equiv="X-UA-Compatible" content="IE=edge" />
@@ -28,8 +29,6 @@
 <script>
 
    $(function() {
-
-      
       
       var str = 4;
       
@@ -37,6 +36,24 @@
       
        str= "";
    });
+   
+   function comma(num){
+	    var len, point, str; 
+	       
+	    num = num + ""; 
+	    point = num.length % 3 ;
+	    len = num.length; 
+	   
+	    str = num.substring(0, point); 
+	    while (point < len) { 
+	        if (str != "") str += ","; 
+	        str += num.substring(point, point + 3); 
+	        point += 3; 
+	    } 
+	     
+	    return str;
+	 
+	}
 </script>
 
 
@@ -393,7 +410,7 @@
                         html1 += '<tr>';
                         html1 += '<td style="text-align: center;">19년 '+bungi+'분기</td>';
                         html1 += '                  <td style="text-align: center;">'+totalStore[i][j].upjongName+'</td>';
-                        html1 += '                  <td style="text-align: right;">'+totalStore[i][j].avgPrice+'원</td>';   
+                        html1 += '                  <td style="text-align: right;">'+comma(totalStore[i][j].avgPrice)+'원</td>';   
                         html1 += '                  <td style="text-align: center;">'+totalStore[i][j].avgCount+'건</td>';   
                         html1 += '                  <td style="text-align: center;">'+totalStore[i][j].sumStore+'개점</td>';   
                         html1 += '                  <td style="text-align: center;">'+totalStore[i][j].avgWDrati+'%</td>';   
@@ -479,26 +496,26 @@
                   html2 += '                           <tr>';
                   html2 += '                              <td style="text-align: center;"><span class="fontsize">19년';
                   html2 += '                                    '+ bungi+' 분기</span></td>';
-                  html2 += '                              <td style="text-align: right;"><span class="fontsize">'+totalStore[i][j].upjongName+'원</span></td>';
-                  html2 += '                              <td style="text-align: right;"><span class="fontsize">'+totalStore[i][j].avgMonPrice+'원</span></td>';
+                  html2 += '                              <td style="text-align: right;"><span class="fontsize">'+totalStore[i][j].upjongName+'</span></td>';
+                  html2 += '                              <td style="text-align: right;"><span class="fontsize">'+comma(totalStore[i][j].avgMonPrice)+'원</span></td>';
                   html2 += '                              <td style="text-align: right;"><span class="fontsize">'+totalStore[i][j].avgMonCount+'건</span></td>';
                   html2 += '                              <td style="text-align: center;"><span class="fontsize">'+totalStore[i][j].avgMonRati+'%</span></td>';
-                  html2 += '                              <td style="text-align: right;"><span class="fontsize">'+totalStore[i][j].avgTuePrice+'원</span></td>';
+                  html2 += '                              <td style="text-align: right;"><span class="fontsize">'+comma(totalStore[i][j].avgTuePrice)+'원</span></td>';
                   html2 += '                              <td style="text-align: right;"><span class="fontsize">'+totalStore[i][j].avgTueCount+'건</span></td>';
                   html2 += '                              <td style="text-align: center;"><span class="fontsize">'+totalStore[i][j].avgTueRati+'%</span></td>';
-                  html2 += '                              <td style="text-align: right;"><span class="fontsize">'+totalStore[i][j].avgWedPrice+'원</span></td>';
+                  html2 += '                              <td style="text-align: right;"><span class="fontsize">'+comma(totalStore[i][j].avgWedPrice)+'원</span></td>';
                   html2 += '                              <td style="text-align: right;"><span class="fontsize">'+totalStore[i][j].avgWedCount+'건</span></td>';
                   html2 += '                              <td style="text-align: center;"><span class="fontsize">'+totalStore[i][j].avgWedRati+'%</span></td>  ';
-                  html2 += '                              <td style="text-align: right;"><span class="fontsize">'+totalStore[i][j].avgThuPrice+'원</span></td> ';
+                  html2 += '                              <td style="text-align: right;"><span class="fontsize">'+comma(totalStore[i][j].avgThuPrice)+'원</span></td> ';
                   html2 += '                              <td style="text-align: right;"><span class="fontsize">'+totalStore[i][j].avgThuCount+'건</span></td> ';
                   html2 += '                              <td style="text-align: center;"><span class="fontsize">'+totalStore[i][j].avgThuRati+'%</span></td>  ';
-                  html2 += '                              <td style="text-align: right;"><span class="fontsize">'+totalStore[i][j].avgTuePrice+'원</span></td> ';
+                  html2 += '                              <td style="text-align: right;"><span class="fontsize">'+comma(totalStore[i][j].avgTuePrice)+'원</span></td> ';
                   html2 += '                              <td style="text-align: right;"><span class="fontsize">'+totalStore[i][j].avgTueCount+'건</span></td> ';
                   html2 += '                              <td style="text-align: center;"><span class="fontsize">'+totalStore[i][j].avgTueRati+'%</span></td>  ';
-                  html2 += '                              <td style="text-align: right;"><span class="fontsize">'+totalStore[i][j].avgSatPrice+'원</span></td> ';
+                  html2 += '                              <td style="text-align: right;"><span class="fontsize">'+comma(totalStore[i][j].avgSatPrice)+'원</span></td> ';
                   html2 += '                              <td style="text-align: right;"><span class="fontsize">'+totalStore[i][j].avgSatCount+'건</span></td> ';
                   html2 += '                              <td style="text-align: center;"><span class="fontsize">'+totalStore[i][j].avgSatRati+'%</span></td>  ';
-                  html2 += '                              <td style="text-align: right;"><span class="fontsize">'+totalStore[i][j].avgSunPrice+'원</span></td> ';
+                  html2 += '                              <td style="text-align: right;"><span class="fontsize">'+comma(totalStore[i][j].avgSunPrice)+'원</span></td> ';
                   html2 += '                              <td style="text-align: right;"><span class="fontsize">'+totalStore[i][j].avgSunCount+'건</span></td> ';
                   html2 += '                              <td style="text-align: center;"><span class="fontsize">'+totalStore[i][j].avgSunRati+'%</span></td>  ';
                   html2 += '                           </tr>';
@@ -575,22 +592,22 @@
             html3 += '                                 <tr>';
             html3 += '                                    <td style="text-align: center;"><span class="fontsize">19년 '+bungi+' 분기</span></td>';
             html3 += '                                    <td style="text-align: right;"><span class="fontsize">'+totalStore[i][j].upjongName+'</span></td>';
-            html3 += '                                    <td style="text-align: right;"><span class="fontsize">'+totalStore[i][j].avg0006Price+'원</span></td>';
+            html3 += '                                    <td style="text-align: right;"><span class="fontsize">'+comma(totalStore[i][j].avg0006Price)+'원</span></td>';
             html3 += '                                    <td style="text-align: right;"><span class="fontsize">'+totalStore[i][j].avg0006Count+'건</span></td>';
             html3 += '                                    <td style="text-align: center;"><span class="fontsize">'+totalStore[i][j].avg0006Rati+'%</span></td>';
-            html3 += '                                    <td style="text-align: right;"><span class="fontsize">'+totalStore[i][j].avg0611Price+'원</span></td>';
+            html3 += '                                    <td style="text-align: right;"><span class="fontsize">'+comma(totalStore[i][j].avg0611Price)+'원</span></td>';
             html3 += '                                    <td style="text-align: right;"><span class="fontsize">'+totalStore[i][j].avg0611Count+'건</span></td>';
             html3 += '                                    <td style="text-align: center;"><span class="fontsize">'+totalStore[i][j].avg0611Rati+'%</span></td>';
-            html3 += '                                    <td style="text-align: right;"><span class="fontsize">'+totalStore[i][j].avg1114Price+'원</span></td>';
+            html3 += '                                    <td style="text-align: right;"><span class="fontsize">'+comma(totalStore[i][j].avg1114Price)+'원</span></td>';
             html3 += '                                    <td style="text-align: right;"><span class="fontsize">'+totalStore[i][j].avg1114Count+'건</span></td>';
             html3 += '                                    <td style="text-align: center;"><span class="fontsize">'+totalStore[i][j].avg1114Rati+'%</span></td>';
-            html3 += '                                    <td style="text-align: right;"><span class="fontsize">'+totalStore[i][j].avg1417Price+'원</span></td>';
+            html3 += '                                    <td style="text-align: right;"><span class="fontsize">'+comma(totalStore[i][j].avg1417Price)+'원</span></td>';
             html3 += '                                    <td style="text-align: right;"><span class="fontsize">'+totalStore[i][j].avg1417Count+'건</span></td>';
             html3 += '                                    <td style="text-align: center;"><span class="fontsize">'+totalStore[i][j].avg1417Rati+'%</span></td>';
-            html3 += '                                    <td style="text-align: right;"><span class="fontsize">'+totalStore[i][j].avg1721Price+'원</span></td>';
+            html3 += '                                    <td style="text-align: right;"><span class="fontsize">'+comma(totalStore[i][j].avg1721Price)+'원</span></td>';
             html3 += '                                    <td style="text-align: right;"><span class="fontsize">'+totalStore[i][j].avg1721Count+'건</span></td>';
             html3 += '                                    <td style="text-align: center;"><span class="fontsize">'+totalStore[i][j].avg1721Rati+'%</span></td>';
-            html3 += '                                    <td style="text-align: right;"><span class="fontsize">'+totalStore[i][j].avg2124Price+'원</span></td>';
+            html3 += '                                    <td style="text-align: right;"><span class="fontsize">'+comma(totalStore[i][j].avg2124Price)+'원</span></td>';
             html3 += '                                    <td style="text-align: right;"><span class="fontsize">'+totalStore[i][j].avg2124Count+'건</span></td>';
             html3 += '                                    <td style="text-align: center;"><span class="fontsize">'+totalStore[i][j].avg2124Rati+'%</span></td>';
             html3 += '                                 </tr>';
@@ -669,22 +686,22 @@
             html4 += '                                 <tr>';
             html4 += '                                    <td style="text-align: center;"><span class="fontsize">19년 '+bungi+' 분기</span></td>';
             html4 += '                                    <td style="text-align: right;"><span class="fontsize">'+totalStore[i][j].upjongName+'</span></td>';
-            html4 += '                                    <td style="text-align: right;"><span class="fontsize">'+totalStore[i][j].avg10Price+'원</span></td>';
+            html4 += '                                    <td style="text-align: right;"><span class="fontsize">'+comma(totalStore[i][j].avg10Price)+'원</span></td>';
             html4 += '                                    <td style="text-align: right;"><span class="fontsize">'+totalStore[i][j].avg10Count+'건</span></td>';
             html4 += '                                    <td style="text-align: center;"><span class="fontsize">'+totalStore[i][j].avg10Rati+'%</span></td>';
-            html4 += '                                    <td style="text-align: right;"><span class="fontsize">'+totalStore[i][j].avg20Price+'원</span></td>';
+            html4 += '                                    <td style="text-align: right;"><span class="fontsize">'+comma(totalStore[i][j].avg20Price)+'원</span></td>';
             html4 += '                                    <td style="text-align: right;"><span class="fontsize">'+totalStore[i][j].avg20Count+'건</span></td>';
             html4 += '                                    <td style="text-align: center;"><span class="fontsize">'+totalStore[i][j].avg20Rati+'%</span></td>';
-            html4 += '                                    <td style="text-align: right;"><span class="fontsize">'+totalStore[i][j].avg30Price+'원</span></td>';
+            html4 += '                                    <td style="text-align: right;"><span class="fontsize">'+comma(totalStore[i][j].avg30Price)+'원</span></td>';
             html4 += '                                    <td style="text-align: right;"><span class="fontsize">'+totalStore[i][j].avg30Count+'건</span></td>';
             html4 += '                                    <td style="text-align: center;"><span class="fontsize">'+totalStore[i][j].avg30Rati+'%</span></td>';
-            html4 += '                                    <td style="text-align: right;"><span class="fontsize">'+totalStore[i][j].avg40Price+'원</span></td>';
+            html4 += '                                    <td style="text-align: right;"><span class="fontsize">'+comma(totalStore[i][j].avg40Price)+'원</span></td>';
             html4 += '                                    <td style="text-align: right;"><span class="fontsize">'+totalStore[i][j].avg40Count+'건</span></td>';
             html4 += '                                    <td style="text-align: center;"><span class="fontsize">'+totalStore[i][j].avg40Rati+'%</span></td>';
-            html4 += '                                    <td style="text-align: right;"><span class="fontsize">'+totalStore[i][j].avg50Price+'원</span></td>';
+            html4 += '                                    <td style="text-align: right;"><span class="fontsize">'+comma(totalStore[i][j].avg50Price)+'원</span></td>';
             html4 += '                                    <td style="text-align: right;"><span class="fontsize">'+totalStore[i][j].avg50Count+'건</span></td>';
             html4 += '                                    <td style="text-align: center;"><span class="fontsize">'+totalStore[i][j].avg50Rati+'%</span></td>';
-            html4 += '                                    <td style="text-align: right;"><span class="fontsize">'+totalStore[i][j].avg60Price+'원</span></td>';
+            html4 += '                                    <td style="text-align: right;"><span class="fontsize">'+comma(totalStore[i][j].avg60Price)+'원</span></td>';
             html4 += '                                    <td style="text-align: right;"><span class="fontsize">'+totalStore[i][j].avg60Count+'건</span></td>';
             html4 += '                                    <td style="text-align: center;"><span class="fontsize">'+totalStore[i][j].avg60Rati+'%</span></td>';
             html4 += '                                 </tr>';
@@ -758,10 +775,10 @@
             html5 += '                                 <tr>';
             html5 += '                                    <td style="text-align: center;"><span class="fontsize">19년 '+bungi+' 분기</span></td>';
             html5 += '                                    <td style="text-align: right;"><span class="fontsize">'+totalStore[i][j].upjongName+'</span></td>';
-            html5 += '                                    <td style="text-align: right;"><span class="fontsize">'+totalStore[i][j].avgMenPrice+'원</span></td>';
+            html5 += '                                    <td style="text-align: right;"><span class="fontsize">'+comma(totalStore[i][j].avgMenPrice)+'원</span></td>';
             html5 += '                                    <td style="text-align: right;"><span class="fontsize">'+totalStore[i][j].avgMenCount+'건</span></td>';
             html5 += '                                    <td style="text-align: center;"><span class="fontsize">'+totalStore[i][j].avgMenRati+'%</span></td>';
-            html5 += '                                    <td style="text-align: right;"><span class="fontsize">'+totalStore[i][j].avgWomPrice+'원</span></td>';
+            html5 += '                                    <td style="text-align: right;"><span class="fontsize">'+comma(totalStore[i][j].avgWomPrice)+'원</span></td>';
             html5 += '                                    <td style="text-align: right;"><span class="fontsize">'+totalStore[i][j].avgWomCount+'건</span></td>';
             html5 += '                                    <td style="text-align: center;"><span class="fontsize">'+totalStore[i][j].avgWomRati+'%</span></td>';
             html5 += '                                 </tr>';
@@ -831,9 +848,16 @@
                                     barPercentage: 0.3
                                 }],
                            yAxes: [{
-                              ticks: {
-                                 beginAtZero:true
-                              }
+                        	   ticks: {
+                                   beginAtZero:true,
+                                   callback: function(value, index, values) {
+                                       if(parseInt(value) >= 1000){
+                                          return  value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")+'원';
+                                       } else {
+                                          return  value;
+                                       }
+                                  }                            
+                               }
                            }]
                         },
                      }
@@ -916,6 +940,20 @@
                                top : 15,
                                bottom : 15
                             }
+                         },
+                         scales: {
+                             yAxes: [{
+                                 ticks: {
+                                     beginAtZero:true,
+                                     callback: function(value, index, values) {
+                                         if(parseInt(value) >= 1000){
+                                            return   value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")+'원';
+                                         } else {
+                                            return  value;
+                                         }
+                                    }                            
+                                 }
+                             }]
                          }
                       }
                    });
@@ -999,6 +1037,20 @@
                                top : 15,
                                bottom : 15
                             }
+                         },
+                         scales: {
+                             yAxes: [{
+                                 ticks: {
+                                     beginAtZero:true,
+                                     callback: function(value, index, values) {
+                                         if(parseInt(value) >= 1000){
+                                            return   value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")+'원';
+                                         } else {
+                                            return  value;
+                                         }
+                                    }                            
+                                 }
+                             }]
                          }
                       }
                    });
@@ -1080,6 +1132,20 @@
                                top : 15,
                                bottom : 15
                             }
+                         },
+                         scales: {
+                             yAxes: [{
+                                 ticks: {
+                                     beginAtZero:true,
+                                     callback: function(value, index, values) {
+                                         if(parseInt(value) >= 1000){
+                                            return   value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")+'원';
+                                         } else {
+                                            return  value;
+                                         }
+                                    }                            
+                                 }
+                             }]
                          }
                       }
                    });
