@@ -29,8 +29,7 @@ public class HistoryRestController {
 
     @PostMapping(value = "/boundSelect", produces = {MediaType.APPLICATION_JSON_VALUE})
     @ResponseBody
-    public ResponseEntity<Map<String, Object>> boundSelect(@RequestBody SquarePoint squarePoint) {
-        log.warn(squarePoint);
+    public ResponseEntity<List<Map<String,String>>> boundSelect(@RequestBody SquarePoint squarePoint) {
 
         //ServiceKey
         String serviceKey = "IGbeITLd67yRCztv9r65smZLPw2NfvkXkgh7G6BnB3JbBcn3jnPdQ5x5wRJdqMEg62O9YJ9kvgy4jl%2BwoxA5Fg%3D%3D";
@@ -42,19 +41,18 @@ public class HistoryRestController {
         
         
        
-        System.out.println(url);
-        
+
         HttpClient httpClient = new DefaultHttpClient();
         ResponseHandler<String> responseHandler = new BasicResponseHandler();
         HttpGet httpGet = new HttpGet();
         List<Map<String, Object>> finalList = new ArrayList<>();
-        Map<String, Object> pointsName = new HashMap<>();
+        List<Map<String,String>> returnMap = new ArrayList<Map<String,String>>();
         try {
             httpGet.setURI(new URI(url));
             String responseBody = httpClient.execute(httpGet, responseHandler);
-
+            //문자열을 자바단으로 바꾸기 위해 ObjectMapper 사용
             ObjectMapper objectMapper = new ObjectMapper();
-
+            //자바 형식으로 바꿈
             Map<String, Map<String, List<Map<String, Object>>>> list = objectMapper.readValue(responseBody,
                     new TypeReference<Map<String, Map<String, Object>>>() {
                     });
@@ -62,31 +60,15 @@ public class HistoryRestController {
             // 선택한 영역의 데이터 전처리 후 필요한 데이터만을 저장하는 list
             
             finalList = list.get("body").get("items");
-
             if (finalList.size() != 0) {
                 for (int i = 0; i < finalList.size(); i++) {
-                    List<Map<String, String>> points = new ArrayList<>();
-                    //상권이름 추출
-                    String scName = (String) finalList.get(i).get("mainTrarNm");
-
-                    //상권의 좌표를 출력
-                    String polygonStr = (String) finalList.get(i).get("coords");
-
-                    //데이터 전처리
-                    polygonStr = polygonStr.replace("POLYGON ((", "");
-                    polygonStr = polygonStr.replace("))", "");
-
-                    String[] polygonlist = polygonStr.split(", ");
-
-                    //공백을 기준으로 split을 사용
-                    for (int j = 0; j < polygonlist.length; j++) {
-                        Map<String, String> point = new HashMap<>();
-                        String[] tempList = polygonlist[j].split(" ");
-                        point.put("x", tempList[0]);
-                        point.put("y", tempList[1]);
-                        points.add(point);
-                    }
-                    pointsName.put(scName, points);
+                    Map<String,String> map = new HashMap<>();
+                    map.put("storeNm", String.valueOf(finalList.get(i).get("bizesNm")));
+                    map.put("storeZi", String.valueOf(finalList.get(i).get("brchNm")));
+                    map.put("storeAddr", String.valueOf(finalList.get(i).get("lnoAdr")));
+                    map.put("x", String.valueOf(finalList.get(i).get("lon")));
+                    map.put("y",String.valueOf(finalList.get(i).get("lat")));
+                    returnMap.add(map);
                 }
             }
 
@@ -94,7 +76,6 @@ public class HistoryRestController {
             e.printStackTrace();
         }
 
-        log.warn(pointsName);
-        return new ResponseEntity<Map<String, Object>>(pointsName, HttpStatus.OK);
+        return new ResponseEntity<List<Map<String,String>>>(returnMap, HttpStatus.OK);
     }
 }

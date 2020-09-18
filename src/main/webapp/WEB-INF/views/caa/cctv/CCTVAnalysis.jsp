@@ -35,7 +35,7 @@
                             </div>
                         </div>
                         <div class="card-body">
-                            <div id="map" style="display: block; width: 785px; height: 570px;"></div>
+                            <div id="map" style="display: block; widht: 785px; height: 375px;"></div>
                             <script>
                                 var container = document
                                     .getElementById('map');
