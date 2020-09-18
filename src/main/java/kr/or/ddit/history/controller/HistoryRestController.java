@@ -68,6 +68,8 @@ public class HistoryRestController {
                     map.put("storeAddr", String.valueOf(finalList.get(i).get("lnoAdr")));
                     map.put("x", String.valueOf(finalList.get(i).get("lon")));
                     map.put("y",String.valueOf(finalList.get(i).get("lat")));
+                    map.put("type", String.valueOf(finalList.get(i).get("indsLclsNm")));
+                    map.put("category", String.valueOf(finalList.get(i).get("indsSclsNm")));
                     returnMap.add(map);
                 }
             }

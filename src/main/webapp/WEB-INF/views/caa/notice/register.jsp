@@ -69,7 +69,6 @@
     </div>
 
 
-
 <script>
 
 $('#editor').summernote('code', '${board.board_content}');

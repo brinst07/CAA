@@ -9,8 +9,8 @@
         <div class="panel-header">
             <div class="page-inner border-bottom pb-0 mb-3">
                 <div class="d-flex align-items-left flex-column">
-                    <h2 class="pb-2 fw-bold">점포이력분석</h2>
-                    <h4 class="pb-2 f2-bold">점포</h4>
+                    <h2 class="pb-2 fw-bold">점포분석</h2>
+                    <h4 class="pb-2 f2-bold">현재 지도 내의 점포를 분석하여 나타냅니다.</h4>
                 </div>
             </div>
         </div>
