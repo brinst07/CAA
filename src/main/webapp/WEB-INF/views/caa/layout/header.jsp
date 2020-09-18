@@ -89,6 +89,13 @@
 <link rel="stylesheet" href="/resources/assets/css/atlantis.css">
 <script src="/resources/assets/js/jquery.oLoader.js"></script>
 <script>
+$(function(){
+	if(${member.member_auth == "ROLE_ADMIN"}){
+		var div = "";
+		div += '<a href="/admin/memberList" class="dropdown-item" id="memberController">회원관리</a>';
+		$('#hidden').append(div);
+	}
+})
     WebFont.load({
         google: {
             "families": ["Lato:300,400,700,900"]
@@ -193,14 +200,14 @@
                                         <div class="u-text">
                                             <h4><c:out value="${member.member_id}"/></h4>
                                             <p class="text-muted"><c:out value="${member.member_email}"/></p>
-                                            <a href="profile.html" class="btn btn-xs btn-secondary btn-sm">View
+                                            <a href="/member/modifyMember?member_id=${member.member_id }" class="btn btn-xs btn-secondary btn-sm">View
                                                 Profile</a>
                                         </div>
                                     </div>
                                 </li>
                                 <li>
                                     <div class="dropdown-divider"></div>
-                                    <a class="dropdown-item">My Profile</a> <a class="dropdown-item">My Balance</a>
+                                    <div id="hidden"></div>
                                     <a class="dropdown-item" id="logout">Logout</a>
                                 </li>
                             </div>

@@ -2,7 +2,6 @@
 	pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
-<head>
 <meta http-equiv="X-UA-Compatible" content="IE=edge" />
 <title>Atlantis Bootstrap 4 Admin Dashboard</title>
 <meta content='width=device-width, initial-scale=1.0, shrink-to-fit=no'
@@ -72,9 +71,6 @@
 CSS Just for demo purpose, don't include it in your project
 <link rel="stylesheet" href="/resources/assets/css/demo.css">
  -->
-</head>
-<body>
-	<div class="wrapper fullheight-side sidebar_minimize">
 
 		<div class="main-panel full-height">
 			<div class="container">
@@ -161,7 +157,6 @@ CSS Just for demo purpose, don't include it in your project
 
 		</div>
 
-	</div>
 	<!--   Core JS Files   -->
 	<script src="/resources/assets/js/core/jquery.3.2.1.min.js"></script>
 	<script src="/resources/assets/js/core/popper.min.js"></script>
@@ -282,5 +277,4 @@ CSS Just for demo purpose, don't include it in your project
 			fillColor : 'rgba(255, 165, 52, .14)'
 		});
 	</script>
-</body>
 </html>

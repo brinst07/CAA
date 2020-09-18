@@ -181,8 +181,7 @@
 									</a></li>
 									<li class="separator"><i class="flaticon-right-arrow"></i></li>
 									<li class="nav-item"><a href="#">업소 현황</a></li>
-									<li class="separator"><i class="flaticon-right-arrow"></i></li>
-									<li class="nav-item"><a href="#">Main Page</a></li>
+								
 								</ul>
 							</div>
 						</div>
