@@ -2,15 +2,7 @@
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=b34009d4b541b528531e4544e9856e95"></script>
 
 <script type="text/javascript">
-    $(document).ready(function () {
-        $('a').click(function (event) {
-            event.preventDefault();
-            var url = $(this).attr('href');
-            console.log(url);
-            var name = $(this).text();
-            console.log(name);
-        });
-    });
+
 </script>
 <div class="main-panel full-height">
     <div class="container">

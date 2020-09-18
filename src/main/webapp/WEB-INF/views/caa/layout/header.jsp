@@ -3,7 +3,6 @@
 <!-- Fonts and icons -->
 <script src="/resources/assets/js/plugin/webfont/webfont.min.js"></script>
 <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
-
 <!-- Core JS Files -->
 <script src="http://code.jquery.com/jquery-latest.min.js"></script>
 <script src="/resources/assets/js/core/popper.min.js"></script>

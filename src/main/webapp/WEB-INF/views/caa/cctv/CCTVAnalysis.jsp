@@ -1,15 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=1a3acaea52f8fb01b6a85dfd59092f27"></script>
 <script type="text/javascript">
-    $(document).ready(function (){
-       $('a').click(function(event){
-    	   event.preventDefault();
-           var url = $(this).attr('href');
-           console.log(url);
-           var name = $(this).text();
-           console.log(name);
-       });
-    });
+
 
     function cctv(url){
         $('#video').attr('src',url);
@@ -142,7 +134,6 @@
             <div class="modal-body">
                 <video id="video" autoplay width="100%" height="100%"></video>
             </div>
-
         </div>
     </div>
 </div>
