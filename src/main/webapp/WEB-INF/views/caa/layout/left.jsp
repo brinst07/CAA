@@ -10,7 +10,7 @@
 
         var url = window.location.href;
         url = url.split("/");
-        var menuname = url[url.length-1];
+        var menuname = url[url.length - 1];
         console.log(menuname);
     })
 </script>
@@ -39,36 +39,45 @@
                 <li class="nav-item" id="status"><a href="/caa/businessstatus"> <i class="fas fa-cloud"></i>
                     <p>업종현황</p>
                 </a></li>
-                <li class="nav-item" id="sector"><a href="/sales/salesBoard"> <i class="fas fa-chart-bar"></i>
+                <li class="nav-item" id="sale"><a href="/sales/salesBoard"> <i class="flaticon-analytics"></i>
                     <p>매출 통계</p>
                 </a></li>
-                <li class="nav-item" id="sector"><a href="/ir/irSelectPage"> <i class="fas fa-chart-bar"></i>
+                <li class="nav-item" id="sector"><a href="/ir/irSelectPage"> <i class="flaticon-layers-1"></i>
                     <p>업종 유형</p>
+                </a></li>
+                <li class="nav-item" id="history"><a href="/history/selectHistory"> <i class="icon-location-pin"></i>
+                    <p>점포분석</p>
+                </a></li>
+                <li class="nav-item" id="cctv"><a href="/cctv/CCTVAnalysis"> <i class="icon-camrecorder"></i>
+                    <p>cctv분석</p>
+                </a></li>
+                <li class="nav-item" id="survive"><a href="/caa/survive"> <i class="flaticon-list"></i>
+                    <p>생존율</p>
                 </a></li>
                 <li class="nav-section"><span class="sidebar-mini-icon"> <i class="fa fa-ellipsis-h"></i>
 					</span>
-						
+
                     <h4 class="text-section">게시판 메뉴</h4></li>
                 <li class="nav-item" id="notice"><a href="/notice/noticeList"> <i class="fas fa-clipboard-list"></i>
-                <p>공지사항</p>
-<!--                      <span class="caret"></span> -->
+                    <p>공지사항</p>
+                    <!--                      <span class="caret"></span> -->
                 </a>
-<!--                     <div class="collapse" id="email-nav"> -->
-<!--                         <ul class="nav nav-collapse"> -->
-<!--                             <li><a href="email-inbox.html"> <span class="sub-item">Inbox</span> -->
-<!--                             </a></li> -->
-<!--                             <li><a href="email-compose.html"> <span class="sub-item">Email Compose</span> -->
-<!--                             </a></li> -->
-<!--                             <li><a href="email-detail.html"> <span class="sub-item">Email Detail</span> -->
-<!--                             </a></li> -->
-<!--                         </ul> -->
-<!--                     </div> -->
+                    <!--                     <div class="collapse" id="email-nav"> -->
+                    <!--                         <ul class="nav nav-collapse"> -->
+                    <!--                             <li><a href="email-inbox.html"> <span class="sub-item">Inbox</span> -->
+                    <!--                             </a></li> -->
+                    <!--                             <li><a href="email-compose.html"> <span class="sub-item">Email Compose</span> -->
+                    <!--                             </a></li> -->
+                    <!--                             <li><a href="email-detail.html"> <span class="sub-item">Email Detail</span> -->
+                    <!--                             </a></li> -->
+                    <!--                         </ul> -->
+                    <!--                     </div> -->
                 </li>
-                
+
                 <li class="nav-item" id="qna"><a href="/qna/list"> <i class="fas fa-question-circle"></i>
                     <p>Q&A게시판</p>
                 </a></li>
-                
+
                 <!-- <li class="nav-item" id="qna"><a data-toggle="collapse"> <i class="fas fa-question-circle"></i>
                     <p>Q&A게시판</p> <span class="caret"></span>
                 </a>
@@ -81,7 +90,7 @@
                         </ul>
                     </div>
                 </li> -->
-            </ul> 
+            </ul>
         </div>
     </div>
 </div>
