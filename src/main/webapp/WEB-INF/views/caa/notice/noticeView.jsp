@@ -48,15 +48,19 @@
                                         <div class="col-md-8 info-invoice">
                                             <h5 class="sub">작성자</h5>
                                             <p>
-                                                <c:out value="${board.member_id }"></c:out>
+                                                <c:out value="${board.member_username }"></c:out>
                                             </p>
                                         </div>
 
                                     </div>
 
-                                    <div class="separator-solid"></div>
+                                    <div class="separator-solid"></div>	
                                     <h5 class="sub">내용</h5>
-                                    <div>${board.board_content}</div>
+                                    <div style="height: 300%">
+                                    ${board.board_content}
+                                    </div>
+                                    <div style="height: 300px">
+                                    </div>
                                 </div>
                             </div>
                         </div>

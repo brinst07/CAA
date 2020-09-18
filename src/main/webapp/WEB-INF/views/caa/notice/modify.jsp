@@ -47,7 +47,7 @@
 										<div class="col-md-8 info-invoice">
 											<h5 class="sub">작성자</h5>
 											<p>
-												<c:out value="${member.member_id }"></c:out>
+												<c:out value="${board.member_username }"></c:out>
 											</p>
 										</div>
 

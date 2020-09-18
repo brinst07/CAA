@@ -5,24 +5,40 @@
 <mapper namespace="kr.or.ddit.notice.mapper.NoticeMapper">
    
    <!-- 리스트 출력 -->
-   <select id="getList" parameterType="kr.or.ddit.domain.BoardVO" resultType="kr.or.ddit.domain.BoardVO">
+   <!-- <select id="getList" parameterType="kr.or.ddit.domain.BoardVO" resultType="kr.or.ddit.domain.BoardVO">
        select rownum boardnum , board.*
       from BOARD
       where BOARD_CATEGORY_ID = #{board_category_id} and BOARD_STATUS = 'y'
-    </select>
-     
+    </select> -->
+    
+    <select id="getList" parameterType="kr.or.ddit.domain.BoardVO" resultType="kr.or.ddit.domain.BoardVO">
+    select ROWNUM boardnum, board.board_id, board.board_title, board.member_username, board.board_datetime, board.board_hit, board.board_content
+        from (
+                 select *
+
+                 from BOARD
+                 inner join MEMBER on board.MEMBER_ID = MEMBER.MEMBER_ID
+                 where BOARD_CATEGORY_ID = 'notice'
+                   and BOARD_STATUS = 'y'
+                   ) board  
+     </select>
 
     <!-- 상세글 출력 get -->
-    <select id="read" resultType="kr.or.ddit.domain.BoardVO">
+    <!-- <select id="read" resultType="kr.or.ddit.domain.BoardVO">
       select * from BOARD where board_id = #{board_id} and  BOARD_CATEGORY_ID = #{board_category_id}
+   </select> -->
+   <select id="read" resultType="kr.or.ddit.domain.BoardVO">
+   select *
+         from BOARD
+         inner join MEMBER on member.MEMBER_ID = board.MEMBER_ID
+         where BOARD.BOARD_CATEGORY_ID = 'notice'
+         and board.BOARD_ID = #{board_id}
    </select>
-   
    <!--글 수정 -->
    
    <update id="modify">
       update board  
       set 
-      member_id = #{member_id ,jdbcType=VARCHAR},
       board_title = #{board_title ,jdbcType=VARCHAR},
       board_content = #{board_content,jdbcType=VARCHAR},
       board_datetime = sysdate
