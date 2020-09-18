@@ -77,6 +77,10 @@
                 <li class="nav-item" id="qna"><a href="/qna/list"> <i class="fas fa-question-circle"></i>
                     <p>Q&A게시판</p>
                 </a></li>
+                
+                 <li class="nav-item" id="data"><a href="/data/get"> <i class="fas fa-file-signature"></i>
+                    <p>데이터 기준</p>
+                </a></li>
 
                 <!-- <li class="nav-item" id="qna"><a data-toggle="collapse"> <i class="fas fa-question-circle"></i>
                     <p>Q&A게시판</p> <span class="caret"></span>
