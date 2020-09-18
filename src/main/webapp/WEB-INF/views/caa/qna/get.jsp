@@ -68,7 +68,7 @@
                                         <div class="col-md-8 info-invoice">
                                             <h5 class="sub">작성자</h5>
                                             <p>
-                                                <c:out value="${board.member_id }"></c:out>
+                                                <c:out value="${board.member_username }"></c:out>
                                                 <%-- <c:out value="${board.board_id }"></c:out> --%>
                                                 <input type="hidden" name="board_id" id="board_id" value="${board.board_id}">
                                                 
@@ -80,7 +80,7 @@
                                     <div class="separator-solid"></div>
                                     <h5 class="sub">내용</h5>
                                     <div style="height: 300px;">
-                                        <c:out value="${board.board_content }"></c:out>
+                                        ${board.board_content }
                                     </div>
                                 </div>
                                 <%-- <form name="loginForm" action="/qna/reply"  method="get">
@@ -99,4 +99,12 @@
     </div>
 </div>
 
+<script>
+function removeHTML(text) {
+	
+	text = text.replace(/<br\/>/ig, "\n");
+	text = text.replace(/<(\/)?([a-zA-Z]*)(\s[a-zA-Z]*=[^>]*)?(\s)*(\/)?>/ig, "");
+}
+
+</script>
 

@@ -82,7 +82,7 @@
                                                            <c:out value="${board.board_title }"/></a></td>
                                                         
                                                         
-                                                    <td><c:out value="${board.member_id }"/></td>
+                                                    <td><c:out value="${board.member_username }"/></td>
                                                     <td><fmt:formatDate pattern="yyyy-MM-dd"
                                                                         value="${board.board_datetime }"/></td>
                                                         <%-- <td><fmt:formatDate pattern="yyyy-MM-dd"

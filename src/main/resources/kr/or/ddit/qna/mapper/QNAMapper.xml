@@ -18,21 +18,41 @@
 
     <!-- 리스트 출력 -->
     <select id="getList" resultType="kr.or.ddit.domain.BoardVO">
-        select ROWNUM boardnum, board.*
+        <!-- select ROWNUM boardnum, board.*
         from (
                  select *
                  from BOARD
                  where BOARD_CATEGORY_ID = #{board_category_id}
                    and BOARD_STATUS = 'y'
-                 order by BOARD_RE_REF desc, BOARD_RE_SEQ asc) board
+                 order by BOARD_RE_REF desc, BOARD_RE_SEQ asc) board -->
+                 
+        select ROWNUM boardnum, board.board_id, board.board_title, board.member_username, board.board_datetime, board.board_hit, board.board_content, board.board_re_lev
+        from (
+                 select *
+
+                 from BOARD
+                 inner join MEMBER on board.MEMBER_ID = MEMBER.MEMBER_ID
+                 where BOARD_CATEGORY_ID = 'qna'
+                   and BOARD_STATUS = 'y'
+
+                 order by BOARD_RE_REF desc, BOARD_RE_SEQ asc) board         
+                 
+                 
     </select>
     
     
     <!-- 상세글 출력 -->
     <select id="read" resultType="kr.or.ddit.domain.BoardVO">
-        select *
+        <!-- select *
         from BOARD
-        where board_id = #{board_id}
+        where board_id = #{board_id} -->
+        
+        select *
+			from BOARD
+			inner join MEMBER on member.MEMBER_ID = board.MEMBER_ID
+			where BOARD.BOARD_CATEGORY_ID = 'qna'
+			and board.BOARD_ID = #{board_id}
+        
     </select>
 
     <!--글 수정 -->

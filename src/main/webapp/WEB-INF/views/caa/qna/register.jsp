@@ -58,7 +58,6 @@
 											<div style="height: 500px;">
 												<textarea id="editor" name="board_content"></textarea>
 
-											<textarea id="editor" name="board_content"></textarea>
 
 										</div>
 											<input type="hidden" name="board_originno" id="board_originno" value="${board_id}">
@@ -122,6 +121,8 @@
 	      height: 320
 	    });
 	      $('textarea[name="board_content"]').summernote("code", "");
+
+	      
 	  });
 	
 	
@@ -144,6 +145,19 @@
 		$("button[data-oper='register']").on("click", function(e) {
 
 			console.log("Submit clicked");
+
+			   var boardTitle = $("#board_title").val();
+		       var boardContent = $("#board_content").val();
+		           
+		       if (boardTitle == ""){            
+		           alert("제목을 입력해주세요.");
+		           $("#board_title").focus();
+		           return;
+		       }
+		       
+		       
+			
+			
 
 			operForm.attr("action", "/qna/register").submit();
 
