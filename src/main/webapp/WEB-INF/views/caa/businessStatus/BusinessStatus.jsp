@@ -128,15 +128,19 @@
 							tdResult += '<td style="text-align:center;">' + result[i].sales_ser_name + '</td>';
 							
 							tdResult += '<td style="text-align:center;">' + result[i].first+'</td>';
-							tdResult += '<td style="text-align:center;">' + result[i].second+'</td>';
+							if( result[i].second != null){
+								tdResult += '<td style="text-align:center;">' + result[i].second+'</td>';
+							}else if(result[i].second== null){
+								tdResult += '<td style="text-align:center;">-</td>';
+							}
 							if ( result[i].store > 0) {
 									tdResult += '<td style="text-align:center;">' + result[i].store+'<div style="color:blue; display:inline">▲</div></td>';
 								}else if( result[i].store < 0){
 									tdResult += '<td style="text-align:center;">' + result[i].store+'<div style="color:red; display:inline">▼</div></td>';
-								}else {
+								}else if(result[i].store == 0){
 									tdResult += '<td style="text-align:center;">' + result[i].store+'</td>';
 									
-								}
+								}else {	tdResult += '<td style="text-align:center;">-</td>';}
 							tdResult +='</tr>';
 							$('#tdResult').append(
 									tdResult
@@ -181,7 +185,6 @@
 									</a></li>
 									<li class="separator"><i class="flaticon-right-arrow"></i></li>
 									<li class="nav-item"><a href="#">업소 현황</a></li>
-								
 								</ul>
 							</div>
 						</div>
