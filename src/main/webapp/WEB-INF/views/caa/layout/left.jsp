@@ -79,7 +79,7 @@
                 </a></li>
                 
                  <li class="nav-item" id="data"><a href="/data/get"> <i class="fas fa-file-signature"></i>
-                    <p>데이터 기준</p>
+                    <p>기준데이터</p>
                 </a></li>
 
                 <!-- <li class="nav-item" id="qna"><a data-toggle="collapse"> <i class="fas fa-question-circle"></i>
