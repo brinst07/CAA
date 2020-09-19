@@ -1,5 +1,22 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <script type="text/javascript">
+function comma(num){
+    var len, point, str; 
+       
+    num = num + ""; 
+    point = num.length % 3 ;
+    len = num.length; 
+   
+    str = num.substring(0, point); 
+    while (point < len) { 
+        if (str != "") str += ","; 
+        str += num.substring(point, point + 3); 
+        point += 3; 
+    } 
+     
+    return str;
+ 
+}
     $(function () {
 
         // 차트 색을 정해주기 위한 배열 선언
@@ -301,22 +318,22 @@
                                 '                                <td>' + csList[j][k].store_YEAR + '</td>\n' +
                                 '                                <td>' + csList[j][k].store_BUNGI + '</td>\n' +
                                 '                                <td>' + csList[j][k].store_SER_CODE_NAME + '</td>\n' +
-                                '                                <td>' + csList[j][k].store_COUNT + '</td>\n' +
-                                '                                <td>' + csList[j][k].store_SM_COUNT + '</td>\n' +
+                                '                                <td>' + comma(csList[j][k].store_COUNT) + '</td>\n' +
+                                '                                <td>' + comma(csList[j][k].store_SM_COUNT) + '</td>\n' +
                                 '                            </tr>';
 
                             openTableTags += ' <tr>\n' +
                                 '                                <td>' + csList[j][k].store_YEAR + '</td>\n' +
                                 '                                <td>' + csList[j][k].store_BUNGI + '</td>\n' +
                                 '                                <td>' + csList[j][k].store_SER_CODE_NAME + '</td>\n' +
-                                '                                <td>' + csList[j][k].store_OPEN_COUNT + '</td>\n' +
+                                '                                <td>' + comma(csList[j][k].store_OPEN_COUNT) + '</td>\n' +
                                 '                            </tr>';
 
                             closeTableTags += ' <tr>\n' +
                                 '                                <td>' + csList[j][k].store_YEAR + '</td>\n' +
                                 '                                <td>' + csList[j][k].store_BUNGI + '</td>\n' +
                                 '                                <td>' + csList[j][k].store_SER_CODE_NAME + '</td>\n' +
-                                '                                <td>' + csList[j][k].store_CLOSE_COUNT + '</td>\n' +
+                                '                                <td>' + comma(csList[j][k].store_CLOSE_COUNT) + '</td>\n' +
                                 '                            </tr>';
 
 
