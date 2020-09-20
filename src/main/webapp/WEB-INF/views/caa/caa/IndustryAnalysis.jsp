@@ -445,10 +445,10 @@ function comma(num){
             <div class="col-md-12">
                 <div class="card">
                     <div class="card-header">
-                        <div class="card-title">업종별 추이</div>
+                        <h5 class="card-title">업종별 추이</h5>
+                        <p class="card-text">위 데이터로 창업하실 영역의 밀집도를 알아보세요(유사업소수는 업소수+프랜차이즈업소)</p>
                     </div>
                     <div class="card-body" id="chartDiv">
-
 
                     </div>
                 </div>
@@ -458,7 +458,6 @@ function comma(num){
                     </div>
                     <div class="card-body" id="SurvivechartDiv">
 
-
                     </div>
                 </div>
                 <div class="card">
@@ -467,14 +466,9 @@ function comma(num){
                     </div>
                     <div class="card-body" id="closechartDiv">
 
-
                     </div>
                 </div>
             </div>
         </div>
     </div>
 </div>
-<script type="text/javascript">
-
-
-</script>

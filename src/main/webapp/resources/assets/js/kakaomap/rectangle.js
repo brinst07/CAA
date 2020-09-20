@@ -126,11 +126,6 @@ kakao.maps.event.addListener(map, 'dragend', function () {
 			
 			 polygons.push(marker);
 
-
-
-
-
-            
         }, error(xhr, status) {
             console.log(xhr, status);
         }

@@ -3,8 +3,8 @@
 <script type="text/javascript">
 
 
-    function cctv(url){
-        $('#video').attr('src',url);
+    function cctv(url) {
+        $('#video').attr('src', url);
     }
 </script>
 <div class="main-panel full-height">
@@ -33,8 +33,8 @@
                                     .getElementById('map');
                                 var options = {
                                     center: new kakao.maps.LatLng(
-                                    		37.52247501, 126.8158529),
-                                    level: 3
+                                        37.497876, 127.027566),
+                                    level: 7
                                 };
 
                                 map = new kakao.maps.Map(container, options);
@@ -52,59 +52,58 @@
                                         success: function (data) {
                                             var jsonData = $.xml2json(data);
                                             var cctv = jsonData.data;
-											if(cctv == null){
+                                            if (cctv == null) {
                                                 swal({
                                                     icon: "info",
-                                                    title : "cctv 정보가 존재하지 않습니다."
+                                                    title: "cctv 정보가 존재하지 않습니다."
                                                 });
-                                                
+
                                                 return false;
                                             }
-											
-											
 
-											var positions = [];
 
-											for(var i = 0; i<cctv.length; i++){
+                                            var positions = [];
+
+                                            for (var i = 0; i < cctv.length; i++) {
                                                 let x = cctv[i].coordx;
                                                 let y = cctv[i].coordy;
-                                                x = x.replace("\"","");
-                                                y = y.replace("\"","");
+                                                x = x.replace("\"", "");
+                                                y = y.replace("\"", "");
 
                                                 var mapInfo = new Object();
                                                 mapInfo.content = '<div style="padding:5px;">' +
-                                                    '<a onclick="cctv(\''+cctv[i].cctvurl+'\')" data-toggle="modal" data-target="#exampleModalCenter">'+cctv[i].cctvname+'</a>' +
+                                                    '<a onclick="cctv(\'' + cctv[i].cctvurl + '\')" data-toggle="modal" data-target="#exampleModalCenter">' + cctv[i].cctvname + '</a>' +
                                                     '</div>';
-                                                mapInfo.latlng = new kakao.maps.LatLng(y,x);
+                                                mapInfo.latlng = new kakao.maps.LatLng(y, x);
 
                                                 positions.push(mapInfo);
 
                                             }
 
-											for (var i = 0; i < positions.length; i ++) {
-											    // 마커를 생성합니다
-											    var marker = new kakao.maps.Marker({
-											        map: map, // 마커를 표시할 지도
-											        position: positions[i].latlng // 마커의 위치
-											    });
+                                            for (var i = 0; i < positions.length; i++) {
+                                                // 마커를 생성합니다
+                                                var marker = new kakao.maps.Marker({
+                                                    map: map, // 마커를 표시할 지도
+                                                    position: positions[i].latlng // 마커의 위치
+                                                });
 
-											    // 마커에 표시할 인포윈도우를 생성합니다 
-											    var infowindow = new kakao.maps.InfoWindow({
-											        content: positions[i].content, // 인포윈도우에 표시할 내용
-											        removable : true
-											        
-											    });
+                                                // 마커에 표시할 인포윈도우를 생성합니다
+                                                var infowindow = new kakao.maps.InfoWindow({
+                                                    content: positions[i].content, // 인포윈도우에 표시할 내용
+                                                    removable: true
 
-											    // 마커에 이벤트를 등록하는 함수 만들고 즉시 호출하여 클로저를 만듭니다
-											    // 클로저를 만들어 주지 않으면 마지막 마커에만 이벤트가 등록됩니다
-											    (function(marker, infowindow) {
-											        // 마커에 mouseover 이벤트를 등록하고 마우스 오버 시 인포윈도우를 표시합니다 
-											    	kakao.maps.event.addListener(marker, 'click', function() {
-											    	      // 마커 위에 인포윈도우를 표시합니다
-											    	      infowindow.open(map, marker);  
-											    	});
-											    })(marker, infowindow);
-											}
+                                                });
+
+                                                // 마커에 이벤트를 등록하는 함수 만들고 즉시 호출하여 클로저를 만듭니다
+                                                // 클로저를 만들어 주지 않으면 마지막 마커에만 이벤트가 등록됩니다
+                                                (function (marker, infowindow) {
+                                                    // 마커에 mouseover 이벤트를 등록하고 마우스 오버 시 인포윈도우를 표시합니다
+                                                    kakao.maps.event.addListener(marker, 'click', function () {
+                                                        // 마커 위에 인포윈도우를 표시합니다
+                                                        infowindow.open(map, marker);
+                                                    });
+                                                })(marker, infowindow);
+                                            }
 
                                         }, error: function (xhr, status) {
                                             console.log(xhr, status);
@@ -122,7 +121,8 @@
     </div>
 </div>
 <!-- Modal -->
-<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
+     aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
             <div class="modal-header">
