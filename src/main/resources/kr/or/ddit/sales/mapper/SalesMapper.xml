@@ -45,7 +45,7 @@
        #{commercial_name} commercial_name
 
       from SALES_TEMP_CSCODE
-      where SALES_BD_NAME like '%' || #{sigungu} || '%'
+      where SALES_BD_NAME like '%' || #{sigungu} ||
         and SALES_CS_CODE like #{large} || '%'
         and SALES_CS_CODE like #{middle} || '%'
         and to_char(SALES_YEAR) >= to_char(add_months(sysdate, -12), 'yyyy')
