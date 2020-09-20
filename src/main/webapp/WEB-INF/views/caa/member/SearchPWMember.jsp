@@ -53,10 +53,10 @@
 			 data : JSON.stringify(data),
 			 contentType : "application/json; charset=utf-8",
 			success : function(data){
-				console.log("ajax success : " );
-				alert("발송 성공!");
+                swal("발송 성공", clientemail+"이메일을 확인해주세요", "success");
 			}, error : function(e){
-				alert("발송 실패! 아이디, 이메일 혹은 이름을 확인해주세요.");
+                swal("발송 실패", "아이디, 이메일 혹은 이름을 확인해주세요.", "error");
+
 			}
 		});
 		

@@ -12,27 +12,28 @@ $(function(){
 	        // 현재 클릭된 Row(<tr>)
 	        var tr = $(this);
 	        var td = tr.children();
-
-	        
 	        userid = td.eq(1).text();
-	  		
+	    	swal("선택 완료", userid+"님을 선택했습니다.", "success");
+
 	       
 	  })
 });
 
 function Delete(){
+
 	if(userid != ""){
 		
 		location.href = "/admin/deletemember?userid="+userid;
-		alert("삭제완료");
+        alert( userid+"회원 데이터를 삭제했습니다.");
 		userid="";
-	}else alert("선택해주세요.")
+	}else         swal("회원을 선택해주세요.", "", "error");
+
 }
 function Modify(){
 	if(userid != ""){
 		location.href = "/admin/modifymember?userid="+userid;
 		userid="";
-	}else alert("선택해주세요.")
+	}else swal("회원을 선택해주세요.", "", "error");
 }
 </script>
 
@@ -107,11 +108,11 @@ function Modify(){
                                         </table>
 
 										<div style="text-align: center;">
-                                        <button data-oper='register' class="btn btn-primary"
+                                        <button type="button" data-oper='register' class="btn btn-primary"
                                                 onclick="Modify()">수정
                                         </button>
                                         
-                                        <button data-oper='register' class="btn btn-danger"
+                                        <button type="button" data-oper='register' class="btn btn-danger"
                                                 onclick="Delete()">삭제
                                         </button>
                                         </div>
