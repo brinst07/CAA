@@ -92,6 +92,9 @@
 
 	
 	function showMetheTalbe(){
+		
+		
+		
 		var detailupjong= $("select[name=middle]").val();
 		var upjong= $("select[name=large]").val();
 		var sigungu= $("select[name=sel2]").val();
