@@ -297,7 +297,7 @@ public class CAARestController {
 
                     // 선택한 영역에는 여러가지 상권이 존재하기 때문에 먼저 배열에 상권이름을 저장한다.
                     scName.add((String) finalList.get(j).get("mainTrarNm"));
-
+                    log.info("상권명 : "+ finalList.get(j).get("mainTrarNm"));
 					totalscName.add(scName);
 				}
 				List<SalesByIndustryVO> storeList = null;
