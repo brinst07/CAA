@@ -37,7 +37,7 @@
                     <p>SNS분석</p>
                 </a></li>
                 <li class="nav-item" id="status"><a href="/caa/businessstatus"> <i class="fas fa-cloud"></i>
-                    <p>업종현황</p>
+                    <p>업소현황</p>
                 </a></li>
                 <li class="nav-item" id="sale"><a href="/sales/salesBoard"> <i class="flaticon-analytics"></i>
                     <p>매출 통계</p>
