@@ -2,7 +2,7 @@ var mapContainer = document
         .getElementById('map'), // 지도를 표시할 div
     mapOption = {
         center: new kakao.maps.LatLng(
-            37.497876, 127.027566), // 지도의 중심좌표
+            37.559907, 126.984459), // 지도의 중심좌표
         level: 1
         // 지도의 확대 레벨
     };
@@ -104,6 +104,7 @@ kakao.maps.event.addListener(map, 'dragend', function () {
 				var iwContent = '<div style="padding:5px; height:120px; width:300px; text-align:center;"><div style="color:#E71D36; font-weight:bold;">'+ data[i].storeNm + '</div><div style="font-size:12px;">(' +data[i].category+ ')</div><div style="font-weight:bold; font-size:13px;">' + data[i].storeAddr + 
 								'</div><br><a href="https://map.kakao.com/link/map/'+data[i].storeNm+','+data[i].y+','+data[i].x+'" style="color:blue" target="_blank">큰지도보기</a> <a href="https://map.kakao.com/link/to/'+data[i].storeNm+','+data[i].y+','+data[i].x+'" style="color:blue" target="_blank">길찾기</a></div>';
 			
+			
 
 				// 마커에 표시할 인포윈도우를 생성합니다 
 				var infowindow = new kakao.maps.InfoWindow({
@@ -126,6 +127,11 @@ kakao.maps.event.addListener(map, 'dragend', function () {
 			
 			 polygons.push(marker);
 
+
+
+
+
+            
         }, error(xhr, status) {
             console.log(xhr, status);
         }

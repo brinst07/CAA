@@ -64,12 +64,13 @@
 
 											<div class="separator-solid"></div>
 											<h5 class="sub">내용</h5>
-											<div style="height: 300px;">
+											<div>
+											<div id="summernote"></div>	
 
 												<textarea id="editor" name="board_content"></textarea>
 
 											</div>
-
+											<div style="height: 50px;"></div>
 
 										</div>
 									</div>
@@ -93,7 +94,7 @@
 <script>
 	$('#editor').summernote('code', '${board.board_content}');
 
-	$('#editor').val("${board.board_content}");
+	$('#editor').val('${board.board_content}');
 	$('#editor').summernote({
 		fontNames : [ 'Arial', 'Arial Black', 'Comic Sans MS', 'Courier New' ],
 		tabsize : 2,

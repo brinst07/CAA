@@ -41,10 +41,11 @@
 											<div class="col-md-8 info-invoice">
 												<h5 class="sub">작성자</h5>
 												<p>
-													<c:out value="${member.member_id }"></c:out>
+													<c:out value="${member.member_username }"></c:out>
 													<input type="hidden" name="member_id" id="member_id"
 														value="${member.member_id}">
 												</p>
+											</div>
 											</div>
 
 											<div class="separator-solid"></div>
@@ -52,7 +53,7 @@
 											<div id="summernote"></div>
 											<!-- <div style="height: 500px;">
 												<textarea id="editor" name="board_content"></textarea> -->
-
+												<div style="height: 50px;"></div>
 
 										</div>
 										<input type="hidden" name="board_originno" id="board_originno"
@@ -137,8 +138,7 @@
 
 											operForm.append(board_content);
 
-											var boardTitle = $("#board_title")
-													.val();
+											var boardTitle = $("#board_title").val();
 											/* var boardContent = $("#board_content").val(); */
 
 											if (boardTitle == "") {
@@ -146,6 +146,12 @@
 												$("#board_title").focus();
 												return;
 											}
+											
+											/* if (boardContent == "") {
+												alert("내용을 입력해주세요.");
+												$("#board_content").focus();
+												return;
+											} */
 
 											operForm.attr("action",
 													"/qna/register").submit();

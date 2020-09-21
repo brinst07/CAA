@@ -79,8 +79,10 @@
 
                                     <div class="separator-solid"></div>
                                     <h5 class="sub">내용</h5>
-                                    <div style="height: 300px;">
+                                    <div>
                                         ${board.board_content }
+                                    </div>
+                                    <div style="height: 50px;">
                                     </div>
                                 </div>
                                 <%-- <form name="loginForm" action="/qna/reply"  method="get">

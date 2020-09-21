@@ -52,26 +52,26 @@
 											<div class="col-md-8 info-invoice">
 												<h5 class="sub">작성자</h5>
 												<p>
-													<c:out value="${member.member_id }"></c:out>
+													<c:out value="${member.member_username }"></c:out>
 													<input type="hidden" name="member_id" id="member_id" value="${member.member_id}">
 												</p>
 											</div>
-											<div class="col-md-8 info-invoice">
-												<h5 class="sub">글 번호</h5>
+											<%-- <div class="col-md-8 info-invoice">
+												<!-- <h5 class="sub">글 번호</h5> -->
 												<p>
 													<%= request.getParameter("board_id") %>
 													<c:out value="${param.board_id }"></c:out>
-													<input type="hidden" name="board_id" id="board_id" value="${param.board_id}">
 												</p>
 											</div>
 
 											<div class="col-md-8 info-invoice">
-												<h5 class="sub">board_re_ref</h5>
+												<!-- <h5 class="sub">board_re_ref</h5> -->
 												<p>
 													<%= request.getParameter("board_re_ref") %>
 													<c:out value="${param.board_re_ref }"></c:out>
-													<input type="hidden" name="board_re_ref" id="board_re_ref" value="${param.board_re_ref}">
+													
 												</p>
+											</div> --%>
 											</div>
 											<div class="separator-solid"></div>
 											<h5 class="sub">내용</h5>
@@ -80,6 +80,8 @@
 
 
 										</div>
+											<input type="hidden" name="board_id" id="board_id" value="${param.board_id}">
+											<input type="hidden" name="board_re_ref" id="board_re_ref" value="${param.board_re_ref}">
 											<input type="hidden" name="board_originno" id="board_originno" value="${board_id}">	
 											
 																							
@@ -195,71 +197,3 @@
 
 
 
-
-<!-- <script type="text/javascript"> -->
-    
-//     $(document).ready(function(){        
-        
-//     });
-        
-//     /** 게시판 - 목록 페이지 이동 */
-//     function goBoardList(){                
-//         location.href = "/qna/list";
-//     }
-    
-//     /** 게시판 - 답글 작성  */
-//     function insertBoardReply(){
- 
-//         var boardTitle = $("#board_title").val();
-//         var boardContent = $("#board_content").val();
-            
-//         if (boardTitle == ""){            
-//             alert("제목을 입력해주세요.");
-//             $("#board_title").focus();
-//             return;
-//         }
-        
-//         if (boardContent == ""){            
-//             alert("내용을 입력해주세요.");
-//             $("#board_content").focus(); 
-//             return;
-//         }
-        
-//         var yn = confirm("게시글을 등록하시겠습니까?");        
-//         if(yn){
-                
-//             $.ajax({    
-                
-//                 url        : "/qna/insertBoardReply",
-//                 data    : $("#operForm").serialize(),
-//                 dataType: "JSON",
-//                 cache   : false,
-//                 async   : true,
-//                 type    : "POST",    
-//                 success : function(obj) {
-//                     insertBoardReplyCallback(obj);                
-//                 },           
-//                 error     : function(xhr, status, error) {}
-                
-//             });
-//         }
-//     }
-    
-//     /** 게시판 - 작성 콜백 함수 */
-//     function insertBoardReplyCallback(obj){
-    
-//         if(obj != null){        
-            
-//             var result = obj.result;
-            
-//             if(result == "SUCCESS"){                
-//                 alert("게시글 답글 등록을 성공하였습니다.");                
-//                 goBoardList();                 
-//             } else {                
-//                 alert("게시글 답글 등록을 실패하였습니다.");    
-//                 return;
-//             }
-//         }
-//     }
-    
-<!-- </script> -->
