@@ -60,7 +60,7 @@
                     <div class="col-md-4">
                         <div class="card card-round">
                             <div class="card-header" style="background: #4ea1d3">
-                                <h4 class="card-title" style="text-align: center; color: white">창업위험도</h4>
+                                <h4 class="card-title" style="text-align: center; color: white">상권상태</h4>
                             </div>
                             <div class="card-body">
                                 <div class="col-md-12">

@@ -120,7 +120,7 @@ public class SNSRestController {
         Map<String, Integer> wordCnt = new HashMap<String, Integer>();
         for (String s : javaParsed) {
             // 일반적으로 많이 등장하는 단어 : 단어 리스트에 불포함
-            if (s.equals("으로") || s.equals("에서") || s.equals("이다") || s.equals("있다") || s.equals("일본") || s.equals("되다") || s.equals("RT") || s.equals("\"") || s.equals("하다"))
+            if (s.equals("으로") || s.equals("에서") || s.equals("이다") || s.equals("있다") || s.equals("일본") || s.equals("되다") || s.equals("RT") || s.equals("\"\"") || s.equals("하다"))
                 continue;
             // 단어 길이가 1인 조사들 : 단어 리스트에 불포함
             if (s.length() > 1) {
