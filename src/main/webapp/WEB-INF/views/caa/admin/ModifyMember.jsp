@@ -33,7 +33,7 @@ $(function() {
 })
 
 function modify(){
-	
+		
 		var selectOption = $("#role option:selected").val();
 		var selectOptionName=$("#username").val();
 		location.href = "/admin/update?user_auth="+selectOption+"&user_id=${userInfo.member_id}&user_name="+selectOptionName;

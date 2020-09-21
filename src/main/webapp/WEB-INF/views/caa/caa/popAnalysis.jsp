@@ -371,7 +371,7 @@ $(function(){
 	
 	tableTags += ' 								<thead> ';
 	tableTags += ' 									<tr> ';
-	tableTags += ' 										<th> 월 \\ 구역</th> ';
+	tableTags += ' 										<th> 구역 \\ 월</th> ';
 
 
 // 	년 월

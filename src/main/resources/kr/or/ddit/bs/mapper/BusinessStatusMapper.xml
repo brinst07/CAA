@@ -21,7 +21,7 @@
 
 
 		from SALES_TEMP_CSCODE
-		where SALES_BD_NAME = #{area2}
+		where SALES_BD_NAME like  '%'||#{area2}
 		  and SALES_CS_CODE like '%'||#{upjong}|| '%'
 		  and SALES_CS_CODE like '%'||#{detailupjong} || '%'
 		 and SALES_BUNGI_CODE IN ( 2, 4)

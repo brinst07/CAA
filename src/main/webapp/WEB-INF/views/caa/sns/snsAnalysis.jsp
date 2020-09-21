@@ -116,7 +116,7 @@
                     <div class="card">
                         <div class="card-header">
                             <div class="card-header-row">
-                                <div class="card-title">트위터 크롤링</div>
+                                <div class="card-title">네이버 블로그 크롤링</div>
                             </div>
                             <div class="card-body">
                                 <div id="wordcloud" align="center"></div>

@@ -57,7 +57,7 @@ public class CAAController {
 	}
 
 	@GetMapping("/businessstatus")
-	public String businessstatus(Model model) {
+	public String businessstatus(Model model, HttpSession session) {
 		// 지역 선택 코드
 		model.addAttribute("SidoList", salesservice.getSidoList());
 //		model.addAttribute("SigunguList", salesservice.getSigunguList("1111"));
@@ -65,7 +65,16 @@ public class CAAController {
 		// 대분류 코드
 		model.addAttribute("csCodeList", salesservice.getCscodeList("1"));
 //		model.addAttribute("csCodeList2", salesservice.getCscodeList2("a"));
-		return "caa/businessStatus/BusinessStatus";
+		
+	      String returnPage = "";
+	      MemberVO vo = (MemberVO) session.getAttribute("member");
+	      if(vo == null){
+	         returnPage = "redirect:/login";
+	      }else{
+	         returnPage = "caa/businessStatus/BusinessStatus";
+	      }
+
+	      return returnPage;
 	}
 //
 //	@GetMapping("/getbusinessStatus")
